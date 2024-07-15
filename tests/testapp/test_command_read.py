@@ -2,7 +2,6 @@ from unittest import TestCase
 from unittest.mock import Mock
 
 from testapp.command import Read, Write
-from testapp.command.__interface import CommandInterface
 
 
 class TestRead(TestCase):
@@ -21,7 +20,7 @@ class TestRead(TestCase):
 
     def test_argument_less_than_0(self):
         with self.assertRaises(ValueError):
-            self.command.run(0)
+            self.command.run(-10)
 
     def test_minus_argument(self):
         with self.assertRaises(ValueError):
