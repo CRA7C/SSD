@@ -17,7 +17,7 @@ class TestShell:
         cmd = self.convert_to_valid_cmd(cmd)
         if cmd == "INVALID COMMAND":
             print(cmd)
-            return
+            return 0
 
         cmd_option, cmd_args = self.parse_args(cmd)
 
@@ -25,9 +25,11 @@ class TestShell:
         if cmd_args is not None:
             print(cmd_option, cmd_args)
             cmd_if.run(cmd_args)
+            return 1
         else:
             print(cmd_option, cmd_args)
             cmd_if.run()
+            return 2
 
     def convert_to_valid_cmd(self, cmd: str) -> str:
         if self.valid_cmd(cmd):
