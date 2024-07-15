@@ -125,7 +125,20 @@ class TestTestShell(TestCase):
             ret = self.testshell.convert_to_valid_cmd(cmd)
             self.assertEqual(ret, "INVALID COMMAND")
 
-    def test_testshell_write(self):
+    def test_parse_args(self):
+        cmd_dict = {
+            "write 3 0xAAAABBBB": ("read", ["3", '0xAAAABBBB']),
+            "read 3": ("read", ["3"]),
+            "exit": ("read", None),
+            "help": ("read", None),
+            "fullwrite 0xABCDFFFF": ("read", ['0xABCDFFFF']),
+            "fullread": ("read", None),
+        }
+        for key, val in cmd_dict.items():
+            ret = self.testshell.parse_args(key)
+            self.assertEqual(ret, val)
+
+    def test_execute_write(self):
         cmd = "write 3 0xAAAABBBB"
 
         self.testshell.execute(cmd)

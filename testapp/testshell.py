@@ -38,7 +38,7 @@ class TestShell:
     def valid_cmd(self, cmd):
         return True
 
-    def parse_args(self, cmd):
+    def parse_args(self, cmd: str):
         cmd_list = cmd.split(" ")
         cmd_option = cmd_list[0]
         if len(cmd_list) > 1:
