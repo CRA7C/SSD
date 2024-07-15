@@ -14,6 +14,9 @@ class Test(TestCase):
         print("End Test")
         print("")
 
+    def test_with_argument(self):
+        with self.assertRaises(ValueError):
+            self.command.run(100)
 
     def test_full_read(self):
         test_value = 0x1289CDEF
