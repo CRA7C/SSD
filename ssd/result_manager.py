@@ -1,8 +1,8 @@
 class ResultManager:
 
     def __init__(self):
-        pass
+        self.result_file_path = None
 
     def write(self, text):
-        # result.txt 파일 열고
-        pass
+        with open(self.result_file_path, 'w') as f:
+            f.write(text)
