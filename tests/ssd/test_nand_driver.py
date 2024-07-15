@@ -22,9 +22,9 @@ class TestNandDriver(TestCase):
         builtins.open.assert_called_with(self.driver.nand_file_path, 'w')
 
     def test_write_value(self):
-        contents = '0x00000000\n0x00000000\n0x00000000'
+        fake_nand = '0x00000000\n0x00000000\n0x00000000'
         expected = '0x00000000\n0x1298CDEF\n0x00000000'
 
-        actual = self.driver.write_value(contents, 1, 0x1298CDEF)
+        actual = self.driver.write_value(fake_nand, 1, 0x1298CDEF)
 
         self.assertEqual(expected, actual)
