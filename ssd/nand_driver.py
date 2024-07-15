@@ -4,10 +4,17 @@ class NandDriver:
     """
 
     def __init__(self):
-        pass
+        self.nand_file_path = None
 
     def read(self, lba) -> int:
-        pass
+        with open(self.nand_file_path, 'r') as f:
+            contents = f.read()
+        for i, line in enumerate(contents.split('\n')):
+            if i == lba:
+                return int(line, 16)
 
     def write(self, lba, value):
-        pass
+        with open(self.nand_file_path, 'r') as f:
+            contents = f.read()
+        with open(self.nand_file_path, 'w') as f:
+            f.write(contents)
