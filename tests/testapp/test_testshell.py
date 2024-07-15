@@ -94,7 +94,7 @@ class TestTestShell(TestCase):
             self.assertFalse(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=True)
-    def test_convert_to_valid_cmd_true(self):
+    def test_is_valid_cmd_true(self):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
@@ -106,11 +106,11 @@ class TestTestShell(TestCase):
             "testapp2",
         ]
         for cmd in cmd_list:
-            ret = self.testshell.convert_to_valid_cmd(cmd)
-            self.assertEqual(ret, cmd)
+            ret = self.testshell.is_valid_cmd(cmd)
+            self.assertTrue(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=False)
-    def test_convert_to_valid_cmd_false(self):
+    def test_is_valid_cmd_false(self):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
@@ -122,8 +122,8 @@ class TestTestShell(TestCase):
             "testapp2",
         ]
         for cmd in cmd_list:
-            ret = self.testshell.convert_to_valid_cmd(cmd)
-            self.assertEqual(ret, "INVALID COMMAND")
+            ret = self.testshell.is_valid_cmd(cmd)
+            self.assertFalse(ret)
 
     def test_parse_args(self):
         cmd_dict = {

@@ -1,5 +1,11 @@
 from testapp import command
 
+EXECUTE_VALID_WO_ARGS = 2
+
+EXECUTE_VALID_WITH_ARGS = 1
+
+EXECUTE_INVALID = 0
+
 
 class TestShell:
     cmd_if_dict = {
@@ -14,10 +20,9 @@ class TestShell:
     }
 
     def execute(self, cmd: str):
-        cmd = self.convert_to_valid_cmd(cmd)
-        if cmd == "INVALID COMMAND":
+        if not self.is_valid_cmd(cmd):
             print(cmd)
-            return 0
+            return EXECUTE_INVALID
 
         cmd_option, cmd_args = self.parse_args(cmd)
 
@@ -25,17 +30,18 @@ class TestShell:
         if cmd_args is not None:
             print(cmd_option, cmd_args)
             cmd_if.run(cmd_args)
-            return 1
-        else:
-            print(cmd_option, cmd_args)
-            cmd_if.run()
-            return 2
+            return EXECUTE_VALID_WITH_ARGS
 
-    def convert_to_valid_cmd(self, cmd: str) -> str:
+        print(cmd_option, cmd_args)
+        cmd_if.run()
+        return EXECUTE_VALID_WO_ARGS
+
+
+    def is_valid_cmd(self, cmd: str) -> bool:
         if self.valid_cmd(cmd):
-            return cmd
+            return True
         else:
-            return "INVALID COMMAND"
+            return False
 
     def valid_cmd(self, cmd):
         return True
