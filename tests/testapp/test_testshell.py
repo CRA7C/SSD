@@ -94,7 +94,7 @@ class TestTestShell(TestCase):
             self.assertFalse(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=True)
-    def test_is_valid_cmd_true(self):
+    def test_is_valid_cmd_true(self, mk):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
@@ -110,7 +110,7 @@ class TestTestShell(TestCase):
             self.assertTrue(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=False)
-    def test_is_valid_cmd_false(self):
+    def test_is_valid_cmd_false(self, mk):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
