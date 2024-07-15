@@ -1,4 +1,4 @@
-from testapp.commands.__interface import CommandInterface
+from testapp.command.__interface import CommandInterface
 
 
 class FullWrite(CommandInterface):
