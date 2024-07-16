@@ -15,16 +15,9 @@ class TestShell:
             return EXECUTE_INVALID
 
         cmd_option, cmd_args = CommandParser.parse_args(cmd)
-
         cmd_if = CommandParser.get_command(cmd_option)
-        if cmd_args is not None:
-            print(cmd_option, *cmd_args)
-            cmd_if.run(*cmd_args)
-            return EXECUTE_VALID_WITH_ARGS
-
-        print(cmd_option)
-        cmd_if.run()
-        return EXECUTE_VALID_WO_ARGS
+        cmd_if.run(*cmd_args)
+        return EXECUTE_VALID_WITH_ARGS if cmd_args else EXECUTE_VALID_WO_ARGS
 
 
 def main():

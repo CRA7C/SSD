@@ -84,7 +84,7 @@ class CommandParser:
             elif cmd_option == "fullwrite":
                 cmd_args[0] = int(cmd_args[0], 16)
             return cmd_option, cmd_args
-        return cmd_option, None
+        return cmd_option, []
 
     @classmethod
     def get_command(cls, cmd_option):
