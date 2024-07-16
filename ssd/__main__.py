@@ -14,7 +14,8 @@ class SSDRunner:
         if sys.argv[1] == 'R':
             self.ssd.read(20)
         elif sys.argv[1] == 'W':
-            self.ssd.write(20, '0x1289CDEF')
+            value = int('0x1289CDEF'[2:], 16)
+            self.ssd.write(20, value)
 
 
 if __name__ == '__main__':

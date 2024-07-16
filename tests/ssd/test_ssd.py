@@ -21,7 +21,7 @@ class TestSSD(TestCase):
     def test_read(self, _):
         self.ssd.result_manager = Mock()
         lba = 2
-        expected = 0xAAAABBBB
+        expected = '0xAAAABBBB'
 
         self.ssd.read(lba)
 
