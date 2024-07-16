@@ -9,3 +9,6 @@ SSD_LBA_RANGE: Final[Iterable[int]] = range(SSD_START_LBA, SSD_END_LBA + 1)
 # SSD Value 관련
 SSD_MIN_VALUE: Final[int] = 0x00000000
 SSD_MAX_VALUE: Final[int] = 0xFFFFFFFF
+
+MAX_LBA: int = 99
+MIN_LBA: int = 0

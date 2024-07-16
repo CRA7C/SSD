@@ -1,4 +1,5 @@
 import re
+from typing import Tuple, Optional, List
 
 from testapp import command
 from testapp.test_app1 import TestApp1
@@ -20,7 +21,7 @@ def is_in_range_lba(lba: str) -> bool:
         return False
 
 
-def is_valid_hex(s):
+def is_valid_hex(s: str):
     # 정규식으로 형식을 먼저 확인
     if re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
         try:
@@ -44,7 +45,7 @@ class TestShell:
         "testapp2": TestApp2,
     }
 
-    def execute(self, cmd: str):
+    def execute(self, cmd: str) -> int:
         if not self.is_valid_cmd(cmd):
             print(cmd)
             return EXECUTE_INVALID
@@ -68,7 +69,7 @@ class TestShell:
             return False
 
     @staticmethod
-    def valid_cmd(cmd):
+    def valid_cmd(cmd) -> bool:
         """
         유효성 검사 수행
         """
@@ -117,7 +118,7 @@ class TestShell:
         return True
 
     @staticmethod
-    def parse_args(cmd: str):
+    def parse_args(cmd: str) -> Tuple[str, Optional[List[int]]]:
         cmd_list = cmd.split(" ")
         cmd_option = cmd_list[0]
         if len(cmd_list) > 1:
