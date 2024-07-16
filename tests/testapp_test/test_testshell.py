@@ -15,7 +15,7 @@ class TestTestShell(TestCase):
 
     def setUp(self):
         super().setUp()
-        self.testshell = TestShell()
+        self.ts = TestShell()
         TestTestShell.test_counter += 1
         print(f"\nRunning test #{TestTestShell.test_counter}")
 
@@ -32,7 +32,7 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.valid_cmd(cmd)
+                ret = self.ts.validate_command(cmd)
                 self.assertTrue(ret)
 
     def test_valid_cmd_write_false(self):
@@ -47,7 +47,7 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.valid_cmd(cmd)
+                ret = self.ts.validate_command(cmd)
                 self.assertFalse(ret)
 
     def test_valid_cmd_read_false(self):
@@ -60,7 +60,7 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.valid_cmd(cmd)
+                ret = self.ts.validate_command(cmd)
                 self.assertFalse(ret)
 
     def test_valid_cmd_exit_false(self):
@@ -73,7 +73,7 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.valid_cmd(cmd)
+                ret = self.ts.validate_command(cmd)
                 self.assertFalse(ret)
 
     def test_valid_cmd_help_false(self):
@@ -86,7 +86,7 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.valid_cmd(cmd)
+                ret = self.ts.validate_command(cmd)
                 self.assertFalse(ret)
 
     def test_valid_cmd_fullwrite_false(self):
@@ -100,7 +100,7 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.valid_cmd(cmd)
+                ret = self.ts.validate_command(cmd)
                 self.assertFalse(ret)
 
     def test_valid_cmd_fullread_false(self):
@@ -113,43 +113,7 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.valid_cmd(cmd)
-                self.assertFalse(ret)
-
-    @patch.object(TestShell, 'valid_cmd', return_value=True)
-    def test_is_valid_cmd_true(self, _):
-        cmd_list = [
-            "write 3 0xAAAABBBB",
-            "read 3",
-            "exit",
-            "help",
-            "fullwrite 0xABCDFFFF",
-            "fullread",
-            "testapp1",
-            "testapp2",
-        ]
-        for idx, cmd in enumerate(cmd_list):
-            with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.is_valid_cmd(cmd)
-                self.assertTrue(ret)
-
-    @patch.object(TestShell, 'valid_cmd', return_value=False)
-    def test_is_valid_cmd_false(self, _):
-        cmd_list = [
-            "write 3 0xAAAABBBB",
-            "read 3",
-            "exit",
-            "help",
-            "fullwrite 0xABCDFFFF",
-            "fullread",
-            "testapp1",
-            "testapp2",
-        ]
-        for idx, cmd in enumerate(cmd_list):
-            with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.is_valid_cmd(cmd)
+                ret = self.ts.validate_command(cmd)
                 self.assertFalse(ret)
 
     def test_parse_args(self):
@@ -163,18 +127,18 @@ class TestTestShell(TestCase):
         for idx, (key, val) in enumerate(cmd_dict.items()):
             with self.subTest(idx=idx, key=key, val=val):
                 print(f"{idx + 1}. {key},{val}")
-                ret = self.testshell.parse_args(key)
+                ret = self.ts.parse_args(key)
                 self.assertEqual(ret, val)
 
     @patch.object(TestApp2, "run", return_value=True)
     @patch.object(TestApp1, "run", return_value=True)
     @patch.object(FullRead, "run", return_value="GOOD")
     def test_testshell_wo_args(self, mk_fullread, mk_testapp1, mk_testapp2):
-        cmd_list = ["help", "fullread", "testapp1", "testapp2"]  # , "testapp1", "testapp2", "fullread"]
+        cmd_list = ["help", "fullread", "testapp1", "testapp2"]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.execute(cmd)
+                ret = self.ts.execute(cmd)
                 self.assertEqual(ret, EXECUTE_VALID_WO_ARGS)
 
     @patch.object(Write, "run", return_value="GOOD")
@@ -188,12 +152,12 @@ class TestTestShell(TestCase):
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.execute(cmd)
+                ret = self.ts.execute(cmd)
                 self.assertEqual(ret, EXECUTE_VALID_WITH_ARGS)
 
     def test_testshell_invalid(self):
         cmd = "Write 1 dd"
 
-        ret = self.testshell.execute(cmd)
+        ret = self.ts.execute(cmd)
 
         self.assertEqual(ret, EXECUTE_INVALID)
