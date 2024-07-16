@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+from ssd.common import convert_hex_to_str
+
 LBA_COUNT = 100
 NAND_INITIAL_VALUE = '0x00000000'
 NAND_FILE_PATH = Path(__file__).parent / 'nand.txt'
@@ -39,7 +41,7 @@ class NandDriver:
         result = []
         for i, line in enumerate(contents.split('\n')):
             if i == lba:
-                result.append(f"0x{value:08X}")
+                result.append(convert_hex_to_str(value))
             else:
                 result.append(line)
         return '\n'.join(result)
