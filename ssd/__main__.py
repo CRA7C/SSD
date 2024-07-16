@@ -16,6 +16,13 @@ class SSDRunner:
 
         if not 0 <= int(sys.argv[2]) <= 99:
             raise ValueError('LBA는 0 ~ 99 여야합니다.')
+
+        if sys.argv[1] == 'W':
+            if len(sys.argv) < 4:
+                raise ValueError('W 명령에는 value가 필요합니다.')
+            if len(sys.argv[3]) != 10 or sys.argv[3][:2] != '0x':
+                raise ValueError('value는 0x00000000 형식이여야 합니다.')
+            int(sys.argv[3], 16)
         return True
 
     def run(self):

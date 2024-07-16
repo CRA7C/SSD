@@ -38,6 +38,10 @@ class TestSSDRunner(TestCase):
             ('R이나 W가 아닌 명령어.', ['test', 'r', '20']),
             ('숫자가 아닌 LBA.', ['test', 'R', 'aa']),
             ('범위를 벗어난 LBA.', ['test', 'R', '-1']),
+            ('value가 없는 write.', ['test', 'W', '20']),
+            ('8자리가 아닌 value', ['test', 'W', '20', '0x1289']),
+            ('0x가 없는 value', ['test', 'W', '20', '111289CDEF']),
+            ('16진수가 아닌 value', ['test', 'W', '20', '0xZ289CDEF']),
         ]
         for test_case, cmd in params:
             with self.subTest(test_case):
