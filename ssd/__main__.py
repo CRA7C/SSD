@@ -2,6 +2,9 @@ import sys
 
 from ssd.solidstatedrive import SolidStateDrive
 
+LBA_LOWER_LIMIT = 0
+LBA_UPPER_LIMIT = 99
+
 
 class SSDRunner:
     def __init__(self):
@@ -15,7 +18,7 @@ class SSDRunner:
         if sys.argv[1] not in ('R', 'W'):
             raise ValueError('R 또는 W를 사용해주세요.(대문자)')
 
-        if not 0 <= int(sys.argv[2]) <= 99:
+        if not LBA_LOWER_LIMIT <= int(sys.argv[2]) <= LBA_UPPER_LIMIT:
             raise ValueError('LBA는 0 ~ 99 여야합니다.')
 
         if sys.argv[1] == 'W':
