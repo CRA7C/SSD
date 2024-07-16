@@ -14,6 +14,7 @@ class TestApp2(CommandInterface):
     def run(self, *args, **kwargs):
         self.write_30_times()
         self.over_write()
+        self.read()
 
     def write_30_times(self):
         write = Write()
@@ -33,3 +34,10 @@ class TestApp2(CommandInterface):
         except Exception:
             raise Exception
         return True
+
+    def read(self):
+        read = Read()
+        read_data = []
+        for lba in range(6):
+            read_data.append(read.run(lba))
+        return read_data

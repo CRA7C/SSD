@@ -20,10 +20,12 @@ class TestTestApp2(TestCase):
         self.test_app2.write_30_times()
         self.assertEqual(30, write_mock.call_count)
 
-    @patch.object(Write, 'run', return_value = True)
-    def test_over_write_SHOULD_execute_write_6_times(self,write_mock):
+    @patch.object(Write, 'run', return_value=True)
+    def test_over_write_SHOULD_execute_write_6_times(self, write_mock):
         self.test_app2.over_write()
         self.assertEqual(6, write_mock.call_count)
 
-
-
+    @patch.object(Read, 'run', return_value=0x12345678)
+    def test_read_SHOULD_execute_read_6_times(self, read_mock):
+        self.test_app2.read()
+        self.assertEqual(6, read_mock.call_count)
