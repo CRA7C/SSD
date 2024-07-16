@@ -4,9 +4,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
-
-LBA_LOWER_LIMIT = 0
-LBA_UPPER_LIMIT = 99
+from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT
 
 
 class SSDRunner:
@@ -22,7 +20,7 @@ class SSDRunner:
             raise ValueError('R 또는 W를 사용해주세요.(대문자)')
 
         if not LBA_LOWER_LIMIT <= int(sys.argv[2]) <= LBA_UPPER_LIMIT:
-            raise ValueError('LBA는 0 ~ 99 여야합니다.')
+            raise ValueError(f'LBA는 {LBA_LOWER_LIMIT} ~ {LBA_UPPER_LIMIT} 여야합니다.')
 
         if sys.argv[1] == 'W':
             if len(sys.argv) < 4:

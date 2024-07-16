@@ -5,14 +5,12 @@ import sys
 from unittest import TestCase
 
 from ssd.__main__ import SSDRunner
-from ssd.nand_driver import NandDriver, NAND_FILE_PATH
 from ssd.result_manager import RESULT_FILE_PATH
 
 
 class TestSSDRunner(TestCase):
     def setUp(self):
         self.runner = SSDRunner()
-        NandDriver.initiate_nand_file(NAND_FILE_PATH)
 
     def test_run_ssd_write_and_read(self):
         params = [
