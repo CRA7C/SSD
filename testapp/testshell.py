@@ -1,10 +1,11 @@
 import re
+from typing import Tuple, Optional, List
 
 from testapp import command
 from testapp.test_app1 import TestApp1
 from testapp.test_app2 import TestApp2
 from testapp.constants import (SSD_MIN_VALUE, SSD_MAX_VALUE,
-                               SSD_START_LBA, SSD_END_LBA)
+                               SSD_START_LBA, SSD_END_LBA, INVALID_COMMAND)
 
 
 EXECUTE_VALID_WO_ARGS = 2
@@ -20,7 +21,7 @@ def is_in_range_lba(lba: str) -> bool:
         return False
 
 
-def is_valid_hex(s):
+def is_valid_hex(s: str):
     # 정규식으로 형식을 먼저 확인
     if re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
         try:
@@ -44,31 +45,25 @@ class TestShell:
         "testapp2": TestApp2,
     }
 
-    def execute(self, cmd: str):
-        if not self.is_valid_cmd(cmd):
-            print(cmd)
+    def execute(self, cmd: str) -> int:
+        if not self.validate_command(cmd):
+            print(INVALID_COMMAND)
             return EXECUTE_INVALID
 
         cmd_option, cmd_args = self.parse_args(cmd)
 
         cmd_if = self.cmd_if_dict[cmd_option]()
         if cmd_args is not None:
-            print(cmd_option, cmd_args)
+            print(cmd_option, *cmd_args)
             cmd_if.run(*cmd_args)
             return EXECUTE_VALID_WITH_ARGS
 
-        print(cmd_option, cmd_args)
+        print(cmd_option)
         cmd_if.run()
         return EXECUTE_VALID_WO_ARGS
 
-    def is_valid_cmd(self, cmd: str) -> bool:
-        if self.valid_cmd(cmd):
-            return True
-        else:
-            return False
-
     @staticmethod
-    def valid_cmd(cmd):
+    def validate_command(cmd) -> bool:
         """
         유효성 검사 수행
         """
@@ -117,7 +112,7 @@ class TestShell:
         return True
 
     @staticmethod
-    def parse_args(cmd: str):
+    def parse_args(cmd: str) -> Tuple[str, Optional[List[int]]]:
         cmd_list = cmd.split(" ")
         cmd_option = cmd_list[0]
         if len(cmd_list) > 1:
