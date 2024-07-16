@@ -8,6 +8,8 @@ class SSDRunner:
         self.ssd = SSD()
 
     def is_valid_command(self):
+        if len(sys.argv) < 2:
+            raise TypeError
         return True
 
     def run(self):

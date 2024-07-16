@@ -1,3 +1,6 @@
+"""
+통합 테스트를 위한 스크립트 입니다.(test double 사용하지 않음)
+"""
 import sys
 from unittest import TestCase
 
@@ -27,3 +30,13 @@ class TestSSDRunner(TestCase):
                     actual = f.read()
 
                 self.assertEqual(expected, actual)
+
+    def test_run_ssd_with_invalid_cmd(self):
+        params = [
+            ('시스템 인자 없음.', ['test']),
+        ]
+        for test_case, cmd in params:
+            with self.subTest(test_case):
+                sys.argv = cmd
+                with self.assertRaises(TypeError):
+                    self.runner.is_valid_command()
