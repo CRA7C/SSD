@@ -1,7 +1,8 @@
 from unittest import TestCase
-from unittest.mock import Mock
+from unittest.mock import patch
 
-from testapp.command import Read, Write
+from testapp.command import Read
+from testapp.ssd_driver import SsdDriver
 
 
 class TestRead(TestCase):
@@ -13,7 +14,6 @@ class TestRead(TestCase):
         print("End Test")
         print("")
 
-    # read     3
     def test_argument_greater_than_99(self):
         with self.assertRaises(ValueError):
             self.command.run(100)
@@ -26,8 +26,7 @@ class TestRead(TestCase):
         with self.assertRaises(ValueError):
             self.command.run(-1)
 
-    def test_run(self):
-        test_value = '0x12345678'
-        Write().run(3, test_value)
-        ret = self.command.run(3)
-        self.assertEqual(ret, test_value)
+    @patch.object(SsdDriver, 'read')
+    def test_run(self, mock_read):
+        self.command.run(3)
+        mock_read.assert_called_once_with(3)
