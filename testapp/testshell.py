@@ -1,6 +1,7 @@
 import re
 
 from testapp import command
+from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
@@ -21,7 +22,7 @@ def is_valid_hex(s):
         try:
             # 16진수로 변환하여 범위를 확인
             num = int(s, 16)
-            return 0x00000000 <= num <= 0xFFFFFFFF
+            return SSD_MIN_VALUE <= num <= SSD_MAX_VALUE
         except ValueError:
             return False
     return False
@@ -99,10 +100,7 @@ class TestShell:
         # 2. read
         if cmd_option == "read":
             n_lba = cmd_list[1]
-            if is_between_0_and_99(n_lba):
-                return True
-            else:
-                return False
+            return True if is_between_0_and_99(n_lba) else False
 
         # 3. fullwrite
         if cmd_option == "fullwrite":
