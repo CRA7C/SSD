@@ -1,5 +1,4 @@
 import subprocess
-import os
 from testapp.util import get_ssd_result, validate_ssd_command, BASE_DIR
 
 
