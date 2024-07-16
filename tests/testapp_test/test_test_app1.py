@@ -1,5 +1,5 @@
 from unittest import TestCase
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 from testapp.command import FullRead, FullWrite
 from testapp.test_app1 import TestApp1

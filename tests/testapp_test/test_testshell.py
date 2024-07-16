@@ -4,7 +4,7 @@ from unittest.mock import patch
 from testapp.test_app1 import TestApp1
 from testapp.test_app2 import TestApp2
 from testapp.testshell import TestShell, EXECUTE_INVALID, EXECUTE_VALID_WO_ARGS, EXECUTE_VALID_WITH_ARGS
-from testapp.command import Read, Write, FullRead, FullWrite, Help
+from testapp.command import Read, Write, FullRead, FullWrite
 
 
 class TestTestShell(TestCase):
@@ -117,7 +117,7 @@ class TestTestShell(TestCase):
                 self.assertFalse(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=True)
-    def test_is_valid_cmd_true(self, mk):
+    def test_is_valid_cmd_true(self, _):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
@@ -135,7 +135,7 @@ class TestTestShell(TestCase):
                 self.assertTrue(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=False)
-    def test_is_valid_cmd_false(self, mk):
+    def test_is_valid_cmd_false(self, _):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
@@ -166,11 +166,11 @@ class TestTestShell(TestCase):
                 ret = self.testshell.parse_args(key)
                 self.assertEqual(ret, val)
 
-    @patch.object(TestApp2 , "run", return_value=True)
-    @patch.object(TestApp1 , "run", return_value=True)
+    @patch.object(TestApp2, "run", return_value=True)
+    @patch.object(TestApp1, "run", return_value=True)
     @patch.object(FullRead, "run", return_value="GOOD")
     def test_testshell_wo_args(self, mk_fullread, mk_testapp1, mk_testapp2):
-        cmd_list = ["help", "fullread", "testapp1","testapp2"]  # , "testapp1", "testapp2", "fullread"]
+        cmd_list = ["help", "fullread", "testapp1", "testapp2"]  # , "testapp1", "testapp2", "fullread"]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")

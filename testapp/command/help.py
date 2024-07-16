@@ -1,6 +1,5 @@
 from testapp.command.__interface import CommandInterface
 
-
 TESTAPP_HELP = r"""
 Usage:
   <command> [options]
@@ -13,6 +12,7 @@ Commands:
   fullwrite         SSD 데이터를 특정 값으로 일괄 쓰기
   fullread          SSD 데이터 전체 읽기
 """
+
 
 class Help(CommandInterface):
     def run(self, *args, **kwarg):

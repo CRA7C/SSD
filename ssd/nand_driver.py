@@ -37,7 +37,8 @@ class NandDriver:
         with open(self.nand_file_path, 'w') as f:
             f.write(result)
 
-    def write_value(self, contents, lba, value):
+    @staticmethod
+    def write_value(contents, lba, value):
         result = []
         for i, line in enumerate(contents.split('\n')):
             if i == lba:

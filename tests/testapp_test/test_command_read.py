@@ -28,5 +28,5 @@ class TestRead(TestCase):
 
     @patch.object(SsdDriver, 'read')
     def test_run(self, mock_read):
-        self.command.run(3)
+        Read().run(3)
         mock_read.assert_called_once_with(3)

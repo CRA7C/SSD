@@ -1,6 +1,6 @@
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
-from testapp.constants import SSD_SIZE
+from testapp.constants import SSD_LBA_RANGE
 
 
 class FullWrite(CommandInterface):
@@ -9,5 +9,5 @@ class FullWrite(CommandInterface):
         self.driver = SsdDriver()
 
     def run(self, value):
-        for i in range(SSD_SIZE):
+        for i in SSD_LBA_RANGE:
             self.driver.write(i, value)

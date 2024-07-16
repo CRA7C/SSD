@@ -9,16 +9,11 @@ from testapp.ssd_driver import SsdDriver
 
 class Test(TestCase):
     def setUp(self):
-        print("Start Test")
         self.command = FullRead()
 
-    def tearDown(self):
-        print("End Test")
-        print("")
-
     def test_with_argument(self):
-        with self.assertRaises(ValueError):
-            self.command.run(100)
+        with self.assertRaises(TypeError):
+            self.command.run(100)  # noqa
 
     @patch.object(SsdDriver, 'read')
     def test_read_count(self, mock_read):

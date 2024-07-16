@@ -7,7 +7,8 @@ class SSDRunner:
     def __init__(self):
         self.ssd = SolidStateDrive()
 
-    def is_valid_command(self):
+    @staticmethod
+    def is_valid_command():
         if len(sys.argv) < 3:
             raise ValueError("명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20/ssd W 20 0x1289CDEF")
 
