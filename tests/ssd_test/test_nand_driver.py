@@ -22,3 +22,15 @@ class TestNandDriver(TestCase):
 
         self.assertEqual(builtins.open.call_count, 2)
         builtins.open.assert_called_with(self.driver.nand_file_path, 'w', encoding='utf-8')
+
+    def test_write_value(self):
+        # 전체 데이터에서 지정 된 LBA 의 값만 변경하는지 확인하는 테스트
+        fake_data = '0x00000000\n0x00000000\n0x00000000'
+        expected_data = ['0x00000000\n', '0x1298CDEF\n', '0x00000000']
+        with patch('builtins.open',
+                   mock_open(read_data=fake_data)) as mocked_open:
+            self.driver.write(1, 0x1298CDEF)
+            mocked_open.assert_called_with(self.driver.nand_file_path, 'w', encoding='utf-8')
+
+            handle = mocked_open()
+            handle.writelines.assert_called_once_with(expected_data)
