@@ -7,7 +7,7 @@ class Read(CommandInterface):
     def __init__(self):
         self.driver = SsdDriver()
 
-    def run(self, *args, **kwarg):
-        self.driver.read(int(args[0]))
+    def run(self, lba):
+        self.driver.read(lba)
 
         return get_ssd_result()
