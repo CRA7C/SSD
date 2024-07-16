@@ -6,9 +6,16 @@ from testapp.command import Read, Write, FullRead, FullWrite, Help
 
 
 class TestTestShell(TestCase):
+    # 클래스 변수로 테스트 순서 추적
+    @classmethod
+    def setUpClass(cls):
+        cls.test_counter = 0
+
     def setUp(self):
         super().setUp()
         self.testshell = TestShell()
+        TestTestShell.test_counter += 1
+        print(f"\nRunning test #{TestTestShell.test_counter}")
 
     def test_valid_cmd_true(self):
         cmd_list = [
@@ -159,14 +166,17 @@ class TestTestShell(TestCase):
 
     @patch.object(FullRead, "run", return_value="GOOD")
     def test_testshell_wo_args(self, mk_fullread):
-        cmd_list = ["help", "fullread"]#, "testapp1", "testapp2", "fullread"]
+        cmd_list = ["help", "fullread"]  # , "testapp1", "testapp2", "fullread"]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")
                 ret = self.testshell.execute(cmd)
                 self.assertEqual(ret, EXECUTE_VALID_WO_ARGS)
+
+    @patch.object(Write, "run", return_value="GOOD")
     @patch.object(Read, "run", return_value="GOOD")
-    def test_testshell_with_args(self, mk_read):
+    @patch.object(FullWrite, "run", return_value="GOOD")
+    def test_testshell_with_args(self, mk_fullwrite, mk_read, mk_write):
         cmd_list = ["fullwrite 0xABCDFFFF",
                     "read 3",
                     "write 3 0xAAAABBBB"
