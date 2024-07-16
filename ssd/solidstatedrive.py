@@ -3,7 +3,7 @@ from ssd.nand_driver import NandDriver
 from ssd.result_manager import ResultManager
 
 
-class SSD:
+class SolidStateDrive:
     def __init__(self):
         self.nand_driver = NandDriver()
         self.result_manager = ResultManager()

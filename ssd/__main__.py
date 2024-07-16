@@ -1,11 +1,11 @@
 import sys
 
-from ssd.ssd import SSD
+from ssd.solidstatedrive import SolidStateDrive
 
 
 class SSDRunner:
     def __init__(self):
-        self.ssd = SSD()
+        self.ssd = SolidStateDrive()
 
     def is_valid_command(self):
         if len(sys.argv) < 3:
