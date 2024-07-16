@@ -8,16 +8,18 @@ TestApp1 제작하기
 from testapp.command.__interface import CommandInterface
 from testapp.command import FullRead, FullWrite
 
+READ_VALUE = 0x12345678
+
 
 class TestApp1(CommandInterface):
 
     def run(self, *args, **kwargs):
-        FullWrite().run(0x12345678)
+        FullWrite().run(READ_VALUE)
         read_data = FullRead().run()
         return self.validate_data(read_data)
 
     def validate_data(self, read_data):
         for data in read_data:
-            if data != 0x12345678:
+            if data != READ_VALUE:
                 return False
         return True
