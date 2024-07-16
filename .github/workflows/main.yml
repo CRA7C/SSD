@@ -21,4 +21,4 @@ jobs:
         echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
     - name: Test with unittest
       run: |
-        python -m unittest discover -s . -p tests
+        python -m unittest discover -s tests -p "*.py"
