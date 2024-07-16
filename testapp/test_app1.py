@@ -5,3 +5,11 @@ TestApp1 제작하기
  • fullread를 하면서, write 한 값대로 read가 되는지 확인한다.
    🡪 SSD가 정상동작하는지확인하는테스트스크립트
 """
+from testapp.command.__interface import CommandInterface
+
+
+class TestApp(CommandInterface):
+
+    def run(self, *args, **kwargs):
+        pass
+
