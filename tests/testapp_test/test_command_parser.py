@@ -109,9 +109,9 @@ class TestCommandParser(TestCase):
         cmd_dict = {
             "write 3 0xAAAABBBB": ("write", [3, 0xAAAABBBB]),
             "read 3": ("read", [3]),
-            "help": ("help", None),
+            "help": ("help", []),
             "fullwrite 0xABCDFFFF": ("fullwrite", [0xABCDFFFF]),
-            "fullread": ("fullread", None),
+            "fullread": ("fullread", []),
         }
         for idx, (key, val) in enumerate(cmd_dict.items()):
             with self.subTest(idx=idx, key=key, val=val):
