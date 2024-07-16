@@ -12,10 +12,6 @@ class TestTestApp2(TestCase):
         self.test_app2 = TestApp2()
 
     @patch.object(Write, 'run', return_value=True)
-    def test_write_30_times(self, write_mock):
-        self.assertTrue(self.test_app2.write_30_times())
-
-    @patch.object(Write, 'run', return_value=True)
     def test_write_30_times_SHOULD_execute_write_30_times(self, write_mock):
         self.test_app2.write_30_times()
         self.assertEqual(30, write_mock.call_count)
@@ -27,7 +23,7 @@ class TestTestApp2(TestCase):
 
     @patch.object(Read, 'run', return_value=READ_VALUE)
     def test_read_SHOULD_execute_read_6_times(self, read_mock):
-        self.test_app2.read()
+        self.test_app2.read_data()
 
     def test_validate_SHOULD_return_True_When_normal_value(self):
         self.assertTrue(self.test_app2.validate([READ_VALUE] * 6))

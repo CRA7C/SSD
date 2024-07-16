@@ -7,41 +7,35 @@ TestApp2 제작하기
 from testapp.command import Write, Read
 from testapp.command.__interface import CommandInterface
 
+TARGET_LBA = [0, 1, 2, 3, 4, 5]
 WRITE_VALUE = 0xAAAABBBB
 READ_VALUE = 0x12345678
 
 
 class TestApp2(CommandInterface):
+    def __init__(self):
+        self.read = Read()
+        self.write = Write()
+
     def run(self, *args, **kwargs):
         self.write_30_times()
         self.over_write()
-        read_data = self.read()
+        read_data = self.read_data()
         return self.validate(read_data)
 
     def write_30_times(self):
-        write = Write()
-        try:
-            for _ in range(6):
-                for lba in range(5):
-                    write.run(lba, WRITE_VALUE)
-        except Exception:
-            raise Exception
-        return True
+        for _ in range(5):
+            for lba in TARGET_LBA:
+                self.write.run(lba, WRITE_VALUE)
 
     def over_write(self):
-        write = Write()
-        try:
-            for lba in range(6):
-                write.run(lba, READ_VALUE)
-        except Exception:
-            raise Exception
-        return True
+        for lba in TARGET_LBA:
+            self.write.run(lba, READ_VALUE)
 
-    def read(self):
-        read = Read()
+    def read_data(self):
         read_data = []
-        for lba in range(6):
-            read_data.append(read.run(lba))
+        for lba in TARGET_LBA:
+            read_data.append(self.read.run(lba))
         return read_data
 
     def validate(self, read_data):
@@ -49,4 +43,3 @@ class TestApp2(CommandInterface):
             if data != READ_VALUE:
                 return False
         return True
-
