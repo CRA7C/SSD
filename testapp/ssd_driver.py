@@ -6,6 +6,12 @@ class SsdDriver:
     - ssd 를 python level에서 접근하여 쓸 수 있게 해주는 드라이버
     - subprocess 를 사용하여 ssd 에 접근하도록 설계
     """
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
 
     @staticmethod
     def run_subprocess(command):

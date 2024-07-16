@@ -10,6 +10,9 @@ class TestSsdDriver(unittest.TestCase):
         super().setUp()
         self.driver = SsdDriver()
 
+    def test_ssd_driver_singleton(self):
+        self.assertEqual(self.driver, SsdDriver())
+
     @patch('subprocess.run')
     def test_run_command(self, mock_run):
         # 모킹된 subprocess.run의 반환값 설정
