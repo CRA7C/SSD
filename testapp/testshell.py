@@ -1,5 +1,5 @@
 from testapp.command_parser import CommandParser
-from testapp.constants import (INVALID_COMMAND)
+from testapp.constants import INVALID_COMMAND
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
@@ -8,7 +8,8 @@ EXECUTE_INVALID = 0
 
 class TestShell:
 
-    def execute(self, cmd: str) -> int:
+    @staticmethod
+    def execute(cmd: str) -> int:
         if not CommandParser.validate_command(cmd):
             print(INVALID_COMMAND)
             return EXECUTE_INVALID
@@ -27,7 +28,6 @@ class TestShell:
 
 
 def main():
-    ts = TestShell()
     while True:
         cmd = input("> ")
-        ts.execute(cmd)
+        TestShell.execute(cmd)
