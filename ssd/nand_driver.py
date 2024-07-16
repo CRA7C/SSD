@@ -1,7 +1,8 @@
 import os
 from pathlib import Path
 
-HEX_PREFIX = "0x"
+from ssd.common import convert_hex_to_str
+
 LBA_COUNT = 100
 NAND_INITIAL_VALUE = '0x00000000'
 NAND_FILE_PATH = Path(__file__).parent / 'nand.txt'
@@ -16,7 +17,8 @@ class NandDriver:
         self.nand_file_path = NAND_FILE_PATH
         self.initiate_nand_file(self.nand_file_path)
 
-    def initiate_nand_file(self, nand_file_path):
+    @staticmethod
+    def initiate_nand_file(nand_file_path):
         if not os.path.exists(nand_file_path):
             with open(nand_file_path, 'w') as f:
                 f.write('\n'.join([NAND_INITIAL_VALUE for _ in range(LBA_COUNT)]))
@@ -39,8 +41,7 @@ class NandDriver:
         result = []
         for i, line in enumerate(contents.split('\n')):
             if i == lba:
-                hex_str = HEX_PREFIX + hex(value)[2:].upper().zfill(8)
-                result.append(hex_str)
+                result.append(convert_hex_to_str(value))
             else:
                 result.append(line)
         return '\n'.join(result)
