@@ -13,6 +13,7 @@ WRITE_VALUE = 0xAAAABBBB
 class TestApp2(CommandInterface):
     def run(self, *args, **kwargs):
         self.write_30_times()
+        self.over_write()
 
     def write_30_times(self):
         write = Write()
@@ -20,6 +21,15 @@ class TestApp2(CommandInterface):
             for _ in range(6):
                 for lba in range(5):
                     write.run(lba, WRITE_VALUE)
+        except Exception:
+            raise Exception
+        return True
+
+    def over_write(self):
+        write = Write()
+        try:
+            for lba in range(6):
+                write.run(lba, 0x12345678)
         except Exception:
             raise Exception
         return True
