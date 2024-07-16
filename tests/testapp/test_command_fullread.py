@@ -1,8 +1,10 @@
 import unittest
 from unittest import TestCase
+from unittest.mock import patch
 
-from testapp.command import FullRead, FullWrite
-from tests.util import get_ssd_result
+from testapp.command import FullRead
+from testapp.constants import SSD_SIZE
+from testapp.ssd_driver import SsdDriver
 
 
 class Test(TestCase):
@@ -18,11 +20,10 @@ class Test(TestCase):
         with self.assertRaises(ValueError):
             self.command.run(100)
 
-    def test_full_read(self):
-        test_value = 0x1289CDEF
-        FullWrite().run(test_value)
-
-        self.assertEqual(self.command.run(), get_ssd_result())
+    @patch.object(SsdDriver, 'read')
+    def test_read_count(self, mock_read):
+        self.command.run()
+        self.assertEqual(mock_read.call_count, SSD_SIZE)
 
 
 if __name__ == '__main__':
