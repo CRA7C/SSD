@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
-from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT
+from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT, is_valid_hex
 
 
 class SSDRunner:
@@ -25,7 +25,7 @@ class SSDRunner:
         if sys.argv[1] == 'W':
             if len(sys.argv) < 4:
                 raise ValueError('W 명령에는 value가 필요합니다.')
-            if len(sys.argv[3]) != 10 or sys.argv[3][:2] != '0x':
+            if not is_valid_hex(sys.argv[3]):
                 raise ValueError('value는 0x00000000 형식이여야 합니다.')
             int(sys.argv[3], 16)
         return True
@@ -35,7 +35,7 @@ class SSDRunner:
         if sys.argv[1] == 'R':
             self.ssd.read(lba)
         elif sys.argv[1] == 'W':
-            value = int(sys.argv[3][2:], 16)
+            value = int(sys.argv[3], 16)
             self.ssd.write(lba, value)
 
 
