@@ -3,11 +3,9 @@ import re
 from testapp import command
 from testapp.test_app1 import TestApp1
 from testapp.test_app2 import TestApp2
-from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE
+from testapp.constants import (SSD_MIN_VALUE, SSD_MAX_VALUE,
+                               SSD_START_LBA, SSD_END_LBA)
 
-MAX_LBA = 99
-
-MIN_LBA = 0
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
@@ -17,14 +15,14 @@ EXECUTE_INVALID = 0
 def is_in_range_lba(lba: str) -> bool:
     try:
         num = int(lba)
-        return MIN_LBA <= num <= MAX_LBA
+        return SSD_START_LBA <= num <= SSD_END_LBA
     except ValueError:
         return False
 
 
 def is_valid_hex(s):
     # 정규식으로 형식을 먼저 확인
-    if re.fullmatch(r'0x[0-9A-Fa-f]{8}', s):
+    if re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
         try:
             # 16진수로 변환하여 범위를 확인
             num = int(s, 16)
@@ -40,8 +38,8 @@ class TestShell:
         "read": command.Read,
         "exit": command.Exit,
         "help": command.Help,
-        "fullwrite": command.FullWrite,
-        "fullread": command.FullRead,
+        "fullwrite": command.FullWrite,  # noqa
+        "fullread": command.FullRead,  # noqa
         "testapp1": TestApp1,
         "testapp2": TestApp2,
     }
@@ -69,7 +67,8 @@ class TestShell:
         else:
             return False
 
-    def valid_cmd(self, cmd):
+    @staticmethod
+    def valid_cmd(cmd):
         """
         유효성 검사 수행
         """
@@ -117,11 +116,12 @@ class TestShell:
                 return False
         return True
 
-    def parse_args(self, cmd: str):
+    @staticmethod
+    def parse_args(cmd: str):
         cmd_list = cmd.split(" ")
         cmd_option = cmd_list[0]
         if len(cmd_list) > 1:
-            cmd_args = cmd_list[1:]
+            cmd_args: list = cmd_list[1:]
             if cmd_option == "read":
                 cmd_args[0] = int(cmd_args[0])
             elif cmd_option == "write":
@@ -134,12 +134,12 @@ class TestShell:
 
 
 def main():
-    testshell = TestShell()
+    ts = TestShell()
     while True:
         cmd = input("> ")
         if cmd == "exit":
             break
-        testshell.execute(cmd)
+        ts.execute(cmd)
     return
 
 

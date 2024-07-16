@@ -2,16 +2,14 @@ import sys
 import io
 from functools import wraps
 from typing import Union
-import os.path
-import subprocess
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent.parent
 
 
 def get_ssd_result() -> str:
-    file_path = BASE_DIR / 'ssd' / 'result.txt'
-    with open(file_path, 'r', encoding='utf-8') as f:
+    file_path = BASE_DIR / "ssd" / "result.txt"
+    with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
 
@@ -42,7 +40,7 @@ def validate_ssd_value(value: Union[str, int]):
     if not isinstance(value, (str, int)):
         raise TypeError
     elif isinstance(value, str):
-        if not value.startswith('0x'):
+        if not value.startswith("0x"):
             raise ValueError
         try:
             value = int(value, 16)  # 16 진수 to

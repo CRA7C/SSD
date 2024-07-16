@@ -1,4 +1,5 @@
-from testapp.util import *  # noqa
+import subprocess
+from testapp.util import get_ssd_result, validate_ssd_command, BASE_DIR
 
 
 class SsdDriver:
@@ -24,8 +25,8 @@ class SsdDriver:
             raise Exception(f"Error executing command: {e.stderr}")
 
     def read(self, lba: int) -> int:
-        result = self.run_subprocess(f"ssd R {lba}")
-        return result.stdout
+        self.run_subprocess(f"ssd R {lba}")
+        return get_ssd_result()
 
     def write(self, lba: int, value: int):
         self.run_subprocess(f"ssd W {lba} 0x{value:08X}")

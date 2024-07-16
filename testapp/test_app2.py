@@ -26,11 +26,10 @@ class TestApp2(CommandInterface):
     def write_30_times(self):
         # Total 30회의 write을 수행.
         call_count = 0
-        while call_count<30:
+        while call_count < 30:
             for lba in TARGET_LBA:
                 self.write.run(lba, WRITE_VALUE)
                 call_count += 1
-
 
     def over_write(self):
         for lba in TARGET_LBA:
@@ -42,7 +41,8 @@ class TestApp2(CommandInterface):
             read_data.append(self.read.run(lba))
         return read_data
 
-    def validate(self, read_data):
+    @staticmethod
+    def validate(read_data):
         for data in read_data:
             if data != READ_VALUE:
                 return False

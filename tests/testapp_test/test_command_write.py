@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
-from testapp.util import get_ssd_result
-from testapp.command import Write, Read
+from testapp.command import Write
 from testapp.ssd_driver import SsdDriver
 
 
