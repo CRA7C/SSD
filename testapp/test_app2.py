@@ -8,13 +8,15 @@ from testapp.command import Write, Read
 from testapp.command.__interface import CommandInterface
 
 WRITE_VALUE = 0xAAAABBBB
+READ_VALUE = 0x12345678
 
 
 class TestApp2(CommandInterface):
     def run(self, *args, **kwargs):
         self.write_30_times()
         self.over_write()
-        self.read()
+        read_data = self.read()
+        return self.validate(read_data)
 
     def write_30_times(self):
         write = Write()
@@ -30,7 +32,7 @@ class TestApp2(CommandInterface):
         write = Write()
         try:
             for lba in range(6):
-                write.run(lba, 0x12345678)
+                write.run(lba, READ_VALUE)
         except Exception:
             raise Exception
         return True
@@ -41,3 +43,10 @@ class TestApp2(CommandInterface):
         for lba in range(6):
             read_data.append(read.run(lba))
         return read_data
+
+    def validate(self, read_data):
+        for data in read_data:
+            if data != READ_VALUE:
+                return False
+        return True
+
