@@ -74,7 +74,8 @@ class TestShell:
             "fullwrite": 1,
             "fullread": 0,
             "testapp1": 0,
-            "testapp2": 0
+            "testapp2": 0,
+            "exit": 0,
         }
         cmd_list = cmd.split(" ")
         cmd_option = cmd_list[0]
@@ -132,10 +133,7 @@ def main():
     ts = TestShell()
     while True:
         cmd = input("> ")
-        if cmd == "exit":
-            break
         ts.execute(cmd)
-    return
 
 
 if __name__ == "__main__":
