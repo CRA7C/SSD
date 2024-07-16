@@ -6,10 +6,17 @@ TestApp1 제작하기
    🡪 SSD가 정상동작하는지확인하는테스트스크립트
 """
 from testapp.command.__interface import CommandInterface
+from testapp.command import FullRead, FullWrite
 
 
-class TestApp(CommandInterface):
+class TestApp1(CommandInterface):
 
     def run(self, *args, **kwargs):
-        pass
+        FullWrite().run(0x12345678)
+        read_data = FullRead().run()
+        for data in read_data:
+            if data != 0x12345678:
+                return False
+
+        return True
 
