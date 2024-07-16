@@ -16,7 +16,7 @@ class TestShell:
 
         cmd_option, cmd_args = CommandParser.parse_args(cmd)
 
-        cmd_if = CommandParser.cmd_if_dict[cmd_option]()
+        cmd_if = CommandParser.get_command(cmd_option)
         if cmd_args is not None:
             print(cmd_option, *cmd_args)
             cmd_if.run(*cmd_args)

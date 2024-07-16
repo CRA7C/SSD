@@ -104,3 +104,7 @@ class CommandParser:
                 cmd_args[0] = int(cmd_args[0], 16)
             return cmd_option, cmd_args
         return cmd_option, None
+
+    @classmethod
+    def get_command(cls, cmd_option):
+        return cls.cmd_if_dict[cmd_option]()
