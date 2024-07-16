@@ -20,7 +20,7 @@ class TestApp2(CommandInterface):
     def run(self, *args, **kwargs):
         self.write_30_times()
         self.over_write()
-        read_data = self.read_data()
+        read_data = self.read_target_lba()
         return self.validate(read_data)
 
     def write_30_times(self):
@@ -35,7 +35,7 @@ class TestApp2(CommandInterface):
         for lba in TARGET_LBA:
             self.write.run(lba, READ_VALUE)
 
-    def read_data(self):
+    def read_target_lba(self):
         read_data = []
         for lba in TARGET_LBA:
             read_data.append(self.read.run(lba))
