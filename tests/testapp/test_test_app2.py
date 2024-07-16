@@ -24,6 +24,7 @@ class TestTestApp2(TestCase):
     @patch.object(Read, 'run', return_value=READ_VALUE)
     def test_read_SHOULD_execute_read_6_times(self, read_mock):
         self.test_app2.read_data()
+        self.assertEqual(6, read_mock.call_count)
 
     def test_validate_SHOULD_return_True_When_normal_value(self):
         self.assertTrue(self.test_app2.validate([READ_VALUE] * 6))
