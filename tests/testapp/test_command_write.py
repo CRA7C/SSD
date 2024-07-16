@@ -1,14 +1,15 @@
 import unittest
-from tests.util import get_ssd_result
+from unittest.mock import patch
+from testapp.util import get_ssd_result
 from testapp.command import Write, Read
+from testapp.ssd_driver import SsdDriver
 
 
-class TestFullWrite(unittest.TestCase):
-    def test_run(self):
+class TestWrite(unittest.TestCase):
+    @patch.object(SsdDriver, 'write')
+    def test_run(self, mock_write):
         Write().run(20, 0x1289CDEF)
-        ret = Read().run(20)
-        result = get_ssd_result()
-        self.assertEqual(int(ret), int(result))
+        mock_write.assert_called_once_with(20, 0x1289CDEF)
 
 
 if __name__ == '__main__':
