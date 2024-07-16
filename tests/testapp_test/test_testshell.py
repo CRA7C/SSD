@@ -116,42 +116,6 @@ class TestTestShell(TestCase):
                 ret = self.testshell.valid_cmd(cmd)
                 self.assertFalse(ret)
 
-    @patch.object(TestShell, 'valid_cmd', return_value=True)
-    def test_is_valid_cmd_true(self, _):
-        cmd_list = [
-            "write 3 0xAAAABBBB",
-            "read 3",
-            "exit",
-            "help",
-            "fullwrite 0xABCDFFFF",
-            "fullread",
-            "testapp1",
-            "testapp2",
-        ]
-        for idx, cmd in enumerate(cmd_list):
-            with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.is_valid_cmd(cmd)
-                self.assertTrue(ret)
-
-    @patch.object(TestShell, 'valid_cmd', return_value=False)
-    def test_is_valid_cmd_false(self, _):
-        cmd_list = [
-            "write 3 0xAAAABBBB",
-            "read 3",
-            "exit",
-            "help",
-            "fullwrite 0xABCDFFFF",
-            "fullread",
-            "testapp1",
-            "testapp2",
-        ]
-        for idx, cmd in enumerate(cmd_list):
-            with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
-                ret = self.testshell.is_valid_cmd(cmd)
-                self.assertFalse(ret)
-
     def test_parse_args(self):
         cmd_dict = {
             "write 3 0xAAAABBBB": ("write", [3, 0xAAAABBBB]),
@@ -170,7 +134,7 @@ class TestTestShell(TestCase):
     @patch.object(TestApp1, "run", return_value=True)
     @patch.object(FullRead, "run", return_value="GOOD")
     def test_testshell_wo_args(self, mk_fullread, mk_testapp1, mk_testapp2):
-        cmd_list = ["help", "fullread", "testapp1", "testapp2"]  # , "testapp1", "testapp2", "fullread"]
+        cmd_list = ["help", "fullread", "testapp1", "testapp2"]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 print(f"{idx + 1}. {cmd}")

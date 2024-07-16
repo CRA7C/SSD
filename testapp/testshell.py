@@ -5,7 +5,7 @@ from testapp import command
 from testapp.test_app1 import TestApp1
 from testapp.test_app2 import TestApp2
 from testapp.constants import (SSD_MIN_VALUE, SSD_MAX_VALUE,
-                               SSD_START_LBA, SSD_END_LBA)
+                               SSD_START_LBA, SSD_END_LBA, INVALID_COMMAND)
 
 
 EXECUTE_VALID_WO_ARGS = 2
@@ -46,7 +46,7 @@ class TestShell:
     }
 
     def execute(self, cmd: str) -> int:
-        if not self.is_valid_cmd(cmd):
+        if not self.valid_cmd(cmd):
             print(INVALID_COMMAND)
             return EXECUTE_INVALID
 
@@ -62,14 +62,7 @@ class TestShell:
         cmd_if.run()
         return EXECUTE_VALID_WO_ARGS
 
-    def is_valid_cmd(self, cmd: str) -> bool:
-        if self.valid_cmd(cmd):
-            return True
-        else:
-            return False
-
-    @staticmethod
-    def valid_cmd(cmd) -> bool:
+    def valid_cmd(self, cmd) -> bool:
         """
         유효성 검사 수행
         """
