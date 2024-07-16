@@ -14,7 +14,8 @@ READ_VALUE = 0x12345678
 class TestApp1(CommandInterface):
 
     def run(self, *args, **kwargs):
-        FullWrite().run(READ_VALUE)
+        if not FullWrite().run(READ_VALUE):
+            return False
         read_data = FullRead().run()
         return self.validate_data(read_data)
 
