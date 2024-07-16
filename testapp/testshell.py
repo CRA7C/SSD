@@ -2,7 +2,7 @@ import re
 
 from testapp import command
 from testapp.test_app1 import TestApp1
-# from testapp.test_app2 import TestApp2
+from testapp.test_app2 import TestApp2
 from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE
 
 EXECUTE_VALID_WO_ARGS = 2
@@ -39,7 +39,7 @@ class TestShell:
         "fullwrite": command.FullWrite,
         "fullread": command.FullRead,
         "testapp1": TestApp1,
-        # "testapp2": TestApp2,
+        "testapp2": TestApp2,
     }
 
     def execute(self, cmd: str):
