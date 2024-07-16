@@ -1,8 +1,8 @@
 from testapp.command import Read
 from testapp.command.__interface import CommandInterface
 
-STARTADDR = 0
-ENDADDR = 99
+START_ADDR = 0
+END_ADDR = 99
 
 
 class FullRead(CommandInterface):
@@ -12,8 +12,11 @@ class FullRead(CommandInterface):
     def run(self, *args, **kwarg):
         self.valid_check(args)
 
-        for addr in range(STARTADDR, ENDADDR + 1):
-            print(self.read.run(addr))
+        ret = []
+        for addr in range(START_ADDR, END_ADDR + 1):
+            ret.append(self.read.run(addr))
+
+        return ret
 
     def valid_check(self, args):
         if len(args) != 0:

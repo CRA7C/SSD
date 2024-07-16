@@ -1,22 +1,13 @@
 from testapp.command.__interface import CommandInterface
-from tests.util import get_ssd_result
+from testapp.ssd_driver import SsdDriver
+from testapp.util import get_ssd_result
 
 
 class Read(CommandInterface):
-    def run(self, *args, **kwarg):
-        self.valid_check(args)
+    def __init__(self):
+        self.driver = SsdDriver()
 
-        read_cmd = f'ssd.py R {args[0]}'
-        run_subprocess(read_cmd)
+    def run(self, lba):
+        self.driver.read(lba)
 
         return get_ssd_result()
-
-    def valid_check(self, args):
-        if len(args) != 1:
-            raise ValueError
-        if args[0] < 0:
-            raise ValueError
-        elif args[0] >= 100:
-            raise ValueError
-
-

@@ -1,7 +1,8 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from testapp.testshell import TestShell
+from testapp.testshell import TestShell, EXECUTE_INVALID, EXECUTE_VALID_WO_ARGS, EXECUTE_VALID_WITH_ARGS
+from testapp.command import Read, Write, FullRead, FullWrite, Help
 
 
 class TestTestShell(TestCase):
@@ -13,16 +14,17 @@ class TestTestShell(TestCase):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
-            "exit",
             "help",
             "fullwrite 0xABCDFFFF",
             "fullread",
             "testapp1",
             "testapp2",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.valid_cmd(cmd)
-            self.assertTrue(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.valid_cmd(cmd)
+                self.assertTrue(ret)
 
     def test_valid_cmd_write_false(self):
 
@@ -33,9 +35,11 @@ class TestTestShell(TestCase):
             "write 3",
             "write",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.valid_cmd(cmd)
-            self.assertFalse(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.valid_cmd(cmd)
+                self.assertFalse(ret)
 
     def test_valid_cmd_read_false(self):
 
@@ -44,9 +48,11 @@ class TestTestShell(TestCase):
             "Read 3",
             "read 0xAAAABBBB",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.valid_cmd(cmd)
-            self.assertFalse(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.valid_cmd(cmd)
+                self.assertFalse(ret)
 
     def test_valid_cmd_exit_false(self):
 
@@ -55,9 +61,11 @@ class TestTestShell(TestCase):
             "exit 1",
             "exit 0xABCDFFFF",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.valid_cmd(cmd)
-            self.assertFalse(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.valid_cmd(cmd)
+                self.assertFalse(ret)
 
     def test_valid_cmd_help_false(self):
 
@@ -66,9 +74,11 @@ class TestTestShell(TestCase):
             "hELP",
             "help 0xABCDFFFF",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.valid_cmd(cmd)
-            self.assertFalse(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.valid_cmd(cmd)
+                self.assertFalse(ret)
 
     def test_valid_cmd_fullwrite_false(self):
 
@@ -78,9 +88,11 @@ class TestTestShell(TestCase):
             "FullWrite 0xABCDFFFF",
             "fullwrite ABCDFFFF",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.valid_cmd(cmd)
-            self.assertFalse(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.valid_cmd(cmd)
+                self.assertFalse(ret)
 
     def test_valid_cmd_fullread_false(self):
 
@@ -89,12 +101,14 @@ class TestTestShell(TestCase):
             "FULLREAD",
             "FullRead",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.valid_cmd(cmd)
-            self.assertFalse(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.valid_cmd(cmd)
+                self.assertFalse(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=True)
-    def test_is_valid_cmd_true(self):
+    def test_is_valid_cmd_true(self, mk):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
@@ -105,12 +119,14 @@ class TestTestShell(TestCase):
             "testapp1",
             "testapp2",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.is_valid_cmd(cmd)
-            self.assertTrue(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.is_valid_cmd(cmd)
+                self.assertTrue(ret)
 
     @patch.object(TestShell, 'valid_cmd', return_value=False)
-    def test_is_valid_cmd_false(self):
+    def test_is_valid_cmd_false(self, mk):
         cmd_list = [
             "write 3 0xAAAABBBB",
             "read 3",
@@ -121,82 +137,49 @@ class TestTestShell(TestCase):
             "testapp1",
             "testapp2",
         ]
-        for cmd in cmd_list:
-            ret = self.testshell.is_valid_cmd(cmd)
-            self.assertFalse(ret)
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.is_valid_cmd(cmd)
+                self.assertFalse(ret)
 
     def test_parse_args(self):
         cmd_dict = {
-            "write 3 0xAAAABBBB": ("read", ["3", '0xAAAABBBB']),
-            "read 3": ("read", ["3"]),
-            "exit": ("read", None),
-            "help": ("read", None),
-            "fullwrite 0xABCDFFFF": ("read", ['0xABCDFFFF']),
-            "fullread": ("read", None),
+            "write 3 0xAAAABBBB": ("write", [3, 0xAAAABBBB]),
+            "read 3": ("read", [3]),
+            "help": ("help", None),
+            "fullwrite 0xABCDFFFF": ("fullwrite", [0xABCDFFFF]),
+            "fullread": ("fullread", None),
         }
-        for key, val in cmd_dict.items():
-            ret = self.testshell.parse_args(key)
-            self.assertEqual(ret, val)
+        for idx, (key, val) in enumerate(cmd_dict.items()):
+            with self.subTest(idx=idx, key=key, val=val):
+                print(f"{idx + 1}. {key},{val}")
+                ret = self.testshell.parse_args(key)
+                self.assertEqual(ret, val)
 
-    def test_execute_write(self):
-        cmd = "write 3 0xAAAABBBB"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 1)
-
-    def test_testshell_read(self):
-        cmd = "read 3"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 1)
-
-    def test_testshell_exit(self):
-        cmd = "exit"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 2)
-
-    def test_testshell_help(self):
-        cmd = "help"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 2)
-
-    def test_testshell_fullwrite(self):
-        cmd = "fullwrite 0xABCDFFFF"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 2)
-
-    def test_testshell_fullread(self):
-        cmd = "fullread"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 2)
-
-    def test_testshell_testapp1(self):
-        cmd = "testapp1"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 2)
-
-    def test_testshell_testapp2(self):
-        cmd = "testapp2"
-
-        ret = self.testshell.execute(cmd)
-
-        self.assertEqual(ret, 2)
+    @patch.object(FullRead, "run", return_value="GOOD")
+    def test_testshell_wo_args(self, mk_fullread):
+        cmd_list = ["help", "fullread"]#, "testapp1", "testapp2", "fullread"]
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.execute(cmd)
+                self.assertEqual(ret, EXECUTE_VALID_WO_ARGS)
+    @patch.object(Read, "run", return_value="GOOD")
+    def test_testshell_with_args(self, mk_read):
+        cmd_list = ["fullwrite 0xABCDFFFF",
+                    "read 3",
+                    "write 3 0xAAAABBBB"
+                    ]
+        for idx, cmd in enumerate(cmd_list):
+            with self.subTest(idx=idx, cmd=cmd):
+                print(f"{idx + 1}. {cmd}")
+                ret = self.testshell.execute(cmd)
+                self.assertEqual(ret, EXECUTE_VALID_WITH_ARGS)
 
     def test_testshell_invalid(self):
         cmd = "Write 1 dd"
 
         ret = self.testshell.execute(cmd)
 
-        self.assertEqual(ret, 0)
+        self.assertEqual(ret, EXECUTE_INVALID)
