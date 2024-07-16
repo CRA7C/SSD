@@ -12,12 +12,12 @@ class TestTestApp1(TestCase):
         self.test_app1 = TestApp1()
 
     @patch.object(FullWrite, 'run', return_value=True)
-    @patch.object(FullRead, 'run', return_value=[0x12345678] * 100)
+    @patch.object(FullRead, 'run', return_value=[READ_VALUE] * 100)
     def test_run_SHOULD_RETURN_True_WHEN_normal(self, full_read_mock, full_write_mock):
         self.assertTrue(self.test_app1.run())
 
     @patch.object(FullWrite, 'run', return_value=False)
-    @patch.object(FullRead, 'run', return_value=[0x12345678] * 100)
+    @patch.object(FullRead, 'run', return_value=[READ_VALUE] * 100)
     def test_run_SHOULD_RETURN_FALSE_WHEN_write_fail(self, full_read_mock, full_write_mock):
         self.assertFalse(self.test_app1.run())
 
