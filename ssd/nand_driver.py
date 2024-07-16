@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-HEX_PREFIX = "0x"
 LBA_COUNT = 100
 NAND_INITIAL_VALUE = '0x00000000'
 NAND_FILE_PATH = Path(__file__).parent / 'nand.txt'
@@ -40,8 +39,7 @@ class NandDriver:
         result = []
         for i, line in enumerate(contents.split('\n')):
             if i == lba:
-                hex_str = HEX_PREFIX + hex(value)[2:].upper().zfill(8)
-                result.append(hex_str)
+                result.append(f"0x{value:08X}")
             else:
                 result.append(line)
         return '\n'.join(result)
