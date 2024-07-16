@@ -10,14 +10,14 @@ class SsdDriver:
     _instance = None
 
     def __new__(cls, *args, **kwargs):
-        if not cls._instance:
+        if cls._instance is None:
             cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
 
     @staticmethod
     def run_subprocess(command):
         validate_ssd_command(command)
-        subprocess_cmd = f"python {command}"
+        subprocess_cmd = f"python -m {command}"
         try:
             return subprocess.run(subprocess_cmd, shell=True, check=True, cwd=BASE_DIR,
                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
