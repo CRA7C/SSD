@@ -16,7 +16,8 @@ class NandDriver:
         self.nand_file_path = NAND_FILE_PATH
         self.initiate_nand_file(self.nand_file_path)
 
-    def initiate_nand_file(self, nand_file_path):
+    @staticmethod
+    def initiate_nand_file(nand_file_path):
         if not os.path.exists(nand_file_path):
             with open(nand_file_path, 'w') as f:
                 f.write('\n'.join([NAND_INITIAL_VALUE for _ in range(LBA_COUNT)]))
