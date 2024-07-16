@@ -5,15 +5,19 @@ from testapp.test_app1 import TestApp1
 from testapp.test_app2 import TestApp2
 from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE
 
+MAX_LBA = 99
+
+MIN_LBA = 0
+
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
 EXECUTE_INVALID = 0
 
 
-def is_between_0_and_99(s):
+def is_in_range_lba(lba: str) -> bool:
     try:
-        num = int(s)
-        return 0 <= num <= 99
+        num = int(lba)
+        return MIN_LBA <= num <= MAX_LBA
     except ValueError:
         return False
 
@@ -94,7 +98,7 @@ class TestShell:
         if cmd_option == "write":
             n_lba = cmd_list[1]
             value = cmd_list[2]
-            if not is_between_0_and_99(n_lba):
+            if not is_in_range_lba(n_lba):
                 return False
             if not is_valid_hex(value):
                 return False
@@ -102,7 +106,7 @@ class TestShell:
         # 2. read
         if cmd_option == "read":
             n_lba = cmd_list[1]
-            return True if is_between_0_and_99(n_lba) else False
+            return True if is_in_range_lba(n_lba) else False
 
         # 3. fullwrite
         if cmd_option == "fullwrite":
