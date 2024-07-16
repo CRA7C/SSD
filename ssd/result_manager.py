@@ -1,11 +1,13 @@
+from pathlib import Path
+
+RESULT_FILE_PATH = Path(__file__).parent / 'result.txt'
+
+
 class ResultManager:
-    """ Result Manager
-    result.txt 파일 관리 클래스
-    """
 
     def __init__(self):
-        pass
+        self.result_file_path = RESULT_FILE_PATH
 
-    def append_result(self, text):
-        # result.txt 파일 열고
-        pass
+    def write(self, text):
+        with open(self.result_file_path, 'w') as f:
+            f.write(text)

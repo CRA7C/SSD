@@ -1,26 +1,14 @@
-class AppSSD:
-    def __init__(self):
-        self.nand_driver = None
-        self.result_manager = None
-        pass
+from ssd.nand_driver import NandDriver
+from ssd.result_manager import ResultManager
 
-    def read(self, lba) -> int:
-        pass
+
+class SSD:
+    def __init__(self):
+        self.nand_driver = NandDriver()
+        self.result_manager = ResultManager()
 
     def write(self, lba, value):
-        pass
+        self.nand_driver.write(lba, value)
 
-    def exit(self):
-        pass
-
-    def help(self):
-        pass
-
-    def fullwrite(self, value):  # noqa
-        pass
-
-    def fullread(self):  # noqa
-        pass
-
-    def parse_command(self, cmd):
-        pass
+    def read(self, lba):
+        self.result_manager.write(self.nand_driver.read(lba))
