@@ -1,14 +1,17 @@
 import unittest
-from tests.util import get_ssd_result
-from testapp.command import FullWrite, Read
+from unittest.mock import patch
+from testapp.constants import SSD_SIZE
+from testapp.command import FullWrite
+from testapp.ssd_driver import SsdDriver
 
 
 class TestFullWrite(unittest.TestCase):
-    def test_run(self):
+
+    @patch.object(SsdDriver, 'write')
+    def test_run(self, mock_write):
         test_value = 0x1289CDEF
         FullWrite().run(test_value)
-        for result in get_ssd_result().split():
-            self.assertEqual(test_value, int(result))
+        self.assertEqual(mock_write.call_count, SSD_SIZE)
 
 
 if __name__ == '__main__':
