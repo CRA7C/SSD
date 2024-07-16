@@ -46,7 +46,7 @@ class TestShell:
     }
 
     def execute(self, cmd: str) -> int:
-        if not self.valid_cmd(cmd):
+        if not self.validate_command(cmd):
             print(INVALID_COMMAND)
             return EXECUTE_INVALID
 
@@ -62,7 +62,8 @@ class TestShell:
         cmd_if.run()
         return EXECUTE_VALID_WO_ARGS
 
-    def valid_cmd(self, cmd) -> bool:
+    @staticmethod
+    def validate_command(cmd) -> bool:
         """
         유효성 검사 수행
         """
