@@ -29,44 +29,29 @@ def is_valid_hex(s: str):
 
 class CommandParser:
     cmd_if_dict = {
-        "write": command.Write,
-        "read": command.Read,
-        "exit": command.Exit,
-        "help": command.Help,
-        "fullwrite": command.FullWrite,  # noqa
-        "fullread": command.FullRead,  # noqa
-        "testapp1": TestApp1,
-        "testapp2": TestApp2,
+        "write": {"class": command.Write, "required_args_cnt": 2},
+        "read": {"class": command.Read, "required_args_cnt": 1},
+        "exit": {"class": command.Exit, "required_args_cnt": 0},
+        "help": {"class": command.Help, "required_args_cnt": 0},
+        "fullwrite": {"class": command.FullWrite, "required_args_cnt": 1},  # noqa
+        "fullread": {"class": command.FullRead, "required_args_cnt": 0},  # noqa
+        "testapp1": {"class": TestApp1, "required_args_cnt": 0},
+        "testapp2": {"class": TestApp2, "required_args_cnt": 0},
     }
 
-    @staticmethod
-    def validate_command(cmd) -> bool:
-        """
-        유효성 검사 수행
-        """
-        cmd_option_to_args_dict = {
-            "write": 2,
-            "read": 1,
-            "help": 0,
-            "fullwrite": 1,
-            "fullread": 0,
-            "testapp1": 0,
-            "testapp2": 0,
-            "exit": 0,
-        }
+    @classmethod
+    def validate_command(cls, cmd) -> bool:
         cmd_list = cmd.split(" ")
         cmd_option = cmd_list[0]
         n_args = len(cmd_list) - 1
-        if cmd_option not in cmd_option_to_args_dict.keys():
+        if cmd_option not in cls.cmd_if_dict.keys():
             print("Command does not exist")
             return False
-        if cmd_option_to_args_dict[cmd_option] != n_args:
+
+        if cls.cmd_if_dict[cmd_option]['required_args_cnt'] != n_args:
             print("The number of argument does not match")
             return False
-        # 0. exit (구현 필요 x), help, fullread , testapp1, testapp2
-        if n_args == 0:
-            return True
-        # 1. write
+
         if cmd_option == "write":
             n_lba = cmd_list[1]
             value = cmd_list[2]
@@ -75,18 +60,14 @@ class CommandParser:
             if not is_valid_hex(value):
                 return False
             return True
-        # 2. read
+
         if cmd_option == "read":
             n_lba = cmd_list[1]
             return True if is_in_range_lba(n_lba) else False
 
-        # 3. fullwrite
         if cmd_option == "fullwrite":
             value = cmd_list[1]
-            if is_valid_hex(value):
-                return True
-            else:
-                return False
+            return True if is_valid_hex(value) else False
         return True
 
     @staticmethod
@@ -107,4 +88,4 @@ class CommandParser:
 
     @classmethod
     def get_command(cls, cmd_option):
-        return cls.cmd_if_dict[cmd_option]()
+        return cls.cmd_if_dict[cmd_option]["class"]()
