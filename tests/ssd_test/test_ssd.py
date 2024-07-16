@@ -2,13 +2,13 @@ from unittest import TestCase
 from unittest.mock import Mock, patch
 
 from ssd.nand_driver import NandDriver
-from ssd.ssd import SSD
+from ssd.solidstatedrive import SolidStateDrive
 
 
 class TestSSD(TestCase):
 
     def setUp(self):
-        self.ssd = SSD()
+        self.ssd = SolidStateDrive()
 
     def test_write(self):
         self.ssd.nand_driver = Mock()
