@@ -1,5 +1,6 @@
 import subprocess
-from testapp.util import get_ssd_result, validate_ssd_command, BASE_DIR
+import os
+from testapp.util import get_ssd_result_file_path, get_ssd_result, validate_ssd_command, BASE_DIR
 
 
 class SsdDriver:
@@ -10,14 +11,24 @@ class SsdDriver:
     _instance = None
 
     def __new__(cls, *args, **kwargs):
-        if not cls._instance:
+        if cls._instance is None:
             cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
+
+    def __init__(self):
+        self.initiate_result_file()
+
+    @staticmethod
+    def initiate_result_file():
+        result_file_path = get_ssd_result_file_path()
+        if not os.path.exists(result_file_path):
+            with open(result_file_path, 'w'):
+                pass
 
     @staticmethod
     def run_subprocess(command):
         validate_ssd_command(command)
-        subprocess_cmd = f"python {command}"
+        subprocess_cmd = f"python -m {command}"
         try:
             return subprocess.run(subprocess_cmd, shell=True, check=True, cwd=BASE_DIR,
                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

@@ -19,12 +19,13 @@ class TestSsdDriver(unittest.TestCase):
         mock_run.return_value.stdout = "Command output"
         mock_run.return_value.stderr = ""
 
-        command = "python ssd R 2"
-        result = self.driver.run_subprocess(command.replace("python ", ""))
+        expected_command = "python -m ssd R 2"
+        actual_command_input = "ssd R 2"
+        result = self.driver.run_subprocess(actual_command_input)
 
         # subprocess.run이 올바른 인자와 함께 호출되었는지 확인
         mock_run.assert_called_once_with(
-            command,
+            expected_command,
             shell=True,
             check=True,
             cwd=Path(__file__).parent.parent.parent,

@@ -7,8 +7,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent.parent
 
 
+def get_ssd_result_file_path():
+    return BASE_DIR / "ssd" / "result.txt"
+
+
 def get_ssd_result() -> str:
-    file_path = BASE_DIR / "ssd" / "result.txt"
+    file_path = get_ssd_result_file_path()
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
