@@ -14,9 +14,10 @@ class TestApp1(CommandInterface):
     def run(self, *args, **kwargs):
         FullWrite().run(0x12345678)
         read_data = FullRead().run()
+        return self.validate_data(read_data)
+
+    def validate_data(self, read_data):
         for data in read_data:
             if data != 0x12345678:
                 return False
-
         return True
-
