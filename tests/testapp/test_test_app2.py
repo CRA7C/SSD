@@ -1,3 +1,4 @@
+import unittest
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -41,3 +42,7 @@ class TestTestApp2(TestCase):
     @patch.object(Read, 'run', return_value=WRITE_VALUE)
     def test_run_SHOULD_return_True_When_wrong(self, read_mock, write_mock):
         self.assertFalse(self.test_app2.run())
+
+
+if __name__ == '__main__':
+    unittest.main()
