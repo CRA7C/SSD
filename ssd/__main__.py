@@ -11,11 +11,12 @@ class SSDRunner:
         return True
 
     def run(self):
+        lba = int(sys.argv[2])
         if sys.argv[1] == 'R':
-            self.ssd.read(20)
+            self.ssd.read(lba)
         elif sys.argv[1] == 'W':
-            value = int('0x1289CDEF'[2:], 16)
-            self.ssd.write(20, value)
+            value = int(sys.argv[3][2:], 16)
+            self.ssd.write(lba, value)
 
 
 if __name__ == '__main__':

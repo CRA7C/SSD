@@ -12,12 +12,18 @@ class TestSSDRunner(TestCase):
         NandDriver.initiate_nand_file(NAND_FILE_PATH)
 
     def test_run_ssd_write_and_read(self):
-        sys.argv = ['test', 'W', '20', '0x1289CDEF']
-        self.runner.run()
+        params = [
+            (['test', 'W', '20', '0x1289CDEF'], ['test', 'R', '20'], '0x1289CDEF'),
+            (['test', 'W', '10', '0xFF1100AA'], ['test', 'R', '10'], '0xFF1100AA'),
+        ]
+        for write_cmd, read_cmd, expected in params:
+            with self.subTest(f"write cmd: {write_cmd}, read cmd: {read_cmd}"):
+                sys.argv = write_cmd
+                self.runner.run()
 
-        sys.argv = ['test', 'R', '20']
-        self.runner.run()
-        with open(RESULT_FILE_PATH, 'r') as f:
-            actual = f.read()
+                sys.argv = read_cmd
+                self.runner.run()
+                with open(RESULT_FILE_PATH, 'r') as f:
+                    actual = f.read()
 
-        self.assertEqual('0x1289CDEF', actual)
+                self.assertEqual(expected, actual)
