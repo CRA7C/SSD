@@ -34,9 +34,13 @@ class TestSSDRunner(TestCase):
     def test_run_ssd_with_invalid_cmd(self):
         params = [
             ('시스템 인자 없음.', ['test']),
+            ('LBA 인자 없음.', ['test', 'R']),
+            ('R이나 W가 아닌 명령어.', ['test', 'r', '20']),
+            ('숫자가 아닌 LBA.', ['test', 'R', 'aa']),
+            ('범위를 벗어난 LBA.', ['test', 'R', '-1']),
         ]
         for test_case, cmd in params:
             with self.subTest(test_case):
                 sys.argv = cmd
-                with self.assertRaises(TypeError):
+                with self.assertRaises(ValueError):
                     self.runner.is_valid_command()

@@ -8,8 +8,14 @@ class SSDRunner:
         self.ssd = SSD()
 
     def is_valid_command(self):
-        if len(sys.argv) < 2:
-            raise TypeError
+        if len(sys.argv) < 3:
+            raise ValueError("명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20/ssd W 20 0x1289CDEF")
+
+        if sys.argv[1] not in ('R', 'W'):
+            raise ValueError('R 또는 W를 사용해주세요.(대문자)')
+
+        if not 0 <= int(sys.argv[2]) <= 99:
+            raise ValueError('LBA는 0 ~ 99 여야합니다.')
         return True
 
     def run(self):
