@@ -3,9 +3,7 @@ import re
 from testapp import command
 
 EXECUTE_VALID_WO_ARGS = 2
-
 EXECUTE_VALID_WITH_ARGS = 1
-
 EXECUTE_INVALID = 0
 
 
@@ -51,7 +49,7 @@ class TestShell:
         cmd_if = self.cmd_if_dict[cmd_option]()
         if cmd_args is not None:
             print(cmd_option, cmd_args)
-            cmd_if.run(cmd_args)
+            cmd_if.run(*cmd_args)
             return EXECUTE_VALID_WITH_ARGS
 
         print(cmd_option, cmd_args)
@@ -120,6 +118,13 @@ class TestShell:
         cmd_option = cmd_list[0]
         if len(cmd_list) > 1:
             cmd_args = cmd_list[1:]
+            if cmd_option == "read":
+                cmd_args[0] = int(cmd_args[0])
+            elif cmd_option == "write":
+                cmd_args[0] = int(cmd_args[0])
+                cmd_args[1] = int(cmd_args[1], 16)
+            elif cmd_option == "fullwrite":
+                cmd_args[0] = int(cmd_args[0], 16)
             return cmd_option, cmd_args
         return cmd_option, None
 
