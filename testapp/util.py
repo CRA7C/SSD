@@ -4,7 +4,7 @@ from functools import wraps
 from typing import Union
 from pathlib import Path
 
-from constants import SSD_MIN_VALUE, SSD_MAX_VALUE
+from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE
 
 RESULT_FILE = "result.txt"
 READ_COMMAND = "R"
@@ -54,7 +54,7 @@ def validate_ssd_value(value: Union[str, int]):
             value = int(value, 16)  # 16 진수 to
         except:  # noqa
             raise ValueError()
-    if not SSD_MIN_VALUE <= value < SSD_MAX_VALUE:
+    if not SSD_MIN_VALUE <= value <= SSD_MAX_VALUE:
         raise ValueError
 
 
