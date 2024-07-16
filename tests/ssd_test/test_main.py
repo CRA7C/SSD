@@ -5,7 +5,6 @@ import sys
 from unittest import TestCase
 
 from ssd.__main__ import SSDRunner
-from ssd.nand_driver import NandDriver
 from ssd.result_manager import RESULT_FILE_PATH
 
 
