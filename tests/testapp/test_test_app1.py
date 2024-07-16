@@ -6,7 +6,7 @@ from testapp.test_app1 import TestApp1
 from testapp.test_app1 import READ_VALUE
 
 
-class TestTestApp(TestCase):
+class TestTestApp1(TestCase):
     def setUp(self):
         super().setUp()
         self.test_app1 = TestApp1()
