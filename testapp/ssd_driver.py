@@ -31,3 +31,6 @@ class SsdDriver:
 
     def write(self, lba: str | int, value: str):
         self.run_subprocess(f"ssd W {lba} {value}")
+
+    def erase(self, lba: str | int, size: str | int):
+        self.run_subprocess(f"ssd E {lba} {size}")
