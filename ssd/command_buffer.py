@@ -15,7 +15,7 @@ class Command:
     @staticmethod
     def get_command(buffer_data):
         cmd = buffer_data[0]
-        args = [int(value) for value in buffer_data[1:]]
+        args = [int(value) if value.isdigit() else value for value in buffer_data[1:]]
         return Command(cmd, args)
 
     @staticmethod
@@ -75,7 +75,7 @@ class CommandBuffer:
         for command in self.buffer[::-1]:
             if command.cmd == 'W' and command.args[0] == cmd.args[0]:
                 return True
-            elif command.cmd == 'E' and command.args[0] <= cmd.args[0] < command.args[0] + command.args[1]:
+            elif command.cmd == 'E' and int(command.args[0]) <= int(cmd.args[0]) < int(command.args[0]) + int(command.args[1]):
                 return True
         return False
 
@@ -83,7 +83,7 @@ class CommandBuffer:
         for command in self.buffer[::-1]:
             if command.cmd == 'W' and command.args[0] == cmd.args[0]:
                 return command.args[1]
-            elif command.cmd == 'E' and command.args[0] <= cmd.args[0] < command.args[0] + command.args[1]:
+            elif command.cmd == 'E' and int(command.args[0]) <= int(cmd.args[0]) < int(command.args[0]) + int(command.args[1]):
                 return 0x00000000
 
     def flush(self):
@@ -103,7 +103,7 @@ class CommandBuffer:
                 else:
                     merge_flag = False
                     for erase in erase_commands:
-                        if erase[1] <= key[1] < erase[2]:
+                        if int(erase[1]) <= int(key[1]) < int(erase[2]):
                             self.buffer.remove(command)
                             merge_flag = True
                             break
@@ -114,7 +114,7 @@ class CommandBuffer:
                 key = (command.cmd, command.args[0], command.args[0] + command.args[1])
                 merge_flag = False
                 for erase in erase_commands:
-                    if erase[1] <= key[1] and key[2] <= erase[2]:
+                    if int(erase[1]) <= int(key[1]) and int(key[2]) <= int(erase[2]):
                         self.buffer.remove(command)
                         merge_flag = True
                         break
