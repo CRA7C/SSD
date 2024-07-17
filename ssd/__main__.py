@@ -5,18 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
 from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT, is_valid_hex
-from ssd.command_buffer import CommandBuffer
-
-
-class Command:
-    def __init__(self):
-        self.cmd = ''
-
-
-class CommandFactory:
-    @staticmethod
-    def create_command(cmd):
-        return tuple(cmd)
+from ssd.command_buffer import CommandBuffer, Command
 
 
 class SSDRunner:
@@ -55,35 +44,32 @@ class SSDRunner:
     def buff_flush(self):
         cmd_list = self.cmd_buf.flush()
         for cmd in cmd_list:
-            self.execute(cmd)
+            self.execute_command(cmd)
 
     def run(self):
-        cmd = CommandFactory().create_command(sys.argv[1:])
-        if cmd[0] == 'F':
+        cmd = Command.create_command(sys.argv[1:])
+        if cmd.cmd == 'F':
             self.buff_flush()
-        elif cmd[0] == 'R':
+        elif cmd.cmd == 'R':
             if self.cmd_buf.is_able_to_fast_read(cmd):
                 value = self.cmd_buf.get_read_fast(cmd)
                 self.ssd.read_fast(value)
             else:
-                self.execute(cmd)
-        else:
+                self.execute_command(cmd)
+        elif cmd.cmd in ('W', 'E'):
             self.cmd_buf.push_command(cmd)
             self.cmd_buf.optimize()
             if self.cmd_buf.need_flush():
                 self.buff_flush()
 
-    def execute(self, command):
-        cmd = command[0]
-        lba = int(command[1])
+    def execute_command(self, command):
+        cmd = command.cmd
         if cmd == 'R':
-            self.ssd.read(lba)
+            self.ssd.read(command.args[0])
         elif cmd == 'W':
-            value = int(command[2], 16)
-            self.ssd.write(lba, value)
+            self.ssd.write(command.args[0], command.args[1])
         elif cmd == 'E':
-            size = int(command[2])
-            self.ssd.erase(lba, size)
+            self.ssd.erase(command.args[0], command.args[1])
 
 
 if __name__ == '__main__':
