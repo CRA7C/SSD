@@ -58,7 +58,6 @@ class SSDRunner:
                 self.execute_command(cmd)
         elif cmd.cmd in ('W', 'E'):
             self.cmd_buf.push_command(cmd)
-            self.cmd_buf.optimize()
             if self.cmd_buf.need_flush():
                 self.buff_flush()
 

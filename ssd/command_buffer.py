@@ -11,6 +11,7 @@ class Command:
 
     def get_value(self):
         return self.cmd, *self.args
+
     @staticmethod
     def get_command(buffer_data):
         cmd = buffer_data[0]
@@ -21,7 +22,7 @@ class Command:
     def create_command(cmd_str):
         cmd = cmd_str[0]
         if cmd == 'W':
-            args = (int(cmd_str[1]), int(cmd_str[2],16))
+            args = (int(cmd_str[1]), int(cmd_str[2], 16))
         elif cmd == 'R':
             args = (int(cmd_str[1]),)
         elif cmd == 'E':
@@ -52,11 +53,17 @@ class CommandBuffer:
 
     def save_buffer(self):
         with open(self.buffer_file_path, 'w') as f:
-            for data in self.buffer:
-                f.write(' '.join([str(d) for d in data.get_value()]) + '\n')
+            f.write(self.get_saved_data())
+
+    def get_saved_data(self):
+        txt = []
+        for data in self.buffer:
+            txt.append(' '.join([str(d) for d in data.get_value()]) + '\n')
+        return ''.join(txt)
 
     def push_command(self, command):
         self.buffer.append(command)
+        self.optimize()
         self.save_buffer()
 
     def pop(self):
@@ -83,10 +90,38 @@ class CommandBuffer:
         cmd_list = [value for value in self.buffer]
         self.buffer.clear()
         self.save_buffer()
-        return cmd_list[::-1]
+        return cmd_list
 
     def optimize(self):
-        pass
+        write_commands = set()
+        erase_commands = set()
+        for command in self.buffer[::-1]:
+            if command.cmd == 'W':
+                key = (command.cmd, command.args[0], 1)
+                if key in write_commands:
+                    self.buffer.remove(command)
+                else:
+                    merge_flag = False
+                    for erase in erase_commands:
+                        if erase[1] <= key[1] < erase[2]:
+                            self.buffer.remove(command)
+                            merge_flag = True
+                            break
+                    if not merge_flag:
+                        write_commands.add(key)
+
+            elif command.cmd == 'E':
+                key = (command.cmd, command.args[0], command.args[0] + command.args[1])
+                merge_flag = False
+                for erase in erase_commands:
+                    if erase[1] <= key[1] and key[2] <= erase[2]:
+                        self.buffer.remove(command)
+                        merge_flag = True
+                        break
+                if not merge_flag:
+                    erase_commands.add(key)
+
+        self.save_buffer()
 
     def need_flush(self):
         return len(self.buffer) > 10
