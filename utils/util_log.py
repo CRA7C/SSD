@@ -69,22 +69,23 @@ class Logger:
         self.logger = logging.getLogger('myLogger')
         self.logger.setLevel(logging.DEBUG)
 
-        log_dir = os.path.dirname(LOG_FILE_PATH)
-        if log_dir and not os.path.exists(log_dir):
-            os.makedirs(log_dir)
+        if not self.logger.handlers:
+            log_dir = os.path.dirname(LOG_FILE_PATH)
+            if log_dir and not os.path.exists(log_dir):
+                os.makedirs(log_dir)
 
-        file_handler = logging.FileHandler(LOG_FILE_PATH)
-        file_handler.setLevel(logging.DEBUG)
+            file_handler = MyRotatingFileHandler(LOG_FILE_PATH, maxBytes=LOG_MAX_SIZE, backupCount=1)
+            file_handler.setLevel(logging.DEBUG)
 
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(logging.INFO)
+            console_handler = logging.StreamHandler()
+            console_handler.setLevel(logging.INFO)
 
-        formatter = CustomFormatter()
-        file_handler.setFormatter(formatter)
-        console_handler.setFormatter(formatter)
+            formatter = CustomFormatter()
+            file_handler.setFormatter(formatter)
+            console_handler.setFormatter(formatter)
 
-        self.logger.addHandler(file_handler)
-        self.logger.addHandler(console_handler)
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
 
     def info(self, message):
         self.log_with_class_func_name(logging.INFO, message)
