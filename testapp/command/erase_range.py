@@ -1,5 +1,4 @@
 from testapp.command.__interface import CommandInterface
-from testapp.constants import SSD_SIZE
 from testapp.ssd_driver import SsdDriver
 
 MAXIMUM_ERASE_SIZE_AT_ONCE = 10
