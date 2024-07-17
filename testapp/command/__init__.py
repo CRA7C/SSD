@@ -6,5 +6,6 @@ from .fullwrite import FullWrite
 from .fullread import FullRead
 from .erase import Erase
 from .erase_range import EraseRange
+from .flush import Flush
 
-__all__ = ["Write", "Read", "Exit", "Help", "FullWrite", "FullRead", "Erase", "EraseRange"]
+__all__ = ["Write", "Read", "Exit", "Help", "FullWrite", "FullRead", "Erase", "EraseRange", "Flush"]

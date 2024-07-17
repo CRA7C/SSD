@@ -65,3 +65,8 @@ class TestTestShell(TestCase):
     def test_execute_erase_range_command(self, mock_write):
         self.ts.execute("erase_range 3 11")
         mock_write.assert_called_with("ssd E 3 8")
+
+    @patch.object(SsdDriver, "run_subprocess")
+    def test_execute_flush_command(self, mock_flush):
+        self.ts.execute("flush")
+        mock_flush.assert_called_with("ssd F")
