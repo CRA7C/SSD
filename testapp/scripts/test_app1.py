@@ -3,7 +3,6 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parents[2].resolve()))
 from testapp.command.__interface import CommandInterface  # noqa E402
 from testapp.command import FullRead, FullWrite  # noqa E402
-from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE  # noqa E402
 
 READ_VALUE = 0x12345678
 

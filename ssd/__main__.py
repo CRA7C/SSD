@@ -5,16 +5,33 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
 from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT, is_valid_hex
-from ssd.command_buffer import CommandBuffer, Command
+from ssd.command_buffer import CommandBuffer
+from ssd.command import CommandFactory
 
 
 class SSDRunner:
+    """
+    SSDRunner 클래스는 가상 SSD의 명령을 처리하고 실행하는 역할을 합니다.
+
+    Attributes:
+        ssd (SolidStateDrive): 가상 SSD 객체
+        option_buf (CommandBuffer): 명령 버퍼 객체
+    """
     def __init__(self):
         self.ssd = SolidStateDrive()
-        self.cmd_buf = CommandBuffer()
+        self.option_buf = CommandBuffer()
 
     @staticmethod
     def is_valid_command():
+        """
+        명령어의 유효성을 검사합니다.
+
+        Raises:
+            ValueError: 유효하지 않은 명령어인 경우 예외를 발생시킵니다.
+
+        Returns:
+            bool: 명령어가 유효한 경우 True를 반환합니다.
+        """
         if len(sys.argv) < 3:
             raise ValueError("명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20/ssd W 20 0x1289CDEF/ssd E 10 3")
 
@@ -42,33 +59,44 @@ class SSDRunner:
         return True
 
     def buff_flush(self):
-        cmd_list = self.cmd_buf.flush()
+        """
+        명령 버퍼를 비우고 명령어를 실행합니다.
+        """
+        cmd_list = self.option_buf.flush()
         for cmd in cmd_list:
             self.execute_command(cmd)
 
     def run(self):
-        cmd = Command.create_command(sys.argv[1:])
-        if cmd.cmd == 'F':
+        """
+        주어진 명령어를 파싱하고 실행합니다.
+        """
+        cmd = CommandFactory().parse_command(sys.argv[1:])
+        if cmd.option == 'F':
             self.buff_flush()
-        elif cmd.cmd == 'R':
-            if self.cmd_buf.is_able_to_fast_read(cmd):
-                value = self.cmd_buf.get_read_fast(cmd)
-                self.ssd.read_fast(value)
+        elif cmd.option == 'R':
+            if self.option_buf.is_able_to_fast_read(cmd):
+                self.ssd.read_fast(self.option_buf.get_read_fast(cmd))
             else:
                 self.execute_command(cmd)
-        elif cmd.cmd in ('W', 'E'):
-            self.cmd_buf.push_command(cmd)
-            if self.cmd_buf.need_flush():
+        elif cmd.option in ('W', 'E'):
+            self.option_buf.push_command(cmd)
+            if self.option_buf.need_flush():
                 self.buff_flush()
 
     def execute_command(self, command):
-        cmd = command.cmd
+        """
+        특정 명령어를 실행합니다.
+
+        Args:
+            command: 실행할 명령어 객체
+        """
+        cmd = command.option
         if cmd == 'R':
-            self.ssd.read(command.args[0])
+            self.ssd.read(command.lba)
         elif cmd == 'W':
-            self.ssd.write(command.args[0], command.args[1])
+            self.ssd.write(command.lba, command.value)
         elif cmd == 'E':
-            self.ssd.erase(command.args[0], command.args[1])
+            self.ssd.erase(command.lba, command.size)
 
 
 if __name__ == '__main__':

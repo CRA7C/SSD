@@ -18,9 +18,18 @@ Commands:
 
 
 class Help(CommandInterface):
+    """
+    Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.
+    """
     def run(self, *args, **kwarg):
+        """
+        사용 가능한 명령어와 옵션을 출력합니다.
+        """
         print(TESTAPP_HELP)
 
     @staticmethod
-    def is_valid_args(self, *args):
+    def is_valid_args(*args) -> bool:
+        """
+        주어진 인자가 유효한지 확인합니다.
+        """
         return True

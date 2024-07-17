@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from testapp.command import Read, Write
 from testapp.scripts.test_app2 import TestApp2, READ_VALUE, WRITE_VALUE
-from utils.util_log import print_function_name
+from my_logger.util_log import print_function_name
 
 
 class TestTestApp2(TestCase):
