@@ -9,5 +9,12 @@ class EraseRange(CommandInterface):
         self.driver = SsdDriver()
 
     def run(self, start_lba: str, end_lba: str):
-        size = int(end_lba) - int(start_lba)
-        self.driver.erase(int(start_lba), size)
+        remain_erase_size = int(end_lba) - int(start_lba)
+        for lba in range(int(start_lba), int(end_lba), MAXIMUM_ERASE_SIZE_AT_ONCE):
+            if remain_erase_size > MAXIMUM_ERASE_SIZE_AT_ONCE:
+                size = MAXIMUM_ERASE_SIZE_AT_ONCE
+                remain_erase_size -= size
+            else:
+                size = remain_erase_size
+                remain_erase_size = 0
+            self.driver.erase(lba, size)

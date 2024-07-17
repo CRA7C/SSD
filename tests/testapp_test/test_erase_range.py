@@ -11,3 +11,10 @@ class TestEraseRange(TestCase):
         self.cmd = EraseRange()
         self.cmd.run('0', '5')
         mock_erase.assert_called_with(0, 5)
+
+    @patch.object(SsdDriver, 'erase')
+    def test_run_large_range(self, mock_erase):
+        self.cmd = EraseRange()
+        self.cmd.run('0', '55')
+        self.assertEqual(6, mock_erase.call_count)
+        mock_erase.assert_called_with(50, 5)
