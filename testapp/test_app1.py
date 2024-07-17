@@ -14,14 +14,13 @@ READ_VALUE = 0x12345678
 class TestApp1(CommandInterface):
 
     def run(self, *args, **kwargs):
-        if not FullWrite().run(READ_VALUE):
-            return False
+        FullWrite().run(READ_VALUE)
         read_data = FullRead().run()
         return self.validate_data(read_data)
 
     @staticmethod
     def validate_data(read_data):
         for data in read_data:
-            if data != READ_VALUE:
+            if int(data, 16) != READ_VALUE:
                 return False
         return True
