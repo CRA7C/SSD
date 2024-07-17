@@ -30,6 +30,7 @@ line-length = 120
 [tool.pylint]
 disable = [
     "C0114",  # Missing module docstring
+    "C0115",  # Missing class docstring
     "C0116",  # Missing function or method docstring
     "C0413",  # Import should be placed at the top of the module
     "C0103",  # Invalid naming style
