@@ -92,8 +92,8 @@ def is_valid_hex(s: str):
         except ValueError:
             return False
     return False
-
-
+  
+  
 def is_valid_size(size: str) -> bool:
     try:
         num = int(size)

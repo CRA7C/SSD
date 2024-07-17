@@ -1,8 +1,6 @@
 from typing import Any
 
 from testapp import command
-from testapp.scripts.test_app1 import TestApp1
-from testapp.scripts.test_app2 import TestApp2
 
 
 class CommandParser:
@@ -14,10 +12,14 @@ class CommandParser:
         "help": {"class": command.Help, "required_args_cnt": 0},
         "exit": {"class": command.Exit, "required_args_cnt": 0},
         "fullwrite": {"class": command.FullWrite, "required_args_cnt": 1},  # noqa
-        "fullread": {"class": command.FullRead, "required_args_cnt": 0},  # noqa
-        "testapp1": {"class": TestApp1, "required_args_cnt": 0},
-        "testapp2": {"class": TestApp2, "required_args_cnt": 0},
+        "fullread": {"class": command.FullRead, "required_args_cnt": 0},
     }
+
+    @classmethod
+    def is_predefined_command(cls, name) -> bool:
+        if name in cls.cmd_if_dict.keys():
+            return True
+        return False
 
     @classmethod
     def validate_command(cls, cmd) -> bool:
