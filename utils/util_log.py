@@ -56,18 +56,18 @@ class Logger:
         self.logger.addHandler(console_handler)
 
     def info(self, message):
-        self.log_with_custom_key(logging.INFO, message)
+        self.log_with_class_func_name(logging.INFO, message)
 
     def debug(self, message):
-        self.log_with_custom_key(logging.DEBUG, message)
+        self.log_with_class_func_name(logging.DEBUG, message)
 
     def warning(self, message):
-        self.log_with_custom_key(logging.WARNING, message)
+        self.log_with_class_func_name(logging.WARNING, message)
 
     def error(self, message):
-        self.log_with_custom_key(logging.ERROR, message)
+        self.log_with_class_func_name(logging.ERROR, message)
 
-    def log_with_custom_key(self, level, message):
+    def log_with_class_func_name(self, level, message):
         frame = inspect.currentframe().f_back.f_back
 
         func_name = frame.f_code.co_name
