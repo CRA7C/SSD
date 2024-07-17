@@ -82,3 +82,27 @@ class TestSSDRunner(TestCase):
             with open(RESULT_FILE_PATH, 'r') as f:
                 actual = f.read()
             self.assertEqual(expected_write, actual)
+
+
+    def test_run_ssd_write_erase_read_for_buffer_optimization(self):
+        test_commands = [
+            ('W', '1', '0x0A'),  # 주소 1에 값 0x0A을 씀
+            ('W', '5', '0x14'),  # 주소 5에 값 0x14을 씀
+            ('E', '3', '4'),  # 주소 3부터 4칸 지움 (3, 4, 5, 6)
+            ('W', '3', '0x1E'),  # 주소 3에 값 0x1E을 씀
+            ('E', '8', '2'),  # 주소 8부터 2칸 지움 (8, 9)
+            ('E', '1', '2'),  # 주소 1부터 2칸 지움 (1, 2)
+            ('W', '9', '0x28'),  # 주소 9에 값 0x28을 씀
+            ('W', '12', '0x32'),  # 주소 12에 값 0x32을 씀
+            ('E', '11', '3'),  # 주소 11부터 3칸 지움 (11, 12, 13)
+            ('E', '10', '2'),  # 주소 10부터 2칸 지움 (10, 11)
+            ('W', '10', '0x3C')  # 주소 10에 값 0x3C을 씀
+        ]
+
+        for t_cmd in test_commands:
+            sys.argv = ['TEST', *t_cmd]
+            self.runner.run()
+
+        sys.argv = ['TEST', 'F']
+        self.runner.run()
+

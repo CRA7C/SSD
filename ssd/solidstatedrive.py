@@ -16,8 +16,7 @@ class SolidStateDrive:
         self.result_manager.write(convert_hex_to_str(result))
 
     def read_fast(self, value):
-        self.result_manager.write(value)
-
+        self.result_manager.write(convert_hex_to_str(value))
 
     def erase(self, lba: int, n_value: int):
         self.nand_driver.erase(lba, n_value)

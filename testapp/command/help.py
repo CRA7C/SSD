@@ -11,6 +11,8 @@ Commands:
   help              Help 보기
   fullwrite         SSD 데이터를 특정 값으로 일괄 쓰기
   fullread          SSD 데이터 전체 읽기
+  erase             SSD 데이터 지우기 (LBA ~ LBA + SIZE)
+  erase_range       SSD 데이터 지우기 (Start LBA ~ End LBA)
 """
 
 
