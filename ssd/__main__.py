@@ -5,11 +5,24 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
 from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT, is_valid_hex
+from ssd.command_buffer import CommandBuffer
+
+
+class Command:
+    def __init__(self):
+        self.cmd = ''
+
+
+class CommandFactory:
+    @staticmethod
+    def create_command(cmd):
+        return tuple(cmd)
 
 
 class SSDRunner:
     def __init__(self):
         self.ssd = SolidStateDrive()
+        self.cmd_buf = CommandBuffer()
 
     @staticmethod
     def is_valid_command():
@@ -30,13 +43,38 @@ class SSDRunner:
             int(sys.argv[3], 16)
         return True
 
+    def buff_flush(self):
+        cmd_list = self.cmd_buf.flush()
+        for cmd in cmd_list:
+            self.execute(cmd)
+
     def run(self):
-        lba = int(sys.argv[2])
-        if sys.argv[1] == 'R':
+        cmd = CommandFactory().create_command(sys.argv[1:])
+        if cmd[0] == 'F':
+            self.buff_flush()
+        elif cmd[0] == 'R':
+            if self.cmd_buf.is_able_to_fast_read(cmd):
+                value = self.cmd_buf.get_read_fast(cmd)
+                self.ssd.read_fast(value)
+            else:
+                self.execute(cmd)
+        else:
+            self.cmd_buf.push_command(cmd)
+            self.cmd_buf.optimize()
+            if self.cmd_buf.need_flush():
+                self.buff_flush()
+
+    def execute(self, command):
+        cmd = command[0]
+        lba = int(command[1])
+        if cmd == 'R':
             self.ssd.read(lba)
-        elif sys.argv[1] == 'W':
-            value = int(sys.argv[3], 16)
+        elif cmd == 'W':
+            value = int(command[2], 16)
             self.ssd.write(lba, value)
+        elif cmd == 'E':
+            size = int(command[2])
+            self.ssd.erase(lba, size)
 
 
 if __name__ == '__main__':
