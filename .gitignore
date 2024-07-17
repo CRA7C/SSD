@@ -84,6 +84,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+# PyLint
+pylint_report.txt
 
 # SSD project specific
 ssd/nand.txt
@@ -92,3 +94,4 @@ ssd/buffer.txt
 
 # individual files and folders
 tests_in_dev/
+*.bak

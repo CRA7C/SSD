@@ -7,4 +7,5 @@ from .fullread import FullRead
 from .erase import Erase
 from .erase_range import EraseRange
 
-__all__ = ["Write", "Read", "Exit", "Help", "FullWrite", "FullRead", "Erase", "EraseRange"]
+__all__ = ["Write", "Read", "Exit", "Help",
+           "FullWrite", "FullRead", "Erase", "EraseRange"]

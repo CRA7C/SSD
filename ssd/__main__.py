@@ -10,12 +10,28 @@ from ssd.command import CommandFactory
 
 
 class SSDRunner:
+    """
+    SSDRunner 클래스는 가상 SSD의 명령을 처리하고 실행하는 역할을 합니다.
+
+    Attributes:
+        ssd (SolidStateDrive): 가상 SSD 객체
+        option_buf (CommandBuffer): 명령 버퍼 객체
+    """
     def __init__(self):
         self.ssd = SolidStateDrive()
         self.option_buf = CommandBuffer()
 
     @staticmethod
     def is_valid_command():
+        """
+        명령어의 유효성을 검사합니다.
+
+        Raises:
+            ValueError: 유효하지 않은 명령어인 경우 예외를 발생시킵니다.
+
+        Returns:
+            bool: 명령어가 유효한 경우 True를 반환합니다.
+        """
         if len(sys.argv) < 3:
             raise ValueError("명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20/ssd W 20 0x1289CDEF/ssd E 10 3")
 
@@ -43,11 +59,17 @@ class SSDRunner:
         return True
 
     def buff_flush(self):
+        """
+        명령 버퍼를 비우고 명령어를 실행합니다.
+        """
         cmd_list = self.option_buf.flush()
         for cmd in cmd_list:
             self.execute_command(cmd)
 
     def run(self):
+        """
+        주어진 명령어를 파싱하고 실행합니다.
+        """
         cmd = CommandFactory().parse_command(sys.argv[1:])
         if cmd.option == 'F':
             self.buff_flush()
@@ -62,6 +84,12 @@ class SSDRunner:
                 self.buff_flush()
 
     def execute_command(self, command):
+        """
+        특정 명령어를 실행합니다.
+
+        Args:
+            command: 실행할 명령어 객체
+        """
         cmd = command.option
         if cmd == 'R':
             self.ssd.read(command.lba)

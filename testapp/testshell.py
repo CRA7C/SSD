@@ -8,9 +8,25 @@ EXECUTE_INVALID = 0
 
 
 class TestShell:
+    """
+    TestShell 클래스는 명령어를 실행하고, 사전 정의된 명령어 또는 테스트 스크립트를 실행하는 기능을 제공합니다.
+
+    """
 
     @staticmethod
     def execute(cmd: str) -> int:
+        """
+        주어진 명령어를 실행합니다.
+
+        Args:
+            cmd (str): 실행할 명령어
+
+        Returns:
+            int: 명령어 실행 결과 코드
+                 - EXECUTE_VALID_WO_ARGS (2): 인자가 없는 유효한 명령어
+                 - EXECUTE_VALID_WITH_ARGS (1): 인자가 있는 유효한 명령어
+                 - EXECUTE_INVALID (0): 유효하지 않은 명령어
+        """
         cmd_option = cmd.split()[0]
         if CommandParser.is_predefined_command(cmd_option):
             cmd_option, cmd_args = CommandParser.parse_args(cmd)
@@ -31,6 +47,10 @@ class TestShell:
 
 
 def main():
+    """
+    TestShell의 메인 루프를 실행합니다.
+    사용자가 명령어를 입력하고 이를 처리합니다.
+    """
     while True:
         cmd = input("> ")
         if TestShell.execute(cmd) == EXECUTE_INVALID:

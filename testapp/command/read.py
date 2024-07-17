@@ -4,14 +4,35 @@ from testapp.util import is_in_range_lba
 
 
 class Read(CommandInterface):
+    """
+    Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.
+
+    Attributes:
+        driver (SsdDriver): SSD 드라이버 객체
+    """
     def __init__(self):
         super().__init__()
         self.driver = SsdDriver()
 
-    def run(self, lba):
+    def run(self, lba: str) -> str:
+        """
+        지정된 LBA에서 데이터를 읽습니다.
+
+        Args:
+            lba (str): 논리 블록 주소
+
+        Returns:
+            str: 읽은 데이터
+        """
         return self.driver.read(lba)
 
     @staticmethod
-    def is_valid_args(self, *args):
+    def is_valid_args(*args) -> bool:
+        """
+        주어진 인자가 유효한지 확인합니다.
+
+        Returns:
+            bool: 인자가 유효한 경우 True, 그렇지 않으면 False
+        """
         n_lba = args[0]
         return True if is_in_range_lba(n_lba) else False

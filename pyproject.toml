@@ -1,2 +1,38 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cra7c-ssd"
+version = "0.1.0"
+description = "SSD Project of Code Review Agent Course"
+readme = "README.md"
+requires-python = ">=3.6"
+license = {text = "MIT"}
+authors = [
+    {name = "김의윤", email = "geniuskey@gmail.com"},
+    {name = "박병준", email = "qazws9346@gmail.com"},
+    {name = "여인표", email = "winsowss@hanmail.net"},
+    {name = "정우훈", email = "jwh1308@gmail.com"},
+    {name = "하종희", email = "gk1whd2@gmail.com"},
+]
+
+[project.urls]
+homepage = "https://cra7c.github.io/SSD/"
+Repository = "https://github.com/CRA7C/SSD"
+
+[tool.setuptools]
+packages = ["ssd", "testapp"]
+
 [tool.ruff]
 line-length = 120
+
+[tool.pylint]
+disable = [
+    "C0114",  # Missing module docstring
+    "C0116",  # Missing function or method docstring
+    "C0413",  # Import should be placed at the top of the module
+    "C0103",  # Invalid naming style
+    "C0301",  # Line too long
+]
+
