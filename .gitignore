@@ -86,8 +86,8 @@ cython_debug/
 
 
 # SSD project specific
-nand.txt
-result.txt
+ssd/nand.txt
+ssd/result.txt
 
 # individual files and folders
 tests_in_dev/

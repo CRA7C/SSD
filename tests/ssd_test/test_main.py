@@ -40,9 +40,45 @@ class TestSSDRunner(TestCase):
             ('8자리가 아닌 value', ['test', 'W', '20', '0x1289']),
             ('0x가 없는 value', ['test', 'W', '20', '111289CDEF']),
             ('16진수가 아닌 value', ['test', 'W', '20', '0xZ289CDEF']),
+            ('value가 없는 erase.', ['test', 'E', '20']),
+            ('10초과인 size', ['test', 'E', '20', '11']),
+            ('1미만인 size', ['test', 'E', '20', '0']),
+            ('숫자가 아닌 size', ['test', 'E', '20', 'a']),
         ]
         for test_case, cmd in params:
             with self.subTest(test_case):
                 sys.argv = cmd
                 with self.assertRaises(ValueError):
                     self.runner.is_valid_command()
+
+    def test_run_ssd_write_erase_read(self):
+        write_cmd = ['test', 'W', '0', '0x1289CDEF']
+        read_cmd = ['test', 'R', '0']
+        erase_cmd = ['test', 'E', '0', '10']
+        expected_write = '0x1289CDEF'
+        expected_erase = '0x00000000'
+
+        sys.argv = write_cmd
+        for i in range(0, 50):
+            sys.argv[2] = str(i)
+            self.runner.run()
+
+        sys.argv = erase_cmd
+        self.runner.run()
+
+        sys.argv = read_cmd
+        for i in range(0, 10):
+            sys.argv[2] = str(i)
+            self.runner.run()
+
+            with open(RESULT_FILE_PATH, 'r') as f:
+                actual = f.read()
+            self.assertEqual(expected_erase, actual)
+
+        for i in range(11, 50):
+            sys.argv[2] = str(i)
+            self.runner.run()
+
+            with open(RESULT_FILE_PATH, 'r') as f:
+                actual = f.read()
+            self.assertEqual(expected_write, actual)
