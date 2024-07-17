@@ -5,13 +5,14 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
 from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT, is_valid_hex
-from ssd.command_buffer import CommandBuffer, Command
+from ssd.command_buffer import CommandBuffer
+from ssd.command import CommandFactory
 
 
 class SSDRunner:
     def __init__(self):
         self.ssd = SolidStateDrive()
-        self.cmd_buf = CommandBuffer()
+        self.option_buf = CommandBuffer()
 
     @staticmethod
     def is_valid_command():
@@ -42,33 +43,32 @@ class SSDRunner:
         return True
 
     def buff_flush(self):
-        cmd_list = self.cmd_buf.flush()
+        cmd_list = self.option_buf.flush()
         for cmd in cmd_list:
             self.execute_command(cmd)
 
     def run(self):
-        cmd = Command.create_command(sys.argv[1:])
-        if cmd.cmd == 'F':
+        cmd = CommandFactory().parse_command(sys.argv[1:])
+        if cmd.option == 'F':
             self.buff_flush()
-        elif cmd.cmd == 'R':
-            if self.cmd_buf.is_able_to_fast_read(cmd):
-                value = self.cmd_buf.get_read_fast(cmd)
-                self.ssd.read_fast(value)
+        elif cmd.option == 'R':
+            if self.option_buf.is_able_to_fast_read(cmd):
+                self.ssd.read_fast(self.option_buf.get_read_fast(cmd))
             else:
                 self.execute_command(cmd)
-        elif cmd.cmd in ('W', 'E'):
-            self.cmd_buf.push_command(cmd)
-            if self.cmd_buf.need_flush():
+        elif cmd.option in ('W', 'E'):
+            self.option_buf.push_command(cmd)
+            if self.option_buf.need_flush():
                 self.buff_flush()
 
     def execute_command(self, command):
-        cmd = command.cmd
+        cmd = command.option
         if cmd == 'R':
-            self.ssd.read(command.args[0])
+            self.ssd.read(command.lba)
         elif cmd == 'W':
-            self.ssd.write(command.args[0], command.args[1])
+            self.ssd.write(command.lba, command.value)
         elif cmd == 'E':
-            self.ssd.erase(command.args[0], command.args[1])
+            self.ssd.erase(command.lba, command.size)
 
 
 if __name__ == '__main__':
