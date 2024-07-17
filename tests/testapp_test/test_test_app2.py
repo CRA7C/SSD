@@ -33,21 +33,21 @@ class TestTestApp2(TestCase):
 
     @print_function_name
     def test_validate_SHOULD_return_True_When_normal_value(self):
-        self.assertTrue(self.test_app2.validate([READ_VALUE] * 6))
+        self.assertTrue(self.test_app2.validate([f'0x{READ_VALUE:02x}'] * 6))
 
     @print_function_name
     def test_validate_SHOULD_return_True_When_wrong_value(self):
-        self.assertFalse(self.test_app2.validate([WRITE_VALUE] * 6))
+        self.assertFalse(self.test_app2.validate([f'0x{WRITE_VALUE:02x}'] * 6))
 
     @print_function_name
     @patch.object(Write, 'run', return_value=True)
-    @patch.object(Read, 'run', return_value=READ_VALUE)
+    @patch.object(Read, 'run', return_value=f'0x{READ_VALUE:02x}')
     def test_run_SHOULD_return_True_When_normal(self, read_mock, write_mock):
         self.assertTrue(self.test_app2.run())
 
     @print_function_name
     @patch.object(Write, 'run', return_value=True)
-    @patch.object(Read, 'run', return_value=WRITE_VALUE)
+    @patch.object(Read, 'run', return_value=f'0x{WRITE_VALUE:02x}')
     def test_run_SHOULD_return_False_When_wrong(self, read_mock, write_mock):
         self.assertFalse(self.test_app2.run())
 
