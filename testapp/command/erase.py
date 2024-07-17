@@ -9,7 +9,7 @@ class Erase(CommandInterface):
     def __init__(self):
         self.driver = SsdDriver()
 
-    def run(self, lba, total_size):
+    def run(self, lba: str, total_size: str):
         erase_size = int(total_size)
         initial_lba = int(lba)
         target_lba = initial_lba + erase_size
