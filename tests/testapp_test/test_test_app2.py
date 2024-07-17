@@ -3,7 +3,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from testapp.command import Read, Write
-from testapp.test_app2 import TestApp2, READ_VALUE, WRITE_VALUE
+from testapp.scripts.test_app2 import TestApp2, READ_VALUE, WRITE_VALUE
 from utils.util_log import print_function_name
 
 
