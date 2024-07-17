@@ -4,6 +4,8 @@ from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import inspect
+import re
+from typing import Tuple
 
 LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / 'latest.log'
 LOG_MAX_SIZE = 10 * 1024
@@ -38,7 +40,9 @@ class MyRotatingFileHandler(RotatingFileHandler):
         """
         super().doRollover()
 
-        self.is_already_bkup_file()
+        result, filename = self.is_already_bkup_file()
+        if result is True:
+            self.rename_log_to_zip(filename)
 
         self.rename_backup_files()
 
@@ -55,6 +59,8 @@ class MyRotatingFileHandler(RotatingFileHandler):
             old_filename = f"{base_filename}.{i}"
             if os.path.exists(old_filename):
                 new_filename = os.path.join(base_file_dir, bkup_file_name)
+                if os.path.isfile(new_filename):
+                    os.remove(new_filename)
                 os.rename(old_filename, new_filename)
 
     def get_bkup_file_name(self):
@@ -66,14 +72,32 @@ class MyRotatingFileHandler(RotatingFileHandler):
         """
         return f'until_{datetime.now().strftime("%y%m%d_%H%M%S")}.log'
 
-    def is_already_bkup_file(self) -> bool:
+    def is_already_bkup_file(self) -> Tuple[bool, str]:
         """
         백업 파일이 이미 존재하는지 확인합니다.
 
         Returns:
             bool: 백업 파일이 이미 존재하면 True, 그렇지 않으면 False
         """
-        pass
+        base_file_dir = os.path.dirname(self.baseFilename)
+        find_pattern = r'until_(\d{6})_(\d{6})\.log'
+
+        for filename in os.listdir(base_file_dir):
+            if re.match(find_pattern, filename):
+                return True, filename
+        return False, None
+
+    def rename_log_to_zip(self, filename):
+        base_file_dir = os.path.dirname(self.baseFilename)
+        zip_file_name, _ = os.path.splitext(filename)
+        zip_file_name += ".zip"
+        zip_file_name = os.path.join(base_file_dir, zip_file_name)
+
+        full_path_filename = os.path.join(base_file_dir, filename)
+
+        if os.path.isfile(zip_file_name):
+            os.remove(zip_file_name)
+        os.rename(full_path_filename, zip_file_name)
 
 
 class CustomFormatter(logging.Formatter):
