@@ -1,7 +1,12 @@
+import os
+import sys
 from random import randint
-from testapp.command.__interface import CommandInterface
-from testapp.command import Write, Read
-from testapp.constants import SSD_START_LBA, SSD_END_LBA, SSD_MAX_VALUE, SSD_MIN_VALUE
+
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))  # testapp 접근을 위함
+from testapp.command.__interface import CommandInterface  # noqa E402
+from testapp.command import Write, Read  # noqa E402
+from testapp.constants import (SSD_START_LBA, SSD_END_LBA,
+                               SSD_MAX_VALUE, SSD_MIN_VALUE)  # noqa E402
 
 
 class Loop_WriteAndReadCompare(CommandInterface):  # noqa
@@ -13,3 +18,7 @@ class Loop_WriteAndReadCompare(CommandInterface):  # noqa
             if value != int(read_value, 16):
                 return False
         return True
+
+
+if __name__ == '__main__':
+    sys.exit(0 if Loop_WriteAndReadCompare().run() else 1)
