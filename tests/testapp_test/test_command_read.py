@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from testapp.command import Read
 from testapp.ssd_driver import SsdDriver
-from utils.util_log import print_function_name
+from my_logger.util_log import print_function_name
 
 
 class TestRead(TestCase):

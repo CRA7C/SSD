@@ -5,7 +5,7 @@ from unittest.mock import patch
 from testapp.command import FullRead
 from testapp.constants import SSD_SIZE
 from testapp.ssd_driver import SsdDriver
-from utils.util_log import print_function_name
+from my_logger.util_log import print_function_name
 
 
 class Test(TestCase):
