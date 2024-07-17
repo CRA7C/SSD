@@ -27,3 +27,10 @@ class TestSSD(TestCase):
 
         self.ssd.nand_driver.read.assert_called_with(lba)
         self.ssd.result_manager.write.assert_called_with(expected)
+
+    def test_erase(self):
+        self.ssd.nand_driver = Mock(spec=NandDriver)
+
+        self.ssd.erase(3, 2)
+
+        self.ssd.nand_driver.erase.assert_called_once()
