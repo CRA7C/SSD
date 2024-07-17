@@ -1,9 +1,9 @@
+import io
 import re
 import sys
-import io
 from functools import wraps
-from typing import Union
 from pathlib import Path
+from typing import Union
 
 from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE, SSD_START_LBA, SSD_END_LBA
 
@@ -92,3 +92,11 @@ def is_valid_hex(s: str):
         except ValueError:
             return False
     return False
+  
+  
+def is_valid_size(size: str) -> bool:
+    try:
+        num = int(size)
+        return 1 <= num
+    except ValueError:
+        return False

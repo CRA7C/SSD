@@ -22,6 +22,10 @@ class TestApp1(CommandInterface):
                 return False
         return True
 
+    @staticmethod
+    def is_valid_args(self, *args):
+        return True
+
 
 if __name__ == '__main__':
     sys.exit(0 if TestApp1().run() else 1)

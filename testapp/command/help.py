@@ -19,3 +19,7 @@ Commands:
 class Help(CommandInterface):
     def run(self, *args, **kwarg):
         print(TESTAPP_HELP)
+
+    @staticmethod
+    def is_valid_args(self, *args):
+        return True

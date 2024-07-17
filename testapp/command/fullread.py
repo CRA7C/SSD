@@ -10,3 +10,7 @@ class FullRead(CommandInterface):
 
     def run(self):
         return [self.driver.read(addr) for addr in SSD_LBA_RANGE]
+
+    @staticmethod
+    def is_valid_args(self, *args):
+        return True
