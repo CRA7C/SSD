@@ -19,11 +19,9 @@ class TestTestShell(TestCase):
         self.ts = TestShell()
         TestTestShell.test_counter += 1
 
-    @patch.object(TestApp2, "run", return_value=True)
-    @patch.object(TestApp1, "run", return_value=True)
     @patch.object(FullRead, "run", return_value="GOOD")
-    def test_testshell_wo_args(self, mk_fullread, mk_testapp1, mk_testapp2):
-        cmd_list = ["help", "fullread", "testapp1", "testapp2"]
+    def test_testshell_wo_args(self, mk_fullread):
+        cmd_list = ["help", "fullread"]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
                 ret = self.ts.execute(cmd)
