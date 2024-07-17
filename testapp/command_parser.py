@@ -1,5 +1,4 @@
-from dataclasses import dataclass
-from typing import Any, Type
+from typing import Any
 
 from testapp import command
 from testapp.util import is_in_range_lba, is_valid_hex
@@ -11,7 +10,6 @@ class CommandParser:
         "read": {"class": command.Read, "required_args_cnt": 1},
         "exit": {"class": command.Exit, "required_args_cnt": 0},
         "help": {"class": command.Help, "required_args_cnt": 0},
-        "exit": {"class": command.Exit, "required_args_cnt": 0},
         "fullwrite": {"class": command.FullWrite, "required_args_cnt": 1},  # noqa
         "fullread": {"class": command.FullRead, "required_args_cnt": 0},
     }

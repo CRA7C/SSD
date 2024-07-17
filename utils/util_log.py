@@ -3,7 +3,8 @@ import os
 from pathlib import Path
 import inspect
 
-LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / f'latest.log'
+LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / 'latest.log'
+
 
 def print_function_name(func):
     def wrapper(*args, **kwargs):

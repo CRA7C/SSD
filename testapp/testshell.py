@@ -1,4 +1,3 @@
-import logging
 from testapp.command_parser import CommandParser
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
