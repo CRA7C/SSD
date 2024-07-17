@@ -29,5 +29,7 @@ class SsdDriver:
         self.run_subprocess(f"ssd R {lba}")
         return get_ssd_result()
 
-    def write(self, lba: str | int, value: str):
+    def write(self, lba: str | int, value: str | int):
+        if isinstance(value, int):
+            value = f"0x{value:08X}"
         self.run_subprocess(f"ssd W {lba} {value}")
