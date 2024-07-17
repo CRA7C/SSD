@@ -20,7 +20,6 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.parser.validate_command(cmd)
                 self.assertTrue(ret)
 
@@ -35,7 +34,6 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.parser.validate_command(cmd)
                 self.assertFalse(ret)
 
@@ -48,7 +46,6 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.parser.validate_command(cmd)
                 self.assertFalse(ret)
 
@@ -61,7 +58,6 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.parser.validate_command(cmd)
                 self.assertFalse(ret)
 
@@ -74,7 +70,6 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.parser.validate_command(cmd)
                 self.assertFalse(ret)
 
@@ -88,7 +83,6 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.parser.validate_command(cmd)
                 self.assertFalse(ret)
 
@@ -101,7 +95,6 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.parser.validate_command(cmd)
                 self.assertFalse(ret)
 
@@ -115,6 +108,5 @@ class TestCommandParser(TestCase):
         }
         for idx, (key, val) in enumerate(cmd_dict.items()):
             with self.subTest(idx=idx, key=key, val=val):
-                print(f"{idx + 1}. {key},{val}")
                 ret = self.parser.parse_args(key)
                 self.assertEqual(ret, val)
