@@ -100,10 +100,10 @@ class TestCommandParser(TestCase):
 
     def test_parse_args(self):
         cmd_dict = {
-            "write 3 0xAAAABBBB": ("write", [3, 0xAAAABBBB]),
-            "read 3": ("read", [3]),
+            "write 3 0xAAAABBBB": ("write", ['3', '0xAAAABBBB']),
+            "read 3": ("read", ['3']),
             "help": ("help", []),
-            "fullwrite 0xABCDFFFF": ("fullwrite", [0xABCDFFFF]),
+            "fullwrite 0xABCDFFFF": ("fullwrite", ['0xABCDFFFF']),
             "fullread": ("fullread", []),
         }
         for idx, (key, val) in enumerate(cmd_dict.items()):
