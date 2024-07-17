@@ -1,4 +1,5 @@
 import subprocess
+
 from testapp.util import get_ssd_result, validate_ssd_command, BASE_DIR
 
 
@@ -24,9 +25,9 @@ class SsdDriver:
         except subprocess.CalledProcessError as e:
             raise Exception(f"Error executing command: {e.stderr}")
 
-    def read(self, lba: int) -> int:
+    def read(self, lba: str | int) -> str:
         self.run_subprocess(f"ssd R {lba}")
         return get_ssd_result()
 
-    def write(self, lba: int, value: int):
-        self.run_subprocess(f"ssd W {lba} 0x{value:08X}")
+    def write(self, lba: str | int, value: str):
+        self.run_subprocess(f"ssd W {lba} {value}")

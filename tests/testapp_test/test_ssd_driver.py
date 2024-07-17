@@ -46,8 +46,8 @@ class TestSsdDriver(unittest.TestCase):
 
     @patch('testapp.ssd_driver.SsdDriver.run_subprocess')
     def test_write(self, mock_run):
-        test_lba = 3
-        test_value = 0x1289CDEF
-        expected_command = f"ssd W {test_lba} 0x{test_value:08X}"
+        test_lba = "3"
+        test_value = "0x1289CDEF"
+        expected_command = f"ssd W {test_lba} {test_value}"
         self.driver.write(test_lba, test_value)
         mock_run.assert_called_once_with(expected_command)
