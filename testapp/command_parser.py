@@ -3,8 +3,8 @@ from typing import Tuple, Optional, List
 
 from testapp import command
 from testapp.constants import SSD_START_LBA, SSD_END_LBA, SSD_MIN_VALUE, SSD_MAX_VALUE
-from testapp.test_app1 import TestApp1
-from testapp.test_app2 import TestApp2
+from testapp.scripts.test_app1 import TestApp1
+from testapp.scripts.test_app2 import TestApp2
 
 
 def is_in_range_lba(lba: str) -> bool:
