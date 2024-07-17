@@ -1,11 +1,9 @@
-"""
-TestApp2 제작하기
- • 0 ~ 5 번 LBA 에 0xAAAABBBB 값으로 총 30번 Write를 수행한다.
- • 0 ~ 5 번 LBA 에 0x12345678 값으로 1 회 Over Write를 수행한다.
- • 0 ~ 5 번 LBA Read 했을 때 정상적으로 값이 읽히는지 확인한다
-"""
-from testapp.command import Write, Read
-from testapp.command.__interface import CommandInterface
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))  # testapp 접근을 위함
+from testapp.command.__interface import CommandInterface  # noqa E402
+from testapp.command import Write, Read  # noqa E402
+from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE  # noqa E402
 
 TARGET_LBA = [0, 1, 2, 3, 4, 5]
 WRITE_VALUE = 0xAAAABBBB
@@ -17,7 +15,7 @@ class TestApp2(CommandInterface):
         self.read = Read()
         self.write = Write()
 
-    def run(self, *args, **kwargs):
+    def run(self):
         self.write_30_times()
         self.over_write()
         read_data = self.read_target_lba()
@@ -47,3 +45,7 @@ class TestApp2(CommandInterface):
             if int(data, 16) != READ_VALUE:
                 return False
         return True
+
+
+if __name__ == '__main__':
+    sys.exit(0 if TestApp2().run() else 1)

@@ -1,5 +1,10 @@
-from testapp.command.__interface import CommandInterface
-from testapp.command import FullRead
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))  # testapp 접근을 위함
+from testapp.command.__interface import CommandInterface  # noqa E402
+from testapp.command import FullRead  # noqa E402
+from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE  # noqa E402
 
 
 class FullRead10AndCompare(CommandInterface):
@@ -10,3 +15,7 @@ class FullRead10AndCompare(CommandInterface):
             if init_data != test_data:
                 return False
         return True
+
+
+if __name__ == '__main__':
+    sys.exit(0 if FullRead10AndCompare().run() else 1)

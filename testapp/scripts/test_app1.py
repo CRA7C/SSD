@@ -1,19 +1,16 @@
-"""
-TestApp1 제작하기
- • Test Shell 에서 “testapp1” 명령어를 입력하면 Script가 수행된다.
- • 먼저 fullwrite를 수행한다.
- • fullread를 하면서, write 한 값대로 read가 되는지 확인한다.
-   🡪 SSD가 정상 동작하는지 확인하는 테스트 스크립트
-"""
-from testapp.command.__interface import CommandInterface
-from testapp.command import FullRead, FullWrite
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))  # testapp 접근을 위함
+from testapp.command.__interface import CommandInterface  # noqa E402
+from testapp.command import FullRead, FullWrite  # noqa E402
+from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE  # noqa E402
 
 READ_VALUE = 0x12345678
 
 
 class TestApp1(CommandInterface):
 
-    def run(self, *args, **kwargs):
+    def run(self):
         FullWrite().run(READ_VALUE)
         read_data = FullRead().run()
         return self.validate_data(read_data)
@@ -24,3 +21,7 @@ class TestApp1(CommandInterface):
             if int(data, 16) != READ_VALUE:
                 return False
         return True
+
+
+if __name__ == '__main__':
+    sys.exit(0 if TestApp1().run() else 1)

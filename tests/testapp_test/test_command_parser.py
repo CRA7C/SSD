@@ -110,3 +110,15 @@ class TestCommandParser(TestCase):
             with self.subTest(idx=idx, key=key, val=val):
                 ret = self.parser.parse_args(key)
                 self.assertEqual(ret, val)
+
+    def test_invalid_erase_cmd(self):
+        commands = [
+            ('인자가 없음.', 'erase'),
+            ('size 인자가 없음.', 'erase 0'),
+            ('음수 size가 입력.', 'erase 0 -1'),
+            ('잘못된 size가 입력.', 'erase 0 test'),
+            ('잘못된 LBA가 입력.', 'erase -1 10'),
+        ]
+        for test, cmd in commands:
+            with self.subTest(test):
+                self.assertFalse(self.parser.validate_command(cmd))

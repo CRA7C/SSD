@@ -1,5 +1,8 @@
-from testapp.command.__interface import CommandInterface
-from testapp.command import Write, Read
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))  # testapp 접근을 위함
+from testapp.command.__interface import CommandInterface  # noqa E402
+from testapp.command import Write, Read  # noqa E402
 
 
 class Write10AndCompare(CommandInterface):
@@ -11,3 +14,7 @@ class Write10AndCompare(CommandInterface):
             if value != int(read_value, 16):
                 return False
         return True
+
+
+if __name__ == '__main__':
+    sys.exit(0 if Write10AndCompare().run() else 1)
