@@ -12,6 +12,7 @@ class CommandParser:
         "read": {"class": command.Read, "required_args_cnt": 1},
         "erase": {"class": command.Erase, "required_args_cnt": 2},
         "erase_range": {"class": command.EraseRange, "required_args_cnt": 2},
+        "flush": {"class": command.Flush, "required_args_cnt": 0},
         "help": {"class": command.Help, "required_args_cnt": 0},
         "exit": {"class": command.Exit, "required_args_cnt": 0},
         "fullwrite": {"class": command.FullWrite, "required_args_cnt": 1},  # noqa

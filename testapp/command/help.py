@@ -13,6 +13,7 @@ Commands:
   fullread          SSD 데이터 전체 읽기
   erase             SSD 데이터 지우기 (LBA ~ LBA + SIZE)
   erase_range       SSD 데이터 지우기 (Start LBA ~ End LBA)
+  flush             Command Buffer에 있는 모든 명령어들을 수행하여 Buffer를 비움
 """
 
 

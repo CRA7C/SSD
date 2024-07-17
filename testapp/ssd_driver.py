@@ -71,3 +71,6 @@ class SsdDriver:
             size (str | int): 삭제할 크기
         """
         self.run_subprocess(f"ssd E {lba} {size}")
+
+    def flush(self):
+        self.run_subprocess(f"ssd F")
