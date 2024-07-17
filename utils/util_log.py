@@ -5,7 +5,7 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import inspect
 
-LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / f'latest.log'
+LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / 'latest.log'
 LOG_MAX_SIZE = 10 * 1024
 
 def print_function_name(func):

@@ -1,5 +1,5 @@
 from pathlib import Path
-from ssd.command import Command, CommandFactory
+from ssd.command import CommandFactory
 
 BUFFER_FILE_PATH = Path(__file__).parent / 'buffer.txt'
 

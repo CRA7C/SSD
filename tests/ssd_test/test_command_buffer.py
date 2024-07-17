@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from ssd.command import CommandFactory
-from ssd.command_buffer import CommandBuffer, Command
+from ssd.command_buffer import CommandBuffer
 
 
 class TestCommandBuffer(TestCase):
