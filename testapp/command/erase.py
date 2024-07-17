@@ -1,8 +1,7 @@
 from testapp.command.__interface import CommandInterface
+from testapp.command.erase_common import request_erase
 from testapp.constants import SSD_SIZE
 from testapp.ssd_driver import SsdDriver
-
-MAXIMUM_ERASE_SIZE_AT_ONCE = 10
 
 
 class Erase(CommandInterface):
@@ -14,12 +13,4 @@ class Erase(CommandInterface):
         initial_lba = int(lba)
         target_lba = initial_lba + erase_size
         end_lba = SSD_SIZE if target_lba > SSD_SIZE else target_lba
-        remain_erase_size = end_lba - initial_lba
-        for start_lba in range(initial_lba, end_lba, MAXIMUM_ERASE_SIZE_AT_ONCE):
-            if remain_erase_size > MAXIMUM_ERASE_SIZE_AT_ONCE:
-                size = MAXIMUM_ERASE_SIZE_AT_ONCE
-                remain_erase_size -= size
-            else:
-                size = remain_erase_size
-                remain_erase_size = 0
-            self.driver.erase(start_lba, size)
+        request_erase(self.driver, initial_lba, end_lba)
