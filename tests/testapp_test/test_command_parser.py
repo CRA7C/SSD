@@ -122,3 +122,14 @@ class TestCommandParser(TestCase):
         for test, cmd in commands:
             with self.subTest(test):
                 self.assertFalse(self.parser.validate_command(cmd))
+
+    def test_invalid_erase_range_cmd(self):
+        commands = [
+            ('인자가 없음.', 'erase_range'),
+            ('LBA 인자가 부족함.', 'erase_range 0'),
+            ('잘못된 LBA가 입력.', 'erase_range -1 10'),
+            ('startLBA가 endLBA보다 큰 경우.', 'erase_range 99 10'),
+        ]
+        for test, cmd in commands:
+            with self.subTest(test):
+                self.assertFalse(self.parser.validate_command(cmd))
