@@ -1,8 +1,12 @@
 import os
 import ast
-import importlib
 import sys
+import logging
+import importlib
+import subprocess
 from typing import List, Tuple
+
+SCRIPTS_DIRECTORY = os.path.dirname(__file__)
 
 
 class CommandInterfaceVisitor(ast.NodeVisitor):
@@ -10,17 +14,18 @@ class CommandInterfaceVisitor(ast.NodeVisitor):
         self.interface_name = interface_name
         self.found_classes = []
 
-    def visit_ClassDef(self, node):
+    def visit_ClassDef(self, node):  # do not change the overwrite method name.
         for base in node.bases:
             if isinstance(base, ast.Name) and base.id == self.interface_name:
                 self.found_classes.append(node.name)
         self.generic_visit(node)
 
 
-def find_command_interface_classes(directory: str, interface_name: str) -> List[Tuple[str, List[str]]]:
+def find_command_classes(interface_name: str) -> List[Tuple[str, List[str]]]:
+    directory = SCRIPTS_DIRECTORY
     result = []
     for filename in os.listdir(directory):
-        if filename.endswith('.py') and filename != 'main.py':
+        if filename.endswith('.py') and not filename.startswith("_"):
             filepath = os.path.join(directory, filename)
             with open(filepath, 'r', encoding='utf-8') as file:
                 node = ast.parse(file.read(), filename=filename)
@@ -32,7 +37,17 @@ def find_command_interface_classes(directory: str, interface_name: str) -> List[
     return result
 
 
-def get_classes(class_info: List[Tuple[str, List[str]]]) -> List[object]:
+def get_test_scripts() -> dict[str, str]:
+    class_info = find_command_classes('CommandInterface')
+    ret_dict = {}
+    for module_name, class_names in class_info:
+        for class_name in class_names:
+            ret_dict[class_name] = os.path.abspath(f"{module_name}.py")
+    return ret_dict
+
+
+def get_classes() -> List[object]:
+    class_info = find_command_classes('CommandInterface')
     class_list = []
     original_sys_path = sys.path.copy()
     try:
@@ -46,14 +61,22 @@ def get_classes(class_info: List[Tuple[str, List[str]]]) -> List[object]:
     return class_list
 
 
+def run_script(script_name: str) -> bool:
+    try:
+        result = subprocess.run(['python', script_name], capture_output=True, text=True)
+        # result.returncode가 0이면 성공, 그렇지 않으면 실패
+        logging.debug(result.stdout)
+        if result.stderr:
+            logging.error(result.stderr)
+        return result.returncode == 0
+    except Exception as e:
+        print(f"Error running script: {e}")
+        return False
+
+
 if __name__ == '__main__':
-    # 현재 디렉토리에서 CommandInterface를 상속받은 클래스를 찾는다.
-    result = find_command_interface_classes('.', 'CommandInterface')
-
-    for file, class_names in result:
-        print(f"File: {file}, Class names: {class_names}")
-
-    # 찾아낸 클래스를 객체로 생성
-    for cls in get_classes(result):
-        print(f"class: {cls}, Type: {type(cls)}")
-        print(cls().run())
+    from pprint import pprint
+    script_dict = get_test_scripts()
+    pprint(script_dict)
+    res = run_script(script_dict['TestApp1'])
+    print(res)
