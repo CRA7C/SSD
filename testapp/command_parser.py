@@ -1,38 +1,8 @@
-import re
 from typing import Any
 
 from testapp import command
-from testapp.constants import SSD_START_LBA, SSD_END_LBA, SSD_MIN_VALUE, SSD_MAX_VALUE
 from testapp.scripts.test_app1 import TestApp1
 from testapp.scripts.test_app2 import TestApp2
-
-
-def is_in_range_lba(lba: str) -> bool:
-    try:
-        num = int(lba)
-        return SSD_START_LBA <= num <= SSD_END_LBA
-    except ValueError:
-        return False
-
-
-def is_valid_hex(s: str):
-    # 정규식으로 형식을 먼저 확인
-    if re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
-        try:
-            # 16진수로 변환하여 범위를 확인
-            num = int(s, 16)
-            return SSD_MIN_VALUE <= num <= SSD_MAX_VALUE
-        except ValueError:
-            return False
-    return False
-
-
-def is_valid_size(size: str) -> bool:
-    try:
-        num = int(size)
-        return 1 <= num
-    except ValueError:
-        return False
 
 
 class CommandParser:
@@ -62,38 +32,8 @@ class CommandParser:
             print("The number of argument does not match")
             return False
 
-        if cmd_option == "write":
-            n_lba = cmd_list[1]
-            value = cmd_list[2]
-            if not is_in_range_lba(n_lba):
-                return False
-            if not is_valid_hex(value):
-                return False
-            return True
-
-        if cmd_option == "read":
-            n_lba = cmd_list[1]
-            return True if is_in_range_lba(n_lba) else False
-
-        if cmd_option == "fullwrite":
-            value = cmd_list[1]
-            return True if is_valid_hex(value) else False
-
-        if cmd_option == "erase":
-            n_lba = cmd_list[1]
-            size = cmd_list[2]
-            if not is_in_range_lba(n_lba):
-                return False
-            if not is_valid_size(size):
-                return False
-
-        if cmd_option == "erase_range":
-            start_lba = cmd_list[1]
-            end_lba = cmd_list[2]
-            if not (is_in_range_lba(start_lba) and is_in_range_lba(end_lba)):
-                return False
-            if int(start_lba) >= int(end_lba):
-                return False
+        if not cls.cmd_if_dict[cmd_option]["class"].is_valid_args(*cmd_list):
+            return False
         return True
 
     @staticmethod
