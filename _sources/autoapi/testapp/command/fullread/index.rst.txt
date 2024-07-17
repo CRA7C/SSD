@@ -1,0 +1,48 @@
+testapp.command.fullread
+========================
+
+.. py:module:: testapp.command.fullread
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.command.fullread.FullRead
+
+
+Module Contents
+---------------
+
+.. py:class:: FullRead
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   FullRead 클래스는 SSD의 모든 LBA에서 데이터를 읽는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run() -> list[str]
+
+      SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.
+
+      :returns: SSD의 모든 LBA에서 읽은 데이터 리스트
+      :rtype: list[str]
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+
+

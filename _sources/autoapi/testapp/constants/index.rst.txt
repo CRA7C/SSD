@@ -1,0 +1,59 @@
+testapp.constants
+=================
+
+.. py:module:: testapp.constants
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   testapp.constants.SSD_START_LBA
+   testapp.constants.SSD_END_LBA
+   testapp.constants.SSD_SIZE
+   testapp.constants.SSD_LBA_RANGE
+   testapp.constants.SSD_MIN_VALUE
+   testapp.constants.SSD_MAX_VALUE
+   testapp.constants.INVALID_COMMAND
+   testapp.constants.PROJECT_ROOT
+   testapp.constants.SCRIPTS_DIRECTORY
+
+
+Module Contents
+---------------
+
+.. py:data:: SSD_START_LBA
+   :type:  Final[int]
+   :value: 0
+
+
+.. py:data:: SSD_END_LBA
+   :type:  Final[int]
+   :value: 99
+
+
+.. py:data:: SSD_SIZE
+   :type:  Final[int]
+
+.. py:data:: SSD_LBA_RANGE
+   :type:  Final[Iterable[int]]
+
+.. py:data:: SSD_MIN_VALUE
+   :type:  Final[int]
+   :value: 0
+
+
+.. py:data:: SSD_MAX_VALUE
+   :type:  Final[int]
+   :value: 4294967295
+
+
+.. py:data:: INVALID_COMMAND
+   :value: 'INVALID COMMAND'
+
+
+.. py:data:: PROJECT_ROOT
+
+.. py:data:: SCRIPTS_DIRECTORY
+

@@ -1,0 +1,74 @@
+ssd.solidstatedrive
+===================
+
+.. py:module:: ssd.solidstatedrive
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ssd.solidstatedrive.SolidStateDrive
+
+
+Module Contents
+---------------
+
+.. py:class:: SolidStateDrive
+
+   SolidStateDrive 클래스는 가상 SSD의 읽기, 쓰기, 삭제 기능을 제공합니다.
+
+   .. attribute:: nand_driver
+
+      NAND 드라이버 객체
+
+      :type: NandDriver
+
+   .. attribute:: result_manager
+
+      결과 관리 객체
+
+      :type: ResultManager
+
+
+   .. py:method:: write(lba: int, value)
+
+      주어진 LBA에 값을 씁니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: int
+      :param value: 쓸 값 (16진수 문자열 형식)
+      :type value: str
+
+
+
+   .. py:method:: read(lba: int)
+
+      주어진 LBA에서 값을 읽고 결과를 기록합니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: int
+
+
+
+   .. py:method:: read_fast(value: str)
+
+      값을 빠르게 읽고 결과를 기록합니다.
+
+      :param value: 읽을 값 (16진수 문자열 형식)
+      :type value: str
+
+
+
+   .. py:method:: erase(lba: int, n_value: int)
+
+      주어진 LBA부터 n_value 개의 블록을 삭제합니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: int
+      :param n_value: 삭제할 블록 수
+      :type n_value: int
+
+
+

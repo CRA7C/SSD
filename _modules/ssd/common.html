@@ -6,6 +6,7 @@
   <title>ssd.common &mdash; SSD by CRA7C  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
   <!--[if lt IE 9]>
@@ -43,8 +44,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../members.html">Members</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -75,24 +77,57 @@
 <span></span><span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Final</span>
 
-<span class="n">LBA_LOWER_LIMIT</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">LBA_UPPER_LIMIT</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
-<span class="n">LBA_SIZE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LBA_UPPER_LIMIT</span> <span class="o">-</span> <span class="n">LBA_LOWER_LIMIT</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="viewcode-block" id="LBA_LOWER_LIMIT">
+<a class="viewcode-back" href="../../autoapi/ssd/common/index.html#ssd.common.LBA_LOWER_LIMIT">[docs]</a>
+<span class="n">LBA_LOWER_LIMIT</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<span class="n">SSD_MIN_VALUE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x00000000</span>
-<span class="n">SSD_MAX_VALUE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
+<div class="viewcode-block" id="LBA_UPPER_LIMIT">
+<a class="viewcode-back" href="../../autoapi/ssd/common/index.html#ssd.common.LBA_UPPER_LIMIT">[docs]</a>
+<span class="n">LBA_UPPER_LIMIT</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span></div>
+
+<div class="viewcode-block" id="LBA_SIZE">
+<a class="viewcode-back" href="../../autoapi/ssd/common/index.html#ssd.common.LBA_SIZE">[docs]</a>
+<span class="n">LBA_SIZE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">LBA_UPPER_LIMIT</span> <span class="o">-</span> <span class="n">LBA_LOWER_LIMIT</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="SSD_MIN_VALUE">
+<a class="viewcode-back" href="../../autoapi/ssd/common/index.html#ssd.common.SSD_MIN_VALUE">[docs]</a>
+<span class="n">SSD_MIN_VALUE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x00000000</span></div>
+
+<div class="viewcode-block" id="SSD_MAX_VALUE">
+<a class="viewcode-back" href="../../autoapi/ssd/common/index.html#ssd.common.SSD_MAX_VALUE">[docs]</a>
+<span class="n">SSD_MAX_VALUE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span></div>
+
 
 
 <div class="viewcode-block" id="convert_hex_to_str">
-<a class="viewcode-back" href="../../ssd.html#ssd.common.convert_hex_to_str">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/ssd/common/index.html#ssd.common.convert_hex_to_str">[docs]</a>
 <span class="k">def</span> <span class="nf">convert_hex_to_str</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    정수 값을 8자리 16진수 문자열로 변환합니다.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (int): 변환할 정수 값</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: 16진수 문자열 (예: &#39;0x00000000&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;0x</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">08X</span><span class="si">}</span><span class="s2">&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="is_valid_hex">
-<a class="viewcode-back" href="../../ssd.html#ssd.common.is_valid_hex">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/ssd/common/index.html#ssd.common.is_valid_hex">[docs]</a>
 <span class="k">def</span> <span class="nf">is_valid_hex</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    주어진 문자열이 유효한 16진수 형식인지 확인합니다.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        s (str): 검사할 문자열</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: 유효한 16진수 형식이면 True, 그렇지 않으면 False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;0x[0-9A-Fa-f]</span><span class="si">{8}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>

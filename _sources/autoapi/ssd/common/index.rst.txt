@@ -1,0 +1,75 @@
+ssd.common
+==========
+
+.. py:module:: ssd.common
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ssd.common.LBA_LOWER_LIMIT
+   ssd.common.LBA_UPPER_LIMIT
+   ssd.common.LBA_SIZE
+   ssd.common.SSD_MIN_VALUE
+   ssd.common.SSD_MAX_VALUE
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ssd.common.convert_hex_to_str
+   ssd.common.is_valid_hex
+
+
+Module Contents
+---------------
+
+.. py:data:: LBA_LOWER_LIMIT
+   :type:  Final[int]
+   :value: 0
+
+
+.. py:data:: LBA_UPPER_LIMIT
+   :type:  Final[int]
+   :value: 99
+
+
+.. py:data:: LBA_SIZE
+   :type:  Final[int]
+
+.. py:data:: SSD_MIN_VALUE
+   :type:  Final[int]
+   :value: 0
+
+
+.. py:data:: SSD_MAX_VALUE
+   :type:  Final[int]
+   :value: 4294967295
+
+
+.. py:function:: convert_hex_to_str(value)
+
+   정수 값을 8자리 16진수 문자열로 변환합니다.
+
+   :param value: 변환할 정수 값
+   :type value: int
+
+   :returns: 16진수 문자열 (예: '0x00000000')
+   :rtype: str
+
+
+.. py:function:: is_valid_hex(s: str)
+
+   주어진 문자열이 유효한 16진수 형식인지 확인합니다.
+
+   :param s: 검사할 문자열
+   :type s: str
+
+   :returns: 유효한 16진수 형식이면 True, 그렇지 않으면 False
+   :rtype: bool
+
+

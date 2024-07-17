@@ -6,6 +6,7 @@
   <title>ssd.solidstatedrive &mdash; SSD by CRA7C  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
   <!--[if lt IE 9]>
@@ -43,8 +44,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../members.html">Members</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -78,34 +80,67 @@
 
 
 <div class="viewcode-block" id="SolidStateDrive">
-<a class="viewcode-back" href="../../ssd.html#ssd.solidstatedrive.SolidStateDrive">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/ssd/solidstatedrive/index.html#ssd.solidstatedrive.SolidStateDrive">[docs]</a>
 <span class="k">class</span> <span class="nc">SolidStateDrive</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SolidStateDrive 클래스는 가상 SSD의 읽기, 쓰기, 삭제 기능을 제공합니다.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        nand_driver (NandDriver): NAND 드라이버 객체</span>
+<span class="sd">        result_manager (ResultManager): 결과 관리 객체</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nand_driver</span> <span class="o">=</span> <span class="n">NandDriver</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result_manager</span> <span class="o">=</span> <span class="n">ResultManager</span><span class="p">()</span>
 
 <div class="viewcode-block" id="SolidStateDrive.write">
-<a class="viewcode-back" href="../../ssd.html#ssd.solidstatedrive.SolidStateDrive.write">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/ssd/solidstatedrive/index.html#ssd.solidstatedrive.SolidStateDrive.write">[docs]</a>
     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 LBA에 값을 씁니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lba (int): 논리 블록 주소</span>
+<span class="sd">            value (str): 쓸 값 (16진수 문자열 형식)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nand_driver</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SolidStateDrive.read">
-<a class="viewcode-back" href="../../ssd.html#ssd.solidstatedrive.SolidStateDrive.read">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/ssd/solidstatedrive/index.html#ssd.solidstatedrive.SolidStateDrive.read">[docs]</a>
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 LBA에서 값을 읽고 결과를 기록합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lba (int): 논리 블록 주소</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nand_driver</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">lba</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result_manager</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">convert_hex_to_str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="SolidStateDrive.read_fast">
-<a class="viewcode-back" href="../../ssd.html#ssd.solidstatedrive.SolidStateDrive.read_fast">[docs]</a>
-    <span class="k">def</span> <span class="nf">read_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<a class="viewcode-back" href="../../autoapi/ssd/solidstatedrive/index.html#ssd.solidstatedrive.SolidStateDrive.read_fast">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        값을 빠르게 읽고 결과를 기록합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value (str): 읽을 값 (16진수 문자열 형식)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result_manager</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">convert_hex_to_str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="SolidStateDrive.erase">
-<a class="viewcode-back" href="../../ssd.html#ssd.solidstatedrive.SolidStateDrive.erase">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/ssd/solidstatedrive/index.html#ssd.solidstatedrive.SolidStateDrive.erase">[docs]</a>
     <span class="k">def</span> <span class="nf">erase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 LBA부터 n_value 개의 블록을 삭제합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lba (int): 논리 블록 주소</span>
+<span class="sd">            n_value (int): 삭제할 블록 수</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nand_driver</span><span class="o">.</span><span class="n">erase</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="n">n_value</span><span class="p">)</span></div>
 </div>
 

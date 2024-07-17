@@ -1,0 +1,31 @@
+testapp.scripts.dummy_test
+==========================
+
+.. py:module:: testapp.scripts.dummy_test
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.scripts.dummy_test.DummyTest
+
+
+Module Contents
+---------------
+
+.. py:class:: DummyTest
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.
+
+
+   .. py:method:: run() -> bool
+
+      명령어를 실행하는 메서드입니다.
+
+
+

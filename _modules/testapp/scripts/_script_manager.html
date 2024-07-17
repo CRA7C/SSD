@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>testapp.scripts._script_manager &mdash; SSD by CRA7C  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SSD by CRA7C
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SSD by CRA7C</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">testapp.scripts._script_manager</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for testapp.scripts._script_manager</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">SCRIPTS_DIRECTORY</span>
+
+
+<div class="viewcode-block" id="CommandInterfaceVisitor">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/_script_manager/index.html#testapp.scripts._script_manager.CommandInterfaceVisitor">[docs]</a>
+<span class="k">class</span> <span class="nc">CommandInterfaceVisitor</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">NodeVisitor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CommandInterfaceVisitor 클래스는 주어진 인터페이스를 구현한 클래스들을 찾기 위한 AST 노드 방문자입니다.</span>
+
+<span class="sd">    .. note:</span>
+<span class="sd">        ast: Abstract Syntax Trees. 파이썬 추상 구문 문법의 트리 처리 도구</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        interface_name (str): 찾고자 하는 인터페이스 이름</span>
+<span class="sd">        found_classes (List[str]): 발견된 클래스 이름 리스트</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface_name</span> <span class="o">=</span> <span class="n">interface_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">found_classes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="CommandInterfaceVisitor.visit_ClassDef">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/_script_manager/index.html#testapp.scripts._script_manager.CommandInterfaceVisitor.visit_ClassDef">[docs]</a>
+    <span class="k">def</span> <span class="nf">visit_ClassDef</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>  <span class="c1"># do not change the overwrite method name.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AST (Abstract Syntax Trees) 에서 클래스 정의 노드를 방문합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node (ast.ClassDef): 클래스 정의 노드</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">bases</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">Name</span><span class="p">)</span> <span class="ow">and</span> <span class="n">base</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_name</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">found_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generic_visit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="find_command_classes">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/_script_manager/index.html#testapp.scripts._script_manager.find_command_classes">[docs]</a>
+<span class="k">def</span> <span class="nf">find_command_classes</span><span class="p">(</span><span class="n">interface_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    주어진 인터페이스를 구현한 클래스를 찾습니다.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        interface_name (str): 인터페이스 이름</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[Tuple[str, List[str]]]: 모듈 이름과 클래스 이름 리스트의 튜플 리스트</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">directory</span> <span class="o">=</span> <span class="n">SCRIPTS_DIRECTORY</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+                <span class="n">visitor</span> <span class="o">=</span> <span class="n">CommandInterfaceVisitor</span><span class="p">(</span><span class="n">interface_name</span><span class="p">)</span>
+                <span class="n">visitor</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">visitor</span><span class="o">.</span><span class="n">found_classes</span><span class="p">:</span>
+                    <span class="n">module_name</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># .py 확장자 제거</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">module_name</span><span class="p">,</span> <span class="n">visitor</span><span class="o">.</span><span class="n">found_classes</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="get_test_scripts">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/index.html#testapp.scripts._script_manager.get_test_scripts">[docs]</a>
+<span class="k">def</span> <span class="nf">get_test_scripts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    테스트 스크립트를 반환합니다.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[str, str]: 테스트 스크립트 딕셔너리 {테스트 이름: 스크립트 절대 경로}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">class_info</span> <span class="o">=</span> <span class="n">find_command_classes</span><span class="p">(</span><span class="s1">&#39;CommandInterface&#39;</span><span class="p">)</span>
+    <span class="n">ret_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">class_names</span> <span class="ow">in</span> <span class="n">class_info</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="n">class_names</span><span class="p">:</span>
+            <span class="n">ret_dict</span><span class="p">[</span><span class="n">class_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">SCRIPTS_DIRECTORY</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">.py&quot;</span>
+    <span class="k">return</span> <span class="n">ret_dict</span></div>
+
+
+
+<div class="viewcode-block" id="get_classes">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/_script_manager/index.html#testapp.scripts._script_manager.get_classes">[docs]</a>
+<span class="k">def</span> <span class="nf">get_classes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">object</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CommandInterface를 구현한 클래스 객체들을 반환합니다.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[object]: 클래스 객체 리스트</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">class_info</span> <span class="o">=</span> <span class="n">find_command_classes</span><span class="p">(</span><span class="s1">&#39;CommandInterface&#39;</span><span class="p">)</span>
+    <span class="n">class_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">original_sys_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>  <span class="c1"># 현재 디렉토리를 sys.path에 추가</span>
+        <span class="k">for</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">class_names</span> <span class="ow">in</span> <span class="n">class_info</span><span class="p">:</span>
+            <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="n">class_names</span><span class="p">:</span>
+                <span class="n">class_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">class_name</span><span class="p">))</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">original_sys_path</span>  <span class="c1"># 원래 sys.path 복원</span>
+    <span class="k">return</span> <span class="n">class_list</span></div>
+
+
+
+<div class="viewcode-block" id="run_script">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/index.html#testapp.scripts._script_manager.run_script">[docs]</a>
+<span class="k">def</span> <span class="nf">run_script</span><span class="p">(</span><span class="n">script_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    주어진 스크립트를 실행합니다.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        script_name (str): 실행할 스크립트 이름</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: 스크립트 실행 성공 여부</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="n">script_name</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># result.returncode가 0이면 성공, 그렇지 않으면 실패</span>
+        <span class="c1"># TODO: 추후 Logger 변경 필요!</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error running script: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="run_test_script_file">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/index.html#testapp.scripts._script_manager.run_test_script_file">[docs]</a>
+<span class="k">def</span> <span class="nf">run_test_script_file</span><span class="p">(</span><span class="n">list_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    주어진 파일에 있는 테스트 스크립트를 순차적으로 실행합니다.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        list_file (str): 테스트 스크립트 목록 파일</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ts_dict</span> <span class="o">=</span> <span class="n">get_test_scripts</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">list_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+            <span class="n">test_id</span> <span class="o">=</span> <span class="n">test_id</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">:</span><span class="s2">30</span><span class="si">}</span><span class="s2"> --- &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">ts_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">run_script</span><span class="p">(</span><span class="n">ts_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PASS&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;FAIL!&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NOT FOUND!&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<div class="viewcode-block" id="script_dict">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/_script_manager/index.html#testapp.scripts._script_manager.script_dict">[docs]</a>
+    <span class="n">script_dict</span> <span class="o">=</span> <span class="n">get_test_scripts</span><span class="p">()</span></div>
+
+    <span class="n">pprint</span><span class="p">(</span><span class="n">script_dict</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">run_script</span><span class="p">(</span><span class="n">script_dict</span><span class="p">[</span><span class="s1">&#39;TestApp1&#39;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CRA7C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

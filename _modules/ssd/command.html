@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ssd.command &mdash; SSD by CRA7C  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SSD by CRA7C
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SSD by CRA7C</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ssd.command</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ssd.command</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="Command">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.Command">[docs]</a>
+<span></span><span class="k">class</span> <span class="nc">Command</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    기본 명령어 클래스입니다.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        option (str): 명령 옵션</span>
+<span class="sd">        args (list): 명령 인자 리스트</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Command 클래스의 생성자. 명령 옵션과 인자를 설정합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            args (list): 명령 인자 리스트</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+
+<div class="viewcode-block" id="Command.get_value">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.Command.get_value">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        명령 인자를 반환합니다.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: 명령 인자 리스트</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ReadCommand">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.ReadCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">ReadCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    읽기 명령어 클래스입니다.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        lba (int): 논리 블록 주소</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ReadCommand 클래스의 생성자. 논리 블록 주소를 설정합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            args (list): 명령 인자 리스트</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="WriteCommand">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.WriteCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">WriteCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    쓰기 명령어 클래스입니다.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        lba (int): 논리 블록 주소</span>
+<span class="sd">        value (int): 쓸 값 (16진수 형식)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        WriteCommand 클래스의 생성자. 논리 블록 주소와 쓸 값을 설정합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            args (list): 명령 인자 리스트</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+
+<div class="viewcode-block" id="WriteCommand.get_key">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.WriteCommand.get_key">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        명령 키를 반환합니다.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: 명령 키 (옵션, 시작 LBA, 끝 LBA)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">option</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lba</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EraseCommand">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.EraseCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">EraseCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    삭제 명령어 클래스입니다.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        lba (int): 논리 블록 주소</span>
+<span class="sd">        size (int): 삭제할 블록 수</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        EraseCommand 클래스의 생성자. 논리 블록 주소와 삭제할 블록 수를 설정합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            args (list): 명령 인자 리스트</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<div class="viewcode-block" id="EraseCommand.get_key">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.EraseCommand.get_key">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        명령 키를 반환합니다.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: 명령 키 (옵션, 시작 LBA, 끝 LBA)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">option</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lba</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CommandFactory">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.CommandFactory">[docs]</a>
+<span class="k">class</span> <span class="nc">CommandFactory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    명령어 생성 클래스입니다.</span>
+<span class="sd">    주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="CommandFactory.parse_command">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.CommandFactory.parse_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">parse_command</span><span class="p">(</span><span class="n">command_list</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            command_list (list): 명령 인자 리스트</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Command: 생성된 명령어 객체</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">command_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ReadCommand</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">WriteCommand</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">EraseCommand</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Command</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CRA7C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

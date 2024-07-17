@@ -1,0 +1,298 @@
+testapp.command
+===============
+
+.. py:module:: testapp.command
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/testapp/command/__interface/index
+   /autoapi/testapp/command/erase/index
+   /autoapi/testapp/command/erase_common/index
+   /autoapi/testapp/command/erase_range/index
+   /autoapi/testapp/command/exit/index
+   /autoapi/testapp/command/fullread/index
+   /autoapi/testapp/command/fullwrite/index
+   /autoapi/testapp/command/help/index
+   /autoapi/testapp/command/read/index
+   /autoapi/testapp/command/write/index
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.command.Write
+   testapp.command.Read
+   testapp.command.Exit
+   testapp.command.Help
+   testapp.command.FullWrite
+   testapp.command.FullRead
+   testapp.command.Erase
+   testapp.command.EraseRange
+
+
+Package Contents
+----------------
+
+.. py:class:: Write
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   Write 클래스는 지정된 LBA에 데이터를 쓰는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run(lba: str, value: str) -> None
+
+      지정된 LBA에 데이터를 씁니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: str
+      :param value: 쓸 데이터 (16진수 문자열)
+      :type value: str
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+      :returns: 인자가 유효한 경우 True, 그렇지 않으면 False
+      :rtype: bool
+
+
+
+.. py:class:: Read
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run(lba: str) -> str
+
+      지정된 LBA에서 데이터를 읽습니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: str
+
+      :returns: 읽은 데이터
+      :rtype: str
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+      :returns: 인자가 유효한 경우 True, 그렇지 않으면 False
+      :rtype: bool
+
+
+
+.. py:class:: Exit
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   Exit 클래스는 프로그램을 종료하는 명령어를 구현합니다.
+
+
+   .. py:method:: run()
+
+      명령어를 실행하는 메서드입니다.
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+
+
+.. py:class:: Help
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.
+
+
+   .. py:method:: run(*args, **kwarg)
+
+      사용 가능한 명령어와 옵션을 출력합니다.
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+
+
+.. py:class:: FullWrite
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   FullWrite 클래스는 SSD의 모든 LBA에 동일한 값을 쓰는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run(value: str) -> None
+
+      SSD의 모든 LBA에 값을 씁니다.
+
+      :param value: 쓸 값 (16진수 문자열)
+      :type value: str
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+      :returns: 인자가 유효한 경우 True, 그렇지 않으면 False
+      :rtype: bool
+
+
+
+.. py:class:: FullRead
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   FullRead 클래스는 SSD의 모든 LBA에서 데이터를 읽는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run() -> list[str]
+
+      SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.
+
+      :returns: SSD의 모든 LBA에서 읽은 데이터 리스트
+      :rtype: list[str]
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+
+
+.. py:class:: Erase
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run(lba: str, total_size: str)
+
+      지정된 LBA와 크기만큼 데이터를 삭제합니다.
+
+      :param lba: 시작 논리 블록 주소
+      :type lba: str
+      :param total_size: 삭제할 총 크기
+      :type total_size: str
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+      :param \*args: 확인할 인자 (LBA와 크기)
+
+      :returns: 인자가 유효한 경우 True, 그렇지 않으면 False
+      :rtype: bool
+
+
+
+.. py:class:: EraseRange
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   EraseRange 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run(start_lba: str, end_lba: str)
+
+      지정된 시작 LBA와 끝 LBA 사이의 데이터를 삭제합니다.
+
+      :param start_lba: 시작 논리 블록 주소
+      :type start_lba: str
+      :param end_lba: 끝 논리 블록 주소
+      :type end_lba: str
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+      :returns: 인자가 유효한 경우 True, 그렇지 않으면 False
+      :rtype: bool
+
+
+

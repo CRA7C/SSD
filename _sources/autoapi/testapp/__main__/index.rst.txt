@@ -1,0 +1,6 @@
+testapp.__main__
+================
+
+.. py:module:: testapp.__main__
+
+

@@ -1,0 +1,139 @@
+ssd.command
+===========
+
+.. py:module:: ssd.command
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ssd.command.Command
+   ssd.command.ReadCommand
+   ssd.command.WriteCommand
+   ssd.command.EraseCommand
+   ssd.command.CommandFactory
+
+
+Module Contents
+---------------
+
+.. py:class:: Command(args)
+
+   기본 명령어 클래스입니다.
+
+   .. attribute:: option
+
+      명령 옵션
+
+      :type: str
+
+   .. attribute:: args
+
+      명령 인자 리스트
+
+      :type: list
+
+
+   .. py:method:: get_value()
+
+      명령 인자를 반환합니다.
+
+      :returns: 명령 인자 리스트
+      :rtype: list
+
+
+
+.. py:class:: ReadCommand(args)
+
+   Bases: :py:obj:`Command`
+
+
+   읽기 명령어 클래스입니다.
+
+   .. attribute:: lba
+
+      논리 블록 주소
+
+      :type: int
+
+
+.. py:class:: WriteCommand(args)
+
+   Bases: :py:obj:`Command`
+
+
+   쓰기 명령어 클래스입니다.
+
+   .. attribute:: lba
+
+      논리 블록 주소
+
+      :type: int
+
+   .. attribute:: value
+
+      쓸 값 (16진수 형식)
+
+      :type: int
+
+
+   .. py:method:: get_key()
+
+      명령 키를 반환합니다.
+
+      :returns: 명령 키 (옵션, 시작 LBA, 끝 LBA)
+      :rtype: tuple
+
+
+
+.. py:class:: EraseCommand(args)
+
+   Bases: :py:obj:`Command`
+
+
+   삭제 명령어 클래스입니다.
+
+   .. attribute:: lba
+
+      논리 블록 주소
+
+      :type: int
+
+   .. attribute:: size
+
+      삭제할 블록 수
+
+      :type: int
+
+
+   .. py:method:: get_key()
+
+      명령 키를 반환합니다.
+
+      :returns: 명령 키 (옵션, 시작 LBA, 끝 LBA)
+      :rtype: tuple
+
+
+
+.. py:class:: CommandFactory
+
+   명령어 생성 클래스입니다.
+   주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
+
+
+   .. py:method:: parse_command(command_list)
+      :staticmethod:
+
+
+      주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
+
+      :param command_list: 명령 인자 리스트
+      :type command_list: list
+
+      :returns: 생성된 명령어 객체
+      :rtype: Command
+
+
+

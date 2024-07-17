@@ -1,0 +1,78 @@
+testapp.testshell
+=================
+
+.. py:module:: testapp.testshell
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   testapp.testshell.EXECUTE_VALID_WO_ARGS
+   testapp.testshell.EXECUTE_VALID_WITH_ARGS
+   testapp.testshell.EXECUTE_INVALID
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.testshell.TestShell
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   testapp.testshell.main
+
+
+Module Contents
+---------------
+
+.. py:data:: EXECUTE_VALID_WO_ARGS
+   :value: 2
+
+
+.. py:data:: EXECUTE_VALID_WITH_ARGS
+   :value: 1
+
+
+.. py:data:: EXECUTE_INVALID
+   :value: 0
+
+
+.. py:class:: TestShell
+
+   TestShell 클래스는 명령어를 실행하고, 사전 정의된 명령어 또는 테스트 스크립트를 실행하는 기능을 제공합니다.
+
+
+
+   .. py:method:: execute(cmd: str) -> int
+      :staticmethod:
+
+
+      주어진 명령어를 실행합니다.
+
+      :param cmd: 실행할 명령어
+      :type cmd: str
+
+      :returns:
+
+                명령어 실행 결과 코드
+                     - EXECUTE_VALID_WO_ARGS (2): 인자가 없는 유효한 명령어
+                     - EXECUTE_VALID_WITH_ARGS (1): 인자가 있는 유효한 명령어
+                     - EXECUTE_INVALID (0): 유효하지 않은 명령어
+      :rtype: int
+
+
+
+.. py:function:: main()
+
+   TestShell의 메인 루프를 실행합니다.
+   사용자가 명령어를 입력하고 이를 처리합니다.
+
+

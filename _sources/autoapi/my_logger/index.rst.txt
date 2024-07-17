@@ -1,0 +1,83 @@
+my_logger
+=========
+
+.. py:module:: my_logger
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/my_logger/util_log/index
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   my_logger.Logger
+
+
+Package Contents
+----------------
+
+.. py:class:: Logger
+
+   싱글톤 패턴을 적용한 Logger 클래스입니다.
+
+
+   .. py:attribute:: _instance
+      :value: None
+
+
+
+   .. py:method:: info(message)
+
+      정보 로그 메시지를 기록합니다.
+
+      :param message: 기록할 메시지
+      :type message: str
+
+
+
+   .. py:method:: debug(message)
+
+      디버그 로그 메시지를 기록합니다.
+
+      :param message: 기록할 메시지
+      :type message: str
+
+
+
+   .. py:method:: warning(message)
+
+      경고 로그 메시지를 기록합니다.
+
+      :param message: 기록할 메시지
+      :type message: str
+
+
+
+   .. py:method:: error(message)
+
+      오류 로그 메시지를 기록합니다.
+
+      :param message: 기록할 메시지
+      :type message: str
+
+
+
+   .. py:method:: log_with_class_func_name(level, message)
+
+      클래스와 함수 이름을 포함하여 로그 메시지를 기록합니다.
+
+      :param level: 로그 레벨
+      :type level: int
+      :param message: 기록할 메시지
+      :type message: str
+
+
+

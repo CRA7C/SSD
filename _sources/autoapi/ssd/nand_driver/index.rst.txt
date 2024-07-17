@@ -1,0 +1,83 @@
+ssd.nand_driver
+===============
+
+.. py:module:: ssd.nand_driver
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ssd.nand_driver.NAND_INITIAL_VALUE
+   ssd.nand_driver.NAND_FILE_PATH
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ssd.nand_driver.NandDriver
+
+
+Module Contents
+---------------
+
+.. py:data:: NAND_INITIAL_VALUE
+   :value: '0x00000000'
+
+
+.. py:data:: NAND_FILE_PATH
+
+.. py:class:: NandDriver(nand_file_path: Union[pathlib.Path, str] = NAND_FILE_PATH)
+
+   NandDriver 클래스는 nand.txt 파일을 기반으로 NAND 읽기, 쓰기 및 삭제 기능을 제공합니다.
+
+   .. attribute:: nand_file_path
+
+      NAND 파일 경로
+
+      :type: Path
+
+
+   .. py:method:: initialize() -> None
+
+      만일 nand.txt 파일이 없으면, 초기화된 파일을 생성합니다.
+
+
+
+   .. py:method:: read(lba: int) -> int
+
+      주어진 LBA에서 값을 읽어 반환합니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: int
+
+      :returns: 읽은 값 (정수 형식)
+      :rtype: int
+
+
+
+   .. py:method:: write(lba: int, value: int) -> None
+
+      주어진 LBA에 값을 씁니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: int
+      :param value: 쓸 값 (정수 형식)
+      :type value: int
+
+
+
+   .. py:method:: erase(lba: int, n_value: int) -> None
+
+      주어진 LBA부터 n_value 개의 블록을 삭제합니다.
+
+      :param lba: 논리 블록 주소
+      :type lba: int
+      :param n_value: 삭제할 블록 수
+      :type n_value: int
+
+
+

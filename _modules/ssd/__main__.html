@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ssd.__main__ &mdash; SSD by CRA7C  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SSD by CRA7C
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SSD by CRA7C</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ssd.__main__</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ssd.__main__</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))))</span>
+
+<span class="kn">from</span> <span class="nn">ssd.solidstatedrive</span> <span class="kn">import</span> <span class="n">SolidStateDrive</span>
+<span class="kn">from</span> <span class="nn">ssd.common</span> <span class="kn">import</span> <span class="n">LBA_LOWER_LIMIT</span><span class="p">,</span> <span class="n">LBA_UPPER_LIMIT</span><span class="p">,</span> <span class="n">is_valid_hex</span>
+<span class="kn">from</span> <span class="nn">ssd.command_buffer</span> <span class="kn">import</span> <span class="n">CommandBuffer</span>
+<span class="kn">from</span> <span class="nn">ssd.command</span> <span class="kn">import</span> <span class="n">CommandFactory</span>
+
+
+<div class="viewcode-block" id="SSDRunner">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner">[docs]</a>
+<span class="k">class</span> <span class="nc">SSDRunner</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SSDRunner 클래스는 가상 SSD의 명령을 처리하고 실행하는 역할을 합니다.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        ssd (SolidStateDrive): 가상 SSD 객체</span>
+<span class="sd">        option_buf (CommandBuffer): 명령 버퍼 객체</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span> <span class="o">=</span> <span class="n">SolidStateDrive</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span> <span class="o">=</span> <span class="n">CommandBuffer</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="SSDRunner.is_valid_command">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner.is_valid_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_valid_command</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        명령어의 유효성을 검사합니다.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: 유효하지 않은 명령어인 경우 예외를 발생시킵니다.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: 명령어가 유효한 경우 True를 반환합니다.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20/ssd W 20 0x1289CDEF/ssd E 10 3&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;R, W, E 중 하나를 사용해주세요.(대문자)&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;LBA는 숫자여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">LBA_LOWER_LIMIT</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">LBA_UPPER_LIMIT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LBA는 </span><span class="si">{</span><span class="n">LBA_LOWER_LIMIT</span><span class="si">}</span><span class="s1"> ~ </span><span class="si">{</span><span class="n">LBA_UPPER_LIMIT</span><span class="si">}</span><span class="s1"> 여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;W 명령에는 value가 필요합니다.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_hex</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;value는 0x00000000 형식이여야 합니다.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;E 명령에는 시작 LBA, 지울 데이터 갯수가 필요합니다.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;지울 데이터 갯수는 숫자여야합니다.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;지울 데이터 갯수는 1이상 10이하만 가능합니다.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="SSDRunner.buff_flush">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner.buff_flush">[docs]</a>
+    <span class="k">def</span> <span class="nf">buff_flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        명령 버퍼를 비우고 명령어를 실행합니다.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmd_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SSDRunner.run">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 명령어를 파싱하고 실행합니다.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">CommandFactory</span><span class="p">()</span><span class="o">.</span><span class="n">parse_command</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buff_flush</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">is_able_to_fast_read</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">read_fast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">get_read_fast</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">push_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">need_flush</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">buff_flush</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SSDRunner.execute_command">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner.execute_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        특정 명령어를 실행합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            command: 실행할 명령어 객체</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">option</span>
+        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">lba</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">lba</span><span class="p">,</span> <span class="n">command</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">erase</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">lba</span><span class="p">,</span> <span class="n">command</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="runner">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.runner">[docs]</a>
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">SSDRunner</span><span class="p">()</span></div>
+
+    <span class="k">if</span> <span class="n">runner</span><span class="o">.</span><span class="n">is_valid_command</span><span class="p">():</span>
+        <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CRA7C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

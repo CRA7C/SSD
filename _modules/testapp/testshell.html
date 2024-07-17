@@ -6,6 +6,7 @@
   <title>testapp.testshell &mdash; SSD by CRA7C  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
   <!--[if lt IE 9]>
@@ -43,8 +44,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../members.html">Members</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -76,19 +78,44 @@
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">INVALID_COMMAND</span>
 <span class="kn">from</span> <span class="nn">testapp.scripts</span> <span class="kn">import</span> <span class="n">get_test_scripts</span><span class="p">,</span> <span class="n">run_script</span>
 
-<span class="n">EXECUTE_VALID_WO_ARGS</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">EXECUTE_VALID_WITH_ARGS</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">EXECUTE_INVALID</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="viewcode-block" id="EXECUTE_VALID_WO_ARGS">
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_VALID_WO_ARGS">[docs]</a>
+<span class="n">EXECUTE_VALID_WO_ARGS</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+<div class="viewcode-block" id="EXECUTE_VALID_WITH_ARGS">
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_VALID_WITH_ARGS">[docs]</a>
+<span class="n">EXECUTE_VALID_WITH_ARGS</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="EXECUTE_INVALID">
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_INVALID">[docs]</a>
+<span class="n">EXECUTE_INVALID</span> <span class="o">=</span> <span class="mi">0</span></div>
+
 
 
 <div class="viewcode-block" id="TestShell">
-<a class="viewcode-back" href="../../testapp.html#testapp.testshell.TestShell">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.TestShell">[docs]</a>
 <span class="k">class</span> <span class="nc">TestShell</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TestShell 클래스는 명령어를 실행하고, 사전 정의된 명령어 또는 테스트 스크립트를 실행하는 기능을 제공합니다.</span>
 
-<div class="viewcode-block" id="TestShell.execute">
-<a class="viewcode-back" href="../../testapp.html#testapp.testshell.TestShell.execute">[docs]</a>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="TestShell.execute">
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.TestShell.execute">[docs]</a>
     <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 명령어를 실행합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cmd (str): 실행할 명령어</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: 명령어 실행 결과 코드</span>
+<span class="sd">                 - EXECUTE_VALID_WO_ARGS (2): 인자가 없는 유효한 명령어</span>
+<span class="sd">                 - EXECUTE_VALID_WITH_ARGS (1): 인자가 있는 유효한 명령어</span>
+<span class="sd">                 - EXECUTE_INVALID (0): 유효하지 않은 명령어</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cmd_option</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">is_predefined_command</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">):</span>
             <span class="n">cmd_option</span><span class="p">,</span> <span class="n">cmd_args</span> <span class="o">=</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
@@ -111,8 +138,12 @@
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../testapp.html#testapp.testshell.main">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.main">[docs]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TestShell의 메인 루프를 실행합니다.</span>
+<span class="sd">    사용자가 명령어를 입력하고 이를 처리합니다.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">TestShell</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="n">EXECUTE_INVALID</span><span class="p">:</span>

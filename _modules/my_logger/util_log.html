@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>my_logger.util_log &mdash; SSD by CRA7C  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SSD by CRA7C
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SSD by CRA7C</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">my_logger.util_log</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for my_logger.util_log</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">logging.handlers</span> <span class="kn">import</span> <span class="n">RotatingFileHandler</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+<div class="viewcode-block" id="LOG_FILE_PATH">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.LOG_FILE_PATH">[docs]</a>
+<span class="n">LOG_FILE_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;log&#39;</span> <span class="o">/</span> <span class="s1">&#39;latest.log&#39;</span></div>
+
+<div class="viewcode-block" id="LOG_MAX_SIZE">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.LOG_MAX_SIZE">[docs]</a>
+<span class="n">LOG_MAX_SIZE</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span></div>
+
+
+
+<div class="viewcode-block" id="print_function_name">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.print_function_name">[docs]</a>
+<span class="k">def</span> <span class="nf">print_function_name</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    함수 실행 시 함수 이름을 출력하는 데코레이터 함수입니다.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func (function): 데코레이트할 함수</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        function: 데코레이트된 함수</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing function: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<div class="viewcode-block" id="MyRotatingFileHandler">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.MyRotatingFileHandler">[docs]</a>
+<span class="k">class</span> <span class="nc">MyRotatingFileHandler</span><span class="p">(</span><span class="n">RotatingFileHandler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    로그 파일이 회전될 때 파일 이름을 변경하는 기능을 추가한 RotatingFileHandler 클래스입니다.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MyRotatingFileHandler.doRollover">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.MyRotatingFileHandler.doRollover">[docs]</a>
+    <span class="k">def</span> <span class="nf">doRollover</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        로그 파일 회전을 수행하고 백업 파일 이름을 변경합니다.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">doRollover</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_already_bkup_file</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rename_backup_files</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="MyRotatingFileHandler.rename_backup_files">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.MyRotatingFileHandler.rename_backup_files">[docs]</a>
+    <span class="k">def</span> <span class="nf">rename_backup_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        백업 파일의 이름을 현재 날짜와 시간으로 변경합니다.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">base_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span>
+        <span class="n">base_file_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">base_filename</span><span class="p">)</span>
+        <span class="n">bkup_file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bkup_file_name</span><span class="p">()</span>
+
+        <span class="c1"># RotatingFileHandler는 기본적으로 {로그파일이름}.1 .2 .3 이런식으로 백업파일 생성함</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">backupCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">old_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_filename</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">old_filename</span><span class="p">):</span>
+                <span class="n">new_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_file_dir</span><span class="p">,</span> <span class="n">bkup_file_name</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old_filename</span><span class="p">,</span> <span class="n">new_filename</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MyRotatingFileHandler.get_bkup_file_name">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.MyRotatingFileHandler.get_bkup_file_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_bkup_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        백업 파일 이름을 생성합니다.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: 백업 파일 이름</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;until_</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">.log&#39;</span></div>
+
+
+<div class="viewcode-block" id="MyRotatingFileHandler.is_already_bkup_file">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.MyRotatingFileHandler.is_already_bkup_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_already_bkup_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        백업 파일이 이미 존재하는지 확인합니다.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: 백업 파일이 이미 존재하면 True, 그렇지 않으면 False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CustomFormatter">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.CustomFormatter">[docs]</a>
+<span class="k">class</span> <span class="nc">CustomFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    로그 메시지 형식을 커스터마이징하는 Formatter 클래스입니다.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CustomFormatter.format">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.CustomFormatter.format">[docs]</a>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        로그 레코드를 지정된 형식으로 포맷합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            record (logging.LogRecord): 로그 레코드</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: 포맷된 로그 메시지</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatTime</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="s2">&quot;%y.%m.</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">class_name</span>
+        <span class="n">func_name</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">func_name</span>
+        <span class="n">padded_function_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">()&quot;</span>
+        <span class="n">fixed_length</span> <span class="o">=</span> <span class="mi">30</span>
+        <span class="n">padded_function_name</span> <span class="o">=</span> <span class="n">padded_function_name</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">fixed_length</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">time_format</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">padded_function_name</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Logger">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.Logger">[docs]</a>
+<span class="k">class</span> <span class="nc">Logger</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    싱글톤 패턴을 적용한 Logger 클래스입니다.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Logger._instance">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.Logger._instance">[docs]</a>
+    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
+            <span class="n">log_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">LOG_FILE_PATH</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">log_dir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">log_dir</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
+
+            <span class="n">file_handler</span> <span class="o">=</span> <span class="n">MyRotatingFileHandler</span><span class="p">(</span><span class="n">LOG_FILE_PATH</span><span class="p">,</span> <span class="n">maxBytes</span><span class="o">=</span><span class="n">LOG_MAX_SIZE</span><span class="p">,</span> <span class="n">backupCount</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">file_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+            <span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+            <span class="n">console_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+            <span class="n">formatter</span> <span class="o">=</span> <span class="n">CustomFormatter</span><span class="p">()</span>
+            <span class="n">file_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+            <span class="n">console_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console_handler</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Logger.info">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.Logger.info">[docs]</a>
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        정보 로그 메시지를 기록합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): 기록할 메시지</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_with_class_func_name</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Logger.debug">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.Logger.debug">[docs]</a>
+    <span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        디버그 로그 메시지를 기록합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): 기록할 메시지</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_with_class_func_name</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Logger.warning">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.Logger.warning">[docs]</a>
+    <span class="k">def</span> <span class="nf">warning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        경고 로그 메시지를 기록합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): 기록할 메시지</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_with_class_func_name</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Logger.error">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.Logger.error">[docs]</a>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        오류 로그 메시지를 기록합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): 기록할 메시지</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_with_class_func_name</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Logger.log_with_class_func_name">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.Logger.log_with_class_func_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">log_with_class_func_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        클래스와 함수 이름을 포함하여 로그 메시지를 기록합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            level (int): 로그 레벨</span>
+<span class="sd">            message (str): 기록할 메시지</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_back</span><span class="o">.</span><span class="n">f_back</span>
+
+        <span class="n">func_name</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="p">[</span><span class="s1">&#39;self&#39;</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class_name&#39;</span><span class="p">:</span> <span class="n">class_name</span><span class="p">,</span> <span class="s1">&#39;func_name&#39;</span><span class="p">:</span> <span class="n">func_name</span><span class="p">})</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CRA7C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

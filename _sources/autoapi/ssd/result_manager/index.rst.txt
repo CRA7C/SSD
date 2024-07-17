@@ -1,0 +1,53 @@
+ssd.result_manager
+==================
+
+.. py:module:: ssd.result_manager
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ssd.result_manager.RESULT_FILE_PATH
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ssd.result_manager.ResultManager
+
+
+Module Contents
+---------------
+
+.. py:data:: RESULT_FILE_PATH
+
+.. py:class:: ResultManager
+
+   ResultManager 클래스는 result.txt 파일을 관리하는 기능을 제공합니다.
+
+   .. attribute:: result_file_path
+
+      결과 파일 경로
+
+      :type: Path
+
+
+   .. py:method:: initialize()
+
+      결과 파일을 초기화합니다. 만일 result.txt 파일이 없으면, 초기화된 파일을 생성합니다.
+
+
+
+   .. py:method:: write(text)
+
+      결과 파일에 텍스트를 씁니다.
+
+      :param text: 결과 파일에 쓸 텍스트
+      :type text: str
+
+
+

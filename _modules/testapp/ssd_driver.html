@@ -6,6 +6,7 @@
   <title>testapp.ssd_driver &mdash; SSD by CRA7C  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
   <!--[if lt IE 9]>
@@ -43,8 +44,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../members.html">Members</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -78,23 +80,38 @@
 
 
 <div class="viewcode-block" id="SsdDriver">
-<a class="viewcode-back" href="../../testapp.html#testapp.ssd_driver.SsdDriver">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/testapp/ssd_driver/index.html#testapp.ssd_driver.SsdDriver">[docs]</a>
 <span class="k">class</span> <span class="nc">SsdDriver</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; SSD Driver</span>
-<span class="sd">    - ssd 를 python level에서 접근하여 쓸 수 있게 해주는 드라이버</span>
-<span class="sd">    - subprocess 를 사용하여 ssd 에 접근하도록 설계</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SSD Driver 클래스는 SSD를 Python 레벨에서 접근하여 제어할 수 있도록 해주는 드라이버입니다.</span>
+<span class="sd">    - subprocess를 사용하여 SSD에 접근하도록 설계되었습니다.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="viewcode-block" id="SsdDriver._instance">
+<a class="viewcode-back" href="../../autoapi/testapp/ssd_driver/index.html#testapp.ssd_driver.SsdDriver._instance">[docs]</a>
+    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span></div>
+
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
 
-<div class="viewcode-block" id="SsdDriver.run_subprocess">
-<a class="viewcode-back" href="../../testapp.html#testapp.ssd_driver.SsdDriver.run_subprocess">[docs]</a>
     <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="SsdDriver.run_subprocess">
+<a class="viewcode-back" href="../../autoapi/testapp/ssd_driver/index.html#testapp.ssd_driver.SsdDriver.run_subprocess">[docs]</a>
     <span class="k">def</span> <span class="nf">run_subprocess</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 명령어를 서브프로세스로 실행합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            command (str): 실행할 명령어</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            subprocess.CompletedProcess: 서브프로세스 실행 결과</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: 명령어 실행 중 오류가 발생한 경우</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">validate_ssd_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
         <span class="n">subprocess_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;python -m </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -105,23 +122,46 @@
 
 
 <div class="viewcode-block" id="SsdDriver.read">
-<a class="viewcode-back" href="../../testapp.html#testapp.ssd_driver.SsdDriver.read">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/testapp/ssd_driver/index.html#testapp.ssd_driver.SsdDriver.read">[docs]</a>
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 LBA에서 데이터를 읽습니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lba (str | int): 논리 블록 주소</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: 읽은 데이터</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">run_subprocess</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ssd R </span><span class="si">{</span><span class="n">lba</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">get_ssd_result</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="SsdDriver.write">
-<a class="viewcode-back" href="../../testapp.html#testapp.ssd_driver.SsdDriver.write">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/testapp/ssd_driver/index.html#testapp.ssd_driver.SsdDriver.write">[docs]</a>
     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 LBA에 데이터를 씁니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lba (str | int): 논리 블록 주소</span>
+<span class="sd">            value (str | int): 쓸 데이터</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;0x</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">08X</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">run_subprocess</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ssd W </span><span class="si">{</span><span class="n">lba</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SsdDriver.erase">
-<a class="viewcode-back" href="../../testapp.html#testapp.ssd_driver.SsdDriver.erase">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/testapp/ssd_driver/index.html#testapp.ssd_driver.SsdDriver.erase">[docs]</a>
     <span class="k">def</span> <span class="nf">erase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        주어진 LBA부터 주어진 크기만큼 데이터를 삭제합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lba (str | int): 논리 블록 주소</span>
+<span class="sd">            size (str | int): 삭제할 크기</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">run_subprocess</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ssd E </span><span class="si">{</span><span class="n">lba</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 </div>
 

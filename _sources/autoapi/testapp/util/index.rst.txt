@@ -1,0 +1,75 @@
+testapp.util
+============
+
+.. py:module:: testapp.util
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   testapp.util.RESULT_FILE
+   testapp.util.READ_COMMAND
+   testapp.util.WRITE_COMMAND
+   testapp.util.SSD_COMMAND
+   testapp.util.SSD_MODULE
+   testapp.util.BASE_DIR
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   testapp.util.get_ssd_result
+   testapp.util.validate_ssd_command
+   testapp.util.validate_ssd_lba
+   testapp.util.validate_ssd_value
+   testapp.util.capture_output
+   testapp.util.is_in_range_lba
+   testapp.util.is_valid_hex
+   testapp.util.is_valid_size
+
+
+Module Contents
+---------------
+
+.. py:data:: RESULT_FILE
+   :value: 'result.txt'
+
+
+.. py:data:: READ_COMMAND
+   :value: 'R'
+
+
+.. py:data:: WRITE_COMMAND
+   :value: 'W'
+
+
+.. py:data:: SSD_COMMAND
+   :value: 'ssd'
+
+
+.. py:data:: SSD_MODULE
+   :value: 'ssd'
+
+
+.. py:data:: BASE_DIR
+
+.. py:function:: get_ssd_result() -> str
+
+.. py:function:: validate_ssd_command(command)
+
+.. py:function:: validate_ssd_lba(lba: Union[str, int])
+
+.. py:function:: validate_ssd_value(value: Union[str, int])
+
+.. py:function:: capture_output(func)
+
+.. py:function:: is_in_range_lba(lba: str) -> bool
+
+.. py:function:: is_valid_hex(s: str)
+
+.. py:function:: is_valid_size(size: str) -> bool
+

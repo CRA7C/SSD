@@ -1,0 +1,41 @@
+testapp.command.erase_common
+============================
+
+.. py:module:: testapp.command.erase_common
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   testapp.command.erase_common.MAXIMUM_ERASE_SIZE_AT_ONCE
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   testapp.command.erase_common.request_erase
+
+
+Module Contents
+---------------
+
+.. py:data:: MAXIMUM_ERASE_SIZE_AT_ONCE
+   :value: 10
+
+
+.. py:function:: request_erase(driver: testapp.ssd_driver.SsdDriver, start_lba: int, end_lba: int)
+
+   지정된 범위의 LBA를 최대 삭제 크기 단위로 나누어 삭제 요청을 보냅니다.
+
+   :param driver: SSD 드라이버 객체
+   :type driver: SsdDriver
+   :param start_lba: 삭제를 시작할 LBA
+   :type start_lba: int
+   :param end_lba: 삭제를 종료할 LBA (포함되지 않음)
+   :type end_lba: int
+
+

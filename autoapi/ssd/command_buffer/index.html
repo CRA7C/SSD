@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ssd.command_buffer &mdash; SSD by CRA7C  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ssd.common" href="../common/index.html" />
+    <link rel="prev" title="ssd.command" href="../command/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SSD by CRA7C
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">ssd</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../__main__/index.html">ssd.__main__</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../command/index.html">ssd.command</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ssd.command_buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../common/index.html">ssd.common</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nand_driver/index.html">ssd.nand_driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../result_manager/index.html">ssd.result_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../solidstatedrive/index.html">ssd.solidstatedrive</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../testapp/index.html">testapp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../my_logger/index.html">my_logger</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SSD by CRA7C</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">ssd</a></li>
+      <li class="breadcrumb-item active">ssd.command_buffer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/ssd/command_buffer/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ssd.command_buffer">
+<span id="ssd-command-buffer"></span><h1>ssd.command_buffer<a class="headerlink" href="#module-ssd.command_buffer" title="Link to this heading"></a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ssd.command_buffer.BUFFER_FILE_PATH" title="ssd.command_buffer.BUFFER_FILE_PATH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BUFFER_FILE_PATH</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ssd.command_buffer.CommandBuffer" title="ssd.command_buffer.CommandBuffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CommandBuffer</span></code></a></p></td>
+<td><p>CommandBuffer 클래스는 명령어를 버퍼에 저장하고 최적화하는 기능을 제공합니다.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="ssd.command_buffer.BUFFER_FILE_PATH">
+<span class="sig-prename descclassname"><span class="pre">ssd.command_buffer.</span></span><span class="sig-name descname"><span class="pre">BUFFER_FILE_PATH</span></span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#BUFFER_FILE_PATH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.BUFFER_FILE_PATH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ssd.command_buffer.</span></span><span class="sig-name descname"><span class="pre">CommandBuffer</span></span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer" title="Link to this definition"></a></dt>
+<dd><p>CommandBuffer 클래스는 명령어를 버퍼에 저장하고 최적화하는 기능을 제공합니다.
+명령어는 buffer.txt 파일에 저장되며, 필요한 경우 버퍼를 비울 수 있습니다.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.buffer_file_path">
+<span class="sig-name descname"><span class="pre">buffer_file_path</span></span><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.buffer_file_path" title="Link to this definition"></a></dt>
+<dd><p>버퍼 파일 경로</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.buffer">
+<span class="sig-name descname"><span class="pre">buffer</span></span><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.buffer" title="Link to this definition"></a></dt>
+<dd><p>명령어를 저장하는 리스트</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.initialize" title="Link to this definition"></a></dt>
+<dd><p>버퍼 파일을 초기화합니다. 만일 buffer.txt 파일이 없으면, 초기화된 파일을 생성합니다.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.load_buffer">
+<span class="sig-name descname"><span class="pre">load_buffer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.load_buffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.load_buffer" title="Link to this definition"></a></dt>
+<dd><p>버퍼 파일에서 명령어를 읽어와 버퍼에 저장합니다.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.save_buffer">
+<span class="sig-name descname"><span class="pre">save_buffer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.save_buffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.save_buffer" title="Link to this definition"></a></dt>
+<dd><p>버퍼 파일에 현재 버퍼의 명령어를 저장합니다.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.get_saved_data">
+<span class="sig-name descname"><span class="pre">get_saved_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.get_saved_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.get_saved_data" title="Link to this definition"></a></dt>
+<dd><p>버퍼에 저장된 명령어 데이터를 문자열 형식으로 반환합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>버퍼에 저장된 명령어 문자열</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.push_command">
+<span class="sig-name descname"><span class="pre">push_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.push_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.push_command" title="Link to this definition"></a></dt>
+<dd><p>명령어를 버퍼에 추가하고 최적화합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>command</strong> – 버퍼에 추가할 명령어</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.pop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.pop" title="Link to this definition"></a></dt>
+<dd><p>버퍼에서 명령어를 제거하고 반환합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>제거된 명령어</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>명령어</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.is_able_to_fast_read">
+<span class="sig-name descname"><span class="pre">is_able_to_fast_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.is_able_to_fast_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.is_able_to_fast_read" title="Link to this definition"></a></dt>
+<dd><p>빠른 읽기가 가능한지 확인합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd</strong> – 확인할 명령어</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>빠른 읽기가 가능한 경우 True, 그렇지 않으면 False</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.get_read_fast">
+<span class="sig-name descname"><span class="pre">get_read_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.get_read_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.get_read_fast" title="Link to this definition"></a></dt>
+<dd><p>버퍼에서 빠른 읽기 값을 반환합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd</strong> – 읽기 명령어</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>읽은 값</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.flush">
+<span class="sig-name descname"><span class="pre">flush</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.flush" title="Link to this definition"></a></dt>
+<dd><p>버퍼를 비우고 모든 명령어를 반환합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>비워진 버퍼의 모든 명령어</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.optimize" title="Link to this definition"></a></dt>
+<dd><p>버퍼 내 명령어를 최적화합니다.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.merge_write_with_erase">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_write_with_erase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">erase_commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.merge_write_with_erase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.merge_write_with_erase" title="Link to this definition"></a></dt>
+<dd><p>쓰기 명령어와 삭제 명령어를 병합합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>erase_commands</strong> (<em>set</em>) – 삭제 명령어 집합</p></li>
+<li><p><strong>key</strong> (<em>tuple</em>) – 쓰기 명령어의 키</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>병합 가능한 경우 True, 그렇지 않으면 False</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.command_buffer.CommandBuffer.need_flush">
+<span class="sig-name descname"><span class="pre">need_flush</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/command_buffer.html#CommandBuffer.need_flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.command_buffer.CommandBuffer.need_flush" title="Link to this definition"></a></dt>
+<dd><p>버퍼를 비울 필요가 있는지 확인합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>버퍼를 비울 필요가 있는 경우 True, 그렇지 않으면 False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../command/index.html" class="btn btn-neutral float-left" title="ssd.command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../common/index.html" class="btn btn-neutral float-right" title="ssd.common" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CRA7C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

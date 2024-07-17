@@ -1,0 +1,55 @@
+testapp.command.erase
+=====================
+
+.. py:module:: testapp.command.erase
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.command.erase.Erase
+
+
+Module Contents
+---------------
+
+.. py:class:: Erase
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.
+
+   .. attribute:: driver
+
+      SSD 드라이버 객체
+
+      :type: SsdDriver
+
+
+   .. py:method:: run(lba: str, total_size: str)
+
+      지정된 LBA와 크기만큼 데이터를 삭제합니다.
+
+      :param lba: 시작 논리 블록 주소
+      :type lba: str
+      :param total_size: 삭제할 총 크기
+      :type total_size: str
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+      :param \*args: 확인할 인자 (LBA와 크기)
+
+      :returns: 인자가 유효한 경우 True, 그렇지 않으면 False
+      :rtype: bool
+
+
+

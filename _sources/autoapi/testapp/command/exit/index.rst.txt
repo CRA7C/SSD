@@ -1,0 +1,39 @@
+testapp.command.exit
+====================
+
+.. py:module:: testapp.command.exit
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.command.exit.Exit
+
+
+Module Contents
+---------------
+
+.. py:class:: Exit
+
+   Bases: :py:obj:`testapp.command.__interface.CommandInterface`
+
+
+   Exit 클래스는 프로그램을 종료하는 명령어를 구현합니다.
+
+
+   .. py:method:: run()
+
+      명령어를 실행하는 메서드입니다.
+
+
+
+   .. py:method:: is_valid_args(*args) -> bool
+      :staticmethod:
+
+
+      주어진 인자가 유효한지 확인합니다.
+
+
+

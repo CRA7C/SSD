@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ssd.nand_driver &mdash; SSD by CRA7C  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ssd.result_manager" href="../result_manager/index.html" />
+    <link rel="prev" title="ssd.common" href="../common/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SSD by CRA7C
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">ssd</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../__main__/index.html">ssd.__main__</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../command/index.html">ssd.command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../command_buffer/index.html">ssd.command_buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../common/index.html">ssd.common</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ssd.nand_driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../result_manager/index.html">ssd.result_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../solidstatedrive/index.html">ssd.solidstatedrive</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../testapp/index.html">testapp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../my_logger/index.html">my_logger</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SSD by CRA7C</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">ssd</a></li>
+      <li class="breadcrumb-item active">ssd.nand_driver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/ssd/nand_driver/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ssd.nand_driver">
+<span id="ssd-nand-driver"></span><h1>ssd.nand_driver<a class="headerlink" href="#module-ssd.nand_driver" title="Link to this heading"></a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ssd.nand_driver.NAND_INITIAL_VALUE" title="ssd.nand_driver.NAND_INITIAL_VALUE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NAND_INITIAL_VALUE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ssd.nand_driver.NAND_FILE_PATH" title="ssd.nand_driver.NAND_FILE_PATH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NAND_FILE_PATH</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ssd.nand_driver.NandDriver" title="ssd.nand_driver.NandDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NandDriver</span></code></a></p></td>
+<td><p>NandDriver 클래스는 nand.txt 파일을 기반으로 NAND 읽기, 쓰기 및 삭제 기능을 제공합니다.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="ssd.nand_driver.NAND_INITIAL_VALUE">
+<span class="sig-prename descclassname"><span class="pre">ssd.nand_driver.</span></span><span class="sig-name descname"><span class="pre">NAND_INITIAL_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'0x00000000'</span></em><a class="reference internal" href="../../../_modules/ssd/nand_driver.html#NAND_INITIAL_VALUE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.nand_driver.NAND_INITIAL_VALUE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ssd.nand_driver.NAND_FILE_PATH">
+<span class="sig-prename descclassname"><span class="pre">ssd.nand_driver.</span></span><span class="sig-name descname"><span class="pre">NAND_FILE_PATH</span></span><a class="reference internal" href="../../../_modules/ssd/nand_driver.html#NAND_FILE_PATH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.nand_driver.NAND_FILE_PATH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ssd.nand_driver.NandDriver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ssd.nand_driver.</span></span><span class="sig-name descname"><span class="pre">NandDriver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nand_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NAND_FILE_PATH</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ssd/nand_driver.html#NandDriver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.nand_driver.NandDriver" title="Link to this definition"></a></dt>
+<dd><p>NandDriver 클래스는 nand.txt 파일을 기반으로 NAND 읽기, 쓰기 및 삭제 기능을 제공합니다.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ssd.nand_driver.NandDriver.nand_file_path">
+<span class="sig-name descname"><span class="pre">nand_file_path</span></span><a class="headerlink" href="#ssd.nand_driver.NandDriver.nand_file_path" title="Link to this definition"></a></dt>
+<dd><p>NAND 파일 경로</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.nand_driver.NandDriver.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ssd/nand_driver.html#NandDriver.initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.nand_driver.NandDriver.initialize" title="Link to this definition"></a></dt>
+<dd><p>만일 nand.txt 파일이 없으면, 초기화된 파일을 생성합니다.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.nand_driver.NandDriver.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../../_modules/ssd/nand_driver.html#NandDriver.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.nand_driver.NandDriver.read" title="Link to this definition"></a></dt>
+<dd><p>주어진 LBA에서 값을 읽어 반환합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lba</strong> (<em>int</em>) – 논리 블록 주소</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>읽은 값 (정수 형식)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.nand_driver.NandDriver.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ssd/nand_driver.html#NandDriver.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.nand_driver.NandDriver.write" title="Link to this definition"></a></dt>
+<dd><p>주어진 LBA에 값을 씁니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lba</strong> (<em>int</em>) – 논리 블록 주소</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – 쓸 값 (정수 형식)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ssd.nand_driver.NandDriver.erase">
+<span class="sig-name descname"><span class="pre">erase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ssd/nand_driver.html#NandDriver.erase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ssd.nand_driver.NandDriver.erase" title="Link to this definition"></a></dt>
+<dd><p>주어진 LBA부터 n_value 개의 블록을 삭제합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lba</strong> (<em>int</em>) – 논리 블록 주소</p></li>
+<li><p><strong>n_value</strong> (<em>int</em>) – 삭제할 블록 수</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../common/index.html" class="btn btn-neutral float-left" title="ssd.common" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../result_manager/index.html" class="btn btn-neutral float-right" title="ssd.result_manager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CRA7C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
