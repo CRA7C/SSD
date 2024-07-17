@@ -2,8 +2,8 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from testapp.command import FullRead, FullWrite
-from testapp.test_app1 import TestApp1
-from testapp.test_app1 import READ_VALUE
+from testapp.scripts.test_app1 import TestApp1
+from testapp.scripts.test_app1 import READ_VALUE
 from utils.util_log import print_function_name
 
 

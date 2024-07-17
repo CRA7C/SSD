@@ -3,6 +3,8 @@ from unittest.mock import patch
 
 from testapp.command import Read, Write, FullRead, FullWrite
 from testapp.ssd_driver import SsdDriver
+from testapp.scripts.test_app1 import TestApp1
+from testapp.scripts.test_app2 import TestApp2
 from testapp.test_app1 import TestApp1
 from testapp.test_app2 import TestApp2
 from testapp.testshell import TestShell, EXECUTE_INVALID, EXECUTE_VALID_WO_ARGS, EXECUTE_VALID_WITH_ARGS
