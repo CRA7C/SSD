@@ -1,10 +1,11 @@
-import sys
 import io
+import re
+import sys
 from functools import wraps
-from typing import Union
 from pathlib import Path
+from typing import Union
 
-from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE
+from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE, SSD_START_LBA, SSD_END_LBA
 
 RESULT_FILE = "result.txt"
 READ_COMMAND = "R"
@@ -71,3 +72,31 @@ def capture_output(func):
         return captured_output
 
     return wrapper
+
+
+def is_in_range_lba(lba: str) -> bool:
+    try:
+        num = int(lba)
+        return SSD_START_LBA <= num <= SSD_END_LBA
+    except ValueError:
+        return False
+
+
+def is_valid_hex(s: str):
+    # 정규식으로 형식을 먼저 확인
+    if re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
+        try:
+            # 16진수로 변환하여 범위를 확인
+            num = int(s, 16)
+            return SSD_MIN_VALUE <= num <= SSD_MAX_VALUE
+        except ValueError:
+            return False
+    return False
+
+
+def is_valid_size(size: str) -> bool:
+    try:
+        num = int(size)
+        return 1 <= num
+    except ValueError:
+        return False
