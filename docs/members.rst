@@ -1,7 +1,8 @@
 .. -*- coding: utf-8 -*-
 
-Members
-=======
+==============
+About Members
+==============
 
 .. toctree::
    :maxdepth: 2
@@ -11,12 +12,16 @@ Members
 - 팀장: `김의윤 <geniuskey@gmail.com>`_
 - 팀원: `박병준 <qazws9346@gmail.com>`_, `여인표 <winsowss@hanmail.net>`_, `정우훈 <jwh1308@gmail.com>`_, , `하종희 <gk1whd2@gmail.com>`_
 
-김의윤 Pixel개발팀 (S.LSI)
+팀원 소개
+==============
+
+김의윤
 ---------------------------
 
-- 뭐를 좋아하구요.. 블라블라
+- 파이썬으로 엔지니어링 문제를 해결하는 사람
+- 저서: `함께해요 파이썬 생태계 <https://wikidocs.net/book/14021>`_
 
-박병훈
+박병준
 -------------------------
 
 - 뭐를 좋아하구요.. 블라블라

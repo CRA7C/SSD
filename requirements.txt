@@ -1,1 +1,9 @@
+build
+setuptools
+wheel
+uv
 ruff
+pylint
+sphinx
+sphinx-autoapi
+sphinx-rtd-theme

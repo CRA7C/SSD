@@ -3,7 +3,6 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parents[2].resolve()))
 from testapp.command.__interface import CommandInterface  # noqa E402
 from testapp.command import Write, Read  # noqa E402
-from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE  # noqa E402
 
 TARGET_LBA = [0, 1, 2, 3, 4, 5]
 WRITE_VALUE = 0xAAAABBBB

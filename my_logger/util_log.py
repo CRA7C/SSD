@@ -8,7 +8,18 @@ import inspect
 LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / 'latest.log'
 LOG_MAX_SIZE = 10 * 1024
 
+
 def print_function_name(func):
+    """
+    함수 실행 시 함수 이름을 출력하는 데코레이터 함수입니다.
+
+    Args:
+        func (function): 데코레이트할 함수
+
+    Returns:
+        function: 데코레이트된 함수
+    """
+
     def wrapper(*args, **kwargs):
         print(f"Executing function: {func.__name__}")
         return func(*args, **kwargs)
@@ -17,8 +28,14 @@ def print_function_name(func):
 
 
 class MyRotatingFileHandler(RotatingFileHandler):
+    """
+    로그 파일이 회전될 때 파일 이름을 변경하는 기능을 추가한 RotatingFileHandler 클래스입니다.
+    """
+
     def doRollover(self):
-        # 기본 회전 작업 수행
+        """
+        로그 파일 회전을 수행하고 백업 파일 이름을 변경합니다.
+        """
         super().doRollover()
 
         self.is_already_bkup_file()
@@ -26,6 +43,9 @@ class MyRotatingFileHandler(RotatingFileHandler):
         self.rename_backup_files()
 
     def rename_backup_files(self):
+        """
+        백업 파일의 이름을 현재 날짜와 시간으로 변경합니다.
+        """
         base_filename = self.baseFilename
         base_file_dir = os.path.dirname(base_filename)
         bkup_file_name = self.get_bkup_file_name()
@@ -38,14 +58,39 @@ class MyRotatingFileHandler(RotatingFileHandler):
                 os.rename(old_filename, new_filename)
 
     def get_bkup_file_name(self):
+        """
+        백업 파일 이름을 생성합니다.
+
+        Returns:
+            str: 백업 파일 이름
+        """
         return f'until_{datetime.now().strftime("%y%m%d_%H%M%S")}.log'
 
     def is_already_bkup_file(self) -> bool:
+        """
+        백업 파일이 이미 존재하는지 확인합니다.
+
+        Returns:
+            bool: 백업 파일이 이미 존재하면 True, 그렇지 않으면 False
+        """
         pass
 
 
 class CustomFormatter(logging.Formatter):
+    """
+    로그 메시지 형식을 커스터마이징하는 Formatter 클래스입니다.
+    """
+
     def format(self, record):
+        """
+        로그 레코드를 지정된 형식으로 포맷합니다.
+
+        Args:
+            record (logging.LogRecord): 로그 레코드
+
+        Returns:
+            str: 포맷된 로그 메시지
+        """
         time_format = self.formatTime(record, "%y.%m.%d %H:%M")
         class_name = record.class_name
         func_name = record.func_name
@@ -58,6 +103,9 @@ class CustomFormatter(logging.Formatter):
 
 
 class Logger:
+    """
+    싱글톤 패턴을 적용한 Logger 클래스입니다.
+    """
     _instance = None
 
     def __new__(cls, *args, **kwargs):
@@ -88,18 +136,49 @@ class Logger:
             self.logger.addHandler(console_handler)
 
     def info(self, message):
+        """
+        정보 로그 메시지를 기록합니다.
+
+        Args:
+            message (str): 기록할 메시지
+        """
         self.log_with_class_func_name(logging.INFO, message)
 
     def debug(self, message):
+        """
+        디버그 로그 메시지를 기록합니다.
+
+        Args:
+            message (str): 기록할 메시지
+        """
         self.log_with_class_func_name(logging.DEBUG, message)
 
     def warning(self, message):
+        """
+        경고 로그 메시지를 기록합니다.
+
+        Args:
+            message (str): 기록할 메시지
+        """
         self.log_with_class_func_name(logging.WARNING, message)
 
     def error(self, message):
+        """
+        오류 로그 메시지를 기록합니다.
+
+        Args:
+            message (str): 기록할 메시지
+        """
         self.log_with_class_func_name(logging.ERROR, message)
 
     def log_with_class_func_name(self, level, message):
+        """
+        클래스와 함수 이름을 포함하여 로그 메시지를 기록합니다.
+
+        Args:
+            level (int): 로그 레벨
+            message (str): 기록할 메시지
+        """
         frame = inspect.currentframe().f_back.f_back
 
         func_name = frame.f_code.co_name
