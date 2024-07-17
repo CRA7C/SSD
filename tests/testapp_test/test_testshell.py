@@ -17,7 +17,6 @@ class TestTestShell(TestCase):
         super().setUp()
         self.ts = TestShell()
         TestTestShell.test_counter += 1
-        print(f"\nRunning test #{TestTestShell.test_counter}")
 
     @patch.object(TestApp2, "run", return_value=True)
     @patch.object(TestApp1, "run", return_value=True)
@@ -26,7 +25,6 @@ class TestTestShell(TestCase):
         cmd_list = ["help", "fullread", "testapp1", "testapp2"]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.ts.execute(cmd)
                 self.assertEqual(ret, EXECUTE_VALID_WO_ARGS)
 
@@ -40,7 +38,6 @@ class TestTestShell(TestCase):
                     ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                print(f"{idx + 1}. {cmd}")
                 ret = self.ts.execute(cmd)
                 self.assertEqual(ret, EXECUTE_VALID_WITH_ARGS)
 
