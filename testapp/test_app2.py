@@ -44,6 +44,6 @@ class TestApp2(CommandInterface):
     @staticmethod
     def validate(read_data):
         for data in read_data:
-            if data != READ_VALUE:
+            if int(data,16) != READ_VALUE:
                 return False
         return True
