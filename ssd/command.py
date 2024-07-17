@@ -19,12 +19,18 @@ class WriteCommand(Command):
         self.lba = int(args[1])
         self.value = int(args[2], 16)
 
+    def get_key(self):
+        return (self.option, self.lba, self.lba + 1)
+
 
 class EraseCommand(Command):
     def __init__(self, args):
         super().__init__(args)
         self.lba = int(args[1])
         self.size = int(args[2])
+
+    def get_key(self):
+        return (self.option, self.lba, self.lba + self.size)
 
 
 class CommandFactory:

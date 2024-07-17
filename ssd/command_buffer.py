@@ -67,32 +67,26 @@ class CommandBuffer:
         write_commands = set()
         erase_commands = set()
         for command in self.buffer[::-1]:
+            key = command.get_key()
             if command.option == 'W':
-                key = (command.option, command.lba, 1)
-                if key in write_commands:
+                if key in write_commands or self.merge_write_with_erase(erase_commands, key):
                     self.buffer.remove(command)
                 else:
-                    merge_flag = False
-                    for erase in erase_commands:
-                        if erase[1] <= key[1] < erase[2]:
-                            self.buffer.remove(command)
-                            merge_flag = True
-                            break
-                    if not merge_flag:
-                        write_commands.add(key)
-
+                    write_commands.add(key)
             elif command.option == 'E':
-                key = (command.option, command.lba, command.lba + command.size)
-                merge_flag = False
-                for erase in erase_commands:
-                    if erase[1] <= key[1] and key[2] <= erase[2]:
-                        self.buffer.remove(command)
-                        merge_flag = True
-                        break
-                if not merge_flag:
+                if self.merge_write_with_erase(erase_commands, key):
+                    self.buffer.remove(command)
+                else:
                     erase_commands.add(key)
 
         self.save_buffer()
+
+    @staticmethod
+    def merge_write_with_erase(erase_commands, key):
+        for erase in erase_commands:
+            if erase[1] <= key[1] and key[2] <= erase[2]:
+                return True
+        return False
 
     def need_flush(self):
         return len(self.buffer) > 10
