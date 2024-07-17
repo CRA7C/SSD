@@ -1,7 +1,7 @@
-import os
 import sys
+from pathlib import Path
 from random import randint
-sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))  # testapp 접근을 위함
+sys.path.append(str(Path(__file__).parents[2].resolve()))
 from testapp.command.__interface import CommandInterface  # noqa E402
 from testapp.command import FullRead, FullWrite  # noqa E402
 from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE  # noqa E402

@@ -15,8 +15,6 @@ class TestCommandParser(TestCase):
             "help",
             "fullwrite 0xABCDFFFF",
             "fullread",
-            "testapp1",
-            "testapp2",
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):

@@ -5,8 +5,7 @@ import logging
 import importlib
 import subprocess
 from typing import List, Tuple
-
-SCRIPTS_DIRECTORY = os.path.dirname(__file__)
+from testapp.constants import SCRIPTS_DIRECTORY
 
 
 class CommandInterfaceVisitor(ast.NodeVisitor):
@@ -42,7 +41,7 @@ def get_test_scripts() -> dict[str, str]:
     ret_dict = {}
     for module_name, class_names in class_info:
         for class_name in class_names:
-            ret_dict[class_name] = os.path.abspath(f"{module_name}.py")
+            ret_dict[class_name] = SCRIPTS_DIRECTORY / f"{module_name}.py"
     return ret_dict
 
 
@@ -65,6 +64,7 @@ def run_script(script_name: str) -> bool:
     try:
         result = subprocess.run(['python', script_name], capture_output=True, text=True)
         # result.returncode가 0이면 성공, 그렇지 않으면 실패
+        # TODO: 추후 Logger 변경 필요!
         logging.debug(result.stdout)
         if result.stderr:
             logging.error(result.stderr)
@@ -74,8 +74,25 @@ def run_script(script_name: str) -> bool:
         return False
 
 
+def run_test_script_file(list_file: str):
+    ts_dict = get_test_scripts()
+    with open(list_file, 'r', encoding='utf-8') as f:
+        for test_id in f.readlines():
+            test_id = test_id.strip()
+            print(f"{test_id:30} --- ", end="")
+            if test_id in ts_dict.keys():
+                print("Run...", end="", flush=True)
+                if run_script(ts_dict[test_id]):
+                    print('PASS')
+                else:
+                    print('FAIL!')
+            else:
+                print("NOT FOUND!")
+
+
 if __name__ == '__main__':
     from pprint import pprint
+
     script_dict = get_test_scripts()
     pprint(script_dict)
     res = run_script(script_dict['TestApp1'])
