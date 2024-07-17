@@ -76,3 +76,6 @@ Module Contents
 
 
 
+   .. py:method:: flush()
+
+

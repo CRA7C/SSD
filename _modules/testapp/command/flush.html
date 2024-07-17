@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>testapp.command.help &mdash; SSD by CRA7C  documentation</title>
+  <title>testapp.command.flush &mdash; SSD by CRA7C  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -64,7 +64,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">testapp.command.help</li>
+      <li class="breadcrumb-item active">testapp.command.flush</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -73,51 +73,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for testapp.command.help</h1><div class="highlight"><pre>
+  <h1>Source code for testapp.command.flush</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
-
-<div class="viewcode-block" id="TESTAPP_HELP">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/help/index.html#testapp.command.help.TESTAPP_HELP">[docs]</a>
-<span class="n">TESTAPP_HELP</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Usage:</span>
-<span class="s2">  &lt;command&gt; [options]</span>
-
-<span class="s2">Commands:</span>
-<span class="s2">  write             SSD 데이터 쓰기</span>
-<span class="s2">  read              SSD 데이터 읽기</span>
-<span class="s2">  exit              TestShellApplication 종료</span>
-<span class="s2">  help              Help 보기</span>
-<span class="s2">  fullwrite         SSD 데이터를 특정 값으로 일괄 쓰기</span>
-<span class="s2">  fullread          SSD 데이터 전체 읽기</span>
-<span class="s2">  erase             SSD 데이터 지우기 (LBA ~ LBA + SIZE)</span>
-<span class="s2">  erase_range       SSD 데이터 지우기 (Start LBA ~ End LBA)</span>
-<span class="s2">  flush             Command Buffer에 있는 모든 명령어들을 수행하여 Buffer를 비움</span>
-<span class="s2">&quot;&quot;&quot;</span></div>
+<span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
 
 
+<div class="viewcode-block" id="Flush">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.Flush">[docs]</a>
+<span class="k">class</span> <span class="nc">Flush</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">SsdDriver</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Help">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.help.Help">[docs]</a>
-<span class="k">class</span> <span class="nc">Help</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Help.run">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.help.Help.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        사용 가능한 명령어와 옵션을 출력합니다.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">TESTAPP_HELP</span><span class="p">)</span></div>
+<div class="viewcode-block" id="Flush.run">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.Flush.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="Help.is_valid_args">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.help.Help.is_valid_args">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        주어진 인자가 유효한지 확인합니다.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Flush.is_valid_args">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.Flush.is_valid_args">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 
