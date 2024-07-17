@@ -1,5 +1,5 @@
 import re
-from typing import Tuple, Optional, List
+from typing import Any
 
 from testapp import command
 from testapp.constants import SSD_START_LBA, SSD_END_LBA, SSD_MIN_VALUE, SSD_MAX_VALUE
@@ -71,20 +71,10 @@ class CommandParser:
         return True
 
     @staticmethod
-    def parse_args(cmd: str) -> Tuple[str, Optional[List[int]]]:
+    def parse_args(cmd: str) -> tuple[str, list[str]] | tuple[str, list[Any]]:
         cmd_list = cmd.split(" ")
         cmd_option = cmd_list[0]
-        if len(cmd_list) > 1:
-            cmd_args: list = cmd_list[1:]
-            if cmd_option == "read":
-                cmd_args[0] = int(cmd_args[0])
-            elif cmd_option == "write":
-                cmd_args[0] = int(cmd_args[0])
-                cmd_args[1] = int(cmd_args[1], 16)
-            elif cmd_option == "fullwrite":
-                cmd_args[0] = int(cmd_args[0], 16)
-            return cmd_option, cmd_args
-        return cmd_option, []
+        return (cmd_option, cmd_list[1:]) if len(cmd_list) > 1 else (cmd_option, [])
 
     @classmethod
     def get_command(cls, cmd_option):
