@@ -16,7 +16,7 @@ class SsdDriver:
         return cls._instance
 
     @staticmethod
-    def run_subprocess(command):
+    def run_subprocess(command: str):
         """
         주어진 명령어를 서브프로세스로 실행합니다.
 
