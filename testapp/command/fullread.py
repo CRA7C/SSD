@@ -23,7 +23,10 @@ class FullReadCommand(CommandInterface):
         Returns:
             list[str]: SSD의 모든 LBA에서 읽은 데이터 리스트
         """
-        return [self.driver.read(addr) for addr in SSD_LBA_RANGE]
+        ret = [self.driver.read(addr) for addr in SSD_LBA_RANGE]
+        for i, value in enumerate(ret):
+            print(f"LBA: {i:02}, value: {value}")  # print 는 shell 의 출력으로 사용
+        return ret  # return 값은 test script 에서 사용
 
     @staticmethod
     def is_valid_args(*args) -> bool:

@@ -26,7 +26,9 @@ class ReadCommand(CommandInterface):
         Returns:
             str: 읽은 데이터
         """
-        return self.driver.read(lba)
+        ret = self.driver.read(lba)
+        print(ret)  # shell 의 출력
+        return ret  # test script 에서 이 값을 사용하기 위함.
 
     @staticmethod
     def is_valid_args(*args) -> bool:
