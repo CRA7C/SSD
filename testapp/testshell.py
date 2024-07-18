@@ -9,6 +9,8 @@ EXECUTE_VALID_WITH_ARGS = 1
 EXECUTE_INVALID = 0
 EXECUTE_EMPTY = -1
 
+logger = Logger()
+
 
 class TestShell:
     """
@@ -47,7 +49,7 @@ class TestShell:
             ts_dict.update({k.lower(): v for k, v in ts_dict.items()})  # lower case 도 포함
             if cmd_option in ts_dict.keys():
                 success = run_script(ts_dict[cmd_option])
-                Logger().debug('PASS' if success else 'FAIL!')
+                logger.debug('PASS' if success else 'FAIL!')
                 return success
         return EXECUTE_INVALID
 
@@ -61,4 +63,4 @@ def main():
     while True:
         cmd = input("> ")
         if ts.execute(cmd) == EXECUTE_INVALID:
-            Logger().info(INVALID_COMMAND)
+            logger.info(INVALID_COMMAND)
