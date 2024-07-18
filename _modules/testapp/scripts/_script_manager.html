@@ -172,12 +172,13 @@
 
 <div class="viewcode-block" id="run_script">
 <a class="viewcode-back" href="../../../autoapi/testapp/scripts/index.html#testapp.scripts._script_manager.run_script">[docs]</a>
-<span class="k">def</span> <span class="nf">run_script</span><span class="p">(</span><span class="n">script_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">run_script</span><span class="p">(</span><span class="n">script_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_print</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    주어진 스크립트를 실행합니다.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        script_name (str): 실행할 스크립트 이름</span>
+<span class="sd">        use_print (bool): 콘솔 창에 출력할지 말지 결정</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: 스크립트 실행 성공 여부</span>
@@ -185,7 +186,11 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="n">script_name</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># result.returncode가 0이면 성공, 그렇지 않으면 실패</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">use_print</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span>

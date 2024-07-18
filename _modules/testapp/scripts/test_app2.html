@@ -106,7 +106,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">write_30_times</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">over_write</span><span class="p">()</span>
         <span class="n">read_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_target_lba</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="n">READ_VALUE</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">read_data</span><span class="p">)</span></div>
+        <span class="n">is_valid</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="n">READ_VALUE</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">read_data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">read_data</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># print 는 shell 의 출력으로 사용</span>
+
+        <span class="k">return</span> <span class="n">is_valid</span></div>
 
 
 <div class="viewcode-block" id="TestApp2.write_30_times">

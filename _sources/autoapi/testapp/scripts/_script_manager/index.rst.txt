@@ -87,12 +87,14 @@ Module Contents
    :rtype: List[object]
 
 
-.. py:function:: run_script(script_name: str) -> bool
+.. py:function:: run_script(script_name: str, use_print: bool = False) -> bool
 
    주어진 스크립트를 실행합니다.
 
    :param script_name: 실행할 스크립트 이름
    :type script_name: str
+   :param use_print: 콘솔 창에 출력할지 말지 결정
+   :type use_print: bool
 
    :returns: 스크립트 실행 성공 여부
    :rtype: bool

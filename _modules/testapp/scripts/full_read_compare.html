@@ -88,7 +88,14 @@
 <a class="viewcode-back" href="../../../autoapi/testapp/scripts/full_read_compare/index.html#testapp.scripts.full_read_compare.FullReadCompare.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">data1</span> <span class="o">=</span> <span class="n">FullReadCommand</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># print 는 shell 의 출력으로 사용</span>
+        <span class="nb">print</span><span class="p">()</span>
+
         <span class="n">data2</span> <span class="o">=</span> <span class="n">FullReadCommand</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data2</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># print 는 shell 의 출력으로 사용</span>
+
         <span class="k">if</span> <span class="n">data1</span> <span class="o">!=</span> <span class="n">data2</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>

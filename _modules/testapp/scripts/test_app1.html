@@ -76,6 +76,7 @@
   <h1>Source code for testapp.scripts.test_app1</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
 <span class="kn">from</span> <span class="nn">testapp.command</span> <span class="kn">import</span> <span class="n">FullReadCommand</span><span class="p">,</span> <span class="n">FullWriteCommand</span>  <span class="c1"># noqa E402</span>
 
@@ -94,7 +95,13 @@
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">FullWriteCommand</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">READ_VALUE</span><span class="p">)</span>
         <span class="n">read_data</span> <span class="o">=</span> <span class="n">FullReadCommand</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="n">READ_VALUE</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">read_data</span><span class="p">)</span></div>
+        <span class="n">is_valid</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="n">READ_VALUE</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">read_data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">read_data</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># print 는 shell 의 출력으로 사용</span>
+
+        <span class="k">return</span> <span class="n">is_valid</span></div>
 </div>
 
 

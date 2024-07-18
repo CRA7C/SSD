@@ -77,6 +77,7 @@
 <span></span><span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
 <span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">SSD_LBA_RANGE</span>
+<span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 
 <div class="viewcode-block" id="FullReadCommand">
@@ -108,7 +109,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="n">SSD_LBA_RANGE</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ret</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># print 는 shell 의 출력으로 사용</span>
+            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># print 는 shell 의 출력으로 사용</span>
         <span class="k">return</span> <span class="n">ret</span>  <span class="c1"># return 값은 test script 에서 사용</span></div>
 
 

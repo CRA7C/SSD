@@ -92,6 +92,7 @@
         <span class="n">WriteCommand</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="n">EraseCommand</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="n">ReadCommand</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">lba</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">lba</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="n">ret</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># print 는 shell 의 출력으로 사용</span>
         <span class="k">return</span> <span class="n">ret</span> <span class="o">==</span> <span class="s2">&quot;0x00000000&quot;</span></div>
 </div>
 
