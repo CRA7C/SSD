@@ -9,7 +9,6 @@ Attributes
 
 .. autoapisummary::
 
-   ssd.__main__.logger
    ssd.__main__.runner
 
 
@@ -23,8 +22,6 @@ Classes
 
 Module Contents
 ---------------
-
-.. py:data:: logger
 
 .. py:class:: SSDRunner
 

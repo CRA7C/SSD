@@ -81,11 +81,6 @@
                              <span class="n">FullWriteCommand</span><span class="p">,</span> <span class="n">FullReadCommand</span><span class="p">,</span> <span class="n">ClearScreenCommand</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
 
-<div class="viewcode-block" id="logger">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/command_factory/index.html#testapp.command.command_factory.logger">[docs]</a>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span></div>
-
-
 
 <div class="viewcode-block" id="CommandFactory">
 <a class="viewcode-back" href="../../../autoapi/testapp/command/command_factory/index.html#testapp.command.command_factory.CommandFactory">[docs]</a>
@@ -170,11 +165,11 @@
     <span class="n">n_args</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">cmd_dict</span> <span class="o">=</span> <span class="n">CommandFactory</span><span class="o">.</span><span class="n">get_command_dict</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">cmd_option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CommandFactory</span><span class="o">.</span><span class="n">get_command_dict</span><span class="p">():</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Command does not exist&quot;</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Command does not exist&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">cmd_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">]</span><span class="o">.</span><span class="n">required_args_cnt</span> <span class="o">!=</span> <span class="n">n_args</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;The number of argument does not match&quot;</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;The number of argument does not match&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">cmd_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">]</span><span class="o">.</span><span class="n">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_list</span><span class="p">):</span>

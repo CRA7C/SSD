@@ -9,7 +9,6 @@ Attributes
 
 .. autoapisummary::
 
-   testapp.scripts._script_manager.logger
    testapp.scripts._script_manager.script_dict
 
 
@@ -35,8 +34,6 @@ Functions
 
 Module Contents
 ---------------
-
-.. py:data:: logger
 
 .. py:class:: ClassVisitor
 
