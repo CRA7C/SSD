@@ -1,11 +1,12 @@
-import sys
 import os
+import sys
+from typing import Union
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
 from ssd.command_buffer import CommandBuffer
-from ssd.command import CommandFactory, ReadCommand, WriteCommand, EraseCommand, FlushCommand
+from ssd.command import CommandFactory, Command, ReadCommand, WriteCommand, EraseCommand
 
 
 class SSDRunner:
@@ -29,7 +30,7 @@ class SSDRunner:
         for cmd in cmd_list:
             self.execute_command(cmd)
 
-    def run(self, cmd: FlushCommand | ReadCommand | WriteCommand | EraseCommand):
+    def run(self, cmd: Command):
         """
         주어진 명령어를 파싱하고 실행합니다.
         """
@@ -42,23 +43,25 @@ class SSDRunner:
             else:
                 self.execute_command(cmd)
         elif cmd.option in ('W', 'E'):
-            self.option_buf.push_command(cmd)
             if self.option_buf.need_flush():
                 self.buff_flush()
+            self.option_buf.push_command(cmd)
 
-    def execute_command(self, command: ReadCommand | WriteCommand | EraseCommand):
+
+    def execute_command(self, command: Union[ReadCommand, WriteCommand, EraseCommand]):
+
         """
         특정 명령어를 실행합니다.
 
         Args:
             command: 실행할 명령어 객체
         """
-        cmd = command.option
-        if cmd == 'R':
+        cmd_opt = command.option
+        if cmd_opt == 'R':
             self.ssd.read(command.lba)
-        elif cmd == 'W':
+        elif cmd_opt == 'W':
             self.ssd.write(command.lba, command.value)
-        elif cmd == 'E':
+        elif cmd_opt == 'E':
             self.ssd.erase(command.lba, command.size)
 
 

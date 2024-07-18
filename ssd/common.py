@@ -12,7 +12,7 @@ SSD_MIN_VALUE: Final[int] = 0x00000000
 SSD_MAX_VALUE: Final[int] = 0xFFFFFFFF
 
 
-def convert_hex_to_str(value):
+def convert_hex_to_str(value: int) -> str:
     """
     정수 값을 8자리 16진수 문자열로 변환합니다.
 
@@ -25,7 +25,7 @@ def convert_hex_to_str(value):
     return f"0x{value:08X}"
 
 
-def is_valid_hex(s: str):
+def is_valid_hex(s: str) -> bool:
     """
     주어진 문자열이 유효한 16진수 형식인지 확인합니다.
 

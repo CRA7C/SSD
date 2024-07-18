@@ -73,4 +73,4 @@ class SsdDriver:
         self.run_subprocess(f"ssd E {lba} {size}")
 
     def flush(self):
-        self.run_subprocess(f"ssd F")
+        self.run_subprocess("ssd F")
