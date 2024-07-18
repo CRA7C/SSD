@@ -76,7 +76,6 @@
   <h1>Source code for ssd.command_buffer</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span>
-
 <span class="kn">from</span> <span class="nn">ssd.command</span> <span class="kn">import</span> <span class="n">CommandFactory</span><span class="p">,</span> <span class="n">Command</span><span class="p">,</span> <span class="n">ReadCommand</span>
 
 <div class="viewcode-block" id="BUFFER_FILE_PATH">
@@ -125,7 +124,7 @@
 <span class="sd">        버퍼 파일에서 명령어를 읽어와 버퍼에 저장합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer_file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">[</span><span class="n">CommandFactory</span><span class="p">()</span><span class="o">.</span><span class="n">parse_command</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">[</span><span class="n">CommandFactory</span><span class="o">.</span><span class="n">parse_command</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span></div>
 
 
 <div class="viewcode-block" id="CommandBuffer.save_buffer">

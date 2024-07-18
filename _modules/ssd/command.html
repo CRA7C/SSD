@@ -74,12 +74,15 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ssd.command</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">ssd.common</span> <span class="kn">import</span> <span class="n">LBA_LOWER_LIMIT</span><span class="p">,</span> <span class="n">LBA_UPPER_LIMIT</span><span class="p">,</span> <span class="n">is_valid_hex</span>
+<span class="kn">from</span> <span class="nn">ssd.common</span> <span class="kn">import</span> <span class="n">ERASE_SIZE_LOWER_LIMIT</span><span class="p">,</span> <span class="n">ERASE_SIZE_UPPER_LIMIT</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
 
 <div class="viewcode-block" id="Command">
 <a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.Command">[docs]</a>
-<span class="k">class</span> <span class="nc">Command</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    기본 명령어 클래스입니다.</span>
 
@@ -97,6 +100,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_command</span><span class="p">()</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="Command.validate_command">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.Command.validate_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate_command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
 
 <div class="viewcode-block" id="Command.get_value">
 <a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.Command.get_value">[docs]</a>
@@ -138,6 +149,20 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
+<div class="viewcode-block" id="ReadCommand.validate_command">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.ReadCommand.validate_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate_command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;LBA는 숫자여야합니다.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">LBA_LOWER_LIMIT</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">LBA_UPPER_LIMIT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LBA는 </span><span class="si">{</span><span class="n">LBA_LOWER_LIMIT</span><span class="si">}</span><span class="s1"> ~ </span><span class="si">{</span><span class="n">LBA_UPPER_LIMIT</span><span class="si">}</span><span class="s1"> 여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+      
 <div class="viewcode-block" id="ReadCommand.get_key">
 <a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.ReadCommand.get_key">[docs]</a>
     <span class="k">def</span> <span class="nf">get_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
@@ -163,6 +188,7 @@
 <span class="sd">        value (int): 쓸 값 (16진수 형식)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        WriteCommand 클래스의 생성자. 논리 블록 주소와 쓸 값을 설정합니다.</span>
@@ -173,6 +199,24 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+
+<div class="viewcode-block" id="WriteCommand.validate_command">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.WriteCommand.validate_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate_command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;명령을 수행하기 위한 인자가 부족합니다. ex) ssd W 20 0x1234ABCD&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;LBA는 숫자여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">LBA_LOWER_LIMIT</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">LBA_UPPER_LIMIT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LBA는 </span><span class="si">{</span><span class="n">LBA_LOWER_LIMIT</span><span class="si">}</span><span class="s1"> ~ </span><span class="si">{</span><span class="n">LBA_UPPER_LIMIT</span><span class="si">}</span><span class="s1"> 여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_hex</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;value는 0x00000000 형식이여야 합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
 
 <div class="viewcode-block" id="WriteCommand.get_key">
 <a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.WriteCommand.get_key">[docs]</a>
@@ -199,6 +243,7 @@
 <span class="sd">        size (int): 삭제할 블록 수</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        EraseCommand 클래스의 생성자. 논리 블록 주소와 삭제할 블록 수를 설정합니다.</span>
@@ -209,6 +254,27 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<div class="viewcode-block" id="EraseCommand.validate_command">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.EraseCommand.validate_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate_command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;명령을 수행하기 위한 인자가 부족합니다. ex) ssd E 20 4&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;LBA는 숫자여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;SIZE는 숫자여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">LBA_LOWER_LIMIT</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">LBA_UPPER_LIMIT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LBA는 </span><span class="si">{</span><span class="n">LBA_LOWER_LIMIT</span><span class="si">}</span><span class="s1"> ~ </span><span class="si">{</span><span class="n">LBA_UPPER_LIMIT</span><span class="si">}</span><span class="s1"> 여야합니다.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ERASE_SIZE_LOWER_LIMIT</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">ERASE_SIZE_UPPER_LIMIT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SIZE는 </span><span class="si">{</span><span class="n">ERASE_SIZE_LOWER_LIMIT</span><span class="si">}</span><span class="s2"> ~ </span><span class="si">{</span><span class="n">ERASE_SIZE_UPPER_LIMIT</span><span class="si">}</span><span class="s2"> 여야합니다.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
 
 <div class="viewcode-block" id="EraseCommand.get_key">
 <a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.EraseCommand.get_key">[docs]</a>
@@ -224,6 +290,35 @@
 
 
 
+<div class="viewcode-block" id="FlushCommand">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.FlushCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">FlushCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    명령어 Buffer를 비우는 명령어 클래스입니다.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        -</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        FlushCommand 클래스의 생성자. 논리 블록 주소와 삭제할 블록 수를 설정합니다.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            args (list): 명령 인자 리스트</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FlushCommand.validate_command">
+<a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.FlushCommand.validate_command">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate_command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;명령을 수행하기 위한 인자가 부족합니다. ex) ssd F&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+</div>
+
+
+
 <div class="viewcode-block" id="CommandFactory">
 <a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.CommandFactory">[docs]</a>
 <span class="k">class</span> <span class="nc">CommandFactory</span><span class="p">:</span>
@@ -235,25 +330,27 @@
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="CommandFactory.parse_command">
 <a class="viewcode-back" href="../../autoapi/ssd/command/index.html#ssd.command.CommandFactory.parse_command">[docs]</a>
-    <span class="k">def</span> <span class="nf">parse_command</span><span class="p">(</span><span class="n">command_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Command</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">parse_command</span><span class="p">(</span><span class="n">arg_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Command</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            command_list (list): 명령 인자 리스트</span>
+<span class="sd">            arg_list (list): 명령 인자 리스트</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Command: 생성된 명령어 객체</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">command_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">arg_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ReadCommand</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ReadCommand</span><span class="p">(</span><span class="n">arg_list</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">WriteCommand</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">WriteCommand</span><span class="p">(</span><span class="n">arg_list</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">EraseCommand</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">EraseCommand</span><span class="p">(</span><span class="n">arg_list</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">FlushCommand</span><span class="p">(</span><span class="n">arg_list</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Command</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;R, W, E, F 중 하나를 사용해주세요.(대문자)&#39;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

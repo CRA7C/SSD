@@ -12,6 +12,8 @@ Attributes
    ssd.common.LBA_LOWER_LIMIT
    ssd.common.LBA_UPPER_LIMIT
    ssd.common.LBA_SIZE
+   ssd.common.ERASE_SIZE_LOWER_LIMIT
+   ssd.common.ERASE_SIZE_UPPER_LIMIT
    ssd.common.SSD_MIN_VALUE
    ssd.common.SSD_MAX_VALUE
 
@@ -40,6 +42,16 @@ Module Contents
 
 .. py:data:: LBA_SIZE
    :type:  Final[int]
+
+.. py:data:: ERASE_SIZE_LOWER_LIMIT
+   :type:  Final[int]
+   :value: 1
+
+
+.. py:data:: ERASE_SIZE_UPPER_LIMIT
+   :type:  Final[int]
+   :value: 10
+
 
 .. py:data:: SSD_MIN_VALUE
    :type:  Final[int]
