@@ -29,8 +29,3 @@ class TestTestApp1(TestCase):
     @patch.object(FullReadCommand, 'run', return_value=['0x00000000'] * 100)
     def test_run_SHOULD_RETURN_FALSE_WHEN_not_match_read_and_write(self, full_read_mock, full_write_mock):
         self.assertFalse(self.test_app1.run())
-
-    @print_function_name
-    def test_validate_data(self):
-        read_data = [f'0x{READ_VALUE:02x}'] * 100
-        self.assertTrue(self.test_app1.validate_data(read_data))

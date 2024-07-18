@@ -11,14 +11,7 @@ class TestApp1:
     def run(self):
         FullWriteCommand().run(READ_VALUE)
         read_data = FullReadCommand().run()
-        return self.validate_data(read_data)
-
-    @staticmethod
-    def validate_data(read_data):
-        for data in read_data:
-            if int(data, 16) != READ_VALUE:
-                return False
-        return True
+        return all(int(data, 16) == READ_VALUE for data in read_data)
 
 
 if __name__ == '__main__':
