@@ -1,6 +1,8 @@
-from testapp.command_parser import CommandParser
+from testapp.command_parser import (is_predefined_command_name, validate_command,
+                                    parse_args, get_command_instance)
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
+from testapp.command.__interface import CommandInterface
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
@@ -27,18 +29,21 @@ class TestShell:
                  - EXECUTE_VALID_WITH_ARGS (1): 인자가 있는 유효한 명령어
                  - EXECUTE_INVALID (0): 유효하지 않은 명령어
         """
+        if len(cmd) == 0:
+            return EXECUTE_INVALID
+
         cmd_option = cmd.split()[0]
-        if CommandParser.is_predefined_command(cmd_option):
-            cmd_option, cmd_args = CommandParser.parse_args(cmd)
-            if not CommandParser.validate_command(cmd):
-                print(INVALID_COMMAND)
+        if is_predefined_command_name(cmd_option):
+            if not validate_command(cmd):
                 return EXECUTE_INVALID
-            cmd_if = CommandParser.get_command(cmd_option)
-            cmd_if.run(*cmd_args)
+            cmd_option, cmd_args = parse_args(cmd)
+            cmd_obj = get_command_instance(cmd_option)
+            cmd_obj.run(*cmd_args)
             return EXECUTE_VALID_WITH_ARGS if cmd_args else EXECUTE_VALID_WO_ARGS
 
         else:  # test script 중에 있으면 동작
-            ts_dict = get_test_scripts()
+            ts_dict = get_test_scripts()  # UpperCamelCase
+            ts_dict.update({k.lower(): v for k, v in ts_dict.items()})  # lower case 도 포함
             if cmd_option in ts_dict.keys():
                 success = run_script(ts_dict[cmd_option])
                 print('PASS' if success else 'FAIL!')
