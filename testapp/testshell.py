@@ -1,5 +1,4 @@
-from testapp.command.command_parser import (is_predefined_command_name, validate_command,
-                                            parse_args, get_command_instance)
+from testapp.command.command_factory import *
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
 
@@ -12,11 +11,9 @@ EXECUTE_EMPTY = -1
 class TestShell:
     """
     TestShell 클래스는 명령어를 실행하고, 사전 정의된 명령어 또는 테스트 스크립트를 실행하는 기능을 제공합니다.
-
     """
 
-    @staticmethod
-    def execute(cmd: str) -> int:
+    def execute(self, cmd: str) -> int:
         """
         주어진 명령어를 실행합니다.
 
@@ -34,12 +31,12 @@ class TestShell:
         cmd = cmd.strip()
 
         cmd_option = cmd.split()[0]
-        
+
         if is_predefined_command_name(cmd_option):
             if not validate_command(cmd):
                 return EXECUTE_INVALID
-            cmd_option, cmd_args = parse_args(cmd)
-            cmd_obj = get_command_instance(cmd_option)
+            cmd_option, cmd_args = parse_cmd_args(cmd)
+            cmd_obj = CommandFactory.get_command_instance(cmd_option)
             cmd_obj.run(*cmd_args)
             return EXECUTE_VALID_WITH_ARGS if cmd_args else EXECUTE_VALID_WO_ARGS
 

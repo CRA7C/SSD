@@ -1,9 +1,13 @@
 from unittest import TestCase
 
-from testapp.command.command_parser import *
+from testapp.command.command_factory import *
 
 
 class TestCommandParser(TestCase):
+
+
+    def setUp(self):
+        super().setUp()
 
     def test_valid_cmd_true(self):
         cmd_list = [
@@ -103,7 +107,7 @@ class TestCommandParser(TestCase):
         }
         for idx, (key, val) in enumerate(cmd_dict.items()):
             with self.subTest(idx=idx, key=key, val=val):
-                ret = parse_args(key)
+                ret = parse_cmd_args(key)
                 self.assertEqual(ret, val)
 
     def test_invalid_erase_cmd(self):
