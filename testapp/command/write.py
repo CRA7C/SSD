@@ -33,8 +33,8 @@ class Write(CommandInterface):
         Returns:
             bool: 인자가 유효한 경우 True, 그렇지 않으면 False
         """
-        n_lba = args[0]
-        value = args[1]
+        n_lba = args[1]
+        value = args[2]
         if not is_in_range_lba(n_lba):
             return False
         if not is_valid_hex(value):
