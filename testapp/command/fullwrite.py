@@ -4,13 +4,15 @@ from testapp.constants import SSD_LBA_RANGE
 from testapp.util import is_valid_hex
 
 
-class FullWrite(CommandInterface):
+class FullWriteCommand(CommandInterface):
     """
     FullWrite 클래스는 SSD의 모든 LBA에 동일한 값을 쓰는 명령어를 구현합니다.
 
     Attributes:
         driver (SsdDriver): SSD 드라이버 객체
     """
+    required_args_cnt: int = 1
+
     def __init__(self):
         super().__init__()
         self.driver = SsdDriver()

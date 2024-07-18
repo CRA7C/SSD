@@ -1,12 +1,12 @@
 import sys
 import io
 import unittest
-from testapp.command import Help
+from testapp.command import HelpCommand
 
 
 class TestHelp(unittest.TestCase):
     def test_run(self):
-        command = Help()
+        command = HelpCommand()
         sys_stdout = sys.stdout  # 원래의 sys.stdout을 저장
         sys.stdout = io.StringIO()
         command.run()

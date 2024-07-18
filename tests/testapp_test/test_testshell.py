@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from testapp.command import Read, Write, FullRead, FullWrite
+from testapp.command import ReadCommand, WriteCommand, FullReadCommand, FullWriteCommand
 from testapp.ssd_driver import SsdDriver
 from testapp.testshell import TestShell, EXECUTE_INVALID, EXECUTE_VALID_WO_ARGS, EXECUTE_VALID_WITH_ARGS
 
@@ -17,7 +17,7 @@ class TestTestShell(TestCase):
         self.ts = TestShell()
         TestTestShell.test_counter += 1
 
-    @patch.object(FullRead, "run", return_value="GOOD")
+    @patch.object(FullReadCommand, "run", return_value="GOOD")
     def test_testshell_wo_args(self, mk_fullread):
         cmd_list = ["help", "fullread"]
         for idx, cmd in enumerate(cmd_list):
@@ -25,9 +25,9 @@ class TestTestShell(TestCase):
                 ret = self.ts.execute(cmd)
                 self.assertEqual(ret, EXECUTE_VALID_WO_ARGS)
 
-    @patch.object(Write, "run", return_value="GOOD")
-    @patch.object(Read, "run", return_value="GOOD")
-    @patch.object(FullWrite, "run", return_value="GOOD")
+    @patch.object(WriteCommand, "run", return_value="GOOD")
+    @patch.object(ReadCommand, "run", return_value="GOOD")
+    @patch.object(FullWriteCommand, "run", return_value="GOOD")
     def test_testshell_with_args(self, mk_fullwrite, mk_read, mk_write):
         cmd_list = ["fullwrite 0xABCDFFFF",
                     "read 3",

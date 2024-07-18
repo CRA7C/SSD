@@ -17,11 +17,13 @@ Commands:
 """
 
 
-class Help(CommandInterface):
+class HelpCommand(CommandInterface):
     """
     Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.
     """
-    def run(self, *args, **kwarg):
+    required_args_cnt: int = 0
+
+    def run(self):
         """
         사용 가능한 명령어와 옵션을 출력합니다.
         """

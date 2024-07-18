@@ -2,7 +2,7 @@ import unittest
 from unittest import TestCase
 from unittest.mock import patch
 
-from testapp.command import FullRead
+from testapp.command import FullReadCommand
 from testapp.constants import SSD_SIZE
 from testapp.ssd_driver import SsdDriver
 from my_logger.util_log import print_function_name
@@ -10,7 +10,7 @@ from my_logger.util_log import print_function_name
 
 class Test(TestCase):
     def setUp(self):
-        self.command = FullRead()
+        self.command = FullReadCommand()
 
     @print_function_name
     def test_with_argument(self):

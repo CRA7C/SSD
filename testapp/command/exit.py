@@ -3,10 +3,11 @@ import sys
 from testapp.command.__interface import CommandInterface
 
 
-class Exit(CommandInterface):
+class ExitCommand(CommandInterface):
     """
     Exit 클래스는 프로그램을 종료하는 명령어를 구현합니다.
     """
+    required_args_cnt: int = 0
 
     def run(self):
         sys.exit()

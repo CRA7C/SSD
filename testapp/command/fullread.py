@@ -3,13 +3,15 @@ from testapp.ssd_driver import SsdDriver
 from testapp.constants import SSD_LBA_RANGE
 
 
-class FullRead(CommandInterface):
+class FullReadCommand(CommandInterface):
     """
     FullRead 클래스는 SSD의 모든 LBA에서 데이터를 읽는 명령어를 구현합니다.
 
     Attributes:
         driver (SsdDriver): SSD 드라이버 객체
     """
+    required_args_cnt: int = 0
+
     def __init__(self):
         super().__init__()
         self.driver = SsdDriver()
