@@ -31,7 +31,6 @@ class TestShell:
         if CommandParser.is_predefined_command(cmd_option):
             cmd_option, cmd_args = CommandParser.parse_args(cmd)
             if not CommandParser.validate_command(cmd):
-                print(INVALID_COMMAND)
                 return EXECUTE_INVALID
             cmd_if = CommandParser.get_command(cmd_option)
             cmd_if.run(*cmd_args)
