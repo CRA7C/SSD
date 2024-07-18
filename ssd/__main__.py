@@ -1,12 +1,13 @@
-import sys
 import os
+import sys
+from typing import Union
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from ssd.solidstatedrive import SolidStateDrive
 from ssd.common import LBA_LOWER_LIMIT, LBA_UPPER_LIMIT, is_valid_hex
 from ssd.command_buffer import CommandBuffer
-from ssd.command import CommandFactory
+from ssd.command import CommandFactory, Command, ReadCommand, WriteCommand, EraseCommand
 
 
 class SSDRunner:
@@ -17,12 +18,14 @@ class SSDRunner:
         ssd (SolidStateDrive): 가상 SSD 객체
         option_buf (CommandBuffer): 명령 버퍼 객체
     """
+    option_buf: CommandBuffer
+
     def __init__(self):
         self.ssd = SolidStateDrive()
         self.option_buf = CommandBuffer()
 
     @staticmethod
-    def is_valid_command():
+    def is_valid_command() -> bool:
         """
         명령어의 유효성을 검사합니다.
 
@@ -73,7 +76,7 @@ class SSDRunner:
         """
         주어진 명령어를 파싱하고 실행합니다.
         """
-        cmd = CommandFactory().parse_command(sys.argv[1:])
+        cmd: Command = CommandFactory().parse_command(sys.argv[1:])
         if cmd.option == 'F':
             self.buff_flush()
         elif cmd.option == 'R':
@@ -86,19 +89,19 @@ class SSDRunner:
                 self.buff_flush()
             self.option_buf.push_command(cmd)
 
-    def execute_command(self, command):
+    def execute_command(self, command: Union[ReadCommand, WriteCommand, EraseCommand]):
         """
         특정 명령어를 실행합니다.
 
         Args:
             command: 실행할 명령어 객체
         """
-        cmd = command.option
-        if cmd == 'R':
+        cmd_opt = command.option
+        if cmd_opt == 'R':
             self.ssd.read(command.lba)
-        elif cmd == 'W':
+        elif cmd_opt == 'W':
             self.ssd.write(command.lba, command.value)
-        elif cmd == 'E':
+        elif cmd_opt == 'E':
             self.ssd.erase(command.lba, command.size)
 
 

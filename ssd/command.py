@@ -1,3 +1,6 @@
+from typing import List, Tuple
+
+
 class Command:
     """
     기본 명령어 클래스입니다.
@@ -6,7 +9,8 @@ class Command:
         option (str): 명령 옵션
         args (list): 명령 인자 리스트
     """
-    def __init__(self, args):
+
+    def __init__(self, args: List[str]):
         """
         Command 클래스의 생성자. 명령 옵션과 인자를 설정합니다.
 
@@ -16,7 +20,7 @@ class Command:
         self.option = args[0]
         self.args = args
 
-    def get_value(self):
+    def get_value(self) -> List[str]:
         """
         명령 인자를 반환합니다.
 
@@ -24,6 +28,9 @@ class Command:
             list: 명령 인자 리스트
         """
         return self.args
+
+    def get_key(self):
+        pass
 
 
 class ReadCommand(Command):
@@ -33,7 +40,8 @@ class ReadCommand(Command):
     Attributes:
         lba (int): 논리 블록 주소
     """
-    def __init__(self, args):
+
+    def __init__(self, args: List[str]):
         """
         ReadCommand 클래스의 생성자. 논리 블록 주소를 설정합니다.
 
@@ -42,6 +50,15 @@ class ReadCommand(Command):
         """
         super().__init__(args)
         self.lba = int(args[1])
+
+    def get_key(self) -> Tuple[str, int]:
+        """
+        명령 키를 반환합니다.
+
+        Returns:
+            tuple: 명령 키 (옵션, LBA)
+        """
+        return self.option, self.lba
 
 
 class WriteCommand(Command):
@@ -52,7 +69,8 @@ class WriteCommand(Command):
         lba (int): 논리 블록 주소
         value (int): 쓸 값 (16진수 형식)
     """
-    def __init__(self, args):
+
+    def __init__(self, args: List[str]):
         """
         WriteCommand 클래스의 생성자. 논리 블록 주소와 쓸 값을 설정합니다.
 
@@ -63,14 +81,14 @@ class WriteCommand(Command):
         self.lba = int(args[1])
         self.value = int(args[2], 16)
 
-    def get_key(self):
+    def get_key(self) -> Tuple[str, int, int]:
         """
         명령 키를 반환합니다.
 
         Returns:
             tuple: 명령 키 (옵션, 시작 LBA, 끝 LBA)
         """
-        return (self.option, self.lba, self.lba + 1)
+        return self.option, self.lba, self.lba + 1
 
 
 class EraseCommand(Command):
@@ -81,7 +99,8 @@ class EraseCommand(Command):
         lba (int): 논리 블록 주소
         size (int): 삭제할 블록 수
     """
-    def __init__(self, args):
+
+    def __init__(self, args: List[str]):
         """
         EraseCommand 클래스의 생성자. 논리 블록 주소와 삭제할 블록 수를 설정합니다.
 
@@ -92,14 +111,14 @@ class EraseCommand(Command):
         self.lba = int(args[1])
         self.size = int(args[2])
 
-    def get_key(self):
+    def get_key(self) -> Tuple[str, int, int]:
         """
         명령 키를 반환합니다.
 
         Returns:
             tuple: 명령 키 (옵션, 시작 LBA, 끝 LBA)
         """
-        return (self.option, self.lba, self.lba + self.size)
+        return self.option, self.lba, self.lba + self.size
 
 
 class CommandFactory:
@@ -107,8 +126,9 @@ class CommandFactory:
     명령어 생성 클래스입니다.
     주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
     """
+
     @staticmethod
-    def parse_command(command_list):
+    def parse_command(command_list: List[str]) -> Command:
         """
         주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
 
