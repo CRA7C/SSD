@@ -2,7 +2,7 @@ from typing import Any, Dict, Type
 
 from testapp.command import (WriteCommand, ReadCommand, EraseCommand, EraseRangeCommand,
                              FlushCommand, HelpCommand, ExitCommand,
-                             FullWriteCommand, FullReadCommand)
+                             FullWriteCommand, FullReadCommand, ClearScreenCommand)
 from testapp.command.__interface import CommandInterface
 
 _cmd_if_dict: Dict[str, Type[CommandInterface]] = {
@@ -15,6 +15,7 @@ _cmd_if_dict: Dict[str, Type[CommandInterface]] = {
     "exit": ExitCommand,
     "fullwrite": FullWriteCommand,
     "fullread": FullReadCommand,
+    "cls": ClearScreenCommand,
 }
 
 
