@@ -7,8 +7,6 @@ from typing import List, Tuple
 from testapp.constants import SCRIPTS_DIRECTORY
 from my_logger import Logger
 
-logger = Logger()
-
 
 class ClassVisitor(ast.NodeVisitor):
     def __init__(self):
@@ -92,14 +90,14 @@ def run_script(script_name: str, use_print: bool = False) -> bool:
         # result.returncode가 0이면 성공, 그렇지 않으면 실패
         if result.stdout:
             if use_print:
-                print(result.stdout)
+                Logger().info(result.stdout)
             else:
-                logger.debug(result.stdout)
+                Logger().debug(result.stdout)
         if result.stderr:
-            logger.debug(result.stderr)
+            Logger().debug(result.stderr)
         return result.returncode == 0
     except Exception as e:
-        logger.debug(f"Error running script: {e}")
+        Logger().debug(f"Error running script: {e}")
         return False
 
 
