@@ -6,6 +6,7 @@ import importlib
 import subprocess
 from typing import List, Tuple
 from testapp.constants import SCRIPTS_DIRECTORY
+from my_logger import Logger
 
 
 class CommandInterfaceVisitor(ast.NodeVisitor):
@@ -110,13 +111,12 @@ def run_script(script_name: str) -> bool:
     try:
         result = subprocess.run(['python', script_name], capture_output=True, text=True)
         # result.returncode가 0이면 성공, 그렇지 않으면 실패
-        # TODO: 추후 Logger 변경 필요!
-        logging.debug(result.stdout)
+        Logger().debug(result.stdout)
         if result.stderr:
             logging.error(result.stderr)
         return result.returncode == 0
     except Exception as e:
-        print(f"Error running script: {e}")
+        Logger().debug(f"Error running script: {e}")
         return False
 
 
@@ -131,15 +131,15 @@ def run_test_script_file(list_file: str):
     with open(list_file, 'r', encoding='utf-8') as f:
         for test_id in f.readlines():
             test_id = test_id.strip()
-            print(f"{test_id:30} --- ", end="")
+            Logger().info(f"{test_id:30} --- ", end="")
             if test_id in ts_dict.keys():
-                print("Run...", end="", flush=True)
+                Logger().info("Run...", end="", flush=True)
                 if run_script(ts_dict[test_id]):
-                    print('PASS')
+                    Logger().info('PASS')
                 else:
-                    print('FAIL!')
+                    Logger().info('FAIL!')
             else:
-                print("NOT FOUND!")
+                Logger().info("NOT FOUND!")
 
 
 if __name__ == '__main__':

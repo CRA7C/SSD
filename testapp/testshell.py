@@ -1,6 +1,7 @@
 from testapp.command_parser import CommandParser
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
+from my_logger import Logger
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
@@ -31,6 +32,7 @@ class TestShell:
         if CommandParser.is_predefined_command(cmd_option):
             cmd_option, cmd_args = CommandParser.parse_args(cmd)
             if not CommandParser.validate_command(cmd):
+                # Logger().debug(INVALID_COMMAND)
                 return EXECUTE_INVALID
             cmd_if = CommandParser.get_command(cmd_option)
             cmd_if.run(*cmd_args)
@@ -40,7 +42,7 @@ class TestShell:
             ts_dict = get_test_scripts()
             if cmd_option in ts_dict.keys():
                 success = run_script(ts_dict[cmd_option])
-                print('PASS' if success else 'FAIL!')
+                Logger().debug('PASS' if success else 'FAIL!')
                 return success
         return EXECUTE_INVALID
 
@@ -53,4 +55,4 @@ def main():
     while True:
         cmd = input("> ")
         if TestShell.execute(cmd) == EXECUTE_INVALID:
-            print(INVALID_COMMAND)
+            Logger().debug(INVALID_COMMAND)
