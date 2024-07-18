@@ -19,7 +19,7 @@ Classes
 Module Contents
 ---------------
 
-.. py:class:: Command(args)
+.. py:class:: Command(args: List[str])
 
    기본 명령어 클래스입니다.
 
@@ -36,7 +36,7 @@ Module Contents
       :type: list
 
 
-   .. py:method:: get_value()
+   .. py:method:: get_value() -> List[str]
 
       명령 인자를 반환합니다.
 
@@ -45,7 +45,10 @@ Module Contents
 
 
 
-.. py:class:: ReadCommand(args)
+   .. py:method:: get_key()
+
+
+.. py:class:: ReadCommand(args: List[str])
 
    Bases: :py:obj:`Command`
 
@@ -59,7 +62,16 @@ Module Contents
       :type: int
 
 
-.. py:class:: WriteCommand(args)
+   .. py:method:: get_key() -> Tuple[str, int]
+
+      명령 키를 반환합니다.
+
+      :returns: 명령 키 (옵션, LBA)
+      :rtype: tuple
+
+
+
+.. py:class:: WriteCommand(args: List[str])
 
    Bases: :py:obj:`Command`
 
@@ -79,7 +91,7 @@ Module Contents
       :type: int
 
 
-   .. py:method:: get_key()
+   .. py:method:: get_key() -> Tuple[str, int, int]
 
       명령 키를 반환합니다.
 
@@ -88,7 +100,7 @@ Module Contents
 
 
 
-.. py:class:: EraseCommand(args)
+.. py:class:: EraseCommand(args: List[str])
 
    Bases: :py:obj:`Command`
 
@@ -108,7 +120,7 @@ Module Contents
       :type: int
 
 
-   .. py:method:: get_key()
+   .. py:method:: get_key() -> Tuple[str, int, int]
 
       명령 키를 반환합니다.
 
@@ -123,7 +135,7 @@ Module Contents
    주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
 
 
-   .. py:method:: parse_command(command_list)
+   .. py:method:: parse_command(command_list: List[str]) -> Command
       :staticmethod:
 
 

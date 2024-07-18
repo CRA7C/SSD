@@ -52,12 +52,12 @@ Module Contents
 
 
 
-   .. py:method:: read_fast(value: str)
+   .. py:method:: read_fast(value: int)
 
       값을 빠르게 읽고 결과를 기록합니다.
 
-      :param value: 읽을 값 (16진수 문자열 형식)
-      :type value: str
+      :param value: 읽을 값 (16진수)
+      :type value: int
 
 
 

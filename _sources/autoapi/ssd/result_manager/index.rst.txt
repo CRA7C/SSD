@@ -42,7 +42,7 @@ Module Contents
 
 
 
-   .. py:method:: write(text)
+   .. py:method:: write(text: str)
 
       결과 파일에 텍스트를 씁니다.
 

@@ -75,7 +75,9 @@
              
   <h1>Source code for ssd.command_buffer</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">ssd.command</span> <span class="kn">import</span> <span class="n">CommandFactory</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span>
+
+<span class="kn">from</span> <span class="nn">ssd.command</span> <span class="kn">import</span> <span class="n">CommandFactory</span><span class="p">,</span> <span class="n">Command</span><span class="p">,</span> <span class="n">ReadCommand</span>
 
 <div class="viewcode-block" id="BUFFER_FILE_PATH">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.BUFFER_FILE_PATH">[docs]</a>
@@ -94,12 +96,13 @@
 <span class="sd">        buffer_file_path (Path): 버퍼 파일 경로</span>
 <span class="sd">        buffer (list): 명령어를 저장하는 리스트</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        CommandBuffer 클래스의 생성자. 버퍼 파일 경로를 설정하고 초기화합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">buffer_file_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">BUFFER_FILE_PATH</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Command</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 
 <div class="viewcode-block" id="CommandBuffer.initialize">
@@ -137,7 +140,7 @@
 
 <div class="viewcode-block" id="CommandBuffer.get_saved_data">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.CommandBuffer.get_saved_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_saved_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_saved_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        버퍼에 저장된 명령어 데이터를 문자열 형식으로 반환합니다.</span>
 
@@ -152,7 +155,7 @@
 
 <div class="viewcode-block" id="CommandBuffer.push_command">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.CommandBuffer.push_command">[docs]</a>
-    <span class="k">def</span> <span class="nf">push_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">push_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">Command</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        명령어를 버퍼에 추가하고 최적화합니다.</span>
 
@@ -180,7 +183,7 @@
 
 <div class="viewcode-block" id="CommandBuffer.is_able_to_fast_read">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.CommandBuffer.is_able_to_fast_read">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_able_to_fast_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_able_to_fast_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="n">Command</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        빠른 읽기가 가능한지 확인합니다.</span>
 
@@ -200,7 +203,7 @@
 
 <div class="viewcode-block" id="CommandBuffer.get_read_fast">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.CommandBuffer.get_read_fast">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_read_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_read_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="n">ReadCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        버퍼에서 빠른 읽기 값을 반환합니다.</span>
 
@@ -219,7 +222,7 @@
 
 <div class="viewcode-block" id="CommandBuffer.flush">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.CommandBuffer.flush">[docs]</a>
-    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Command</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        버퍼를 비우고 모든 명령어를 반환합니다.</span>
 
@@ -259,7 +262,7 @@
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="CommandBuffer.merge_write_with_erase">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.CommandBuffer.merge_write_with_erase">[docs]</a>
-    <span class="k">def</span> <span class="nf">merge_write_with_erase</span><span class="p">(</span><span class="n">erase_commands</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">merge_write_with_erase</span><span class="p">(</span><span class="n">erase_commands</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">key</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        쓰기 명령어와 삭제 명령어를 병합합니다.</span>
 
@@ -278,7 +281,7 @@
 
 <div class="viewcode-block" id="CommandBuffer.need_flush">
 <a class="viewcode-back" href="../../autoapi/ssd/command_buffer/index.html#ssd.command_buffer.CommandBuffer.need_flush">[docs]</a>
-    <span class="k">def</span> <span class="nf">need_flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">need_flush</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        버퍼를 비울 필요가 있는지 확인합니다.</span>
 

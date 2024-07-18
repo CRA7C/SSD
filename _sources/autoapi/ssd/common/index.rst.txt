@@ -51,7 +51,7 @@ Module Contents
    :value: 4294967295
 
 
-.. py:function:: convert_hex_to_str(value)
+.. py:function:: convert_hex_to_str(value: int) -> str
 
    정수 값을 8자리 16진수 문자열로 변환합니다.
 
@@ -62,7 +62,7 @@ Module Contents
    :rtype: str
 
 
-.. py:function:: is_valid_hex(s: str)
+.. py:function:: is_valid_hex(s: str) -> bool
 
    주어진 문자열이 유효한 16진수 형식인지 확인합니다.
 

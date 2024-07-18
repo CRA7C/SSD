@@ -40,7 +40,11 @@ Module Contents
       :type: CommandBuffer
 
 
-   .. py:method:: is_valid_command()
+   .. py:attribute:: option_buf
+      :type:  ssd.command_buffer.CommandBuffer
+
+
+   .. py:method:: is_valid_command() -> bool
       :staticmethod:
 
 
@@ -65,7 +69,7 @@ Module Contents
 
 
 
-   .. py:method:: execute_command(command)
+   .. py:method:: execute_command(command: Union[ssd.command.ReadCommand, ssd.command.WriteCommand, ssd.command.EraseCommand])
 
       특정 명령어를 실행합니다.
 

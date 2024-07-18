@@ -74,15 +74,16 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ssd.__main__</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))))</span>
 
 <span class="kn">from</span> <span class="nn">ssd.solidstatedrive</span> <span class="kn">import</span> <span class="n">SolidStateDrive</span>
 <span class="kn">from</span> <span class="nn">ssd.common</span> <span class="kn">import</span> <span class="n">LBA_LOWER_LIMIT</span><span class="p">,</span> <span class="n">LBA_UPPER_LIMIT</span><span class="p">,</span> <span class="n">is_valid_hex</span>
 <span class="kn">from</span> <span class="nn">ssd.command_buffer</span> <span class="kn">import</span> <span class="n">CommandBuffer</span>
-<span class="kn">from</span> <span class="nn">ssd.command</span> <span class="kn">import</span> <span class="n">CommandFactory</span>
+<span class="kn">from</span> <span class="nn">ssd.command</span> <span class="kn">import</span> <span class="n">CommandFactory</span><span class="p">,</span> <span class="n">Command</span><span class="p">,</span> <span class="n">ReadCommand</span><span class="p">,</span> <span class="n">WriteCommand</span><span class="p">,</span> <span class="n">EraseCommand</span>
 
 
 <div class="viewcode-block" id="SSDRunner">
@@ -95,6 +96,11 @@
 <span class="sd">        ssd (SolidStateDrive): 가상 SSD 객체</span>
 <span class="sd">        option_buf (CommandBuffer): 명령 버퍼 객체</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SSDRunner.option_buf">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner.option_buf">[docs]</a>
+    <span class="n">option_buf</span><span class="p">:</span> <span class="n">CommandBuffer</span></div>
+
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span> <span class="o">=</span> <span class="n">SolidStateDrive</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span> <span class="o">=</span> <span class="n">CommandBuffer</span><span class="p">()</span>
@@ -102,7 +108,7 @@
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="SSDRunner.is_valid_command">
 <a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner.is_valid_command">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_valid_command</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">is_valid_command</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        명령어의 유효성을 검사합니다.</span>
 
@@ -159,7 +165,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 명령어를 파싱하고 실행합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="n">CommandFactory</span><span class="p">()</span><span class="o">.</span><span class="n">parse_command</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="n">Command</span> <span class="o">=</span> <span class="n">CommandFactory</span><span class="p">()</span><span class="o">.</span><span class="n">parse_command</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
         <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">buff_flush</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
@@ -175,19 +181,19 @@
 
 <div class="viewcode-block" id="SSDRunner.execute_command">
 <a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.SSDRunner.execute_command">[docs]</a>
-    <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ReadCommand</span><span class="p">,</span> <span class="n">WriteCommand</span><span class="p">,</span> <span class="n">EraseCommand</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        특정 명령어를 실행합니다.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            command: 실행할 명령어 객체</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">option</span>
-        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
+        <span class="n">cmd_opt</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">option</span>
+        <span class="k">if</span> <span class="n">cmd_opt</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">lba</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">cmd_opt</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">lba</span><span class="p">,</span> <span class="n">command</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">cmd_opt</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">erase</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">lba</span><span class="p">,</span> <span class="n">command</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
 </div>
 

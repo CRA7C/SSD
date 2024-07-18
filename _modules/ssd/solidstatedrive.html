@@ -121,12 +121,12 @@
 
 <div class="viewcode-block" id="SolidStateDrive.read_fast">
 <a class="viewcode-back" href="../../autoapi/ssd/solidstatedrive/index.html#ssd.solidstatedrive.SolidStateDrive.read_fast">[docs]</a>
-    <span class="k">def</span> <span class="nf">read_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">read_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        값을 빠르게 읽고 결과를 기록합니다.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            value (str): 읽을 값 (16진수 문자열 형식)</span>
+<span class="sd">            value (int): 읽을 값 (16진수)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result_manager</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">convert_hex_to_str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
 
