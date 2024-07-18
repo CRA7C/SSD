@@ -32,11 +32,14 @@ class SSDRunner:
         Returns:
             bool: 명령어가 유효한 경우 True를 반환합니다.
         """
+        if sys.argv[1] == 'F':
+            return True
+
         if len(sys.argv) < 3:
             raise ValueError("명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20/ssd W 20 0x1289CDEF/ssd E 10 3")
 
-        if sys.argv[1] not in ('R', 'W', 'E'):
-            raise ValueError('R, W, E 중 하나를 사용해주세요.(대문자)')
+        if sys.argv[1] not in ('R', 'W', 'E', 'F'):
+            raise ValueError('R, W, E, F 중 하나를 사용해주세요.(대문자)')
 
         if not sys.argv[2].isdigit():
             raise ValueError('LBA는 숫자여야합니다.')
