@@ -16,13 +16,13 @@ class WriteCommand(CommandInterface):
         super().__init__()
         self.driver = SsdDriver()
 
-    def run(self, lba: str, value: str) -> None:
+    def run(self, lba: str | int, value: str | int) -> None:
         """
         지정된 LBA에 데이터를 씁니다.
 
         Args:
-            lba (str): 논리 블록 주소
-            value (str): 쓸 데이터 (16진수 문자열)
+            lba (str | int): 논리 블록 주소
+            value (str | int): 쓸 데이터 (16진수 문자열)
         """
         self.driver.write(lba, value)
 

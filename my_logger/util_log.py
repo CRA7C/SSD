@@ -22,7 +22,7 @@ def print_function_name(func):
     """
 
     def wrapper(*args, **kwargs):
-        print(f"Executing function: {func.__name__}")
+        Logger().debug(f"Executing function: {func.__name__}")
         return func(*args, **kwargs)
 
     return wrapper
@@ -150,15 +150,13 @@ class Logger:
 
             file_handler = MyRotatingFileHandler(LOG_FILE_PATH, maxBytes=LOG_MAX_SIZE, backupCount=1)
             file_handler.setLevel(logging.DEBUG)
+            file_formatter = CustomFormatter()
+            file_handler.setFormatter(file_formatter)
+            self.logger.addHandler(file_handler)
 
             console_handler = logging.StreamHandler()
             console_handler.setLevel(logging.INFO)
-
-            formatter = CustomFormatter()
-            file_handler.setFormatter(formatter)
-            console_handler.setFormatter(formatter)
-
-            self.logger.addHandler(file_handler)
+            console_handler.setFormatter(logging.Formatter('%(message)s'))
             self.logger.addHandler(console_handler)
 
     def info(self, message):
@@ -208,5 +206,8 @@ class Logger:
         frame = inspect.currentframe().f_back.f_back
 
         func_name = frame.f_code.co_name
-        class_name = frame.f_locals['self'].__class__.__name__
+        class_name = ''
+        if 'self' in frame.f_locals.keys():
+            class_name = frame.f_locals['self'].__class__.__name__
+
         self.logger.log(level, message, extra={'class_name': class_name, 'func_name': func_name})

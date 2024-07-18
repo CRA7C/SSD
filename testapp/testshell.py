@@ -1,6 +1,7 @@
 from testapp.command.command_factory import *
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
+from my_logger import Logger
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
@@ -45,7 +46,7 @@ class TestShell:
             ts_dict.update({k.lower(): v for k, v in ts_dict.items()})  # lower case 도 포함
             if cmd_option in ts_dict.keys():
                 success = run_script(ts_dict[cmd_option])
-                print('PASS' if success else 'FAIL!')
+                Logger().debug('PASS' if success else 'FAIL!')
                 return success
         return EXECUTE_INVALID
 
@@ -55,7 +56,8 @@ def main():
     TestShell의 메인 루프를 실행합니다.
     사용자가 명령어를 입력하고 이를 처리합니다.
     """
+    ts = TestShell()
     while True:
         cmd = input("> ")
-        if TestShell.execute(cmd) == EXECUTE_INVALID:
-            print(INVALID_COMMAND)
+        if ts.execute(cmd) == EXECUTE_INVALID:
+            Logger().info(INVALID_COMMAND)

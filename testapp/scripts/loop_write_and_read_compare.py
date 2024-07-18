@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 from random import randint
+
 sys.path.append(str(Path(__file__).parents[2].resolve()))
 from testapp.command import WriteCommand, ReadCommand  # noqa E402
 from testapp.constants import (SSD_START_LBA, SSD_END_LBA,

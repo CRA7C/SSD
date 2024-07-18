@@ -6,6 +6,7 @@ import importlib
 import subprocess
 from typing import List, Tuple
 from testapp.constants import SCRIPTS_DIRECTORY
+from my_logger import Logger
 
 
 class ClassVisitor(ast.NodeVisitor):
@@ -20,7 +21,6 @@ class ClassVisitor(ast.NodeVisitor):
 def find_classes() -> List[Tuple[str, List[str]]]:
     """
     주어진 디렉토리 내의 모든 파이썬 파일에서 정의된 클래스를 찾습니다.
-
     Returns:
         List[Tuple[str, List[str]]]: 모듈 이름과 클래스 이름 리스트의 튜플 리스트
     """
@@ -61,7 +61,7 @@ def get_classes() -> List[object]:
     Returns:
         List[object]: 클래스 객체 리스트
     """
-    class_info = find_classes('CommandInterface')
+    class_info = find_classes()
     class_list = []
     original_sys_path = sys.path.copy()
     try:
@@ -88,12 +88,12 @@ def run_script(script_name: str) -> bool:
     try:
         result = subprocess.run(['python', script_name], capture_output=True, text=True)
         # result.returncode가 0이면 성공, 그렇지 않으면 실패
-        # TODO: 추후 Logger 변경 필요!
-        logging.debug(result.stdout)
+        Logger().debug(result.stdout)
         if result.stderr:
-            logging.error(result.stderr)
+            Logger().debug(result.stderr)
         return result.returncode == 0
     except Exception as e:
+        Logger().debug(f"Error running script: {e}")
         return False
 
 
@@ -124,5 +124,5 @@ if __name__ == '__main__':
 
     script_dict = get_test_scripts()
     pprint(script_dict)
-    # res = run_script(script_dict['TestApp1'])
-    # print(res)
+    res = run_script(script_dict['TestApp1'])
+    print(res)

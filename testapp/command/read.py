@@ -1,6 +1,7 @@
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
 from testapp.util import is_in_range_lba
+from my_logger import Logger
 
 
 class ReadCommand(CommandInterface):
@@ -16,19 +17,17 @@ class ReadCommand(CommandInterface):
         super().__init__()
         self.driver = SsdDriver()
 
-    def run(self, lba: str) -> str:
+    def run(self, lba: str | int) -> str:
         """
         지정된 LBA에서 데이터를 읽습니다.
+        읽어온 데이터를 화면에 출력합니다.
 
         Args:
-            lba (str): 논리 블록 주소
-
-        Returns:
-            str: 읽은 데이터
+            lba (str | int): 논리 블록 주소
         """
-        ret = self.driver.read(lba)
-        print(ret)  # shell 의 출력
-        return ret  # test script 에서 이 값을 사용하기 위함.
+        read_value = self.driver.read(lba)
+        Logger().info(read_value)
+        return read_value
 
     @staticmethod
     def is_valid_args(*args) -> bool:

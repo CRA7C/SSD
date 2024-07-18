@@ -17,7 +17,7 @@ class FullWriteCommand(CommandInterface):
         super().__init__()
         self.driver = SsdDriver()
 
-    def run(self, value: str) -> None:
+    def run(self, value: str | int) -> None:
         """
         SSD의 모든 LBA에 값을 씁니다.
 

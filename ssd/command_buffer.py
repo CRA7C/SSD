@@ -1,6 +1,5 @@
 from pathlib import Path
 from typing import List, Tuple, Set
-
 from ssd.command import CommandFactory, Command, ReadCommand
 
 BUFFER_FILE_PATH = Path(__file__).parent / 'buffer.txt'
@@ -39,7 +38,7 @@ class CommandBuffer:
         버퍼 파일에서 명령어를 읽어와 버퍼에 저장합니다.
         """
         with open(self.buffer_file_path, 'r') as f:
-            self.buffer = [CommandFactory().parse_command(line.split()) for line in f.readlines()]
+            self.buffer = [CommandFactory.parse_command(line.split()) for line in f.readlines()]
 
     def save_buffer(self):
         """

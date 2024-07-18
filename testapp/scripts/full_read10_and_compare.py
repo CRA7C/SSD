@@ -13,10 +13,6 @@ class FullRead10AndCompare:
                 return False
         return True
 
-    @staticmethod
-    def is_valid_args(*args, **kwarg):
-        return True
-
 
 if __name__ == '__main__':
     sys.exit(0 if FullRead10AndCompare().run() else 1)

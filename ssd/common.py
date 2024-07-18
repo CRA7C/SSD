@@ -5,6 +5,9 @@ LBA_LOWER_LIMIT: Final[int] = 0
 LBA_UPPER_LIMIT: Final[int] = 99
 LBA_SIZE: Final[int] = LBA_UPPER_LIMIT - LBA_LOWER_LIMIT + 1
 
+ERASE_SIZE_LOWER_LIMIT: Final[int] = 1
+ERASE_SIZE_UPPER_LIMIT: Final[int] = 10
+
 SSD_MIN_VALUE: Final[int] = 0x00000000
 SSD_MAX_VALUE: Final[int] = 0xFFFFFFFF
 
