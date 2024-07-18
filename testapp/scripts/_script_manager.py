@@ -121,6 +121,7 @@ def run_test_script_file(list_file: str):
                     print('PASS')
                 else:
                     print('FAIL!')
+                    return
             else:
                 print("NOT FOUND!")
 
