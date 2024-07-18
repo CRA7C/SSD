@@ -14,14 +14,13 @@ class FullRead(CommandInterface):
         super().__init__()
         self.driver = SsdDriver()
 
-    def run(self) -> list[str]:
+    def run(self):
         """
         SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.
-
-        Returns:
-            list[str]: SSD의 모든 LBA에서 읽은 데이터 리스트
+        전체 데이터를 LBA와 함께 화면에 출력합니다.
         """
-        return [self.driver.read(addr) for addr in SSD_LBA_RANGE]
+        for addr in SSD_LBA_RANGE:
+            print(f"LBA: {addr}, value: {self.driver.read(addr)}")
 
     @staticmethod
     def is_valid_args(*args) -> bool:
