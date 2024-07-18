@@ -32,8 +32,8 @@ class EraseRange(CommandInterface):
         Returns:
             bool: 인자가 유효한 경우 True, 그렇지 않으면 False
         """
-        start_lba = args[0]
-        end_lba = args[1]
+        start_lba = args[1]
+        end_lba = args[2]
         if not (is_in_range_lba(start_lba) and is_in_range_lba(end_lba)):
             return False
         if int(start_lba) >= int(end_lba):

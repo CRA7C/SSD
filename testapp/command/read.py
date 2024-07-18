@@ -34,5 +34,5 @@ class Read(CommandInterface):
         Returns:
             bool: 인자가 유효한 경우 True, 그렇지 않으면 False
         """
-        n_lba = args[0]
+        n_lba = args[1]
         return True if is_in_range_lba(n_lba) else False
