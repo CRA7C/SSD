@@ -33,6 +33,7 @@ class TestShell:
             return EXECUTE_INVALID
 
         cmd_option = cmd.split()[0]
+        
         if is_predefined_command_name(cmd_option):
             if not validate_command(cmd):
                 return EXECUTE_INVALID
