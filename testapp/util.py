@@ -10,6 +10,8 @@ from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE, SSD_START_LBA, SSD_E
 RESULT_FILE = "result.txt"
 READ_COMMAND = "R"
 WRITE_COMMAND = "W"
+ERASE_COMMAND = "E"
+FLUSH_COMMAND = "F"
 SSD_COMMAND = "ssd"
 SSD_MODULE = "ssd"
 
@@ -34,6 +36,11 @@ def validate_ssd_command(command: str) -> None:
         validate_ssd_value(args[3])
     elif op == READ_COMMAND and len(args) == 3:
         validate_ssd_lba(args[2])
+    elif op == ERASE_COMMAND and len(args) == 4:
+        validate_ssd_lba(args[2])
+        validate_ssd_erase_size(args[3])
+    elif op == FLUSH_COMMAND and len(args) == 2:
+        pass
     else:
         raise ValueError(f"Applied wrong command: {command}")
 
@@ -56,6 +63,13 @@ def validate_ssd_value(value: Union[str, int]) -> None:
         except:  # noqa
             raise ValueError()
     if not SSD_MIN_VALUE <= value <= SSD_MAX_VALUE:
+        raise ValueError
+
+
+def validate_ssd_erase_size(size: Union[str, int]):
+    if not isinstance(size, (str, int)):
+        raise TypeError
+    elif not 0 < int(size) < 11:
         raise ValueError
 
 
@@ -92,8 +106,8 @@ def is_valid_hex(s: str) -> bool:
         except ValueError:
             return False
     return False
-  
-  
+
+
 def is_valid_size(size: str) -> bool:
     try:
         num = int(size)
