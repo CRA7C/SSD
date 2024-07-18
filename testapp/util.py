@@ -36,7 +36,7 @@ def validate_ssd_command(command):
         validate_ssd_value(args[3])
     elif op == READ_COMMAND and len(args) == 3:  # ssd R lba
         validate_ssd_lba(args[2])
-    elif op == ERASE_COMMAND and len(args) == 3:  # ssd E lba
+    elif op == ERASE_COMMAND and len(args) == 4:  # ssd E lba total_size
         validate_ssd_lba(args[2])
     elif op == FLUSH_COMMAND and len(args) == 2:  # ssd F
         pass
