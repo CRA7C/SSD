@@ -76,12 +76,13 @@ def get_classes() -> List[object]:
     return class_list
 
 
-def run_script(script_name: str) -> bool:
+def run_script(script_name: str, use_print: bool = False) -> bool:
     """
     주어진 스크립트를 실행합니다.
 
     Args:
         script_name (str): 실행할 스크립트 이름
+        use_print (bool): 콘솔 창에 출력할지 말지 결정
 
     Returns:
         bool: 스크립트 실행 성공 여부
@@ -89,7 +90,11 @@ def run_script(script_name: str) -> bool:
     try:
         result = subprocess.run(['python', script_name], capture_output=True, text=True)
         # result.returncode가 0이면 성공, 그렇지 않으면 실패
-        logger.debug(result.stdout)
+        if result.stdout:
+            if use_print:
+                print(result.stdout)
+            else:
+                logger.debug(result.stdout)
         if result.stderr:
             logger.debug(result.stderr)
         return result.returncode == 0

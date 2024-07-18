@@ -9,10 +9,17 @@ from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE  # noqa E402
 
 class FullWriteReadCompare:
     def run(self) -> bool:
-        value = randint(SSD_MIN_VALUE, SSD_MAX_VALUE)
-        FullWriteCommand().run(value)
+        READ_VALUE = randint(SSD_MIN_VALUE, SSD_MAX_VALUE)
+        FullWriteCommand().run(READ_VALUE)
         read_data = FullReadCommand().run()
-        return all(int(data, 16) == value for data in read_data)
+
+        is_valid = all(int(data, 16) == READ_VALUE for data in read_data)
+
+        if is_valid:
+            for i, value in enumerate(read_data):
+                print(f"LBA: {i:02}, value: {value}")  # print 는 shell 의 출력으로 사용
+
+        return is_valid
 
 
 if __name__ == '__main__':

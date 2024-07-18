@@ -12,6 +12,7 @@ class WriteAndErase:
         WriteCommand().run(lba, value)
         EraseCommand().run(lba, 2)
         ret = ReadCommand().run(lba)
+        print(f"LBA: {lba:02}, value: {ret}")  # print 는 shell 의 출력으로 사용
         return ret == "0x00000000"
 
 
