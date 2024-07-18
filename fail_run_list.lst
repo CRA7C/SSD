@@ -1,0 +1,6 @@
+WriteAndErase
+DummyFailTest
+FullWriteReadCompare
+FullReadCompare
+Write10AndCompare
+Loop_WriteAndReadCompare
