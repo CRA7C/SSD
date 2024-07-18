@@ -1,4 +1,6 @@
 from pathlib import Path
+from typing import List, Tuple, Set
+
 from ssd.command import CommandFactory, Command, ReadCommand
 
 BUFFER_FILE_PATH = Path(__file__).parent / 'buffer.txt'
@@ -13,12 +15,13 @@ class CommandBuffer:
         buffer_file_path (Path): 버퍼 파일 경로
         buffer (list): 명령어를 저장하는 리스트
     """
+
     def __init__(self):
         """
         CommandBuffer 클래스의 생성자. 버퍼 파일 경로를 설정하고 초기화합니다.
         """
         self.buffer_file_path: Path = Path(BUFFER_FILE_PATH)
-        self.buffer = []
+        self.buffer: List[Command] = []
         self.initialize()
 
     def initialize(self):
@@ -45,7 +48,7 @@ class CommandBuffer:
         with open(self.buffer_file_path, 'w') as f:
             f.write(self.get_saved_data())
 
-    def get_saved_data(self):
+    def get_saved_data(self) -> str:
         """
         버퍼에 저장된 명령어 데이터를 문자열 형식으로 반환합니다.
 
@@ -112,7 +115,7 @@ class CommandBuffer:
             elif command.option == 'E' and command.lba <= cmd.lba < command.lba + command.size:
                 return 0x00000000
 
-    def flush(self):
+    def flush(self) -> List[Command]:
         """
         버퍼를 비우고 모든 명령어를 반환합니다.
 
@@ -146,7 +149,7 @@ class CommandBuffer:
         self.save_buffer()
 
     @staticmethod
-    def merge_write_with_erase(erase_commands, key):
+    def merge_write_with_erase(erase_commands: Set[Tuple[str, int, int]], key: Tuple[str, int, int]):
         """
         쓰기 명령어와 삭제 명령어를 병합합니다.
 

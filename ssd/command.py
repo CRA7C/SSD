@@ -29,6 +29,9 @@ class Command:
         """
         return self.args
 
+    def get_key(self):
+        pass
+
 
 class ReadCommand(Command):
     """
@@ -47,6 +50,15 @@ class ReadCommand(Command):
         """
         super().__init__(args)
         self.lba = int(args[1])
+
+    def get_key(self) -> Tuple[str, int]:
+        """
+        명령 키를 반환합니다.
+
+        Returns:
+            tuple: 명령 키 (옵션, LBA)
+        """
+        return self.option, self.lba
 
 
 class WriteCommand(Command):
