@@ -83,6 +83,12 @@
 <span class="kn">from</span> <span class="nn">ssd.solidstatedrive</span> <span class="kn">import</span> <span class="n">SolidStateDrive</span>
 <span class="kn">from</span> <span class="nn">ssd.command_buffer</span> <span class="kn">import</span> <span class="n">CommandBuffer</span>
 <span class="kn">from</span> <span class="nn">ssd.command</span> <span class="kn">import</span> <span class="n">CommandFactory</span><span class="p">,</span> <span class="n">Command</span><span class="p">,</span> <span class="n">ReadCommand</span><span class="p">,</span> <span class="n">WriteCommand</span><span class="p">,</span> <span class="n">EraseCommand</span>
+<span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+
+<div class="viewcode-block" id="logger">
+<a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.logger">[docs]</a>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span></div>
+
 
 
 <div class="viewcode-block" id="SSDRunner">
@@ -106,6 +112,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        명령 버퍼를 비우고 명령어를 실행합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Buffer Flash&quot;</span><span class="p">)</span>
         <span class="n">cmd_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmd_list</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div>
@@ -121,13 +128,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">buff_flush</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">is_able_to_fast_read</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">read_fast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">get_read_fast</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+                <span class="n">read_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">get_read_fast</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">read_fast</span><span class="p">(</span><span class="n">read_value</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Read Fast : </span><span class="si">{</span><span class="n">read_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Read from NAND&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">need_flush</span><span class="p">():</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">buff_flush</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">push_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">option_buf</span><span class="o">.</span><span class="n">push_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Push into buffer&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SSDRunner.execute_command">
@@ -139,6 +150,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            command: 실행할 명령어 객체</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Execute CMD : </span><span class="si">{</span><span class="n">command</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">cmd_opt</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">option</span>
         <span class="k">if</span> <span class="n">cmd_opt</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">lba</span><span class="p">)</span>
@@ -151,12 +163,15 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;[SSD] Start SSDRunner&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="runner">
 <a class="viewcode-back" href="../../autoapi/ssd/__main__/index.html#ssd.__main__.runner">[docs]</a>
     <span class="n">runner</span> <span class="o">=</span> <span class="n">SSDRunner</span><span class="p">()</span></div>
 
     <span class="n">cmd_</span> <span class="o">=</span> <span class="n">CommandFactory</span><span class="o">.</span><span class="n">parse_command</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[SSD] Received CMD : </span><span class="si">{</span><span class="n">cmd_</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd_</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;[SSD] Finish SSDRunner&quot;</span><span class="p">)</span>
 </pre></div>
 
            </div>
