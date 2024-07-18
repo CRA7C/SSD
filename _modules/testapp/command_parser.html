@@ -77,6 +77,7 @@
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">from</span> <span class="nn">testapp</span> <span class="kn">import</span> <span class="n">command</span>
+<span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
 
 
@@ -136,11 +137,11 @@
         <span class="n">cmd_option</span> <span class="o">=</span> <span class="n">cmd_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">n_args</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">cmd_option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">cmd_if_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Command does not exist&quot;</span><span class="p">)</span>
+            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Command does not exist&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">cmd_if_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">][</span><span class="s1">&#39;required_args_cnt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">n_args</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of argument does not match&quot;</span><span class="p">)</span>
+            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;The number of argument does not match&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">cmd_if_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">][</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_list</span><span class="p">):</span>

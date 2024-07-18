@@ -77,6 +77,7 @@
 <span></span><span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
 <span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">SSD_LBA_RANGE</span>
+<span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 
 <div class="viewcode-block" id="FullRead">
@@ -100,7 +101,7 @@
 <span class="sd">        전체 데이터를 LBA와 함께 화면에 출력합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="n">SSD_LBA_RANGE</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>

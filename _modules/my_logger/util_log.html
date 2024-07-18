@@ -106,7 +106,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing function: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing function: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">wrapper</span></div>
@@ -267,15 +267,13 @@
 
             <span class="n">file_handler</span> <span class="o">=</span> <span class="n">MyRotatingFileHandler</span><span class="p">(</span><span class="n">LOG_FILE_PATH</span><span class="p">,</span> <span class="n">maxBytes</span><span class="o">=</span><span class="n">LOG_MAX_SIZE</span><span class="p">,</span> <span class="n">backupCount</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">file_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+            <span class="n">file_formatter</span> <span class="o">=</span> <span class="n">CustomFormatter</span><span class="p">()</span>
+            <span class="n">file_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">file_formatter</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
 
             <span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
             <span class="n">console_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-
-            <span class="n">formatter</span> <span class="o">=</span> <span class="n">CustomFormatter</span><span class="p">()</span>
-            <span class="n">file_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-            <span class="n">console_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+            <span class="n">console_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console_handler</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Logger.info">
@@ -339,7 +337,10 @@
         <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_back</span><span class="o">.</span><span class="n">f_back</span>
 
         <span class="n">func_name</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span>
-        <span class="n">class_name</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="p">[</span><span class="s1">&#39;self&#39;</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="s1">&#39;self&#39;</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">class_name</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="p">[</span><span class="s1">&#39;self&#39;</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class_name&#39;</span><span class="p">:</span> <span class="n">class_name</span><span class="p">,</span> <span class="s1">&#39;func_name&#39;</span><span class="p">:</span> <span class="n">func_name</span><span class="p">})</span></div>
 </div>
 

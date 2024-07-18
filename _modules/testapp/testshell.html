@@ -77,6 +77,7 @@
 <span></span><span class="kn">from</span> <span class="nn">testapp.command_parser</span> <span class="kn">import</span> <span class="n">CommandParser</span>
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">INVALID_COMMAND</span>
 <span class="kn">from</span> <span class="nn">testapp.scripts</span> <span class="kn">import</span> <span class="n">get_test_scripts</span><span class="p">,</span> <span class="n">run_script</span>
+<span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 <div class="viewcode-block" id="EXECUTE_VALID_WO_ARGS">
 <a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_VALID_WO_ARGS">[docs]</a>
@@ -120,6 +121,7 @@
         <span class="k">if</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">is_predefined_command</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">):</span>
             <span class="n">cmd_option</span><span class="p">,</span> <span class="n">cmd_args</span> <span class="o">=</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">validate_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+                <span class="c1"># Logger().debug(INVALID_COMMAND)</span>
                 <span class="k">return</span> <span class="n">EXECUTE_INVALID</span>
             <span class="n">cmd_if</span> <span class="o">=</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">get_command</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">)</span>
             <span class="n">cmd_if</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_args</span><span class="p">)</span>
@@ -129,7 +131,7 @@
             <span class="n">ts_dict</span> <span class="o">=</span> <span class="n">get_test_scripts</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">cmd_option</span> <span class="ow">in</span> <span class="n">ts_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">success</span> <span class="o">=</span> <span class="n">run_script</span><span class="p">(</span><span class="n">ts_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">])</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PASS&#39;</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s1">&#39;FAIL!&#39;</span><span class="p">)</span>
+                <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;PASS&#39;</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s1">&#39;FAIL!&#39;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">success</span>
         <span class="k">return</span> <span class="n">EXECUTE_INVALID</span></div>
 </div>
@@ -146,7 +148,7 @@
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">TestShell</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="n">EXECUTE_INVALID</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span></div>
+            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span></div>
 
 </pre></div>
 
