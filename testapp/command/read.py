@@ -14,17 +14,15 @@ class Read(CommandInterface):
         super().__init__()
         self.driver = SsdDriver()
 
-    def run(self, lba: str) -> str:
+    def run(self, lba: str):
         """
         지정된 LBA에서 데이터를 읽습니다.
+        읽어온 데이터를 화면에 출력합니다.
 
         Args:
             lba (str): 논리 블록 주소
-
-        Returns:
-            str: 읽은 데이터
         """
-        return self.driver.read(lba)
+        print(self.driver.read(lba))
 
     @staticmethod
     def is_valid_args(*args) -> bool:
