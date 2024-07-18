@@ -35,6 +35,9 @@ class SSDRunner:
         Returns:
             bool: 명령어가 유효한 경우 True를 반환합니다.
         """
+        if len(sys.argv) < 2:
+            raise ValueError("명령을 수행하기 위해 인자가 부족합니다.")
+
         if sys.argv[1] == 'F':
             return True
 
