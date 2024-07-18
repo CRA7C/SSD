@@ -87,6 +87,18 @@ Module Contents
 
 
 
+   .. py:method:: get_exact_log_name() -> str
+
+      until_날짜_시간.log에 맵핑되는 정확한 로그파일 명을 반환합니다.
+
+      :returns: until_날짜_시간.log 형식의 파일명 (경로포함 X)
+      :rtype: str
+
+
+
+   .. py:method:: rename_log_to_zip(filename)
+
+
 .. py:class:: CustomFormatter(fmt=None, datefmt=None, style='%', validate=True, *, defaults=None)
 
    Bases: :py:obj:`logging.Formatter`

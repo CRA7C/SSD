@@ -80,6 +80,7 @@
 <span class="kn">from</span> <span class="nn">logging.handlers</span> <span class="kn">import</span> <span class="n">RotatingFileHandler</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">re</span>
 
 <div class="viewcode-block" id="LOG_FILE_PATH">
 <a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.LOG_FILE_PATH">[docs]</a>
@@ -127,7 +128,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">doRollover</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_already_bkup_file</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_already_bkup_file</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rename_log_to_zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_exact_log_name</span><span class="p">())</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rename_backup_files</span><span class="p">()</span></div>
 
@@ -138,15 +140,15 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        백업 파일의 이름을 현재 날짜와 시간으로 변경합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">base_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span>
-        <span class="n">base_file_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">base_filename</span><span class="p">)</span>
         <span class="n">bkup_file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bkup_file_name</span><span class="p">()</span>
 
         <span class="c1"># RotatingFileHandler는 기본적으로 {로그파일이름}.1 .2 .3 이런식으로 백업파일 생성함</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">backupCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">old_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_filename</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">old_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">old_filename</span><span class="p">):</span>
-                <span class="n">new_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_file_dir</span><span class="p">,</span> <span class="n">bkup_file_name</span><span class="p">)</span>
+                <span class="n">new_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span><span class="p">),</span> <span class="n">bkup_file_name</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">new_filename</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">new_filename</span><span class="p">)</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old_filename</span><span class="p">,</span> <span class="n">new_filename</span><span class="p">)</span></div>
 
 
@@ -171,7 +173,37 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: 백업 파일이 이미 존재하면 True, 그렇지 않으면 False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
+        <span class="n">find_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;until_(\d</span><span class="si">{6}</span><span class="s1">)_(\d</span><span class="si">{6}</span><span class="s1">)\.log&#39;</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">find_pattern</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="MyRotatingFileHandler.get_exact_log_name">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.MyRotatingFileHandler.get_exact_log_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_exact_log_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        until_날짜_시간.log에 맵핑되는 정확한 로그파일 명을 반환합니다.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: until_날짜_시간.log 형식의 파일명 (경로포함 X)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">find_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;until_(\d</span><span class="si">{6}</span><span class="s1">)_(\d</span><span class="si">{6}</span><span class="s1">)\.log&#39;</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">find_pattern</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">filename</span></div>
+
+
+<div class="viewcode-block" id="MyRotatingFileHandler.rename_log_to_zip">
+<a class="viewcode-back" href="../../autoapi/my_logger/util_log/index.html#my_logger.MyRotatingFileHandler.rename_log_to_zip">[docs]</a>
+    <span class="k">def</span> <span class="nf">rename_log_to_zip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">until_log_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">zip_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseFilename</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.zip&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">zip_file_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zip_file_path</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">until_log_file_path</span><span class="p">,</span> <span class="n">zip_file_path</span><span class="p">)</span></div>
 </div>
 
 
