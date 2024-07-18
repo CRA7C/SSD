@@ -9,6 +9,8 @@ EXECUTE_VALID_WITH_ARGS = 1
 EXECUTE_INVALID = 0
 EXECUTE_EMPTY = -1
 
+logger = Logger()
+
 
 class TestShell:
     """
@@ -61,4 +63,4 @@ def main():
     while True:
         cmd = input("> ")
         if ts.execute(cmd) == EXECUTE_INVALID:
-            Logger().info(INVALID_COMMAND)
+            logger.info(INVALID_COMMAND)

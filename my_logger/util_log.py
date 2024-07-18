@@ -117,15 +117,14 @@ class CustomFormatter(logging.Formatter):
         Returns:
             str: 포맷된 로그 메시지
         """
-        time_format = self.formatTime(record, "%y.%m.%d %H:%M")
+        time_format = self.formatTime(record, "%y.%m.%d %H:%M:%S")
         class_name = record.class_name
         func_name = record.func_name
-        padded_function_name = f"{func_name}()"
-        fixed_length = 30
-        padded_function_name = padded_function_name.ljust(fixed_length)
+        fixed_length = 45
+        class_func_name = f'{class_name}.{func_name}()'.ljust(fixed_length)
         message = record.getMessage()
 
-        return f"[{time_format}] {class_name}.{padded_function_name} : {message}"
+        return f"[{time_format}] {class_func_name} : {message}"
 
 
 class Logger:
