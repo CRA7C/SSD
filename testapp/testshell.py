@@ -1,4 +1,5 @@
-from testapp.command.command_factory import *
+from testapp.command.command_factory import (CommandFactory, is_predefined_command_name,
+                                             validate_command, parse_cmd_args)
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
 from my_logger import Logger

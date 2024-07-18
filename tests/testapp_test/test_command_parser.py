@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from testapp.command.command_factory import *
+from testapp.command.command_factory import validate_command, parse_cmd_args
 
 
 class TestCommandParser(TestCase):
