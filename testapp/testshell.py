@@ -6,6 +6,7 @@ from testapp.scripts import get_test_scripts, run_script
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
 EXECUTE_INVALID = 0
+EXECUTE_EMPTY = -1
 
 
 class TestShell:
@@ -29,7 +30,7 @@ class TestShell:
                  - EXECUTE_INVALID (0): 유효하지 않은 명령어
         """
         if len(cmd) == 0:
-            return EXECUTE_INVALID
+            return EXECUTE_EMPTY
         cmd = cmd.strip()
 
         cmd_option = cmd.split()[0]
