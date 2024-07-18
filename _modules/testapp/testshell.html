@@ -120,7 +120,6 @@
         <span class="k">if</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">is_predefined_command</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">):</span>
             <span class="n">cmd_option</span><span class="p">,</span> <span class="n">cmd_args</span> <span class="o">=</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">validate_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">EXECUTE_INVALID</span>
             <span class="n">cmd_if</span> <span class="o">=</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">get_command</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">)</span>
             <span class="n">cmd_if</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_args</span><span class="p">)</span>

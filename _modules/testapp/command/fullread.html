@@ -94,14 +94,13 @@
 
 <div class="viewcode-block" id="FullRead.run">
 <a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.fullread.FullRead.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            list[str]: SSD의 모든 LBA에서 읽은 데이터 리스트</span>
+<span class="sd">        전체 데이터를 LBA와 함께 화면에 출력합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="n">SSD_LBA_RANGE</span><span class="p">]</span></div>
+        <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="n">SSD_LBA_RANGE</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LBA: </span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s2">, value: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>
