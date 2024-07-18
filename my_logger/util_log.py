@@ -206,5 +206,8 @@ class Logger:
         frame = inspect.currentframe().f_back.f_back
 
         func_name = frame.f_code.co_name
-        class_name = frame.f_locals['self'].__class__.__name__
+        class_name = ''
+        if 'self' in frame.f_locals.keys():
+            class_name = frame.f_locals['self'].__class__.__name__
+
         self.logger.log(level, message, extra={'class_name': class_name, 'func_name': func_name})
