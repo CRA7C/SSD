@@ -1,0 +1,22 @@
+testapp.scripts.dummy_fail_test
+===============================
+
+.. py:module:: testapp.scripts.dummy_fail_test
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.scripts.dummy_fail_test.DummyFailTest
+
+
+Module Contents
+---------------
+
+.. py:class:: DummyFailTest
+
+   .. py:method:: run() -> bool
+
+

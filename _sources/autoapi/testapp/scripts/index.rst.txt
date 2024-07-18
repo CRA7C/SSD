@@ -11,6 +11,7 @@ Submodules
    :maxdepth: 1
 
    /autoapi/testapp/scripts/_script_manager/index
+   /autoapi/testapp/scripts/dummy_fail_test/index
    /autoapi/testapp/scripts/dummy_test/index
    /autoapi/testapp/scripts/full_read10_and_compare/index
    /autoapi/testapp/scripts/full_read_compare/index
