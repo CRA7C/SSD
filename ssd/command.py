@@ -205,7 +205,7 @@ class CommandFactory:
     """
 
     @staticmethod
-    def parse_command(command_list: List[str]) -> Command:
+    def parse_command(arg_list: List[str]) -> Command:
         """
         주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
 
