@@ -150,15 +150,13 @@ class Logger:
 
             file_handler = MyRotatingFileHandler(LOG_FILE_PATH, maxBytes=LOG_MAX_SIZE, backupCount=1)
             file_handler.setLevel(logging.DEBUG)
+            file_formatter = CustomFormatter()
+            file_handler.setFormatter(file_formatter)
+            self.logger.addHandler(file_handler)
 
             console_handler = logging.StreamHandler()
             console_handler.setLevel(logging.INFO)
-
-            formatter = CustomFormatter()
-            file_handler.setFormatter(formatter)
-            console_handler.setFormatter(formatter)
-
-            self.logger.addHandler(file_handler)
+            console_handler.setFormatter(logging.Formatter('%(message)s'))
             self.logger.addHandler(console_handler)
 
     def info(self, message):
