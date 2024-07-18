@@ -1,6 +1,7 @@
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
 from testapp.constants import SSD_LBA_RANGE
+from my_logger import Logger
 
 
 class FullReadCommand(CommandInterface):
@@ -25,7 +26,7 @@ class FullReadCommand(CommandInterface):
         """
         ret = [self.driver.read(addr) for addr in SSD_LBA_RANGE]
         for i, value in enumerate(ret):
-            print(f"LBA: {i:02}, value: {value}")  # print 는 shell 의 출력으로 사용
+            Logger().info(f"LBA: {i:02}, value: {value}")  # print 는 shell 의 출력으로 사용
         return ret  # return 값은 test script 에서 사용
 
     @staticmethod
