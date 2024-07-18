@@ -48,6 +48,7 @@ class TestShell:
             if cmd_option in ts_dict.keys():
                 success = run_script(ts_dict[cmd_option])
                 Logger().debug('PASS' if success else 'FAIL!')
+                Logger().info('PASS' if success else 'FAIL!')
                 return success
         return EXECUTE_INVALID
 
