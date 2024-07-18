@@ -34,7 +34,6 @@ class SSDRunner:
         """
         주어진 명령어를 파싱하고 실행합니다.
         """
-
         if cmd.option == 'F':
             self.buff_flush()
         elif cmd.option == 'R':
@@ -47,9 +46,7 @@ class SSDRunner:
                 self.buff_flush()
             self.option_buf.push_command(cmd)
 
-
     def execute_command(self, command: Union[ReadCommand, WriteCommand, EraseCommand]):
-
         """
         특정 명령어를 실행합니다.
 
