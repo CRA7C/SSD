@@ -97,6 +97,11 @@
 <span class="n">EXECUTE_EMPTY</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
 
 
+<div class="viewcode-block" id="logger">
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.logger">[docs]</a>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span></div>
+
+
 
 <div class="viewcode-block" id="TestShell">
 <a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.TestShell">[docs]</a>
@@ -139,7 +144,7 @@
             <span class="n">ts_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ts_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>  <span class="c1"># lower case 도 포함</span>
             <span class="k">if</span> <span class="n">cmd_option</span> <span class="ow">in</span> <span class="n">ts_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">success</span> <span class="o">=</span> <span class="n">run_script</span><span class="p">(</span><span class="n">ts_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">])</span>
-                <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;PASS&#39;</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s1">&#39;FAIL!&#39;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;PASS&#39;</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s1">&#39;FAIL!&#39;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">success</span>
         <span class="k">return</span> <span class="n">EXECUTE_INVALID</span></div>
 </div>
@@ -157,7 +162,7 @@
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ts</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="n">EXECUTE_INVALID</span><span class="p">:</span>
-            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span></div>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span></div>
 
 </pre></div>
 

@@ -13,6 +13,7 @@ Attributes
    testapp.testshell.EXECUTE_VALID_WITH_ARGS
    testapp.testshell.EXECUTE_INVALID
    testapp.testshell.EXECUTE_EMPTY
+   testapp.testshell.logger
 
 
 Classes
@@ -47,6 +48,8 @@ Module Contents
 
 
 .. py:data:: EXECUTE_EMPTY
+
+.. py:data:: logger
 
 .. py:class:: TestShell
 

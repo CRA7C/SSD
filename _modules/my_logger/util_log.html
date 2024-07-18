@@ -227,15 +227,14 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            str: 포맷된 로그 메시지</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">time_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatTime</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="s2">&quot;%y.%m.</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
+        <span class="n">time_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatTime</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="s2">&quot;%y.%m.</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
         <span class="n">class_name</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">class_name</span>
         <span class="n">func_name</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">func_name</span>
-        <span class="n">padded_function_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">()&quot;</span>
-        <span class="n">fixed_length</span> <span class="o">=</span> <span class="mi">30</span>
-        <span class="n">padded_function_name</span> <span class="o">=</span> <span class="n">padded_function_name</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">fixed_length</span><span class="p">)</span>
+        <span class="n">fixed_length</span> <span class="o">=</span> <span class="mi">45</span>
+        <span class="n">class_func_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s1">()&#39;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">fixed_length</span><span class="p">)</span>
         <span class="n">message</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">time_format</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">padded_function_name</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">time_format</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">class_func_name</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span></div>
 </div>
 
 

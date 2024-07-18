@@ -4,6 +4,14 @@ testapp.command.command_factory
 .. py:module:: testapp.command.command_factory
 
 
+Attributes
+----------
+
+.. autoapisummary::
+
+   testapp.command.command_factory.logger
+
+
 Classes
 -------
 
@@ -23,6 +31,8 @@ Functions
 
 Module Contents
 ---------------
+
+.. py:data:: logger
 
 .. py:class:: CommandFactory
 
