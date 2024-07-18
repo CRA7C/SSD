@@ -169,4 +169,4 @@ class CommandBuffer:
         Returns:
             bool: 버퍼를 비울 필요가 있는 경우 True, 그렇지 않으면 False
         """
-        return len(self.buffer) > 10
+        return len(self.buffer) >= 10
