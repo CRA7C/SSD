@@ -49,15 +49,13 @@ class MyRotatingFileHandler(RotatingFileHandler):
         """
         백업 파일의 이름을 현재 날짜와 시간으로 변경합니다.
         """
-        base_filename = self.baseFilename
-        base_file_dir = os.path.dirname(base_filename)
         bkup_file_name = self.get_bkup_file_name()
 
         # RotatingFileHandler는 기본적으로 {로그파일이름}.1 .2 .3 이런식으로 백업파일 생성함
         for i in range(1, self.backupCount + 1):
-            old_filename = f"{base_filename}.{i}"
+            old_filename = f"{self.baseFilename}.{i}"
             if os.path.exists(old_filename):
-                new_filename = os.path.join(base_file_dir, bkup_file_name)
+                new_filename = os.path.join(os.path.dirname(self.baseFilename), bkup_file_name)
                 if os.path.isfile(new_filename):
                     os.remove(new_filename)
                 os.rename(old_filename, new_filename)
@@ -97,15 +95,12 @@ class MyRotatingFileHandler(RotatingFileHandler):
                 return filename
 
     def rename_log_to_zip(self, filename):
-        base_file_dir = os.path.dirname(self.baseFilename)
-        zip_file_name = os.path.splitext(filename)[0] + ".zip"
-        zip_file_name = os.path.join(base_file_dir, zip_file_name)
+        until_log_file_path = os.path.join(os.path.dirname(self.baseFilename), filename)
+        zip_file_path = os.path.join(os.path.dirname(self.baseFilename), os.path.splitext(filename)[0] + ".zip")
 
-        full_path_filename = os.path.join(base_file_dir, filename)
-
-        if os.path.isfile(zip_file_name):
-            os.remove(zip_file_name)
-        os.rename(full_path_filename, zip_file_name)
+        if os.path.isfile(zip_file_path):
+            os.remove(zip_file_path)
+        os.rename(until_log_file_path, zip_file_path)
 
 
 class CustomFormatter(logging.Formatter):
