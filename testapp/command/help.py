@@ -27,7 +27,7 @@ class Help(CommandInterface):
         """
         사용 가능한 명령어와 옵션을 출력합니다.
         """
-        Logger().debug(TESTAPP_HELP)
+        Logger().info(TESTAPP_HELP)
 
     @staticmethod
     def is_valid_args(*args) -> bool:

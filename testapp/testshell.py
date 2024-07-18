@@ -55,4 +55,4 @@ def main():
     while True:
         cmd = input("> ")
         if TestShell.execute(cmd) == EXECUTE_INVALID:
-            Logger().debug(INVALID_COMMAND)
+            Logger().info(INVALID_COMMAND)
