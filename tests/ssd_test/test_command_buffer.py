@@ -9,8 +9,6 @@ class TestCommandBuffer(TestCase):
         super().setUp()
         self.cmd_buffer = CommandBuffer()
 
-
-
     def test_optimize(self):
         test_commands = [
             ('W', '1', '0x0000000A'),  # 주소 1에 값 0x0A을 씀
@@ -42,5 +40,3 @@ W 10 0x0000003C
 
         actual_result = self.cmd_buffer.get_saved_data()
         self.assertEqual(expected_result, actual_result)
-
-

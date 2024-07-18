@@ -1,26 +1,23 @@
 import sys
 from pathlib import Path
-from typing import List
-
 sys.path.append(str(Path(__file__).parents[2].resolve()))
-from testapp.command.__interface import CommandInterface  # noqa E402
-from testapp.command import Write, Read  # noqa E402
+from testapp.command import WriteCommand, ReadCommand  # noqa E402
 
 TARGET_LBA = [0, 1, 2, 3, 4, 5]
 WRITE_VALUE = 0xAAAABBBB
 READ_VALUE = 0x12345678
 
 
-class TestApp2(CommandInterface):
+class TestApp2:
     def __init__(self):
-        self.read = Read()
-        self.write = Write()
+        self.read = ReadCommand()
+        self.write = WriteCommand()
 
-    def run(self) -> bool:
+    def run(self):
         self.write_30_times()
         self.over_write()
         read_data = self.read_target_lba()
-        return self.validate(read_data)
+        return all(int(data, 16) == READ_VALUE for data in read_data)
 
     def write_30_times(self):
         # Total 30회의 write을 수행.
@@ -34,22 +31,11 @@ class TestApp2(CommandInterface):
         for lba in TARGET_LBA:
             self.write.run(lba, READ_VALUE)
 
-    def read_target_lba(self) -> List[str]:
+    def read_target_lba(self):
         read_data = []
         for lba in TARGET_LBA:
             read_data.append(self.read.run(lba))
         return read_data
-
-    @staticmethod
-    def validate(read_data: List[str]) -> bool:
-        for data in read_data:
-            if int(data, 16) != READ_VALUE:
-                return False
-        return True
-
-    @staticmethod
-    def is_valid_args(self, *args):
-        return True
 
 
 if __name__ == '__main__':

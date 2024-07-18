@@ -1,4 +1,5 @@
+WriteAndErase
 FullWriteReadCompare
-FullRead10AndCompare
+FullReadCompare
 Write10AndCompare
 Loop_WriteAndReadCompare

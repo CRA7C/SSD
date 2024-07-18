@@ -92,6 +92,10 @@ ssd/nand.txt
 ssd/result.txt
 ssd/buffer.txt
 
+# Log stuffs
+log/
+
+
 # individual files and folders
 tests_in_dev/
 *.bak

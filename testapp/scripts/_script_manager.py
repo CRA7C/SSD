@@ -1,7 +1,6 @@
 import os
 import ast
 import sys
-import logging
 import importlib
 import subprocess
 from typing import List, Tuple
@@ -9,41 +8,18 @@ from testapp.constants import SCRIPTS_DIRECTORY
 from my_logger import Logger
 
 
-class CommandInterfaceVisitor(ast.NodeVisitor):
-    """
-    CommandInterfaceVisitor 클래스는 주어진 인터페이스를 구현한 클래스들을 찾기 위한 AST 노드 방문자입니다.
-
-    .. note:
-        ast: Abstract Syntax Trees. 파이썬 추상 구문 문법의 트리 처리 도구
-
-    Attributes:
-        interface_name (str): 찾고자 하는 인터페이스 이름
-        found_classes (List[str]): 발견된 클래스 이름 리스트
-    """
-    def __init__(self, interface_name: str):
-        self.interface_name = interface_name
+class ClassVisitor(ast.NodeVisitor):
+    def __init__(self):
         self.found_classes = []
 
-    def visit_ClassDef(self, node):  # do not change the overwrite method name.
-        """
-        AST (Abstract Syntax Trees) 에서 클래스 정의 노드를 방문합니다.
-
-        Args:
-            node (ast.ClassDef): 클래스 정의 노드
-        """
-        for base in node.bases:
-            if isinstance(base, ast.Name) and base.id == self.interface_name:
-                self.found_classes.append(node.name)
+    def visit_ClassDef(self, node):
+        self.found_classes.append(node.name)
         self.generic_visit(node)
 
 
-def find_command_classes(interface_name: str) -> List[Tuple[str, List[str]]]:
+def find_classes() -> List[Tuple[str, List[str]]]:
     """
-    주어진 인터페이스를 구현한 클래스를 찾습니다.
-
-    Args:
-        interface_name (str): 인터페이스 이름
-
+    주어진 디렉토리 내의 모든 파이썬 파일에서 정의된 클래스를 찾습니다.
     Returns:
         List[Tuple[str, List[str]]]: 모듈 이름과 클래스 이름 리스트의 튜플 리스트
     """
@@ -54,7 +30,7 @@ def find_command_classes(interface_name: str) -> List[Tuple[str, List[str]]]:
             filepath = os.path.join(directory, filename)
             with open(filepath, 'r', encoding='utf-8') as file:
                 node = ast.parse(file.read(), filename=filename)
-                visitor = CommandInterfaceVisitor(interface_name)
+                visitor = ClassVisitor()
                 visitor.visit(node)
                 if visitor.found_classes:
                     module_name = filename[:-3]  # .py 확장자 제거
@@ -69,7 +45,7 @@ def get_test_scripts() -> dict[str, str]:
     Returns:
         Dict[str, str]: 테스트 스크립트 딕셔너리 {테스트 이름: 스크립트 절대 경로}
     """
-    class_info = find_command_classes('CommandInterface')
+    class_info = find_classes()
     ret_dict = {}
     for module_name, class_names in class_info:
         for class_name in class_names:
@@ -84,7 +60,7 @@ def get_classes() -> List[object]:
     Returns:
         List[object]: 클래스 객체 리스트
     """
-    class_info = find_command_classes('CommandInterface')
+    class_info = find_classes()
     class_list = []
     original_sys_path = sys.path.copy()
     try:
@@ -113,7 +89,7 @@ def run_script(script_name: str) -> bool:
         # result.returncode가 0이면 성공, 그렇지 않으면 실패
         Logger().debug(result.stdout)
         if result.stderr:
-            logging.error(result.stderr)
+            Logger().debug(result.stderr)
         return result.returncode == 0
     except Exception as e:
         Logger().debug(f"Error running script: {e}")
@@ -131,15 +107,15 @@ def run_test_script_file(list_file: str):
     with open(list_file, 'r', encoding='utf-8') as f:
         for test_id in f.readlines():
             test_id = test_id.strip()
-            Logger().info(f"{test_id:30} --- ", end="")
+            print(f"{test_id:30} --- ", end="")
             if test_id in ts_dict.keys():
-                Logger().info("Run...", end="", flush=True)
+                print("Run...", end="", flush=True)
                 if run_script(ts_dict[test_id]):
-                    Logger().info('PASS')
+                    print('PASS')
                 else:
-                    Logger().info('FAIL!')
+                    print('FAIL!')
             else:
-                Logger().info("NOT FOUND!")
+                print("NOT FOUND!")
 
 
 if __name__ == '__main__':

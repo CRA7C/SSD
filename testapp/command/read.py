@@ -4,13 +4,14 @@ from testapp.util import is_in_range_lba
 from my_logger import Logger
 
 
-class Read(CommandInterface):
+class ReadCommand(CommandInterface):
     """
     Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.
 
     Attributes:
         driver (SsdDriver): SSD 드라이버 객체
     """
+    required_args_cnt: int = 1
 
     def __init__(self):
         super().__init__()

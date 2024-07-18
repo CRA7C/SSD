@@ -5,6 +5,7 @@ class CommandInterface(ABC):
     """
     CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.
     """
+    required_args_cnt: int = 0
 
     @abstractmethod
     def run(self, *args, **kwarg):

@@ -10,6 +10,8 @@ from testapp.constants import SSD_MIN_VALUE, SSD_MAX_VALUE, SSD_START_LBA, SSD_E
 RESULT_FILE = "result.txt"
 READ_COMMAND = "R"
 WRITE_COMMAND = "W"
+ERASE_COMMAND = "E"
+FLUSH_COMMAND = "F"
 SSD_COMMAND = "ssd"
 SSD_MODULE = "ssd"
 
@@ -29,11 +31,15 @@ def validate_ssd_command(command: str) -> None:
     if args[0] != SSD_COMMAND:
         raise ValueError(f"Applied wrong command: {command}")
     op = args[1]
-    if op == WRITE_COMMAND and len(args) == 4:
+    if op == WRITE_COMMAND and len(args) == 4:  # ssd W lba value
         validate_ssd_lba(args[2])
         validate_ssd_value(args[3])
-    elif op == READ_COMMAND and len(args) == 3:
+    elif op == READ_COMMAND and len(args) == 3:  # ssd R lba
         validate_ssd_lba(args[2])
+    elif op == ERASE_COMMAND and len(args) == 4:  # ssd E lba total_size
+        validate_ssd_lba(args[2])
+    elif op == FLUSH_COMMAND and len(args) == 2:  # ssd F
+        pass
     else:
         raise ValueError(f"Applied wrong command: {command}")
 

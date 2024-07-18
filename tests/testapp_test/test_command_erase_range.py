@@ -1,13 +1,13 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from testapp.command.erase_range import EraseRange
+from testapp.command.erase_range import EraseRangeCommand
 from testapp.ssd_driver import SsdDriver
 
 
 class TestEraseRange(TestCase):
     def setUp(self):
-        self.cmd = EraseRange()
+        self.cmd = EraseRangeCommand()
 
     @patch.object(SsdDriver, 'erase')
     def test_run_small_range(self, mock_erase):

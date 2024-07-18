@@ -1,13 +1,13 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from testapp.command.erase import Erase
+from testapp.command.erase import EraseCommand
 from testapp.ssd_driver import SsdDriver
 
 
 class TestErase(TestCase):
     def setUp(self):
-        self.cmd = Erase()
+        self.cmd = EraseCommand()
 
     @patch.object(SsdDriver, 'erase')
     def test_run(self, mock_erase):

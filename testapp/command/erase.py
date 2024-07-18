@@ -5,13 +5,14 @@ from testapp.ssd_driver import SsdDriver
 from testapp.util import is_valid_size, is_in_range_lba
 
 
-class Erase(CommandInterface):
+class EraseCommand(CommandInterface):
     """
     Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.
 
     Attributes:
         driver (SsdDriver): SSD 드라이버 객체
     """
+    required_args_cnt: int = 2
 
     def __init__(self):
         self.driver = SsdDriver()

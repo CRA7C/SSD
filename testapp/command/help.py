@@ -1,5 +1,4 @@
 from testapp.command.__interface import CommandInterface
-from my_logger import Logger
 
 TESTAPP_HELP = r"""
 Usage:
@@ -15,19 +14,21 @@ Commands:
   erase             SSD 데이터 지우기 (LBA ~ LBA + SIZE)
   erase_range       SSD 데이터 지우기 (Start LBA ~ End LBA)
   flush             Command Buffer에 있는 모든 명령어들을 수행하여 Buffer를 비움
+  cls               Clear Screen
 """
 
 
-class Help(CommandInterface):
+class HelpCommand(CommandInterface):
     """
     Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.
     """
+    required_args_cnt: int = 0
 
-    def run(self, *args, **kwarg):
+    def run(self):
         """
         사용 가능한 명령어와 옵션을 출력합니다.
         """
-        Logger().info(TESTAPP_HELP)
+        print(TESTAPP_HELP)
 
     @staticmethod
     def is_valid_args(*args) -> bool:
