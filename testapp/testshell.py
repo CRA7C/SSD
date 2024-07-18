@@ -1,8 +1,7 @@
-from testapp.command_parser import (is_predefined_command_name, validate_command,
-                                    parse_args, get_command_instance)
+from testapp.command.command_parser import (is_predefined_command_name, validate_command,
+                                            parse_args, get_command_instance)
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
-from testapp.command.__interface import CommandInterface
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1

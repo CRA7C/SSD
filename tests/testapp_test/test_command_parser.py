@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from testapp.command_parser import *
+from testapp.command.command_parser import *
 
 
 class TestCommandParser(TestCase):
