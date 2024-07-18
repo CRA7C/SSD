@@ -1,10 +1,9 @@
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parents[2].resolve()))
-from testapp.command.__interface import CommandInterface  # noqa E402
 
 
-class DummyTest(CommandInterface):
+class DummyTest:
     def run(self) -> bool:
         return True
 

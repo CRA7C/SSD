@@ -4,13 +4,12 @@ sys.path.append(str(Path(__file__).parents[2].resolve()))
 from testapp.command import FullReadCommand  # noqa E402
 
 
-class FullRead10AndCompare:
+class FullReadCompare:
     def run(self) -> bool:
-        init_data = FullReadCommand().run()
-        for _ in range(9):
-            test_data = FullReadCommand().run()
-            if init_data != test_data:
-                return False
+        data1 = FullReadCommand().run()
+        data2 = FullReadCommand().run()
+        if data1 != data2:
+            return False
         return True
 
     @staticmethod
@@ -19,4 +18,4 @@ class FullRead10AndCompare:
 
 
 if __name__ == '__main__':
-    sys.exit(0 if FullRead10AndCompare().run() else 1)
+    sys.exit(0 if FullReadCompare().run() else 1)

@@ -1,17 +1,16 @@
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parents[2].resolve()))
-from testapp.command.__interface import CommandInterface  # noqa E402
-from testapp.command import FullRead, FullWrite  # noqa E402
+from testapp.command import FullReadCommand, FullWriteCommand  # noqa E402
 
 READ_VALUE = 0x12345678
 
 
-class TestApp1(CommandInterface):
+class TestApp1:
 
     def run(self):
-        FullWrite().run(READ_VALUE)
-        read_data = FullRead().run()
+        FullWriteCommand().run(READ_VALUE)
+        read_data = FullReadCommand().run()
         return self.validate_data(read_data)
 
     @staticmethod
@@ -19,10 +18,6 @@ class TestApp1(CommandInterface):
         for data in read_data:
             if int(data, 16) != READ_VALUE:
                 return False
-        return True
-
-    @staticmethod
-    def is_valid_args(self, *args):
         return True
 
 
