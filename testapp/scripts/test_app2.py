@@ -1,5 +1,7 @@
 import sys
 from pathlib import Path
+from typing import List
+
 sys.path.append(str(Path(__file__).parents[2].resolve()))
 from testapp.command.__interface import CommandInterface  # noqa E402
 from testapp.command import Write, Read  # noqa E402
@@ -14,7 +16,7 @@ class TestApp2(CommandInterface):
         self.read = Read()
         self.write = Write()
 
-    def run(self):
+    def run(self) -> bool:
         self.write_30_times()
         self.over_write()
         read_data = self.read_target_lba()
@@ -32,14 +34,14 @@ class TestApp2(CommandInterface):
         for lba in TARGET_LBA:
             self.write.run(lba, READ_VALUE)
 
-    def read_target_lba(self):
+    def read_target_lba(self) -> List[str]:
         read_data = []
         for lba in TARGET_LBA:
             read_data.append(self.read.run(lba))
         return read_data
 
     @staticmethod
-    def validate(read_data):
+    def validate(read_data: List[str]) -> bool:
         for data in read_data:
             if int(data, 16) != READ_VALUE:
                 return False

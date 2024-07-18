@@ -2,6 +2,7 @@ from typing import Any
 
 from testapp import command
 from my_logger import Logger
+from testapp.command.__interface import CommandInterface
 
 
 class CommandParser:
@@ -21,7 +22,7 @@ class CommandParser:
     }
 
     @classmethod
-    def is_predefined_command(cls, name) -> bool:
+    def is_predefined_command(cls, name: str) -> bool:
         """
         주어진 이름이 사전 정의된 명령어인지 확인합니다.
 
@@ -36,7 +37,7 @@ class CommandParser:
         return False
 
     @classmethod
-    def validate_command(cls, cmd) -> bool:
+    def validate_command(cls, cmd: str) -> bool:
         """
         주어진 명령어의 유효성을 검사합니다.
 
@@ -77,7 +78,7 @@ class CommandParser:
         return (cmd_option, cmd_list[1:]) if len(cmd_list) > 1 else (cmd_option, [])
 
     @classmethod
-    def get_command(cls, cmd_option):
+    def get_command(cls, cmd_option: str) -> CommandInterface:
         """
         주어진 명령 옵션에 해당하는 명령어 객체를 반환합니다.
 
