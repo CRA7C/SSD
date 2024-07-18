@@ -17,7 +17,7 @@ Classes
 
 .. autoapisummary::
 
-   testapp.scripts._script_manager.CommandInterfaceVisitor
+   testapp.scripts._script_manager.ClassVisitor
 
 
 Functions
@@ -25,7 +25,7 @@ Functions
 
 .. autoapisummary::
 
-   testapp.scripts._script_manager.find_command_classes
+   testapp.scripts._script_manager.find_classes
    testapp.scripts._script_manager.get_test_scripts
    testapp.scripts._script_manager.get_classes
    testapp.scripts._script_manager.run_script
@@ -35,45 +35,35 @@ Functions
 Module Contents
 ---------------
 
-.. py:class:: CommandInterfaceVisitor(interface_name: str)
+.. py:class:: ClassVisitor
 
    Bases: :py:obj:`ast.NodeVisitor`
 
 
-   CommandInterfaceVisitor 클래스는 주어진 인터페이스를 구현한 클래스들을 찾기 위한 AST 노드 방문자입니다.
+   A node visitor base class that walks the abstract syntax tree and calls a
+   visitor function for every node found.  This function may return a value
+   which is forwarded by the `visit` method.
 
-   .. note:
-       ast: Abstract Syntax Trees. 파이썬 추상 구문 문법의 트리 처리 도구
+   This class is meant to be subclassed, with the subclass adding visitor
+   methods.
 
-   .. attribute:: interface_name
+   Per default the visitor functions for the nodes are ``'visit_'`` +
+   class name of the node.  So a `TryFinally` node visit function would
+   be `visit_TryFinally`.  This behavior can be changed by overriding
+   the `visit` method.  If no visitor function exists for a node
+   (return value `None`) the `generic_visit` visitor is used instead.
 
-      찾고자 하는 인터페이스 이름
-
-      :type: str
-
-   .. attribute:: found_classes
-
-      발견된 클래스 이름 리스트
-
-      :type: List[str]
+   Don't use the `NodeVisitor` if you want to apply changes to nodes during
+   traversing.  For this a special visitor exists (`NodeTransformer`) that
+   allows modifications.
 
 
    .. py:method:: visit_ClassDef(node)
 
-      AST (Abstract Syntax Trees) 에서 클래스 정의 노드를 방문합니다.
 
-      :param node: 클래스 정의 노드
-      :type node: ast.ClassDef
+.. py:function:: find_classes() -> List[Tuple[str, List[str]]]
 
-
-
-.. py:function:: find_command_classes(interface_name: str) -> List[Tuple[str, List[str]]]
-
-   주어진 인터페이스를 구현한 클래스를 찾습니다.
-
-   :param interface_name: 인터페이스 이름
-   :type interface_name: str
-
+   주어진 디렉토리 내의 모든 파이썬 파일에서 정의된 클래스를 찾습니다.
    :returns: 모듈 이름과 클래스 이름 리스트의 튜플 리스트
    :rtype: List[Tuple[str, List[str]]]
 

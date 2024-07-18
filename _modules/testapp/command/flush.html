@@ -78,21 +78,26 @@
 <span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
 
 
-<div class="viewcode-block" id="Flush">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.Flush">[docs]</a>
-<span class="k">class</span> <span class="nc">Flush</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
+<div class="viewcode-block" id="FlushCommand">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.FlushCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">FlushCommand</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
+<div class="viewcode-block" id="FlushCommand.required_args_cnt">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/flush/index.html#testapp.command.flush.FlushCommand.required_args_cnt">[docs]</a>
+    <span class="n">required_args_cnt</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">SsdDriver</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Flush.run">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.Flush.run">[docs]</a>
+<div class="viewcode-block" id="FlushCommand.run">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.FlushCommand.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="Flush.is_valid_args">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.Flush.is_valid_args">[docs]</a>
+<div class="viewcode-block" id="FlushCommand.is_valid_args">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.flush.FlushCommand.is_valid_args">[docs]</a>
     <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>

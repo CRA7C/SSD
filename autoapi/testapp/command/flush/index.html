@@ -98,7 +98,7 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.flush.Flush" title="testapp.command.flush.Flush"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Flush</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.flush.FlushCommand" title="testapp.command.flush.FlushCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlushCommand</span></code></a></p></td>
 <td><p>CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.</p></td>
 </tr>
 </tbody>
@@ -107,19 +107,24 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.flush.Flush">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.flush.</span></span><span class="sig-name descname"><span class="pre">Flush</span></span><a class="reference internal" href="../../../../_modules/testapp/command/flush.html#Flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.flush.Flush" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.flush.FlushCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.flush.</span></span><span class="sig-name descname"><span class="pre">FlushCommand</span></span><a class="reference internal" href="../../../../_modules/testapp/command/flush.html#FlushCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.flush.FlushCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.flush.FlushCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="reference internal" href="../../../../_modules/testapp/command/flush.html#FlushCommand.required_args_cnt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.flush.FlushCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.flush.Flush.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/command/flush.html#Flush.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.flush.Flush.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.flush.FlushCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/command/flush.html#FlushCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.flush.FlushCommand.run" title="Link to this definition"></a></dt>
 <dd><p>명령어를 실행하는 메서드입니다.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.flush.Flush.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/command/flush.html#Flush.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.flush.Flush.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.flush.FlushCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/command/flush.html#FlushCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.flush.FlushCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>명령어의 인자가 유효한지 확인하는 메서드입니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>

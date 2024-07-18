@@ -1,0 +1,22 @@
+testapp.scripts.full_read_compare
+=================================
+
+.. py:module:: testapp.scripts.full_read_compare
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.scripts.full_read_compare.FullReadCompare
+
+
+Module Contents
+---------------
+
+.. py:class:: FullReadCompare
+
+   .. py:method:: run() -> bool
+
+

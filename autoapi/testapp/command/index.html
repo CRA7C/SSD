@@ -98,6 +98,8 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="__interface/index.html">testapp.command.__interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clear_screen/index.html">testapp.command.clear_screen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_factory/index.html">testapp.command.command_factory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="erase/index.html">testapp.command.erase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="erase_common/index.html">testapp.command.erase_common</a></li>
 <li class="toctree-l1"><a class="reference internal" href="erase_range/index.html">testapp.command.erase_range</a></li>
@@ -115,32 +117,35 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.Write" title="testapp.command.Write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Write</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.WriteCommand" title="testapp.command.WriteCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WriteCommand</span></code></a></p></td>
 <td><p>Write 클래스는 지정된 LBA에 데이터를 쓰는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.Read" title="testapp.command.Read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Read</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.ReadCommand" title="testapp.command.ReadCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReadCommand</span></code></a></p></td>
 <td><p>Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.Exit" title="testapp.command.Exit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exit</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.ExitCommand" title="testapp.command.ExitCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExitCommand</span></code></a></p></td>
 <td><p>Exit 클래스는 프로그램을 종료하는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.Help" title="testapp.command.Help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Help</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.HelpCommand" title="testapp.command.HelpCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HelpCommand</span></code></a></p></td>
 <td><p>Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.FullWrite" title="testapp.command.FullWrite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FullWrite</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.FullWriteCommand" title="testapp.command.FullWriteCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FullWriteCommand</span></code></a></p></td>
 <td><p>FullWrite 클래스는 SSD의 모든 LBA에 동일한 값을 쓰는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.FullRead" title="testapp.command.FullRead"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FullRead</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.FullReadCommand" title="testapp.command.FullReadCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FullReadCommand</span></code></a></p></td>
 <td><p>FullRead 클래스는 SSD의 모든 LBA에서 데이터를 읽는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.Erase" title="testapp.command.Erase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Erase</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.EraseCommand" title="testapp.command.EraseCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EraseCommand</span></code></a></p></td>
 <td><p>Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.EraseRange" title="testapp.command.EraseRange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EraseRange</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.EraseRangeCommand" title="testapp.command.EraseRangeCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EraseRangeCommand</span></code></a></p></td>
 <td><p>EraseRange 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.Flush" title="testapp.command.Flush"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Flush</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.FlushCommand" title="testapp.command.FlushCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlushCommand</span></code></a></p></td>
 <td><p>CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#testapp.command.ClearScreenCommand" title="testapp.command.ClearScreenCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClearScreenCommand</span></code></a></p></td>
+<td><p>Exit 클래스는 프로그램을 종료하는 명령어를 구현합니다.</p></td>
 </tr>
 </tbody>
 </table>
@@ -148,13 +153,13 @@
 <section id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.Write">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">Write</span></span><a class="reference internal" href="../../../_modules/testapp/command/write.html#Write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Write" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.WriteCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">WriteCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/write.html#WriteCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.WriteCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Write 클래스는 지정된 LBA에 데이터를 쓰는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.Write.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.Write.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.WriteCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.WriteCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -163,9 +168,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.WriteCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#testapp.command.WriteCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Write.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/write.html#Write.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Write.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.WriteCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/write.html#WriteCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.WriteCommand.run" title="Link to this definition"></a></dt>
 <dd><p>지정된 LBA에 데이터를 씁니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -178,8 +188,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Write.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/write.html#Write.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Write.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.WriteCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/write.html#WriteCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.WriteCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -194,13 +204,13 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.Read">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">Read</span></span><a class="reference internal" href="../../../_modules/testapp/command/read.html#Read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Read" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.ReadCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">ReadCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/read.html#ReadCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ReadCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.Read.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.Read.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.ReadCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.ReadCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -209,9 +219,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.ReadCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#testapp.command.ReadCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Read.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/read.html#Read.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Read.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.ReadCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/read.html#ReadCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ReadCommand.run" title="Link to this definition"></a></dt>
 <dd><p>지정된 LBA에서 데이터를 읽습니다.
 읽어온 데이터를 화면에 출력합니다.</p>
 <dl class="field-list simple">
@@ -222,8 +237,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Read.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/read.html#Read.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Read.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.ReadCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/read.html#ReadCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ReadCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -238,51 +253,61 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.Exit">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">Exit</span></span><a class="reference internal" href="../../../_modules/testapp/command/exit.html#Exit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Exit" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.ExitCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">ExitCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/exit.html#ExitCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ExitCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Exit 클래스는 프로그램을 종료하는 명령어를 구현합니다.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.ExitCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#testapp.command.ExitCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Exit.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/exit.html#Exit.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Exit.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.ExitCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/exit.html#ExitCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ExitCommand.run" title="Link to this definition"></a></dt>
 <dd><p>명령어를 실행하는 메서드입니다.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Exit.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/exit.html#Exit.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Exit.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.ExitCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/exit.html#ExitCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ExitCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.Help">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">Help</span></span><a class="reference internal" href="../../../_modules/testapp/command/help.html#Help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Help" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.HelpCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">HelpCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/help.html#HelpCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.HelpCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.HelpCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#testapp.command.HelpCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Help.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/help.html#Help.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Help.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.HelpCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/help.html#HelpCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.HelpCommand.run" title="Link to this definition"></a></dt>
 <dd><p>사용 가능한 명령어와 옵션을 출력합니다.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Help.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/help.html#Help.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Help.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.HelpCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/help.html#HelpCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.HelpCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.FullWrite">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">FullWrite</span></span><a class="reference internal" href="../../../_modules/testapp/command/fullwrite.html#FullWrite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullWrite" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FullWriteCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">FullWriteCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/fullwrite.html#FullWriteCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullWriteCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>FullWrite 클래스는 SSD의 모든 LBA에 동일한 값을 쓰는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.FullWrite.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.FullWrite.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FullWriteCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.FullWriteCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -291,9 +316,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.FullWriteCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#testapp.command.FullWriteCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.FullWrite.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/fullwrite.html#FullWrite.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullWrite.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FullWriteCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/fullwrite.html#FullWriteCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullWriteCommand.run" title="Link to this definition"></a></dt>
 <dd><p>SSD의 모든 LBA에 값을 씁니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -303,8 +333,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.FullWrite.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/fullwrite.html#FullWrite.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullWrite.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FullWriteCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/fullwrite.html#FullWriteCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullWriteCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -319,13 +349,13 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.FullRead">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">FullRead</span></span><a class="reference internal" href="../../../_modules/testapp/command/fullread.html#FullRead"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullRead" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FullReadCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">FullReadCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/fullread.html#FullReadCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullReadCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>FullRead 클래스는 SSD의 모든 LBA에서 데이터를 읽는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.FullRead.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.FullRead.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FullReadCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.FullReadCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -334,29 +364,41 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.FullReadCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#testapp.command.FullReadCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.FullRead.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/fullread.html#FullRead.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullRead.run" title="Link to this definition"></a></dt>
-<dd><p>SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.
-전체 데이터를 LBA와 함께 화면에 출력합니다.</p>
+<dt class="sig sig-object py" id="testapp.command.FullReadCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/testapp/command/fullread.html#FullReadCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullReadCommand.run" title="Link to this definition"></a></dt>
+<dd><p>SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>SSD의 모든 LBA에서 읽은 데이터 리스트</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.FullRead.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/fullread.html#FullRead.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullRead.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FullReadCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/fullread.html#FullReadCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FullReadCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.Erase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">Erase</span></span><a class="reference internal" href="../../../_modules/testapp/command/erase.html#Erase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Erase" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">EraseCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/erase.html#EraseCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.Erase.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.Erase.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.EraseCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -365,9 +407,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.EraseCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#testapp.command.EraseCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Erase.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/erase.html#Erase.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Erase.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/erase.html#EraseCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseCommand.run" title="Link to this definition"></a></dt>
 <dd><p>지정된 LBA와 크기만큼 데이터를 삭제합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -380,8 +427,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Erase.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/erase.html#Erase.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Erase.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/erase.html#EraseCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -399,13 +446,13 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.EraseRange">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">EraseRange</span></span><a class="reference internal" href="../../../_modules/testapp/command/erase_range.html#EraseRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseRange" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseRangeCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">EraseRangeCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/erase_range.html#EraseRangeCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseRangeCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>EraseRange 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.EraseRange.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.EraseRange.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseRangeCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.EraseRangeCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -414,9 +461,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.EraseRangeCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#testapp.command.EraseRangeCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.EraseRange.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/erase_range.html#EraseRange.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseRange.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseRangeCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/erase_range.html#EraseRangeCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseRangeCommand.run" title="Link to this definition"></a></dt>
 <dd><p>지정된 시작 LBA와 끝 LBA 사이의 데이터를 삭제합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -429,8 +481,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.EraseRange.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/erase_range.html#EraseRange.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseRange.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.EraseRangeCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/erase_range.html#EraseRangeCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.EraseRangeCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -445,19 +497,24 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.Flush">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">Flush</span></span><a class="reference internal" href="../../../_modules/testapp/command/flush.html#Flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Flush" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FlushCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">FlushCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/flush.html#FlushCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FlushCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.FlushCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#testapp.command.FlushCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Flush.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/flush.html#Flush.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Flush.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FlushCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/flush.html#FlushCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FlushCommand.run" title="Link to this definition"></a></dt>
 <dd><p>명령어를 실행하는 메서드입니다.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.Flush.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/flush.html#Flush.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.Flush.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.FlushCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/flush.html#FlushCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.FlushCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>명령어의 인자가 유효한지 확인하는 메서드입니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -467,6 +524,30 @@
 <dd class="field-even"><p>bool</p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="testapp.command.ClearScreenCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.</span></span><span class="sig-name descname"><span class="pre">ClearScreenCommand</span></span><a class="reference internal" href="../../../_modules/testapp/command/clear_screen.html#ClearScreenCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ClearScreenCommand" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
+<p>Exit 클래스는 프로그램을 종료하는 명령어를 구현합니다.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.ClearScreenCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#testapp.command.ClearScreenCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="testapp.command.ClearScreenCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/command/clear_screen.html#ClearScreenCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ClearScreenCommand.run" title="Link to this definition"></a></dt>
+<dd><p>명령어를 실행하는 메서드입니다.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="testapp.command.ClearScreenCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/command/clear_screen.html#ClearScreenCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.ClearScreenCommand.is_valid_args" title="Link to this definition"></a></dt>
+<dd><p>주어진 인자가 유효한지 확인합니다.</p>
 </dd></dl>
 
 </dd></dl>

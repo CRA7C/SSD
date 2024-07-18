@@ -1,0 +1,22 @@
+testapp.scripts.write_and_erase
+===============================
+
+.. py:module:: testapp.scripts.write_and_erase
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.scripts.write_and_erase.WriteAndErase
+
+
+Module Contents
+---------------
+
+.. py:class:: WriteAndErase
+
+   .. py:method:: run() -> bool
+
+

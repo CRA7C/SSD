@@ -3,7 +3,7 @@ SSD 프로젝트
 ===============
 
 :Project: SSD Project
-:Authors: `김의윤 <geniuskey@gmail.com>`_, `박병준 <qazws9346@gmail.com>`_, `여인표 <winsowss@hanmail.net>`_, `정우훈 <jwh1308@gmail.com>`_, , `하종희 <gk1whd2@gmail.com>`_
+:Authors: `김의윤 <geniuskey@gmail.com>`_, `박병준 <qazws9346@gmail.com>`_, `여인표 <winsowss@hanmail.net>`_, `정우훈 <jwh1308@gmail.com>`_, `하종희 <gk1whd2@gmail.com>`_
 
 
 개요

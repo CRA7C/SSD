@@ -9,18 +9,24 @@ Classes
 
 .. autoapisummary::
 
-   testapp.command.flush.Flush
+   testapp.command.flush.FlushCommand
 
 
 Module Contents
 ---------------
 
-.. py:class:: Flush
+.. py:class:: FlushCommand
 
    Bases: :py:obj:`testapp.command.__interface.CommandInterface`
 
 
    CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.
+
+
+   .. py:attribute:: required_args_cnt
+      :type:  int
+      :value: 0
+
 
 
    .. py:method:: run()

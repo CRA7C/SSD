@@ -108,8 +108,8 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.scripts._script_manager.CommandInterfaceVisitor" title="testapp.scripts._script_manager.CommandInterfaceVisitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CommandInterfaceVisitor</span></code></a></p></td>
-<td><p>CommandInterfaceVisitor 클래스는 주어진 인터페이스를 구현한 클래스들을 찾기 위한 AST 노드 방문자입니다.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.scripts._script_manager.ClassVisitor" title="testapp.scripts._script_manager.ClassVisitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClassVisitor</span></code></a></p></td>
+<td><p>A node visitor base class that walks the abstract syntax tree and calls a</p></td>
 </tr>
 </tbody>
 </table>
@@ -118,8 +118,8 @@
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.scripts._script_manager.find_command_classes" title="testapp.scripts._script_manager.find_command_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_command_classes</span></code></a>(→ List[Tuple[str, List[str]]])</p></td>
-<td><p>주어진 인터페이스를 구현한 클래스를 찾습니다.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.scripts._script_manager.find_classes" title="testapp.scripts._script_manager.find_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_classes</span></code></a>(→ List[Tuple[str, List[str]]])</p></td>
+<td><p>주어진 디렉토리 내의 모든 파이썬 파일에서 정의된 클래스를 찾습니다.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#testapp.scripts._script_manager.get_test_scripts" title="testapp.scripts._script_manager.get_test_scripts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_test_scripts</span></code></a>(→ dict[str, str])</p></td>
 <td><p>테스트 스크립트를 반환합니다.</p></td>
@@ -139,60 +139,35 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.scripts._script_manager.CommandInterfaceVisitor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.scripts._script_manager.</span></span><span class="sig-name descname"><span class="pre">CommandInterfaceVisitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#CommandInterfaceVisitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.CommandInterfaceVisitor" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.scripts._script_manager.ClassVisitor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.scripts._script_manager.</span></span><span class="sig-name descname"><span class="pre">ClassVisitor</span></span><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#ClassVisitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.ClassVisitor" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">ast.NodeVisitor</span></code></p>
-<p>CommandInterfaceVisitor 클래스는 주어진 인터페이스를 구현한 클래스들을 찾기 위한 AST 노드 방문자입니다.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.scripts._script_manager.CommandInterfaceVisitor.interface_name">
-<span class="sig-name descname"><span class="pre">interface_name</span></span><a class="headerlink" href="#testapp.scripts._script_manager.CommandInterfaceVisitor.interface_name" title="Link to this definition"></a></dt>
-<dd><p>찾고자 하는 인터페이스 이름</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.scripts._script_manager.CommandInterfaceVisitor.found_classes">
-<span class="sig-name descname"><span class="pre">found_classes</span></span><a class="headerlink" href="#testapp.scripts._script_manager.CommandInterfaceVisitor.found_classes" title="Link to this definition"></a></dt>
-<dd><p>발견된 클래스 이름 리스트</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
+<p>A node visitor base class that walks the abstract syntax tree and calls a
+visitor function for every node found.  This function may return a value
+which is forwarded by the <cite>visit</cite> method.</p>
+<p>This class is meant to be subclassed, with the subclass adding visitor
+methods.</p>
+<p>Per default the visitor functions for the nodes are <code class="docutils literal notranslate"><span class="pre">'visit_'</span></code> +
+class name of the node.  So a <cite>TryFinally</cite> node visit function would
+be <cite>visit_TryFinally</cite>.  This behavior can be changed by overriding
+the <cite>visit</cite> method.  If no visitor function exists for a node
+(return value <cite>None</cite>) the <cite>generic_visit</cite> visitor is used instead.</p>
+<p>Don’t use the <cite>NodeVisitor</cite> if you want to apply changes to nodes during
+traversing.  For this a special visitor exists (<cite>NodeTransformer</cite>) that
+allows modifications.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.scripts._script_manager.CommandInterfaceVisitor.visit_ClassDef">
-<span class="sig-name descname"><span class="pre">visit_ClassDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#CommandInterfaceVisitor.visit_ClassDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.CommandInterfaceVisitor.visit_ClassDef" title="Link to this definition"></a></dt>
-<dd><p>AST (Abstract Syntax Trees) 에서 클래스 정의 노드를 방문합니다.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>node</strong> (<em>ast.ClassDef</em>) – 클래스 정의 노드</p>
-</dd>
-</dl>
-</dd></dl>
+<dt class="sig sig-object py" id="testapp.scripts._script_manager.ClassVisitor.visit_ClassDef">
+<span class="sig-name descname"><span class="pre">visit_ClassDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#ClassVisitor.visit_ClassDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.ClassVisitor.visit_ClassDef" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="testapp.scripts._script_manager.find_command_classes">
-<span class="sig-prename descclassname"><span class="pre">testapp.scripts._script_manager.</span></span><span class="sig-name descname"><span class="pre">find_command_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#find_command_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.find_command_classes" title="Link to this definition"></a></dt>
-<dd><p>주어진 인터페이스를 구현한 클래스를 찾습니다.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>interface_name</strong> (<em>str</em>) – 인터페이스 이름</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>모듈 이름과 클래스 이름 리스트의 튜플 리스트</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[Tuple[str, List[str]]]</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="testapp.scripts._script_manager.find_classes">
+<span class="sig-prename descclassname"><span class="pre">testapp.scripts._script_manager.</span></span><span class="sig-name descname"><span class="pre">find_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#find_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.find_classes" title="Link to this definition"></a></dt>
+<dd><p>주어진 디렉토리 내의 모든 파이썬 파일에서 정의된 클래스를 찾습니다.
+:returns: 모듈 이름과 클래스 이름 리스트의 튜플 리스트
+:rtype: List[Tuple[str, List[str]]]</p>
 </dd></dl>
 
 <dl class="py function">

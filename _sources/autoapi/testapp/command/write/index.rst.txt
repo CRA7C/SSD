@@ -9,13 +9,13 @@ Classes
 
 .. autoapisummary::
 
-   testapp.command.write.Write
+   testapp.command.write.WriteCommand
 
 
 Module Contents
 ---------------
 
-.. py:class:: Write
+.. py:class:: WriteCommand
 
    Bases: :py:obj:`testapp.command.__interface.CommandInterface`
 
@@ -27,6 +27,12 @@ Module Contents
       SSD 드라이버 객체
 
       :type: SsdDriver
+
+
+   .. py:attribute:: required_args_cnt
+      :type:  int
+      :value: 2
+
 
 
    .. py:method:: run(lba: str | int, value: str | int) -> None

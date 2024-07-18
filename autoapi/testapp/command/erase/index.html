@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="testapp.command.erase_common" href="../erase_common/index.html" />
-    <link rel="prev" title="testapp.command.__interface" href="../__interface/index.html" /> 
+    <link rel="prev" title="testapp.command.command_factory" href="../command_factory/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -98,7 +98,7 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.erase.Erase" title="testapp.command.erase.Erase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Erase</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.erase.EraseCommand" title="testapp.command.erase.EraseCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EraseCommand</span></code></a></p></td>
 <td><p>Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.</p></td>
 </tr>
 </tbody>
@@ -107,13 +107,13 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.erase.Erase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.erase.</span></span><span class="sig-name descname"><span class="pre">Erase</span></span><a class="reference internal" href="../../../../_modules/testapp/command/erase.html#Erase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.erase.Erase" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.erase.EraseCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.erase.</span></span><span class="sig-name descname"><span class="pre">EraseCommand</span></span><a class="reference internal" href="../../../../_modules/testapp/command/erase.html#EraseCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.erase.EraseCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.erase.Erase.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.erase.Erase.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.erase.EraseCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.erase.EraseCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -122,9 +122,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.erase.EraseCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/testapp/command/erase.html#EraseCommand.required_args_cnt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.erase.EraseCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.erase.Erase.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/command/erase.html#Erase.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.erase.Erase.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.erase.EraseCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/command/erase.html#EraseCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.erase.EraseCommand.run" title="Link to this definition"></a></dt>
 <dd><p>지정된 LBA와 크기만큼 데이터를 삭제합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -137,8 +142,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.erase.Erase.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/erase.html#Erase.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.erase.Erase.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.erase.EraseCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/erase.html#EraseCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.erase.EraseCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -162,7 +167,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../__interface/index.html" class="btn btn-neutral float-left" title="testapp.command.__interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../command_factory/index.html" class="btn btn-neutral float-left" title="testapp.command.command_factory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../erase_common/index.html" class="btn btn-neutral float-right" title="testapp.command.erase_common" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

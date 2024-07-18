@@ -81,21 +81,25 @@
 <span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">is_valid_size</span><span class="p">,</span> <span class="n">is_in_range_lba</span>
 
 
-<div class="viewcode-block" id="Erase">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.erase.Erase">[docs]</a>
-<span class="k">class</span> <span class="nc">Erase</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
+<div class="viewcode-block" id="EraseCommand">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.erase.EraseCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">EraseCommand</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Erase 클래스는 지정된 LBA 범위의 데이터를 삭제하는 명령어를 구현합니다.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        driver (SsdDriver): SSD 드라이버 객체</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="EraseCommand.required_args_cnt">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/erase/index.html#testapp.command.erase.EraseCommand.required_args_cnt">[docs]</a>
+    <span class="n">required_args_cnt</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span></div>
+
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">SsdDriver</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Erase.run">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.erase.Erase.run">[docs]</a>
+<div class="viewcode-block" id="EraseCommand.run">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.erase.EraseCommand.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">total_size</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        지정된 LBA와 크기만큼 데이터를 삭제합니다.</span>
@@ -112,8 +116,8 @@
 
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="Erase.is_valid_args">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.erase.Erase.is_valid_args">[docs]</a>
+<div class="viewcode-block" id="EraseCommand.is_valid_args">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.erase.EraseCommand.is_valid_args">[docs]</a>
     <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 인자가 유효한지 확인합니다.</span>

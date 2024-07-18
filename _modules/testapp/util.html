@@ -95,6 +95,14 @@
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.WRITE_COMMAND">[docs]</a>
 <span class="n">WRITE_COMMAND</span> <span class="o">=</span> <span class="s2">&quot;W&quot;</span></div>
 
+<div class="viewcode-block" id="ERASE_COMMAND">
+<a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.ERASE_COMMAND">[docs]</a>
+<span class="n">ERASE_COMMAND</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span></div>
+
+<div class="viewcode-block" id="FLUSH_COMMAND">
+<a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.FLUSH_COMMAND">[docs]</a>
+<span class="n">FLUSH_COMMAND</span> <span class="o">=</span> <span class="s2">&quot;F&quot;</span></div>
+
 <div class="viewcode-block" id="SSD_COMMAND">
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.SSD_COMMAND">[docs]</a>
 <span class="n">SSD_COMMAND</span> <span class="o">=</span> <span class="s2">&quot;ssd&quot;</span></div>
@@ -128,11 +136,15 @@
     <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">SSD_COMMAND</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Applied wrong command: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">op</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="n">WRITE_COMMAND</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="n">WRITE_COMMAND</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># ssd W lba value</span>
         <span class="n">validate_ssd_lba</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
         <span class="n">validate_ssd_value</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-    <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">READ_COMMAND</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">READ_COMMAND</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># ssd R lba</span>
         <span class="n">validate_ssd_lba</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">ERASE_COMMAND</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># ssd E lba total_size</span>
+        <span class="n">validate_ssd_lba</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">FLUSH_COMMAND</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># ssd F</span>
+        <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Applied wrong command: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 

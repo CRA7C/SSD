@@ -80,21 +80,26 @@
 <span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">is_valid_hex</span>
 
 
-<div class="viewcode-block" id="FullWrite">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.fullwrite.FullWrite">[docs]</a>
-<span class="k">class</span> <span class="nc">FullWrite</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
+<div class="viewcode-block" id="FullWriteCommand">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.fullwrite.FullWriteCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">FullWriteCommand</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    FullWrite 클래스는 SSD의 모든 LBA에 동일한 값을 쓰는 명령어를 구현합니다.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        driver (SsdDriver): SSD 드라이버 객체</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="FullWriteCommand.required_args_cnt">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/fullwrite/index.html#testapp.command.fullwrite.FullWriteCommand.required_args_cnt">[docs]</a>
+    <span class="n">required_args_cnt</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">SsdDriver</span><span class="p">()</span>
 
-<div class="viewcode-block" id="FullWrite.run">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.fullwrite.FullWrite.run">[docs]</a>
+<div class="viewcode-block" id="FullWriteCommand.run">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.fullwrite.FullWriteCommand.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        SSD의 모든 LBA에 값을 씁니다.</span>
@@ -107,8 +112,8 @@
 
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="FullWrite.is_valid_args">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.fullwrite.FullWrite.is_valid_args">[docs]</a>
+<div class="viewcode-block" id="FullWriteCommand.is_valid_args">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/index.html#testapp.command.fullwrite.FullWriteCommand.is_valid_args">[docs]</a>
     <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 인자가 유효한지 확인합니다.</span>

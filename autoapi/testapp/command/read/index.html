@@ -98,7 +98,7 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.read.Read" title="testapp.command.read.Read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Read</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.read.ReadCommand" title="testapp.command.read.ReadCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReadCommand</span></code></a></p></td>
 <td><p>Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.</p></td>
 </tr>
 </tbody>
@@ -107,13 +107,13 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.read.Read">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.read.</span></span><span class="sig-name descname"><span class="pre">Read</span></span><a class="reference internal" href="../../../../_modules/testapp/command/read.html#Read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.read.Read" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.read.ReadCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.read.</span></span><span class="sig-name descname"><span class="pre">ReadCommand</span></span><a class="reference internal" href="../../../../_modules/testapp/command/read.html#ReadCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.read.ReadCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.read.Read.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.read.Read.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.read.ReadCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.read.ReadCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -122,9 +122,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.read.ReadCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../_modules/testapp/command/read.html#ReadCommand.required_args_cnt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.read.ReadCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.read.Read.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/read.html#Read.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.read.Read.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.read.ReadCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/read.html#ReadCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.read.ReadCommand.run" title="Link to this definition"></a></dt>
 <dd><p>지정된 LBA에서 데이터를 읽습니다.
 읽어온 데이터를 화면에 출력합니다.</p>
 <dl class="field-list simple">
@@ -135,8 +140,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.read.Read.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/read.html#Read.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.read.Read.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.read.ReadCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/read.html#ReadCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.read.ReadCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>

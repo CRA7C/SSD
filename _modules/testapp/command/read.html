@@ -80,22 +80,26 @@
 <span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 
-<div class="viewcode-block" id="Read">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/read/index.html#testapp.command.Read">[docs]</a>
-<span class="k">class</span> <span class="nc">Read</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
+<div class="viewcode-block" id="ReadCommand">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/read/index.html#testapp.command.ReadCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">ReadCommand</span><span class="p">(</span><span class="n">CommandInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read 클래스는 지정된 LBA에서 데이터를 읽는 명령어를 구현합니다.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        driver (SsdDriver): SSD 드라이버 객체</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ReadCommand.required_args_cnt">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/read/index.html#testapp.command.ReadCommand.required_args_cnt">[docs]</a>
+    <span class="n">required_args_cnt</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span></div>
+
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">SsdDriver</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Read.run">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/read/index.html#testapp.command.Read.run">[docs]</a>
+<div class="viewcode-block" id="ReadCommand.run">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/read/index.html#testapp.command.ReadCommand.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        지정된 LBA에서 데이터를 읽습니다.</span>
@@ -110,8 +114,8 @@
 
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="Read.is_valid_args">
-<a class="viewcode-back" href="../../../autoapi/testapp/command/read/index.html#testapp.command.Read.is_valid_args">[docs]</a>
+<div class="viewcode-block" id="ReadCommand.is_valid_args">
+<a class="viewcode-back" href="../../../autoapi/testapp/command/read/index.html#testapp.command.ReadCommand.is_valid_args">[docs]</a>
     <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 인자가 유효한지 확인합니다.</span>

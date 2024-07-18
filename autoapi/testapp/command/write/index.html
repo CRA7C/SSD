@@ -98,7 +98,7 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.write.Write" title="testapp.command.write.Write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Write</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.command.write.WriteCommand" title="testapp.command.write.WriteCommand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WriteCommand</span></code></a></p></td>
 <td><p>Write 클래스는 지정된 LBA에 데이터를 쓰는 명령어를 구현합니다.</p></td>
 </tr>
 </tbody>
@@ -107,13 +107,13 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="testapp.command.write.Write">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.write.</span></span><span class="sig-name descname"><span class="pre">Write</span></span><a class="reference internal" href="../../../../_modules/testapp/command/write.html#Write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.write.Write" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.write.WriteCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testapp.command.write.</span></span><span class="sig-name descname"><span class="pre">WriteCommand</span></span><a class="reference internal" href="../../../../_modules/testapp/command/write.html#WriteCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.write.WriteCommand" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../__interface/index.html#testapp.command.__interface.CommandInterface" title="testapp.command.__interface.CommandInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testapp.command.__interface.CommandInterface</span></code></a></p>
 <p>Write 클래스는 지정된 LBA에 데이터를 쓰는 명령어를 구현합니다.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="testapp.command.write.Write.driver">
-<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.write.Write.driver" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.write.WriteCommand.driver">
+<span class="sig-name descname"><span class="pre">driver</span></span><a class="headerlink" href="#testapp.command.write.WriteCommand.driver" title="Link to this definition"></a></dt>
 <dd><p>SSD 드라이버 객체</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -122,9 +122,14 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.command.write.WriteCommand.required_args_cnt">
+<span class="sig-name descname"><span class="pre">required_args_cnt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../_modules/testapp/command/write.html#WriteCommand.required_args_cnt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.write.WriteCommand.required_args_cnt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.write.Write.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/write.html#Write.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.write.Write.run" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.write.WriteCommand.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/write.html#WriteCommand.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.write.WriteCommand.run" title="Link to this definition"></a></dt>
 <dd><p>지정된 LBA에 데이터를 씁니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -137,8 +142,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="testapp.command.write.Write.is_valid_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/write.html#Write.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.write.Write.is_valid_args" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="testapp.command.write.WriteCommand.is_valid_args">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/testapp/command/write.html#WriteCommand.is_valid_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.command.write.WriteCommand.is_valid_args" title="Link to this definition"></a></dt>
 <dd><p>주어진 인자가 유효한지 확인합니다.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>

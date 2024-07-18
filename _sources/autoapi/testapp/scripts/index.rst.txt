@@ -13,11 +13,13 @@ Submodules
    /autoapi/testapp/scripts/_script_manager/index
    /autoapi/testapp/scripts/dummy_test/index
    /autoapi/testapp/scripts/full_read10_and_compare/index
+   /autoapi/testapp/scripts/full_read_compare/index
    /autoapi/testapp/scripts/full_write_read_compare/index
    /autoapi/testapp/scripts/loop_write_and_read_compare/index
    /autoapi/testapp/scripts/test_app1/index
    /autoapi/testapp/scripts/test_app2/index
    /autoapi/testapp/scripts/write10_and_compare/index
+   /autoapi/testapp/scripts/write_and_erase/index
 
 
 Functions

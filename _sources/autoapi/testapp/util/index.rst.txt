@@ -12,6 +12,8 @@ Attributes
    testapp.util.RESULT_FILE
    testapp.util.READ_COMMAND
    testapp.util.WRITE_COMMAND
+   testapp.util.ERASE_COMMAND
+   testapp.util.FLUSH_COMMAND
    testapp.util.SSD_COMMAND
    testapp.util.SSD_MODULE
    testapp.util.BASE_DIR
@@ -45,6 +47,14 @@ Module Contents
 
 .. py:data:: WRITE_COMMAND
    :value: 'W'
+
+
+.. py:data:: ERASE_COMMAND
+   :value: 'E'
+
+
+.. py:data:: FLUSH_COMMAND
+   :value: 'F'
 
 
 .. py:data:: SSD_COMMAND

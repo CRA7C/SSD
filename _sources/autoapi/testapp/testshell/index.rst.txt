@@ -12,6 +12,7 @@ Attributes
    testapp.testshell.EXECUTE_VALID_WO_ARGS
    testapp.testshell.EXECUTE_VALID_WITH_ARGS
    testapp.testshell.EXECUTE_INVALID
+   testapp.testshell.EXECUTE_EMPTY
 
 
 Classes
@@ -45,15 +46,14 @@ Module Contents
    :value: 0
 
 
+.. py:data:: EXECUTE_EMPTY
+
 .. py:class:: TestShell
 
    TestShell 클래스는 명령어를 실행하고, 사전 정의된 명령어 또는 테스트 스크립트를 실행하는 기능을 제공합니다.
 
 
-
    .. py:method:: execute(cmd: str) -> int
-      :staticmethod:
-
 
       주어진 명령어를 실행합니다.
 

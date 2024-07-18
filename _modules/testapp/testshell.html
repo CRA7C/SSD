@@ -74,7 +74,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for testapp.testshell</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">testapp.command_parser</span> <span class="kn">import</span> <span class="n">CommandParser</span>
+<span></span><span class="kn">from</span> <span class="nn">testapp.command.command_factory</span> <span class="kn">import</span> <span class="p">(</span><span class="n">CommandFactory</span><span class="p">,</span> <span class="n">is_predefined_command_name</span><span class="p">,</span>
+                                             <span class="n">validate_command</span><span class="p">,</span> <span class="n">parse_cmd_args</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">INVALID_COMMAND</span>
 <span class="kn">from</span> <span class="nn">testapp.scripts</span> <span class="kn">import</span> <span class="n">get_test_scripts</span><span class="p">,</span> <span class="n">run_script</span>
 <span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
@@ -91,6 +92,10 @@
 <a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_INVALID">[docs]</a>
 <span class="n">EXECUTE_INVALID</span> <span class="o">=</span> <span class="mi">0</span></div>
 
+<div class="viewcode-block" id="EXECUTE_EMPTY">
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_EMPTY">[docs]</a>
+<span class="n">EXECUTE_EMPTY</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+
 
 
 <div class="viewcode-block" id="TestShell">
@@ -98,13 +103,11 @@
 <span class="k">class</span> <span class="nc">TestShell</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    TestShell 클래스는 명령어를 실행하고, 사전 정의된 명령어 또는 테스트 스크립트를 실행하는 기능을 제공합니다.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TestShell.execute">
 <a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.TestShell.execute">[docs]</a>
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 명령어를 실행합니다.</span>
 
@@ -117,18 +120,23 @@
 <span class="sd">                 - EXECUTE_VALID_WITH_ARGS (1): 인자가 있는 유효한 명령어</span>
 <span class="sd">                 - EXECUTE_INVALID (0): 유효하지 않은 명령어</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">EXECUTE_EMPTY</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
         <span class="n">cmd_option</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">is_predefined_command</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">):</span>
-            <span class="n">cmd_option</span><span class="p">,</span> <span class="n">cmd_args</span> <span class="o">=</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">validate_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
-                <span class="c1"># Logger().debug(INVALID_COMMAND)</span>
+
+        <span class="k">if</span> <span class="n">is_predefined_command_name</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">validate_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">EXECUTE_INVALID</span>
-            <span class="n">cmd_if</span> <span class="o">=</span> <span class="n">CommandParser</span><span class="o">.</span><span class="n">get_command</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">)</span>
-            <span class="n">cmd_if</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_args</span><span class="p">)</span>
+            <span class="n">cmd_option</span><span class="p">,</span> <span class="n">cmd_args</span> <span class="o">=</span> <span class="n">parse_cmd_args</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="n">cmd_obj</span> <span class="o">=</span> <span class="n">CommandFactory</span><span class="o">.</span><span class="n">get_command_instance</span><span class="p">(</span><span class="n">cmd_option</span><span class="p">)</span>
+            <span class="n">cmd_obj</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_args</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">EXECUTE_VALID_WITH_ARGS</span> <span class="k">if</span> <span class="n">cmd_args</span> <span class="k">else</span> <span class="n">EXECUTE_VALID_WO_ARGS</span>
 
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># test script 중에 있으면 동작</span>
-            <span class="n">ts_dict</span> <span class="o">=</span> <span class="n">get_test_scripts</span><span class="p">()</span>
+            <span class="n">ts_dict</span> <span class="o">=</span> <span class="n">get_test_scripts</span><span class="p">()</span>  <span class="c1"># UpperCamelCase</span>
+            <span class="n">ts_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ts_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>  <span class="c1"># lower case 도 포함</span>
             <span class="k">if</span> <span class="n">cmd_option</span> <span class="ow">in</span> <span class="n">ts_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">success</span> <span class="o">=</span> <span class="n">run_script</span><span class="p">(</span><span class="n">ts_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">])</span>
                 <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;PASS&#39;</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s1">&#39;FAIL!&#39;</span><span class="p">)</span>
@@ -145,9 +153,10 @@
 <span class="sd">    TestShell의 메인 루프를 실행합니다.</span>
 <span class="sd">    사용자가 명령어를 입력하고 이를 처리합니다.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">TestShell</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">TestShell</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="n">EXECUTE_INVALID</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ts</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="n">EXECUTE_INVALID</span><span class="p">:</span>
             <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span></div>
 
 </pre></div>

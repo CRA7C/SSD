@@ -9,13 +9,13 @@ Classes
 
 .. autoapisummary::
 
-   testapp.command.read.Read
+   testapp.command.read.ReadCommand
 
 
 Module Contents
 ---------------
 
-.. py:class:: Read
+.. py:class:: ReadCommand
 
    Bases: :py:obj:`testapp.command.__interface.CommandInterface`
 
@@ -27,6 +27,12 @@ Module Contents
       SSD 드라이버 객체
 
       :type: SsdDriver
+
+
+   .. py:attribute:: required_args_cnt
+      :type:  int
+      :value: 1
+
 
 
    .. py:method:: run(lba: str | int) -> str

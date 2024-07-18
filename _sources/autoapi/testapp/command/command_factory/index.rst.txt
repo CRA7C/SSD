@@ -1,0 +1,89 @@
+testapp.command.command_factory
+===============================
+
+.. py:module:: testapp.command.command_factory
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   testapp.command.command_factory.CommandFactory
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   testapp.command.command_factory.is_predefined_command_name
+   testapp.command.command_factory.validate_command
+
+
+Module Contents
+---------------
+
+.. py:class:: CommandFactory
+
+   명령어 객체를 생성하는 팩토리 클래스입니다.
+
+
+   .. py:attribute:: _cmd_dict
+      :type:  Dict[str, Type[testapp.command.__interface.CommandInterface]]
+
+
+   .. py:method:: get_command_instance(cmd_name: str) -> testapp.command.__interface.CommandInterface
+      :classmethod:
+
+
+      주어진 명령 옵션에 해당하는 명령어 객체를 반환합니다.
+
+      :param cmd_name: 명령 이름
+      :type cmd_name: str
+
+      :returns: 명령어 객체
+      :rtype: CommandInterface
+
+
+
+   .. py:method:: get_command_dict()
+      :classmethod:
+
+
+
+.. py:function:: is_predefined_command_name(name: str) -> bool
+
+   주어진 이름이 사전 정의된 명령어인지 확인합니다.
+
+   :param name: 확인할 명령어 이름
+   :type name: str
+
+   :returns: 사전 정의된 명령어이면 True, 그렇지 않으면 False
+   :rtype: bool
+
+
+.. py:function:: validate_command(cmd: str) -> bool
+
+   주어진 명령어의 유효성을 검사합니다.
+
+   :param cmd: 검사할 명령어
+   :type cmd: str
+
+   :returns: 유효한 명령어이면 True, 그렇지 않으면 False
+   :rtype: bool
+
+
+.. py:method:: parse_cmd_args(cmd: str) -> tuple[str, list[str]] | tuple[str, list[Any]]
+   :staticmethod:
+
+
+   주어진 명령어를 파싱하여 옵션과 인자를 반환합니다.
+
+   :param cmd: 파싱할 명령어
+   :type cmd: str
+
+   :returns: 명령 옵션과 인자 리스트의 튜플
+   :rtype: tuple[str, list[str]] | tuple[str, list[Any]]
+
+

@@ -17,7 +17,7 @@ Classes
 
 .. autoapisummary::
 
-   testapp.command.help.Help
+   testapp.command.help.HelpCommand
 
 
 Module Contents
@@ -46,6 +46,7 @@ Module Contents
         erase             SSD 데이터 지우기 (LBA ~ LBA + SIZE)
         erase_range       SSD 데이터 지우기 (Start LBA ~ End LBA)
         flush             Command Buffer에 있는 모든 명령어들을 수행하여 Buffer를 비움
+        cls               Clear Screen
       """
 
    .. raw:: html
@@ -54,7 +55,7 @@ Module Contents
 
 
 
-.. py:class:: Help
+.. py:class:: HelpCommand
 
    Bases: :py:obj:`testapp.command.__interface.CommandInterface`
 
@@ -62,7 +63,13 @@ Module Contents
    Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.
 
 
-   .. py:method:: run(*args, **kwarg)
+   .. py:attribute:: required_args_cnt
+      :type:  int
+      :value: 0
+
+
+
+   .. py:method:: run()
 
       사용 가능한 명령어와 옵션을 출력합니다.
 
