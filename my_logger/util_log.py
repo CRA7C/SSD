@@ -5,7 +5,6 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import inspect
 import re
-from typing import Tuple
 
 LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / 'latest.log'
 LOG_MAX_SIZE = 10 * 1024
