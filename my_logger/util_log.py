@@ -40,9 +40,8 @@ class MyRotatingFileHandler(RotatingFileHandler):
         """
         super().doRollover()
 
-        result, filename = self.is_already_bkup_file()
-        if result is True:
-            self.rename_log_to_zip(filename)
+        if self.is_already_bkup_file() is True:
+            self.rename_log_to_zip(self.get_exact_log_name())
 
         self.rename_backup_files()
 
@@ -72,25 +71,34 @@ class MyRotatingFileHandler(RotatingFileHandler):
         """
         return f'until_{datetime.now().strftime("%y%m%d_%H%M%S")}.log'
 
-    def is_already_bkup_file(self) -> Tuple[bool, str]:
+    def is_already_bkup_file(self) -> bool:
         """
         백업 파일이 이미 존재하는지 확인합니다.
 
         Returns:
             bool: 백업 파일이 이미 존재하면 True, 그렇지 않으면 False
         """
-        base_file_dir = os.path.dirname(self.baseFilename)
         find_pattern = r'until_(\d{6})_(\d{6})\.log'
-
-        for filename in os.listdir(base_file_dir):
+        for filename in os.listdir(os.path.dirname(self.baseFilename)):
             if re.match(find_pattern, filename):
-                return True, filename
-        return False, None
+                return True
+        return False
+
+    def get_exact_log_name(self) -> str:
+        """
+        until_날짜_시간.log에 맵핑되는 정확한 로그파일 명을 반환합니다.
+
+        Returns:
+            str: until_날짜_시간.log 형식의 파일명 (경로포함 X)
+        """
+        find_pattern = r'until_(\d{6})_(\d{6})\.log'
+        for filename in os.listdir(os.path.dirname(self.baseFilename)):
+            if re.match(find_pattern, filename):
+                return filename
 
     def rename_log_to_zip(self, filename):
         base_file_dir = os.path.dirname(self.baseFilename)
-        zip_file_name, _ = os.path.splitext(filename)
-        zip_file_name += ".zip"
+        zip_file_name = os.path.splitext(filename)[0] + ".zip"
         zip_file_name = os.path.join(base_file_dir, zip_file_name)
 
         full_path_filename = os.path.join(base_file_dir, filename)
