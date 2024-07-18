@@ -35,12 +35,12 @@ class SolidStateDrive:
         result = self.nand_driver.read(lba)
         self.result_manager.write(convert_hex_to_str(result))
 
-    def read_fast(self, value: str):
+    def read_fast(self, value: int):
         """
         값을 빠르게 읽고 결과를 기록합니다.
 
         Args:
-            value (str): 읽을 값 (16진수 문자열 형식)
+            value (int): 읽을 값 (16진수)
         """
         self.result_manager.write(convert_hex_to_str(value))
 

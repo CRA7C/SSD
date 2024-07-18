@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Command:
     """
     기본 명령어 클래스입니다.
@@ -108,7 +111,7 @@ class CommandFactory:
     주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
     """
     @staticmethod
-    def parse_command(command_list):
+    def parse_command(command_list: List[str]) -> Command:
         """
         주어진 명령 인자 리스트를 통해 적절한 명령어 객체를 생성합니다.
 

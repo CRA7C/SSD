@@ -1,5 +1,5 @@
 from pathlib import Path
-from ssd.command import CommandFactory
+from ssd.command import CommandFactory, Command, ReadCommand
 
 BUFFER_FILE_PATH = Path(__file__).parent / 'buffer.txt'
 
@@ -57,7 +57,7 @@ class CommandBuffer:
             txt.append(' '.join(data.get_value()) + '\n')
         return ''.join(txt)
 
-    def push_command(self, command):
+    def push_command(self, command: Command):
         """
         명령어를 버퍼에 추가하고 최적화합니다.
 
@@ -79,7 +79,7 @@ class CommandBuffer:
         self.save_buffer()
         return value
 
-    def is_able_to_fast_read(self, cmd):
+    def is_able_to_fast_read(self, cmd: Command) -> bool:
         """
         빠른 읽기가 가능한지 확인합니다.
 
@@ -96,7 +96,7 @@ class CommandBuffer:
                 return True
         return False
 
-    def get_read_fast(self, cmd):
+    def get_read_fast(self, cmd: ReadCommand) -> int:
         """
         버퍼에서 빠른 읽기 값을 반환합니다.
 
@@ -162,7 +162,7 @@ class CommandBuffer:
                 return True
         return False
 
-    def need_flush(self):
+    def need_flush(self) -> bool:
         """
         버퍼를 비울 필요가 있는지 확인합니다.
 
