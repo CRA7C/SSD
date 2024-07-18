@@ -120,9 +120,8 @@ class CustomFormatter(logging.Formatter):
         time_format = self.formatTime(record, "%y.%m.%d %H:%M:%S")
         class_name = record.class_name
         func_name = record.func_name
-        class_func_name = f'{class_name}.{func_name}()'
         fixed_length = 45
-        class_func_name = class_func_name.ljust(fixed_length)
+        class_func_name = f'{class_name}.{func_name}()'.ljust(fixed_length)
         message = record.getMessage()
 
         return f"[{time_format}] {class_func_name} : {message}"
