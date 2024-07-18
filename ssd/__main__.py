@@ -82,9 +82,9 @@ class SSDRunner:
             else:
                 self.execute_command(cmd)
         elif cmd.option in ('W', 'E'):
-            self.option_buf.push_command(cmd)
             if self.option_buf.need_flush():
                 self.buff_flush()
+            self.option_buf.push_command(cmd)
 
     def execute_command(self, command):
         """

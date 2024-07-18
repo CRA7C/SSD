@@ -4,6 +4,7 @@ from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import inspect
+import re
 
 LOG_FILE_PATH = Path(__file__).parent.parent / 'log' / 'latest.log'
 LOG_MAX_SIZE = 10 * 1024
@@ -38,7 +39,8 @@ class MyRotatingFileHandler(RotatingFileHandler):
         """
         super().doRollover()
 
-        self.is_already_bkup_file()
+        if self.is_already_bkup_file() is True:
+            self.rename_log_to_zip(self.get_exact_log_name())
 
         self.rename_backup_files()
 
@@ -46,15 +48,15 @@ class MyRotatingFileHandler(RotatingFileHandler):
         """
         백업 파일의 이름을 현재 날짜와 시간으로 변경합니다.
         """
-        base_filename = self.baseFilename
-        base_file_dir = os.path.dirname(base_filename)
         bkup_file_name = self.get_bkup_file_name()
 
         # RotatingFileHandler는 기본적으로 {로그파일이름}.1 .2 .3 이런식으로 백업파일 생성함
         for i in range(1, self.backupCount + 1):
-            old_filename = f"{base_filename}.{i}"
+            old_filename = f"{self.baseFilename}.{i}"
             if os.path.exists(old_filename):
-                new_filename = os.path.join(base_file_dir, bkup_file_name)
+                new_filename = os.path.join(os.path.dirname(self.baseFilename), bkup_file_name)
+                if os.path.isfile(new_filename):
+                    os.remove(new_filename)
                 os.rename(old_filename, new_filename)
 
     def get_bkup_file_name(self):
@@ -73,7 +75,31 @@ class MyRotatingFileHandler(RotatingFileHandler):
         Returns:
             bool: 백업 파일이 이미 존재하면 True, 그렇지 않으면 False
         """
-        pass
+        find_pattern = r'until_(\d{6})_(\d{6})\.log'
+        for filename in os.listdir(os.path.dirname(self.baseFilename)):
+            if re.match(find_pattern, filename):
+                return True
+        return False
+
+    def get_exact_log_name(self) -> str:
+        """
+        until_날짜_시간.log에 맵핑되는 정확한 로그파일 명을 반환합니다.
+
+        Returns:
+            str: until_날짜_시간.log 형식의 파일명 (경로포함 X)
+        """
+        find_pattern = r'until_(\d{6})_(\d{6})\.log'
+        for filename in os.listdir(os.path.dirname(self.baseFilename)):
+            if re.match(find_pattern, filename):
+                return filename
+
+    def rename_log_to_zip(self, filename):
+        until_log_file_path = os.path.join(os.path.dirname(self.baseFilename), filename)
+        zip_file_path = os.path.join(os.path.dirname(self.baseFilename), os.path.splitext(filename)[0] + ".zip")
+
+        if os.path.isfile(zip_file_path):
+            os.remove(zip_file_path)
+        os.rename(until_log_file_path, zip_file_path)
 
 
 class CustomFormatter(logging.Formatter):
