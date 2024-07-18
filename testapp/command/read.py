@@ -10,19 +10,22 @@ class Read(CommandInterface):
     Attributes:
         driver (SsdDriver): SSD 드라이버 객체
     """
+
     def __init__(self):
         super().__init__()
         self.driver = SsdDriver()
 
-    def run(self, lba: str):
+    def run(self, lba: str | int) -> str:
         """
         지정된 LBA에서 데이터를 읽습니다.
         읽어온 데이터를 화면에 출력합니다.
 
         Args:
-            lba (str): 논리 블록 주소
+            lba (str | int): 논리 블록 주소
         """
-        print(self.driver.read(lba))
+        read_value = self.driver.read(lba)
+        print(read_value)
+        return read_value
 
     @staticmethod
     def is_valid_args(*args) -> bool:

@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 from random import randint
+
 sys.path.append(str(Path(__file__).parents[2].resolve()))
 from testapp.command.__interface import CommandInterface  # noqa E402
 from testapp.command import FullRead, FullWrite  # noqa E402
@@ -13,6 +14,10 @@ class FullWriteReadCompare(CommandInterface):
         FullWrite().run(value)
         read_data = FullRead().run()
         return all(int(data, 16) == value for data in read_data)
+
+    @staticmethod
+    def is_valid_args(self, *args):
+        return True
 
 
 if __name__ == '__main__':
