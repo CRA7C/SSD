@@ -1,6 +1,7 @@
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
 from testapp.util import is_in_range_lba
+from my_logger import Logger
 
 
 class Read(CommandInterface):
@@ -10,6 +11,7 @@ class Read(CommandInterface):
     Attributes:
         driver (SsdDriver): SSD 드라이버 객체
     """
+
     def __init__(self):
         super().__init__()
         self.driver = SsdDriver()
@@ -22,7 +24,7 @@ class Read(CommandInterface):
         Args:
             lba (str): 논리 블록 주소
         """
-        print(self.driver.read(lba))
+        Logger().info(self.driver.read(lba))
 
     @staticmethod
     def is_valid_args(*args) -> bool:
