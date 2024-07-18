@@ -26,7 +26,7 @@ class ResultManager:
             with open(self.result_file_path, 'w', encoding='utf-8') as f:
                 f.write("0x00000000")
 
-    def write(self, text):
+    def write(self, text: str):
         """
         결과 파일에 텍스트를 씁니다.
 
