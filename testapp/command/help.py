@@ -1,4 +1,5 @@
 from testapp.command.__interface import CommandInterface
+from my_logger import Logger
 
 TESTAPP_HELP = r"""
 Usage:
@@ -21,11 +22,12 @@ class Help(CommandInterface):
     """
     Help 클래스는 사용 가능한 명령어와 옵션을 출력하는 명령어를 구현합니다.
     """
+
     def run(self, *args, **kwarg):
         """
         사용 가능한 명령어와 옵션을 출력합니다.
         """
-        print(TESTAPP_HELP)
+        Logger().info(TESTAPP_HELP)
 
     @staticmethod
     def is_valid_args(*args) -> bool:

@@ -1,6 +1,7 @@
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
 from testapp.constants import SSD_LBA_RANGE
+from my_logger import Logger
 
 
 class FullRead(CommandInterface):
@@ -20,7 +21,7 @@ class FullRead(CommandInterface):
         전체 데이터를 LBA와 함께 화면에 출력합니다.
         """
         for addr in SSD_LBA_RANGE:
-            print(f"LBA: {addr}, value: {self.driver.read(addr)}")
+            Logger().info(f"LBA: {addr}, value: {self.driver.read(addr)}")
 
     @staticmethod
     def is_valid_args(*args) -> bool:

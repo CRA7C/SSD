@@ -1,6 +1,7 @@
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
 from testapp.util import is_in_range_lba
+from my_logger import Logger
 
 
 class Read(CommandInterface):
@@ -24,7 +25,7 @@ class Read(CommandInterface):
             lba (str | int): 논리 블록 주소
         """
         read_value = self.driver.read(lba)
-        print(read_value)
+        Logger().info(read_value)
         return read_value
 
     @staticmethod

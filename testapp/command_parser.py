@@ -1,6 +1,7 @@
 from typing import Any
 
 from testapp import command
+from my_logger import Logger
 from testapp.command.__interface import CommandInterface
 
 
@@ -50,11 +51,11 @@ class CommandParser:
         cmd_option = cmd_list[0]
         n_args = len(cmd_list) - 1
         if cmd_option not in cls.cmd_if_dict.keys():
-            print("Command does not exist")
+            Logger().debug("Command does not exist")
             return False
 
         if cls.cmd_if_dict[cmd_option]['required_args_cnt'] != n_args:
-            print("The number of argument does not match")
+            Logger().debug("The number of argument does not match")
             return False
 
         if not cls.cmd_if_dict[cmd_option]["class"].is_valid_args(*cmd_list):
