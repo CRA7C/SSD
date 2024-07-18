@@ -46,8 +46,7 @@ class TestShell:
             ts_dict = get_test_scripts()  # UpperCamelCase
             ts_dict.update({k.lower(): v for k, v in ts_dict.items()})  # lower case 도 포함
             if cmd_option in ts_dict.keys():
-                success = run_script(ts_dict[cmd_option])
-                Logger().debug('PASS' if success else 'FAIL!')
+                success = run_script(ts_dict[cmd_option], use_print=True)
                 Logger().info('PASS' if success else 'FAIL!')
                 return success
         return EXECUTE_INVALID
