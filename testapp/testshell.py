@@ -30,6 +30,7 @@ class TestShell:
         """
         if len(cmd) == 0:
             return EXECUTE_INVALID
+        cmd = cmd.strip()
 
         cmd_option = cmd.split()[0]
         
