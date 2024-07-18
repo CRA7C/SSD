@@ -29,7 +29,7 @@ Module Contents
       :type: SsdDriver
 
 
-   .. py:method:: run(value: str) -> None
+   .. py:method:: run(value: str | int) -> None
 
       SSD의 모든 LBA에 값을 씁니다.
 

@@ -59,17 +59,17 @@ Module Contents
 
 .. py:function:: get_ssd_result() -> str
 
-.. py:function:: validate_ssd_command(command)
+.. py:function:: validate_ssd_command(command: str) -> None
 
-.. py:function:: validate_ssd_lba(lba: Union[str, int])
+.. py:function:: validate_ssd_lba(lba: Union[str, int]) -> None
 
-.. py:function:: validate_ssd_value(value: Union[str, int])
+.. py:function:: validate_ssd_value(value: Union[str, int]) -> None
 
 .. py:function:: capture_output(func)
 
 .. py:function:: is_in_range_lba(lba: str) -> bool
 
-.. py:function:: is_valid_hex(s: str)
+.. py:function:: is_valid_hex(s: str) -> bool
 
 .. py:function:: is_valid_size(size: str) -> bool
 

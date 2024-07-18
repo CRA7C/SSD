@@ -77,6 +77,7 @@
 <span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
 <span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>  <span class="c1"># noqa E402</span>
 <span class="kn">from</span> <span class="nn">testapp.command</span> <span class="kn">import</span> <span class="n">Write</span><span class="p">,</span> <span class="n">Read</span>  <span class="c1"># noqa E402</span>
@@ -96,6 +97,13 @@
             <span class="n">read_value</span> <span class="o">=</span> <span class="n">Read</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">lba</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="n">read_value</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Loop_WriteAndReadCompare.is_valid_args">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/loop_write_and_read_compare/index.html#testapp.scripts.loop_write_and_read_compare.Loop_WriteAndReadCompare.is_valid_args">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 

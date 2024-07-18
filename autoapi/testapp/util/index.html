@@ -129,13 +129,13 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#testapp.util.get_ssd_result" title="testapp.util.get_ssd_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ssd_result</span></code></a>(→ str)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#testapp.util.validate_ssd_command" title="testapp.util.validate_ssd_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ssd_command</span></code></a>(command)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#testapp.util.validate_ssd_command" title="testapp.util.validate_ssd_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ssd_command</span></code></a>(→ None)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.util.validate_ssd_lba" title="testapp.util.validate_ssd_lba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ssd_lba</span></code></a>(lba)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.util.validate_ssd_lba" title="testapp.util.validate_ssd_lba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ssd_lba</span></code></a>(→ None)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#testapp.util.validate_ssd_value" title="testapp.util.validate_ssd_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ssd_value</span></code></a>(value)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#testapp.util.validate_ssd_value" title="testapp.util.validate_ssd_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_ssd_value</span></code></a>(→ None)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#testapp.util.capture_output" title="testapp.util.capture_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capture_output</span></code></a>(func)</p></td>
@@ -144,7 +144,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#testapp.util.is_in_range_lba" title="testapp.util.is_in_range_lba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_in_range_lba</span></code></a>(→ bool)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.util.is_valid_hex" title="testapp.util.is_valid_hex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_hex</span></code></a>(s)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#testapp.util.is_valid_hex" title="testapp.util.is_valid_hex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_hex</span></code></a>(→ bool)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#testapp.util.is_valid_size" title="testapp.util.is_valid_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_size</span></code></a>(→ bool)</p></td>
@@ -192,17 +192,17 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="testapp.util.validate_ssd_command">
-<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">validate_ssd_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/util.html#validate_ssd_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.validate_ssd_command" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">validate_ssd_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/testapp/util.html#validate_ssd_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.validate_ssd_command" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="testapp.util.validate_ssd_lba">
-<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">validate_ssd_lba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/util.html#validate_ssd_lba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.validate_ssd_lba" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">validate_ssd_lba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/testapp/util.html#validate_ssd_lba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.validate_ssd_lba" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="testapp.util.validate_ssd_value">
-<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">validate_ssd_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/util.html#validate_ssd_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.validate_ssd_value" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">validate_ssd_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/testapp/util.html#validate_ssd_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.validate_ssd_value" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -217,7 +217,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="testapp.util.is_valid_hex">
-<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">is_valid_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/testapp/util.html#is_valid_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.is_valid_hex" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">testapp.util.</span></span><span class="sig-name descname"><span class="pre">is_valid_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/testapp/util.html#is_valid_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.util.is_valid_hex" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">

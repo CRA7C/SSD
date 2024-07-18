@@ -29,14 +29,14 @@ Module Contents
       :type: SsdDriver
 
 
-   .. py:method:: run(lba: str, value: str) -> None
+   .. py:method:: run(lba: str | int, value: str | int) -> None
 
       지정된 LBA에 데이터를 씁니다.
 
       :param lba: 논리 블록 주소
-      :type lba: str
+      :type lba: str | int
       :param value: 쓸 데이터 (16진수 문자열)
-      :type value: str
+      :type value: str | int
 
 
 

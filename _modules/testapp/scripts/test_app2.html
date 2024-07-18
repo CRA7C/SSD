@@ -76,6 +76,8 @@
   <h1>Source code for testapp.scripts.test_app2</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
 <span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>  <span class="c1"># noqa E402</span>
 <span class="kn">from</span> <span class="nn">testapp.command</span> <span class="kn">import</span> <span class="n">Write</span><span class="p">,</span> <span class="n">Read</span>  <span class="c1"># noqa E402</span>
@@ -103,7 +105,7 @@
 
 <div class="viewcode-block" id="TestApp2.run">
 <a class="viewcode-back" href="../../../autoapi/testapp/scripts/test_app2/index.html#testapp.scripts.test_app2.TestApp2.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write_30_times</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">over_write</span><span class="p">()</span>
         <span class="n">read_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_target_lba</span><span class="p">()</span>
@@ -130,7 +132,7 @@
 
 <div class="viewcode-block" id="TestApp2.read_target_lba">
 <a class="viewcode-back" href="../../../autoapi/testapp/scripts/test_app2/index.html#testapp.scripts.test_app2.TestApp2.read_target_lba">[docs]</a>
-    <span class="k">def</span> <span class="nf">read_target_lba</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">read_target_lba</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="n">read_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">lba</span> <span class="ow">in</span> <span class="n">TARGET_LBA</span><span class="p">:</span>
             <span class="n">read_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">lba</span><span class="p">))</span>
@@ -140,7 +142,7 @@
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TestApp2.validate">
 <a class="viewcode-back" href="../../../autoapi/testapp/scripts/test_app2/index.html#testapp.scripts.test_app2.TestApp2.validate">[docs]</a>
-    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">read_data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">read_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">read_data</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">!=</span> <span class="n">READ_VALUE</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span>

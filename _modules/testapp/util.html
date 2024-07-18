@@ -121,7 +121,7 @@
 
 <div class="viewcode-block" id="validate_ssd_command">
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_ssd_command">[docs]</a>
-<span class="k">def</span> <span class="nf">validate_ssd_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">validate_ssd_command</span><span class="p">(</span><span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
@@ -140,7 +140,7 @@
 
 <div class="viewcode-block" id="validate_ssd_lba">
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_ssd_lba">[docs]</a>
-<span class="k">def</span> <span class="nf">validate_ssd_lba</span><span class="p">(</span><span class="n">lba</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
+<span class="k">def</span> <span class="nf">validate_ssd_lba</span><span class="p">(</span><span class="n">lba</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span>
     <span class="k">elif</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lba</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
@@ -150,7 +150,7 @@
 
 <div class="viewcode-block" id="validate_ssd_value">
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_ssd_value">[docs]</a>
-<span class="k">def</span> <span class="nf">validate_ssd_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
+<span class="k">def</span> <span class="nf">validate_ssd_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -196,7 +196,7 @@
 
 <div class="viewcode-block" id="is_valid_hex">
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.is_valid_hex">[docs]</a>
-<span class="k">def</span> <span class="nf">is_valid_hex</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">is_valid_hex</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="c1"># 정규식으로 형식을 먼저 확인</span>
     <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;0x[0-9A-Fa-f]</span><span class="si">{8}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>

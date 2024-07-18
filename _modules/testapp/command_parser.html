@@ -77,6 +77,7 @@
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">from</span> <span class="nn">testapp</span> <span class="kn">import</span> <span class="n">command</span>
+<span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
 
 
 <div class="viewcode-block" id="CommandParser">
@@ -103,7 +104,7 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="CommandParser.is_predefined_command">
 <a class="viewcode-back" href="../../autoapi/testapp/command_parser/index.html#testapp.command_parser.CommandParser.is_predefined_command">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_predefined_command</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">is_predefined_command</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 이름이 사전 정의된 명령어인지 확인합니다.</span>
 
@@ -121,7 +122,7 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="CommandParser.validate_command">
 <a class="viewcode-back" href="../../autoapi/testapp/command_parser/index.html#testapp.command_parser.CommandParser.validate_command">[docs]</a>
-    <span class="k">def</span> <span class="nf">validate_command</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">validate_command</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 명령어의 유효성을 검사합니다.</span>
 
@@ -168,7 +169,7 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="CommandParser.get_command">
 <a class="viewcode-back" href="../../autoapi/testapp/command_parser/index.html#testapp.command_parser.CommandParser.get_command">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_command</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cmd_option</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_command</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cmd_option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CommandInterface</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        주어진 명령 옵션에 해당하는 명령어 객체를 반환합니다.</span>
 

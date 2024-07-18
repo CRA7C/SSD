@@ -45,7 +45,7 @@ Module Contents
    CommandInterface 클래스는 모든 명령어 클래스가 구현해야 하는 인터페이스를 정의합니다.
 
 
-   .. py:method:: run()
+   .. py:method:: run() -> bool
 
       명령어를 실행하는 메서드입니다.
 
@@ -57,10 +57,10 @@ Module Contents
    .. py:method:: over_write()
 
 
-   .. py:method:: read_target_lba()
+   .. py:method:: read_target_lba() -> List[str]
 
 
-   .. py:method:: validate(read_data)
+   .. py:method:: validate(read_data: List[str]) -> bool
       :staticmethod:
 
 

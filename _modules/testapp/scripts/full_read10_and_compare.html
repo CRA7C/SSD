@@ -76,6 +76,7 @@
   <h1>Source code for testapp.scripts.full_read10_and_compare</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">resolve</span><span class="p">()))</span>
 <span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>  <span class="c1"># noqa E402</span>
 <span class="kn">from</span> <span class="nn">testapp.command</span> <span class="kn">import</span> <span class="n">FullRead</span>  <span class="c1"># noqa E402</span>
@@ -92,6 +93,13 @@
             <span class="n">test_data</span> <span class="o">=</span> <span class="n">FullRead</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">init_data</span> <span class="o">!=</span> <span class="n">test_data</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="FullRead10AndCompare.is_valid_args">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/full_read10_and_compare/index.html#testapp.scripts.full_read10_and_compare.FullRead10AndCompare.is_valid_args">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_valid_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 

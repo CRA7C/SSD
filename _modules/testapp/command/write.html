@@ -95,13 +95,13 @@
 
 <div class="viewcode-block" id="Write.run">
 <a class="viewcode-back" href="../../../autoapi/testapp/command/write/index.html#testapp.command.Write.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lba</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        지정된 LBA에 데이터를 씁니다.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            lba (str): 논리 블록 주소</span>
-<span class="sd">            value (str): 쓸 데이터 (16진수 문자열)</span>
+<span class="sd">            lba (str | int): 논리 블록 주소</span>
+<span class="sd">            value (str | int): 쓸 데이터 (16진수 문자열)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 
