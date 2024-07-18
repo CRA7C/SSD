@@ -63,13 +63,20 @@ class ReadCommand(Command):
         if len(self.args) != 2:
             raise ValueError("명령을 수행하기 위한 인자가 부족합니다. ex) ssd R 20")
 
-        if not self.args[1].isdigit():
-            raise ValueError('LBA는 숫자여야합니다.')
+        def is_integer(s: str) -> bool:
+            try:
+                int(s)
+                return True
+            except ValueError:
+                return False
+
+        if not is_integer(self.args[1]):
+            raise ValueError('LBA는 정수여야합니다.')
         if not LBA_LOWER_LIMIT <= int(self.args[1]) <= LBA_UPPER_LIMIT:
             raise ValueError(f'LBA는 {LBA_LOWER_LIMIT} ~ {LBA_UPPER_LIMIT} 여야합니다.')
 
         return True
-      
+
     def get_key(self) -> Tuple[str, int]:
         """
         명령 키를 반환합니다.
@@ -88,7 +95,6 @@ class WriteCommand(Command):
         lba (int): 논리 블록 주소
         value (int): 쓸 값 (16진수 형식)
     """
-
 
     def __init__(self, args: List[str]):
         """
@@ -134,7 +140,6 @@ class EraseCommand(Command):
         lba (int): 논리 블록 주소
         size (int): 삭제할 블록 수
     """
-
 
     def __init__(self, args: List[str]):
         """
