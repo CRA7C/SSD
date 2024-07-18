@@ -12,6 +12,7 @@ class Write10AndCompare:
             read_value = ReadCommand().run(lba)
             if value != int(read_value, 16):
                 return False
+            print(f"LBA: {lba:02}, value: {read_value}")  # print 는 shell 의 출력으로 사용
         return True
 
 

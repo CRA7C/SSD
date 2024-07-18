@@ -17,7 +17,13 @@ class TestApp2:
         self.write_30_times()
         self.over_write()
         read_data = self.read_target_lba()
-        return all(int(data, 16) == READ_VALUE for data in read_data)
+        is_valid = all(int(data, 16) == READ_VALUE for data in read_data)
+
+        if is_valid:
+            for i, value in enumerate(read_data):
+                print(f"LBA: {i:02}, value: {value}")  # print 는 shell 의 출력으로 사용
+
+        return is_valid
 
     def write_30_times(self):
         # Total 30회의 write을 수행.
