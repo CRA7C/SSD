@@ -35,6 +35,9 @@ Module Contents
 
 
 
+   .. py:attribute:: driver
+
+
    .. py:method:: run(lba: str | int) -> str
 
       지정된 LBA에서 데이터를 읽습니다.

@@ -35,6 +35,9 @@ Module Contents
 
 
 
+   .. py:attribute:: driver
+
+
    .. py:method:: run(lba: str, total_size: str)
 
       지정된 LBA와 크기만큼 데이터를 삭제합니다.

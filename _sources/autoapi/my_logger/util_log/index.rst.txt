@@ -129,6 +129,9 @@ Module Contents
 
 
 
+   .. py:attribute:: logger
+
+
    .. py:method:: info(message)
 
       정보 로그 메시지를 기록합니다.

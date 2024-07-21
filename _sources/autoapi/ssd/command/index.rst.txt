@@ -40,6 +40,12 @@ Module Contents
       :type: list
 
 
+   .. py:attribute:: option
+
+
+   .. py:attribute:: args
+
+
    .. py:method:: validate_command()
       :abstractmethod:
 
@@ -69,6 +75,9 @@ Module Contents
       논리 블록 주소
 
       :type: int
+
+
+   .. py:attribute:: lba
 
 
    .. py:method:: validate_command()
@@ -103,6 +112,12 @@ Module Contents
       :type: int
 
 
+   .. py:attribute:: lba
+
+
+   .. py:attribute:: value
+
+
    .. py:method:: validate_command()
 
 
@@ -133,6 +148,12 @@ Module Contents
       삭제할 블록 수
 
       :type: int
+
+
+   .. py:attribute:: lba
+
+
+   .. py:attribute:: size
 
 
    .. py:method:: validate_command()

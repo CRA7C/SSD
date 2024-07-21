@@ -40,6 +40,12 @@ Module Contents
       :type: CommandBuffer
 
 
+   .. py:attribute:: ssd
+
+
+   .. py:attribute:: option_buf
+
+
    .. py:method:: buff_flush()
 
       명령 버퍼를 비우고 명령어를 실행합니다.

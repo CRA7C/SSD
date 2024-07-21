@@ -21,6 +21,7 @@ SSD 프로젝트
    :caption: Contents:
 
    members
+   development
    LICENSE
 
 
@@ -31,7 +32,8 @@ SSD 프로젝트
 
 .. code-block:: shell
 
-   pip install cra7c-ssd
+    git clone https://github.com/CRA7C/SSD.git
+    cd SSD
 
 사용법
 =======

@@ -35,6 +35,9 @@ Module Contents
 
 
 
+   .. py:attribute:: driver
+
+
    .. py:method:: run() -> list[str]
 
       SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.

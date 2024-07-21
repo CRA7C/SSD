@@ -58,6 +58,11 @@ Module Contents
    allows modifications.
 
 
+   .. py:attribute:: found_classes
+      :value: []
+
+
+
    .. py:method:: visit_ClassDef(node)
 
 

@@ -65,6 +65,9 @@ Package Contents
 
 
 
+   .. py:attribute:: driver
+
+
    .. py:method:: run(lba: str | int, value: str | int) -> None
 
       지정된 LBA에 데이터를 씁니다.
@@ -105,6 +108,9 @@ Package Contents
       :type:  int
       :value: 1
 
+
+
+   .. py:attribute:: driver
 
 
    .. py:method:: run(lba: str | int) -> str
@@ -204,6 +210,9 @@ Package Contents
 
 
 
+   .. py:attribute:: driver
+
+
    .. py:method:: run(value: str | int) -> None
 
       SSD의 모든 LBA에 값을 씁니다.
@@ -244,6 +253,9 @@ Package Contents
 
 
 
+   .. py:attribute:: driver
+
+
    .. py:method:: run() -> list[str]
 
       SSD의 모든 LBA에서 데이터를 읽어 리스트로 반환합니다.
@@ -279,6 +291,9 @@ Package Contents
       :type:  int
       :value: 2
 
+
+
+   .. py:attribute:: driver
 
 
    .. py:method:: run(lba: str, total_size: str)
@@ -325,6 +340,9 @@ Package Contents
 
 
 
+   .. py:attribute:: driver
+
+
    .. py:method:: run(start_lba: str, end_lba: str)
 
       지정된 시작 LBA와 끝 LBA 사이의 데이터를 삭제합니다.
@@ -359,6 +377,9 @@ Package Contents
       :type:  int
       :value: 0
 
+
+
+   .. py:attribute:: driver
 
 
    .. py:method:: run()

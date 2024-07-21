@@ -43,6 +43,16 @@ Module Contents
       :type: list
 
 
+   .. py:attribute:: buffer_file_path
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: buffer
+      :type:  List[ssd.command.Command]
+      :value: []
+
+
+
    .. py:method:: initialize()
 
       버퍼 파일을 초기화합니다. 만일 buffer.txt 파일이 없으면, 초기화된 파일을 생성합니다.

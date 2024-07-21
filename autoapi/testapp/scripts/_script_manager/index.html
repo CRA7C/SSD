@@ -48,10 +48,12 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development.html">개발 가이드</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../LICENSE.html">LICENSE</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../../ssd/index.html">ssd</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../index.html">testapp</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#uml-diagrams">UML Diagrams</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../index.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../command/index.html">testapp.command</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../index.html">testapp.scripts</a></li>
@@ -155,6 +157,11 @@ the <cite>visit</cite> method.  If no visitor function exists for a node
 <p>Don’t use the <cite>NodeVisitor</cite> if you want to apply changes to nodes during
 traversing.  For this a special visitor exists (<cite>NodeTransformer</cite>) that
 allows modifications.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testapp.scripts._script_manager.ClassVisitor.found_classes">
+<span class="sig-name descname"><span class="pre">found_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#ClassVisitor.found_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.ClassVisitor.found_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="testapp.scripts._script_manager.ClassVisitor.visit_ClassDef">
 <span class="sig-name descname"><span class="pre">visit_ClassDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/testapp/scripts/_script_manager.html#ClassVisitor.visit_ClassDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testapp.scripts._script_manager.ClassVisitor.visit_ClassDef" title="Link to this definition"></a></dt>

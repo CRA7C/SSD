@@ -48,11 +48,17 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">개발 가이드</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">LICENSE</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../ssd/index.html">ssd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../testapp/index.html">testapp</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">my_logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uml-diagrams">UML Diagrams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">my_logger 모듈 구조</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logger-testapp">Logger 동작 (TestApp 에서의 예)</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="util_log/index.html">my_logger.util_log</a></li>
 </ul>
@@ -95,6 +101,17 @@
              
   <section id="module-my_logger">
 <span id="my-logger"></span><h1>my_logger<a class="headerlink" href="#module-my_logger" title="Link to this heading"></a></h1>
+<section id="uml-diagrams">
+<h2>UML Diagrams<a class="headerlink" href="#uml-diagrams" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>my_logger 모듈 구조<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<img alt="../../_images/logger_classes.png" src="../../_images/logger_classes.png" />
+</section>
+<section id="logger-testapp">
+<h3>Logger 동작 (TestApp 에서의 예)<a class="headerlink" href="#logger-testapp" title="Link to this heading"></a></h3>
+<img alt="../../_images/logger_sequence.png" src="../../_images/logger_sequence.png" />
+</section>
+</section>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -122,6 +139,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="my_logger.Logger._instance">
 <span class="sig-name descname"><span class="pre">_instance</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#my_logger.Logger._instance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="my_logger.Logger.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#my_logger.Logger.logger" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">

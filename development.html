@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>개발 가이드 &mdash; SSD by CRA7C  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LICENSE" href="LICENSE.html" />
+    <link rel="prev" title="About Members" href="members.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SSD by CRA7C
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="members.html">About Members</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">개발 가이드</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">프로젝트 설정</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">개발 환경</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">프로젝트 구조</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">주요 구성 요소</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">코딩 스타일</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">테스트</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">프로젝트 빌드</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">문서화</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">기여</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SSD by CRA7C</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">개발 가이드</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/development.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>개발 가이드<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>이 문서는 프로젝트를 개발하기 위한 가이드입니다. 개발 환경을 설정하고, 프로젝트 구조를 이해하며, 효과적으로 기여할 수 있도록 도와줍니다.</p>
+<section id="id2">
+<h2>프로젝트 설정<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><dl>
+<dt>저장소 클론:</dt><dd><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/CRA7C/SSD.git
+<span class="nb">cd</span><span class="w"> </span>SSD
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>필요한 의존성 설치:</dt><dd><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="id3">
+<h2>개발 환경<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>의존성을 관리하기 위해 가상 환경을 사용하는 것이 좋습니다. 다음 명령어를 사용하여 가상 환경을 만들 수 있습니다:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate<span class="w">  </span><span class="c1"># Linux/MacOS 에서는 `source venv/bin/activate` 사용</span>
+</pre></div>
+</div>
+<p>작업을 시작하기 전에 가상 환경을 활성화하세요.</p>
+</section>
+<section id="id4">
+<h2>프로젝트 구조<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>프로젝트 디렉토리 구조는 다음과 같습니다:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SSD/
+├─docs/                : Sphinx doc gen. 을 위한 파일들
+├─log/                 : logger 의 파일들을 보관하는 폴더
+├─my_logger/           : 요구사항의 Logger 구현
+├─ssd/                 : 가상 ssd 모듈
+├─testapp/             : Test Shell App. 모듈
+│  ├─command/          : command 관련 하위 모듈
+│  └─scripts/          : Test Scripts 및 관련 처리 모듈
+├─tests/               : 테스트 파일들 모음 (120개)
+│  ├─ssd_test/         : ssd 모듈의 Unit tests
+│  └─testapp_test/     : testapp 모듈의 Unit tests
+├─requirements.txt     : 의존성 라이브러리 리스트
+└─make.bat             : make doc, make clean, make pylint 등
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>주요 구성 요소<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><cite>my_logger/</cite>: 요구 된 Logger 로직을 포함합니다.</p></li>
+<li><p><cite>ssd/</cite>: 주된 SSD(솔리드 스테이트 드라이브) 시뮬레이션 로직을 포함합니다.</p></li>
+<li><p><cite>testapp/</cite>: SSD와 상호작용하는 테스트 애플리케이션을 포함합니다.</p></li>
+<li><p><cite>docs/</cite>: 문서화 소스 파일을 포함합니다.</p></li>
+<li><p><cite>tests/</cite>: 프로젝트의 테스트 케이스를 포함합니다.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>코딩 스타일<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>PEP 8, 공식 Python 스타일 가이드를 따릅니다. 코드를 이 지침에 맞추어 작성하세요. <cite>pylint`와 `ruff</cite> 같은 도구를 사용하여 코드를 검사하고 포맷할 수 있습니다:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pylint<span class="w"> </span>ssd<span class="w"> </span>testapp
+ruff<span class="w"> </span>check<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2>테스트<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>모든 새로운 기능 및 버그 수정에는 테스트가 포함되어야 합니다. <a href="#id8"><span class="problematic" id="id9">`</span></a>unittest`를 사용하여 테스트를 실행합니다. 테스트를 실행하려면 다음을 사용하세요</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>discover<span class="w"> </span>-s<span class="w"> </span>tests<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;*.py&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h2>프로젝트 빌드<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>프로젝트를 빌드하기 위해 다음 명령어를 사용할 수 있습니다:</p>
+<ol class="arabic">
+<li><dl>
+<dt>빌드 디렉토리 정리:</dt><dd><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clean
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>문서화 빌드:</dt><dd><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>doc
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="id11">
+<h2>문서화<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>Sphinx를 사용하여 프로젝트 문서를 생성합니다. 소스 파일은 <cite>docs/</cite> 디렉토리에 있습니다. HTML 문서를 빌드하려면 다음을 사용하세요:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>doc
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h2>기여<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>저장소를 포크하고, 기능이나 버그 수정을 위한 새 브랜치를 만드세요.</p></li>
+<li><p>변경 사항을 작성하고, 충분히 문서화하고 테스트하세요.</p></li>
+<li><p>변경 사항에 대한 명확한 설명과 함께 풀 리퀘스트를 제출하세요.</p></li>
+</ol>
+<p>프로젝트에 기여해 주셔서 감사합니다!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="members.html" class="btn btn-neutral float-left" title="About Members" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="LICENSE.html" class="btn btn-neutral float-right" title="LICENSE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CRA7C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

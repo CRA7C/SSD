@@ -32,6 +32,12 @@ Module Contents
       :type: ResultManager
 
 
+   .. py:attribute:: nand_driver
+
+
+   .. py:attribute:: result_manager
+
+
    .. py:method:: write(lba: int, value)
 
       주어진 LBA에 값을 씁니다.

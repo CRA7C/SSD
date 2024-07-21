@@ -41,6 +41,10 @@ Module Contents
       :type: Path
 
 
+   .. py:attribute:: nand_file_path
+      :type:  pathlib.Path
+
+
    .. py:method:: initialize() -> None
 
       만일 nand.txt 파일이 없으면, 초기화된 파일을 생성합니다.

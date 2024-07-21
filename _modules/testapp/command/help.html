@@ -45,6 +45,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../members.html">About Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">개발 가이드</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">LICENSE</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">API Reference</a></li>
 </ul>
@@ -75,6 +76,7 @@
              
   <h1>Source code for testapp.command.help</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
+<span class="kn">from</span> <span class="nn">testapp.scripts</span> <span class="kn">import</span> <span class="n">get_test_scripts</span>
 
 <div class="viewcode-block" id="TESTAPP_HELP">
 <a class="viewcode-back" href="../../../autoapi/testapp/command/help/index.html#testapp.command.help.TESTAPP_HELP">[docs]</a>
@@ -114,7 +116,12 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        사용 가능한 명령어와 옵션을 출력합니다.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">TESTAPP_HELP</span><span class="p">)</span></div>
+        <span class="nb">print</span><span class="p">(</span><span class="n">TESTAPP_HELP</span><span class="p">)</span>
+        <span class="n">test_scripts_dict</span> <span class="o">=</span> <span class="n">get_test_scripts</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">test_scripts_dict</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Scripts:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">test_scripts_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>

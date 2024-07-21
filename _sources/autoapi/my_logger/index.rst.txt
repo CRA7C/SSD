@@ -3,6 +3,27 @@ my_logger
 
 .. py:module:: my_logger
 
+.. autoapi-nested-parse::
+
+   ============================
+   my_logger
+   ============================
+
+   UML Diagrams
+   ============================
+
+   my_logger 모듈 구조
+   ----------------------------
+
+   .. image:: /_images/my_logger/logger_classes.png
+
+
+   Logger 동작 (TestApp 에서의 예)
+   -----------------------------------------
+
+   .. image:: /_images/my_logger/logger_sequence.png
+
+
 
 Submodules
 ----------
@@ -32,6 +53,9 @@ Package Contents
    .. py:attribute:: _instance
       :value: None
 
+
+
+   .. py:attribute:: logger
 
 
    .. py:method:: info(message)
