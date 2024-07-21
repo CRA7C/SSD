@@ -1,4 +1,5 @@
 from testapp.command.__interface import CommandInterface
+from testapp.scripts import get_test_scripts
 
 TESTAPP_HELP = r"""
 Usage:
@@ -29,6 +30,11 @@ class HelpCommand(CommandInterface):
         사용 가능한 명령어와 옵션을 출력합니다.
         """
         print(TESTAPP_HELP)
+        test_scripts_dict = get_test_scripts()
+        if test_scripts_dict:
+            print("Test Scripts:")
+            for key in test_scripts_dict.keys():
+                print(f"  {key}")
 
     @staticmethod
     def is_valid_args(*args) -> bool:
