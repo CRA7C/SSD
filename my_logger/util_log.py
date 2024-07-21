@@ -1,8 +1,8 @@
 import logging
 import os
 from datetime import datetime
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from concurrent_log_handler import ConcurrentRotatingFileHandler
 import inspect
 import re
 
@@ -28,7 +28,7 @@ def print_function_name(func):
     return wrapper
 
 
-class MyRotatingFileHandler(RotatingFileHandler):
+class MyRotatingFileHandler(ConcurrentRotatingFileHandler):
     """
     로그 파일이 회전될 때 파일 이름을 변경하는 기능을 추가한 RotatingFileHandler 클래스입니다.
     """
