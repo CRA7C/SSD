@@ -1,0 +1,21 @@
+@startuml
+actor User
+
+participant TestShell
+participant Logger
+
+User -> TestShell: 명령어 입력 (예: write 1 0x12345678)
+TestShell -> Logger: info("입력: write 1 0x12345678")
+ref over TestShell, CommandParser: 명령어 파싱 및 유효성 검사
+alt 명령어가 유효하지 않은 경우
+    TestShell -> Logger: error("INVALID COMMAND")
+    TestShell -> User: INVALID COMMAND 출력
+else 명령어가 유효한 경우
+    ref over TestShell, Command: Command 객체 생성
+    TestShell -> Logger: debug("실행: write 1 0x12345678")
+    TestShell -> Command: 명령어 실행
+    ref over Command: 명령어 동작
+    Command -> Logger: info("명령어 실행 완료")
+end
+
+@enduml

@@ -8,6 +8,7 @@ set BUILD_DIR=build
 :: Create make targets
 if "%1" == "help" goto help
 if "%1" == "install" goto install
+if "%1" == "uml" goto uml
 if "%1" == "doc" goto doc
 if "%1" == "whl" goto whl
 if "%1" == "html" goto html
@@ -31,6 +32,11 @@ goto end
 :install
 echo Installing dependencies...
 python -m pip install -r requirements.txt
+goto end
+
+:uml
+echo Building Plant UML images...
+call java -jar %DOCS_DIR%/plantuml.jar %DOCS_DIR%/_images/*/*.uml
 goto end
 
 :doc

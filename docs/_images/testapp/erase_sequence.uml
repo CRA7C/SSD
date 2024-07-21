@@ -1,0 +1,25 @@
+@startuml
+
+actor User
+
+participant TestShell
+participant CommandParser
+participant EraseCommand
+participant SsdDriver
+
+User -> TestShell: erase 명령어 입력\n(예: erase 10 5)
+TestShell -> CommandParser: 명령어 파싱 및 유효성 검사
+CommandParser -> CommandParser: 명령어 유효성 검사
+alt 명령어가 유효하지 않은 경우
+    CommandParser -> TestShell: INVALID COMMAND 응답
+    TestShell -> User: INVALID COMMAND 출력
+else 명령어가 유효한 경우
+    CommandParser -> EraseCommand: EraseCommand 객체 생성
+    TestShell -> EraseCommand: 명령어 실행 요청
+    EraseCommand -> SsdDriver: erase(lba, size) 호출
+    ref over SsdDriver: Erase 동작 수행
+    SsdDriver -> EraseCommand: 결과 반환
+    EraseCommand -> TestShell: 결과 반환
+    TestShell -> User: 결과 출력
+end
+@enduml

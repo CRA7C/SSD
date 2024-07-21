@@ -1,0 +1,74 @@
+@startuml
+' TestApp 모듈 클래스 다이어그램
+
+class TestShell {
+    +execute(cmd: str) -> int
+}
+
+class CommandParser {
+    +is_predefined_command(name: str) -> bool
+    +validate_command(cmd: str) -> bool
+    +parse_args(cmd: str) -> tuple[str, list[str]]
+    +get_command(cmd_option: str) -> CommandInterface
+}
+
+interface CommandInterface {
+    +run(*args, **kwargs)
+    +is_valid_args(*args, **kwargs) -> bool
+}
+
+class WriteCommand implements CommandInterface {
+    +run(lba: str, value: str)
+    +is_valid_args(*args) -> bool
+}
+
+class ReadCommand implements CommandInterface {
+    +run(lba: str) -> str
+    +is_valid_args(*args) -> bool
+}
+
+class EraseCommand implements CommandInterface {
+    +run(lba: str, total_size: str)
+    +is_valid_args(*args) -> bool
+}
+
+class EraseRangeCommand implements CommandInterface {
+    +run(start_lba: str, end_lba: str)
+    +is_valid_args(*args) -> bool
+}
+
+class HelpCommand implements CommandInterface {
+    +run(*args, **kwargs)
+    +is_valid_args(*args) -> bool
+}
+
+class ExitCommand implements CommandInterface {
+    +run(*args, **kwargs)
+    +is_valid_args(*args) -> bool
+}
+
+class FullWriteCommand implements CommandInterface {
+    +run(value: str)
+    +is_valid_args(*args) -> bool
+}
+
+class FullReadCommand implements CommandInterface {
+    +run()
+    +is_valid_args(*args) -> bool
+}
+
+class SsdDriver {
+    +read(lba: str | int) -> str
+    +write(lba: str | int, value: str | int)
+    +erase(lba: str | int, size: str | int)
+    +run_subprocess(command: str)
+}
+
+TestShell --> CommandParser : uses
+CommandParser --> CommandInterface : creates
+WriteCommand --> SsdDriver : uses
+ReadCommand --> SsdDriver : uses
+EraseCommand --> SsdDriver : uses
+EraseRangeCommand --> SsdDriver : uses
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+actor User
+
+participant SSDRunner
+participant CommandFactory
+participant WriteCommand
+participant CommandBuffer
+participant SolidStateDrive
+participant NandDriver
+
+User -> SSDRunner: 명령어 입력\n(예: write 1 0x12345678)
+SSDRunner -> SSDRunner: 명령어 파싱 및 유효성 검사
+alt 명령어가 유효하지 않은 경우
+    SSDRunner -> User: system 종료
+else 명령어가 유효한 경우
+    SSDRunner -> CommandFactory: 명령어 객체 생성 요청\n(write 1 0x12345678)
+    CommandFactory -> WriteCommand: 명령어 객체 생성
+    SSDRunner -> CommandBuffer: 명령어 객체 추가
+    CommandBuffer -> SSDRunner: 실행할 명령어 객체 전달
+    SSDRunner -> WriteCommand: 명령어 실행
+    WriteCommand -> SolidStateDrive: 쓰기 명령어 전달\n(write 1 0x12345678)
+    SolidStateDrive -> NandDriver: 데이터 쓰기\n(1, 0x12345678)
+end
+@enduml

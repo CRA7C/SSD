@@ -1,0 +1,29 @@
+@startuml
+actor User
+
+participant CommandBuffer
+participant CommandFactory
+participant Command
+participant SolidStateDrive
+
+User -> CommandBuffer: push_command(command)
+CommandBuffer -> CommandFactory: parse_command(command_list)
+CommandFactory -> Command: 생성된 명령어 객체 반환
+CommandBuffer -> CommandBuffer: buffer에 명령어 추가
+CommandBuffer -> CommandBuffer: optimize()
+group 명령어 최적화
+    CommandBuffer -> CommandBuffer: 중복 쓰기 명령어 제거
+    CommandBuffer -> CommandBuffer: 중복 삭제 명령어 제거
+    CommandBuffer -> CommandBuffer: 필요없는 명령어 병합
+end
+
+User -> CommandBuffer: flush()
+loop 각 명령어 실행
+    CommandBuffer -> CommandBuffer: buffer 에서 명령어 pop
+    CommandBuffer -> Command: 명령어 실행 요청
+    Command -> SolidStateDrive: 명령어 실행
+    ref over SolidStateDrive: SSD 동작
+    SolidStateDrive -> Command: 명령어 실행 결과 반환
+    Command -> CommandBuffer: 명령어 실행 결과 반환
+end
+@enduml
