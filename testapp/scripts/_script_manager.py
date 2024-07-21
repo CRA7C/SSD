@@ -93,7 +93,7 @@ def run_script(script_name: str, use_print: bool = False) -> bool:
                 Logger().info(result.stdout)
             else:
                 Logger().debug(result.stdout)
-        if result.stderr:
+        elif result.stderr:
             Logger().debug(result.stderr)
         return result.returncode == 0
     except Exception as e:
