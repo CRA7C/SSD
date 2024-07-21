@@ -12,11 +12,6 @@
 
 프로젝트를 설치하려면 다음 명령어를 실행하십시오:
 
-```shell
-pip install cra7c-ssd
-```
-
-혹은
 
 ```shell
 git clone https://github.com/CRA7C/SSD.git

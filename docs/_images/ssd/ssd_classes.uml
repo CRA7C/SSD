@@ -1,0 +1,90 @@
+@startuml
+' SSD 모듈 클래스 다이어그램
+
+class SolidStateDrive {
+    - nand_driver: NandDriver
+    - result_manager: ResultManager
+    __init__()
+    write(lba: int, value)
+    read(lba: int)
+    read_fast(value)
+    erase(lba: int, n_value: int)
+}
+
+class NandDriver {
+    __init__(nand_file_path: Union[Path, str])
+    initialize()
+    read(lba: int) -> int
+    write(lba: int, value: int) -> None
+    erase(lba: int, n_value: int) -> None
+}
+
+class ResultManager {
+    __init__()
+    initialize()
+    write(text: str)
+}
+
+class CommandBuffer {
+    __init__()
+    initialize()
+    load_buffer()
+    save_buffer()
+    get_saved_data() -> str
+    push_command(command)
+    pop()
+    is_able_to_fast_read(cmd) -> bool
+    get_read_fast(cmd)
+    flush() -> list
+    optimize()
+    need_flush() -> bool
+}
+
+class CommandFactory {
+    +parse_command(command_list: list) -> Command
+}
+
+abstract class Command {
+    - option: str
+    - args: list
+    __init__(args: list)
+    get_value() -> list
+    {abstract} execute()
+}
+
+class WriteCommand extends Command {
+    - lba: int
+    - value: int
+    __init__(args: list)
+    get_key() -> tuple
+}
+
+class ReadCommand extends Command {
+    - lba: int
+    __init__(args: list)
+}
+
+class EraseCommand extends Command {
+    - lba: int
+    - size: int
+    __init__(args: list)
+    get_key() -> tuple
+}
+
+class SSDRunner {
+    - ssd: SolidStateDrive
+    - option_buf: CommandBuffer
+    __init__()
+    is_valid_command() -> bool
+    buff_flush()
+    run()
+    execute_command(command)
+}
+
+SolidStateDrive --> NandDriver : uses
+SolidStateDrive --> ResultManager : uses
+SSDRunner --> SolidStateDrive : uses
+SSDRunner --> CommandBuffer : uses
+CommandBuffer --> Command : contains
+CommandFactory --> Command : creates
+@enduml

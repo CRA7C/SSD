@@ -1,0 +1,25 @@
+@startuml
+participant User
+participant TestShell
+participant CommandParser
+participant Command
+participant SsdDriver
+participant ssd
+
+User -> TestShell: 명령어 입력 \n(예: write 1 0x12345678)
+TestShell -> CommandParser: 명령어 유효성 검사 및 파싱
+CommandParser -> CommandParser: 명령어 유효성 검사
+alt 명령어가 유효하지 않은 경우
+    CommandParser -> TestShell: INVALID COMMAND 응답
+    TestShell -> User: INVALID COMMAND 출력
+else 명령어가 유효한 경우
+    TestShell -> Command: 명령어 실행
+    Command -> SsdDriver: 데이터 쓰기
+    SsdDriver -> ssd: 데이터 쓰기
+    ref over ssd: SSD 동작
+    ssd -> SsdDriver: 결과 반환
+    SsdDriver -> Command: 결과 반환
+    Command -> TestShell: 실행 결과 반환
+    TestShell -> User: 결과 출력
+end
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+actor User
+
+participant TestShell
+participant CommandParser
+participant ReadCommand
+participant SsdDriver
+
+User -> TestShell: read 명령어 입력
+TestShell -> CommandParser: 유효한 명령어인지 확인
+
+alt 유효하지 않은 명령어일 경우
+    TestShell -> TestShell: INVALID COMMAND 응답
+else 유효한 명령어일 경우
+    TestShell -> CommandParser: command 객체 생성 요청
+    CommandParser -> TestShell: read command 객체 리턴
+    TestShell -> ReadCommand: 데이터 요청
+    ReadCommand -> SsdDriver: 명령어 전달
+    ref over SsdDriver: SSD read operation
+    SsdDriver -> ReadCommand: 읽어온 데이터 응답
+    ReadCommand -> TestShell: result.txt 파일 로드
+    TestShell -> User: result.txt 파일 내용을 화면에 출력
+end
+@enduml

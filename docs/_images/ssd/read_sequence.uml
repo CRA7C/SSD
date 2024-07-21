@@ -1,0 +1,26 @@
+@startuml
+actor User
+
+participant SSDRunner
+participant CommandFactory
+participant ReadCommand
+participant CommandBuffer
+participant SolidStateDrive
+participant NandDriver
+participant ResultManager
+
+User -> SSDRunner: 명령어 입력\n(예: read 1)
+SSDRunner -> SSDRunner: 명령어 파싱 및 유효성 검사
+alt 명령어가 유효하지 않은 경우
+    SSDRunner -> User: system 종료
+else 명령어가 유효한 경우
+    SSDRunner -> CommandFactory: 명령어 객체 생성 요청\n(read 1)
+    CommandFactory -> ReadCommand: 명령어 객체 생성
+    SSDRunner -> CommandBuffer: 명령어 객체 추가
+    SSDRunner -> ReadCommand: 명령어 실행
+    ReadCommand -> SolidStateDrive: 읽기 명령어 전달\n(read 1)
+    SolidStateDrive -> NandDriver: 데이터 읽기 (1)
+    NandDriver -> SolidStateDrive: 데이터 반환\n(0x12345678)
+    SolidStateDrive -> ResultManager: 결과 저장
+end
+@enduml

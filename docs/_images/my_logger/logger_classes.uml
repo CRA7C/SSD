@@ -1,0 +1,35 @@
+@startuml
+' my_logger 모듈 클래스 다이어그램
+
+class Logger {
+    - logger: logging.Logger
+    __new__(cls, *args, **kwargs)
+    __init__()
+    info(message: str)
+    debug(message: str)
+    warning(message: str)
+    error(message: str)
+    log_with_class_func_name(level: int, message: str)
+}
+
+class MyRotatingFileHandler {
+    doRollover()
+    rename_backup_files()
+    get_bkup_file_name() -> str
+    is_already_bkup_file() -> bool
+    get_exact_log_name() -> str
+    rename_log_to_zip(filename: str)
+}
+
+class CustomFormatter {
+    format(record: logging.LogRecord) -> str
+}
+
+Logger --> logging.Logger : uses
+Logger --> MyRotatingFileHandler : uses
+Logger --> CustomFormatter : uses
+MyRotatingFileHandler --> logging.handlers.RotatingFileHandler : extends
+logging.Logger <|-- Logger
+logging.handlers.RotatingFileHandler <|-- MyRotatingFileHandler
+
+@enduml

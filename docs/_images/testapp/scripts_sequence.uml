@@ -1,0 +1,28 @@
+@startuml
+actor User
+
+participant TestShell
+participant CommandParser
+participant ScriptManager
+participant TestScript 
+
+User -> TestShell: 명령어 입력\n(예: testapp1)
+TestShell -> CommandParser: 명령어 존재 여부 요청
+CommandParser -> TestShell: 명령어 존재 여부 응답
+alt 명령어가 존재하는 경우
+    ref over TestShell, CommandParser : 기본 명령어 동작 (예: write, read, erase 등)
+else 명령어가 존재하지 않는 경우
+    TestShell -> ScriptManager: 스크립트 존재 여부 확인
+    ScriptManager -> ScriptManager: scripts 폴더 내\nTest script 수집
+    ScriptManager -> ScriptManager: 스크립트 존재 여부 판단
+    ScriptManager -> TestShell: 스크립트 유무 응답
+    alt 스크립트가 존재하지 않는 경우
+        TestShell -> User: INVALID COMMAND 출력
+    else 스크립트가 존재하는 경우
+        TestShell -> TestScript: 스크립트 실행 by using subprocess.run()
+        TestScript -> TestScript: 스크립트 실행
+        TestScript -> TestShell: 실행 결과 반환
+        TestShell -> User: 결과 출력
+    end
+end
+@enduml
