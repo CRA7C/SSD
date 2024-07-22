@@ -20,7 +20,6 @@ SSD 프로젝트
    :maxdepth: 2
    :caption: Contents:
 
-   members
    development
    LICENSE
 
