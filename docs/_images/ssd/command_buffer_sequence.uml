@@ -6,18 +6,42 @@ participant CommandFactory
 participant Command
 participant SolidStateDrive
 
-User -> CommandBuffer: push_command(command)
-CommandBuffer -> CommandFactory: parse_command(command_list)
+User -> CommandFactory: parse_command(command_args)
+Activate CommandFactory
 CommandFactory -> Command: 생성된 명령어 객체 반환
-CommandBuffer -> CommandBuffer: buffer에 명령어 추가
-CommandBuffer -> CommandBuffer: optimize()
-group 명령어 최적화
-    CommandBuffer -> CommandBuffer: 중복 쓰기 명령어 제거
-    CommandBuffer -> CommandBuffer: 중복 삭제 명령어 제거
-    CommandBuffer -> CommandBuffer: 필요없는 명령어 병합
+Activate Command
+Command --> CommandFactory : command
+Deactivate Command
+CommandFactory --> User : command
+Deactivate CommandFactory
+
+User -> CommandBuffer: push_command(command)
+Activate CommandBuffer
+alt Write or Erase
+    CommandBuffer -> CommandBuffer: buffer에 명령어 추가
+    group 명령어 최적화: Optimize()
+        CommandBuffer -> CommandBuffer: 중복 Write 명령어 제거
+        CommandBuffer -> CommandBuffer: Write후 Erase된 명령어 제거
+        CommandBuffer -> CommandBuffer: 중복 Erase 명령어 제거
+    end
+else Read
+    Activate CommandBuffer
+    alt fast read
+        CommandBuffer -> CommandBuffer: Buffer에 기록된 값 가져오기 : value
+    else nand read
+        CommandBuffer -> SolidStateDrive: Nand에 기록된 값 가져오기
+        Activate SolidStateDrive
+        SolidStateDrive --> CommandBuffer : value
+        Deactivate SolidStateDrive
+    end
+    CommandBuffer -> SolidStateDrive : Write to result.txt
 end
+CommandBuffer --> User :
+Deactivate CommandBuffer
+
 
 User -> CommandBuffer: flush()
+Activate CommandBuffer
 loop 각 명령어 실행
     CommandBuffer -> CommandBuffer: buffer 에서 명령어 pop
     CommandBuffer -> Command: 명령어 실행 요청
@@ -26,4 +50,6 @@ loop 각 명령어 실행
     SolidStateDrive -> Command: 명령어 실행 결과 반환
     Command -> CommandBuffer: 명령어 실행 결과 반환
 end
+CommandBuffer --> User
+Deactivate CommandBuffer
 @enduml
