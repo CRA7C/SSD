@@ -79,7 +79,7 @@ Module Contents
 
 .. py:function:: is_in_range_lba(lba: str) -> bool
 
-.. py:function:: is_valid_hex(s: str) -> bool
+.. py:function:: is_valid_hex(s: str)
 
 .. py:function:: validate_size(size: str)
 

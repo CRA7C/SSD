@@ -77,7 +77,7 @@
   <h1>Source code for testapp.command.write</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
 <span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
-<span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">validate_ssd_lba</span><span class="p">,</span> <span class="n">validate_ssd_value</span>
+<span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">validate_ssd_lba</span><span class="p">,</span> <span class="n">is_valid_hex</span>
 
 
 <div class="viewcode-block" id="WriteCommand">
@@ -127,7 +127,7 @@
         <span class="n">n_lba</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">validate_ssd_lba</span><span class="p">(</span><span class="n">n_lba</span><span class="p">)</span>
-        <span class="n">validate_ssd_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">is_valid_hex</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 
