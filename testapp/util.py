@@ -94,7 +94,7 @@ def is_valid_hex(s: str):
         num = int(s, 16)
         if not SSD_MIN_VALUE <= num <= SSD_MAX_VALUE:
             raise ValueError("value는 0x00000000부터 0xFFFFFFFF 사이의 값이여야 합니다.")
-    return ValueError("value는 0x00000000 형식이여야 합니다.")
+    raise ValueError("value는 0x00000000 형식이여야 합니다.")
   
   
 def validate_size(size: str):
