@@ -80,7 +80,7 @@
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
-<span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">SCRIPTS_DIRECTORY</span>
+<span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">SCRIPTS_DIRECTORY</span><span class="p">,</span> <span class="n">MAX_BLOCK</span>
 <span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 
@@ -168,6 +168,16 @@
 
 
 
+<div class="viewcode-block" id="print_log">
+<a class="viewcode-back" href="../../../autoapi/testapp/scripts/_script_manager/index.html#testapp.scripts._script_manager.print_log">[docs]</a>
+<span class="k">def</span> <span class="nf">print_log</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">use_print</span><span class="p">,</span> <span class="n">start_loc</span><span class="p">,</span> <span class="n">end_loc</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">use_print</span><span class="p">:</span>
+        <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">[</span><span class="n">start_loc</span><span class="p">:</span><span class="n">end_loc</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">[</span><span class="n">start_loc</span><span class="p">:</span><span class="n">end_loc</span><span class="p">])</span></div>
+
+
+
 <div class="viewcode-block" id="run_script">
 <a class="viewcode-back" href="../../../autoapi/testapp/scripts/index.html#testapp.scripts._script_manager.run_script">[docs]</a>
 <span class="k">def</span> <span class="nf">run_script</span><span class="p">(</span><span class="n">script_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_print</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -185,10 +195,15 @@
         <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="n">script_name</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># result.returncode가 0이면 성공, 그렇지 않으면 실패</span>
         <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">use_print</span><span class="p">:</span>
-                <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+            <span class="n">result_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+            <span class="n">curr_loc</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">curr_loc</span> <span class="o">&lt;</span> <span class="n">result_size</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">curr_loc</span> <span class="o">+</span> <span class="n">MAX_BLOCK</span> <span class="o">&lt;</span> <span class="n">result_size</span><span class="p">:</span>
+                    <span class="n">print_log</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">use_print</span><span class="p">,</span> <span class="n">curr_loc</span><span class="p">,</span> <span class="n">curr_loc</span> <span class="o">+</span> <span class="n">MAX_BLOCK</span><span class="p">)</span>
+                    <span class="n">curr_loc</span> <span class="o">+=</span> <span class="n">MAX_BLOCK</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">print_log</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">use_print</span><span class="p">,</span> <span class="n">curr_loc</span><span class="p">,</span> <span class="n">result_size</span><span class="p">)</span>
+                    <span class="k">break</span>
         <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
             <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span>

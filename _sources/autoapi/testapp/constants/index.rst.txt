@@ -18,6 +18,7 @@ Attributes
    testapp.constants.INVALID_COMMAND
    testapp.constants.PROJECT_ROOT
    testapp.constants.SCRIPTS_DIRECTORY
+   testapp.constants.MAX_BLOCK
 
 
 Module Contents
@@ -56,4 +57,8 @@ Module Contents
 .. py:data:: PROJECT_ROOT
 
 .. py:data:: SCRIPTS_DIRECTORY
+
+.. py:data:: MAX_BLOCK
+   :value: 1000
+
 

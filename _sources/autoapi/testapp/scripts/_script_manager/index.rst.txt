@@ -28,6 +28,7 @@ Functions
    testapp.scripts._script_manager.find_classes
    testapp.scripts._script_manager.get_test_scripts
    testapp.scripts._script_manager.get_classes
+   testapp.scripts._script_manager.print_log
    testapp.scripts._script_manager.run_script
    testapp.scripts._script_manager.run_test_script_file
 
@@ -88,6 +89,8 @@ Module Contents
    :returns: 클래스 객체 리스트
    :rtype: List[object]
 
+
+.. py:function:: print_log(result, use_print, start_loc, end_loc)
 
 .. py:function:: run_script(script_name: str, use_print: bool = False) -> bool
 
