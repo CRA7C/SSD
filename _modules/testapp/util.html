@@ -160,6 +160,15 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;LBA는 0에서 99사이의 정수여야 합니다.&quot;</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="validate_ssd_end_lba">
+<a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_ssd_end_lba">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_ssd_end_lba</span><span class="p">(</span><span class="n">lba</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;LBA는 숫자 타입이여야 합니다.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lba</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;End LBA는 0에서 100사이의 정수여야 합니다.&quot;</span><span class="p">)</span></div>
+
+
 
 <div class="viewcode-block" id="validate_ssd_value">
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_ssd_value">[docs]</a>

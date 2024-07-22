@@ -27,6 +27,7 @@ Functions
    testapp.util.get_ssd_result
    testapp.util.validate_ssd_command
    testapp.util.validate_ssd_lba
+   testapp.util.validate_ssd_end_lba
    testapp.util.validate_ssd_value
    testapp.util.capture_output
    testapp.util.is_in_range_lba
@@ -72,6 +73,8 @@ Module Contents
 .. py:function:: validate_ssd_command(command: str) -> None
 
 .. py:function:: validate_ssd_lba(lba: Union[str, int]) -> None
+
+.. py:function:: validate_ssd_end_lba(lba: Union[str, int]) -> None
 
 .. py:function:: validate_ssd_value(value: Union[str, int]) -> None
 
