@@ -3,4 +3,9 @@ testapp.__main__
 
 .. py:module:: testapp.__main__
 
+.. autoapi-nested-parse::
+
+   `python -m testapp` 동작 시 실행되는 파일입니다.
+
+
 

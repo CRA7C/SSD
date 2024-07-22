@@ -3,6 +3,11 @@ ssd.__main__
 
 .. py:module:: ssd.__main__
 
+.. autoapi-nested-parse::
+
+   `python -m ssd` 동작 시 실행되는 파일입니다.
+
+
 
 Attributes
 ----------

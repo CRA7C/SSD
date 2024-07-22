@@ -57,7 +57,6 @@ Submodules
    :maxdepth: 1
 
    /autoapi/testapp/__main__/index
-   /autoapi/testapp/command_parser/index
    /autoapi/testapp/constants/index
    /autoapi/testapp/ssd_driver/index
    /autoapi/testapp/testshell/index
