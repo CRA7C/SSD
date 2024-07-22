@@ -96,6 +96,10 @@
 <a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_EMPTY">[docs]</a>
 <span class="n">EXECUTE_EMPTY</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
 
+<div class="viewcode-block" id="EXECUTE_FAIL">
+<a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_FAIL">[docs]</a>
+<span class="n">EXECUTE_FAIL</span> <span class="o">=</span> <span class="mi">3</span></div>
+
 
 
 <div class="viewcode-block" id="TestShell">
@@ -140,7 +144,7 @@
             <span class="k">if</span> <span class="n">cmd_option</span> <span class="ow">in</span> <span class="n">ts_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">success</span> <span class="o">=</span> <span class="n">run_script</span><span class="p">(</span><span class="n">ts_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">],</span> <span class="n">use_print</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;PASS&#39;</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s1">&#39;FAIL!&#39;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">success</span>
+                <span class="k">return</span> <span class="n">EXECUTE_VALID_WO_ARGS</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="n">EXECUTE_FAIL</span>
         <span class="k">return</span> <span class="n">EXECUTE_INVALID</span></div>
 </div>
 

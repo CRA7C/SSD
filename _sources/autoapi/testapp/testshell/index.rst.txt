@@ -13,6 +13,7 @@ Attributes
    testapp.testshell.EXECUTE_VALID_WITH_ARGS
    testapp.testshell.EXECUTE_INVALID
    testapp.testshell.EXECUTE_EMPTY
+   testapp.testshell.EXECUTE_FAIL
 
 
 Classes
@@ -47,6 +48,10 @@ Module Contents
 
 
 .. py:data:: EXECUTE_EMPTY
+
+.. py:data:: EXECUTE_FAIL
+   :value: 3
+
 
 .. py:class:: TestShell
 
