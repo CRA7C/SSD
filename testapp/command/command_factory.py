@@ -1,9 +1,11 @@
 from typing import Any, Dict, Type
+
 from my_logger import Logger
 from testapp.command import (WriteCommand, ReadCommand, EraseCommand, EraseRangeCommand,
                              FlushCommand, HelpCommand, ExitCommand,
                              FullWriteCommand, FullReadCommand, ClearScreenCommand)
 from testapp.command.__interface import CommandInterface
+from testapp.constants import INVALID_COMMAND
 
 
 class CommandFactory:
@@ -73,14 +75,12 @@ def validate_command(cmd: str) -> bool:
     cmd_dict = CommandFactory.get_command_dict()
     if cmd_option not in CommandFactory.get_command_dict():
         Logger().debug("Command does not exist")
-        return False
+        raise ValueError(INVALID_COMMAND)
 
     if cmd_dict[cmd_option].required_args_cnt != n_args:
-        Logger().debug("The number of argument does not match")
-        return False
+        raise ValueError("The number of argument does not match")
 
-    if not cmd_dict[cmd_option].is_valid_args(*cmd_list):
-        return False
+    cmd_dict[cmd_option].is_valid_args(*cmd_list)
     return True
 
 

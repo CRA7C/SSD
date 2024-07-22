@@ -20,8 +20,12 @@ class SSDRunner:
     """
 
     def __init__(self):
+        Logger().debug("[SSD] Start SSDRunner")
         self.ssd = SolidStateDrive()
         self.option_buf = CommandBuffer()
+
+    def __del__(self):
+        Logger().debug("[SSD] Finish SSDRunner")
 
     def buff_flush(self):
         """
@@ -36,6 +40,8 @@ class SSDRunner:
         """
         주어진 명령어를 파싱하고 실행합니다.
         """
+        Logger().debug(f"[SSD] Received CMD : {cmd.get_value()}")
+
         if cmd.option == 'F':
             self.buff_flush()
         elif cmd.option == 'R':
@@ -70,9 +76,5 @@ class SSDRunner:
 
 
 if __name__ == '__main__':
-    Logger().debug("[SSD] Start SSDRunner")
-    runner = SSDRunner()
     cmd_ = CommandFactory.parse_command(sys.argv[1:])
-    Logger().debug(f"[SSD] Received CMD : {cmd_.get_value()}")
-    runner.run(cmd_)
-    Logger().debug("[SSD] Finish SSDRunner")
+    SSDRunner().run(cmd_)

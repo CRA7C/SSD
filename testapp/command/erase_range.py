@@ -1,7 +1,7 @@
 from testapp.command.__interface import CommandInterface
 from testapp.command.erase_common import request_erase
 from testapp.ssd_driver import SsdDriver
-from testapp.util import is_in_range_lba
+from testapp.util import validate_ssd_lba
 
 
 class EraseRangeCommand(CommandInterface):
@@ -34,13 +34,11 @@ class EraseRangeCommand(CommandInterface):
         Returns:
             bool: 인자가 유효한 경우 True, 그렇지 않으면 False
         """
-        if not (args[1].isdigit() and args[2].isdigit()):
-            return False
-        start_lba = int(args[1])
-        end_lba = int(args[2])
 
-        if not (is_in_range_lba(str(start_lba)) and is_in_range_lba(str(end_lba-1))):
-            return False
-        if start_lba >= end_lba:
-            return False
+        start_lba = args[1]
+        end_lba = args[2]
+        validate_ssd_lba(start_lba)
+        validate_ssd_lba(end_lba-1)
+        if int(start_lba) >= int(end_lba):
+            raise ValueError("end LBA는 start LBA보다 커야합니다.")
         return True

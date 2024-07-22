@@ -46,23 +46,23 @@ def validate_ssd_command(command: str) -> None:
 
 def validate_ssd_lba(lba: Union[str, int]) -> None:
     if not isinstance(lba, (str, int)):
-        raise TypeError
+        raise TypeError("LBA는 숫자 타입이여야 합니다.")
     elif not 0 <= int(lba) < 100:
-        raise ValueError
+        raise ValueError("LBA는 0에서 99사이의 정수여야 합니다.")
 
 
 def validate_ssd_value(value: Union[str, int]) -> None:
     if not isinstance(value, (str, int)):
-        raise TypeError
+        raise TypeError("value는 16진수 형식의 정수값만 허용됩니다.")
     elif isinstance(value, str):
         if not value.startswith("0x"):
-            raise ValueError
+            raise ValueError("value는 0x00000000 형식이여야 합니다.")
         try:
             value = int(value, 16)  # 16 진수 to
         except:  # noqa
-            raise ValueError()
+            raise ValueError("value가 16진수가 아닙니다.")
     if not SSD_MIN_VALUE <= value <= SSD_MAX_VALUE:
-        raise ValueError
+        raise ValueError("value는 0x00000000에서 0xFFFFFFFF 사이의 값이여야 합니다.")
 
 
 def capture_output(func):
@@ -88,21 +88,16 @@ def is_in_range_lba(lba: str) -> bool:
         return False
 
 
-def is_valid_hex(s: str) -> bool:
-    # 정규식으로 형식을 먼저 확인
-    if re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
-        try:
-            # 16진수로 변환하여 범위를 확인
-            num = int(s, 16)
-            return SSD_MIN_VALUE <= num <= SSD_MAX_VALUE
-        except ValueError:
-            return False
-    return False
-  
-  
-def is_valid_size(size: str) -> bool:
-    try:
-        num = int(size)
-        return 1 <= num
-    except ValueError:
-        return False
+def is_valid_hex(s: str):
+    if not re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
+        raise ValueError("value는 0x00000000 형식이여야 합니다.")
+
+    num = int(s, 16)
+    if not SSD_MIN_VALUE <= num <= SSD_MAX_VALUE:
+        raise ValueError("value는 0x00000000부터 0xFFFFFFFF 사이의 값이여야 합니다.")
+
+
+def validate_size(size: str):
+    num = int(size)
+    if 1 > num:
+        raise ValueError("size는 1이상의 정수여야 합니다.")

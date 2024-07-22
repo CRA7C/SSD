@@ -1,8 +1,8 @@
+from my_logger import Logger
 from testapp.command.command_factory import (CommandFactory, is_predefined_command_name,
                                              validate_command, parse_cmd_args)
 from testapp.constants import INVALID_COMMAND
 from testapp.scripts import get_test_scripts, run_script
-from my_logger import Logger
 
 EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
@@ -60,5 +60,9 @@ def main():
     ts = TestShell()
     while True:
         cmd = input("> ")
-        if ts.execute(cmd) == EXECUTE_INVALID:
-            Logger().info(INVALID_COMMAND)
+        try:
+            if ts.execute(cmd) == EXECUTE_INVALID:
+                Logger().info(INVALID_COMMAND)
+        except Exception as e:
+            err_message = str(e) if str(e) else INVALID_COMMAND
+            Logger().error(err_message)
