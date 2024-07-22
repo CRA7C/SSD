@@ -50,6 +50,12 @@ def validate_ssd_lba(lba: Union[str, int]) -> None:
     elif not 0 <= int(lba) < 100:
         raise ValueError("LBA는 0에서 99사이의 정수여야 합니다.")
 
+def validate_ssd_end_lba(lba: Union[str, int]) -> None:
+    if not isinstance(lba, (str, int)):
+        raise TypeError("LBA는 숫자 타입이여야 합니다.")
+    elif not 0 <= int(lba) <= 100:
+        raise ValueError("End LBA는 0에서 100사이의 정수여야 합니다.")
+
 
 def validate_ssd_value(value: Union[str, int]) -> None:
     if not isinstance(value, (str, int)):
