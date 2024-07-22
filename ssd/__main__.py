@@ -1,3 +1,6 @@
+"""
+`python -m ssd` 동작 시 실행되는 파일입니다.
+"""
 import os
 import sys
 from typing import Union
