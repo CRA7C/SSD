@@ -8,6 +8,7 @@ EXECUTE_VALID_WO_ARGS = 2
 EXECUTE_VALID_WITH_ARGS = 1
 EXECUTE_INVALID = 0
 EXECUTE_EMPTY = -1
+EXECUTE_FAIL = 3
 
 
 class TestShell:
@@ -48,7 +49,7 @@ class TestShell:
             if cmd_option in ts_dict.keys():
                 success = run_script(ts_dict[cmd_option], use_print=True)
                 Logger().info('PASS' if success else 'FAIL!')
-                return success
+                return EXECUTE_VALID_WO_ARGS if success else EXECUTE_FAIL
         return EXECUTE_INVALID
 
 
