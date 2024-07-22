@@ -19,3 +19,8 @@ class TestEraseRange(TestCase):
         self.cmd.run('0', '55')
         self.assertEqual(6, mock_erase.call_count)
         mock_erase.assert_called_with(50, 5)
+
+    def test_run_erase_edge_case(self):
+        ret = self.cmd.is_valid_args('erase','99', '100')
+        self.assertEqual(True, ret)
+
