@@ -76,9 +76,9 @@
              
   <h1>Source code for testapp.command.fullwrite</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
-<span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">SSD_LBA_RANGE</span>
-<span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">is_valid_hex</span>
+<span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
+<span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">validate_ssd_value</span>
 
 
 <div class="viewcode-block" id="FullWriteCommand">
@@ -126,7 +126,8 @@
 <span class="sd">            bool: 인자가 유효한 경우 True, 그렇지 않으면 False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">is_valid_hex</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span></div>
+        <span class="n">validate_ssd_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 
 </pre></div>

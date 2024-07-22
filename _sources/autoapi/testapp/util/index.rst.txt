@@ -31,7 +31,7 @@ Functions
    testapp.util.capture_output
    testapp.util.is_in_range_lba
    testapp.util.is_valid_hex
-   testapp.util.is_valid_size
+   testapp.util.validate_size
 
 
 Module Contents
@@ -81,5 +81,5 @@ Module Contents
 
 .. py:function:: is_valid_hex(s: str) -> bool
 
-.. py:function:: is_valid_size(size: str) -> bool
+.. py:function:: validate_size(size: str)
 

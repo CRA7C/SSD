@@ -155,9 +155,9 @@
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_ssd_lba">[docs]</a>
 <span class="k">def</span> <span class="nf">validate_ssd_lba</span><span class="p">(</span><span class="n">lba</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lba</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;LBA는 숫자 타입이여야 합니다.&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lba</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;LBA는 0에서 99사이의 정수여야 합니다.&quot;</span><span class="p">)</span></div>
 
 
 
@@ -165,16 +165,16 @@
 <a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_ssd_value">[docs]</a>
 <span class="k">def</span> <span class="nf">validate_ssd_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;value는 16진수 형식의 정수값만 허용됩니다.&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;0x&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;value는 0x00000000 형식이여야 합니다.&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>  <span class="c1"># 16 진수 to</span>
         <span class="k">except</span><span class="p">:</span>  <span class="c1"># noqa</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;value가 16진수가 아닙니다.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">SSD_MIN_VALUE</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">SSD_MAX_VALUE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;value는 0x00000000에서 0xFFFFFFFF 사이의 값이여야 합니다.&quot;</span><span class="p">)</span></div>
 
 
 
@@ -222,14 +222,12 @@
 
   
   
-<div class="viewcode-block" id="is_valid_size">
-<a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.is_valid_size">[docs]</a>
-<span class="k">def</span> <span class="nf">is_valid_size</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">num</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+<div class="viewcode-block" id="validate_size">
+<a class="viewcode-back" href="../../autoapi/testapp/util/index.html#testapp.util.validate_size">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_size</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">num</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;size는 1이상의 정수여야 합니다.&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 

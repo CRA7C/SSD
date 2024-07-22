@@ -79,7 +79,7 @@
 <span class="kn">from</span> <span class="nn">testapp.command.erase_common</span> <span class="kn">import</span> <span class="n">request_erase</span>
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">SSD_SIZE</span>
 <span class="kn">from</span> <span class="nn">testapp.ssd_driver</span> <span class="kn">import</span> <span class="n">SsdDriver</span>
-<span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">is_valid_size</span><span class="p">,</span> <span class="n">is_in_range_lba</span>
+<span class="kn">from</span> <span class="nn">testapp.util</span> <span class="kn">import</span> <span class="n">validate_ssd_lba</span><span class="p">,</span> <span class="n">validate_size</span>
 
 
 <div class="viewcode-block" id="EraseCommand">
@@ -134,10 +134,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n_lba</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_in_range_lba</span><span class="p">(</span><span class="n">n_lba</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_size</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">validate_ssd_lba</span><span class="p">(</span><span class="n">n_lba</span><span class="p">)</span>
+        <span class="n">validate_size</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 

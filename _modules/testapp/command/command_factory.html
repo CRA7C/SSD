@@ -76,11 +76,13 @@
              
   <h1>Source code for testapp.command.command_factory</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Type</span>
+
 <span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="kn">from</span> <span class="nn">testapp.command</span> <span class="kn">import</span> <span class="p">(</span><span class="n">WriteCommand</span><span class="p">,</span> <span class="n">ReadCommand</span><span class="p">,</span> <span class="n">EraseCommand</span><span class="p">,</span> <span class="n">EraseRangeCommand</span><span class="p">,</span>
                              <span class="n">FlushCommand</span><span class="p">,</span> <span class="n">HelpCommand</span><span class="p">,</span> <span class="n">ExitCommand</span><span class="p">,</span>
                              <span class="n">FullWriteCommand</span><span class="p">,</span> <span class="n">FullReadCommand</span><span class="p">,</span> <span class="n">ClearScreenCommand</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">testapp.command.__interface</span> <span class="kn">import</span> <span class="n">CommandInterface</span>
+<span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">INVALID_COMMAND</span>
 
 
 <div class="viewcode-block" id="CommandFactory">
@@ -167,14 +169,12 @@
     <span class="n">cmd_dict</span> <span class="o">=</span> <span class="n">CommandFactory</span><span class="o">.</span><span class="n">get_command_dict</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">cmd_option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CommandFactory</span><span class="o">.</span><span class="n">get_command_dict</span><span class="p">():</span>
         <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Command does not exist&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">cmd_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">]</span><span class="o">.</span><span class="n">required_args_cnt</span> <span class="o">!=</span> <span class="n">n_args</span><span class="p">:</span>
-        <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;The number of argument does not match&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The number of argument does not match&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">cmd_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">]</span><span class="o">.</span><span class="n">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_list</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">cmd_dict</span><span class="p">[</span><span class="n">cmd_option</span><span class="p">]</span><span class="o">.</span><span class="n">is_valid_args</span><span class="p">(</span><span class="o">*</span><span class="n">cmd_list</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">True</span></div>
 
 

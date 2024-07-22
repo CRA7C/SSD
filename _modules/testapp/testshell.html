@@ -75,11 +75,11 @@
            <div itemprop="articleBody">
              
   <h1>Source code for testapp.testshell</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">testapp.command.command_factory</span> <span class="kn">import</span> <span class="p">(</span><span class="n">CommandFactory</span><span class="p">,</span> <span class="n">is_predefined_command_name</span><span class="p">,</span>
+<span></span><span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">testapp.command.command_factory</span> <span class="kn">import</span> <span class="p">(</span><span class="n">CommandFactory</span><span class="p">,</span> <span class="n">is_predefined_command_name</span><span class="p">,</span>
                                              <span class="n">validate_command</span><span class="p">,</span> <span class="n">parse_cmd_args</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">testapp.constants</span> <span class="kn">import</span> <span class="n">INVALID_COMMAND</span>
 <span class="kn">from</span> <span class="nn">testapp.scripts</span> <span class="kn">import</span> <span class="n">get_test_scripts</span><span class="p">,</span> <span class="n">run_script</span>
-<span class="kn">from</span> <span class="nn">my_logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 <div class="viewcode-block" id="EXECUTE_VALID_WO_ARGS">
 <a class="viewcode-back" href="../../autoapi/testapp/testshell/index.html#testapp.testshell.EXECUTE_VALID_WO_ARGS">[docs]</a>
@@ -157,8 +157,12 @@
     <span class="n">ts</span> <span class="o">=</span> <span class="n">TestShell</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ts</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="n">EXECUTE_INVALID</span><span class="p">:</span>
-            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ts</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="n">EXECUTE_INVALID</span><span class="p">:</span>
+                <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">INVALID_COMMAND</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">err_message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">else</span> <span class="n">INVALID_COMMAND</span>
+            <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err_message</span><span class="p">)</span></div>
 
 </pre></div>
 
