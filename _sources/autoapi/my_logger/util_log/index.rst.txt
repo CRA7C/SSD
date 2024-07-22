@@ -49,9 +49,9 @@ Module Contents
    :rtype: function
 
 
-.. py:class:: MyRotatingFileHandler(filename, mode='a', maxBytes=0, backupCount=0, encoding=None, delay=False, errors=None)
+.. py:class:: MyRotatingFileHandler
 
-   Bases: :py:obj:`logging.handlers.RotatingFileHandler`
+   Bases: :py:obj:`concurrent_log_handler.ConcurrentRotatingFileHandler`
 
 
    로그 파일이 회전될 때 파일 이름을 변경하는 기능을 추가한 RotatingFileHandler 클래스입니다.
