@@ -23,7 +23,7 @@
 
 의존성을 관리하기 위해 가상 환경을 사용하는 것이 좋습니다. 다음 명령어를 사용하여 가상 환경을 만들 수 있습니다:
 
-.. code-block:: shell
+.. code-block::
 
     python -m venv venv
     venv\Scripts\activate  # Linux/MacOS 에서는 `source venv/bin/activate` 사용
@@ -99,11 +99,7 @@ PEP 8, 공식 Python 스타일 가이드를 따릅니다. 코드를 이 지침�
 문서화
 ========
 
-Sphinx를 사용하여 프로젝트 문서를 생성합니다. 소스 파일은 `docs/` 디렉토리에 있습니다. HTML 문서를 빌드하려면 다음을 사용하세요:
-
-.. code-block:: shell
-
-    make doc
+Sphinx를 사용하여 프로젝트 문서를 생성합니다. 소스 파일은 `docs/` 디렉토리에 있습니다.
 
 기여
 =======
