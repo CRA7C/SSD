@@ -34,11 +34,10 @@ class EraseRangeCommand(CommandInterface):
         Returns:
             bool: 인자가 유효한 경우 True, 그렇지 않으면 False
         """
-
         start_lba = args[1]
         end_lba = args[2]
         validate_ssd_lba(start_lba)
-        validate_ssd_lba(end_lba-1)
+        validate_ssd_lba(end_lba)
         if int(start_lba) >= int(end_lba):
             raise ValueError("end LBA는 start LBA보다 커야합니다.")
         return True
