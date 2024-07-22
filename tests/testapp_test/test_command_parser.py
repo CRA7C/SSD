@@ -5,9 +5,12 @@ from testapp.command.command_factory import validate_command, parse_cmd_args
 
 class TestCommandParser(TestCase):
 
-
     def setUp(self):
         super().setUp()
+
+    def check_cmd_exception(self, cmd: str):
+        with self.assertRaises(Exception):
+            self.assertFalse(validate_command(cmd))
 
     def test_valid_cmd_true(self):
         cmd_list = [
@@ -33,8 +36,7 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                ret = validate_command(cmd)
-                self.assertFalse(ret)
+                self.check_cmd_exception(cmd)
 
     def test_valid_cmd_read_false(self):
 
@@ -45,8 +47,7 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                ret = validate_command(cmd)
-                self.assertFalse(ret)
+                self.check_cmd_exception(cmd)
 
     def test_valid_cmd_exit_false(self):
 
@@ -57,8 +58,7 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                ret = validate_command(cmd)
-                self.assertFalse(ret)
+                self.check_cmd_exception(cmd)
 
     def test_valid_cmd_help_false(self):
 
@@ -69,8 +69,7 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                ret = validate_command(cmd)
-                self.assertFalse(ret)
+                self.check_cmd_exception(cmd)
 
     def test_valid_cmd_fullwrite_false(self):
 
@@ -82,8 +81,7 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                ret = validate_command(cmd)
-                self.assertFalse(ret)
+                self.check_cmd_exception(cmd)
 
     def test_valid_cmd_fullread_false(self):
 
@@ -94,8 +92,7 @@ class TestCommandParser(TestCase):
         ]
         for idx, cmd in enumerate(cmd_list):
             with self.subTest(idx=idx, cmd=cmd):
-                ret = validate_command(cmd)
-                self.assertFalse(ret)
+                self.check_cmd_exception(cmd)
 
     def test_parse_args(self):
         cmd_dict = {
@@ -120,7 +117,7 @@ class TestCommandParser(TestCase):
         ]
         for test, cmd in commands:
             with self.subTest(test):
-                self.assertFalse(validate_command(cmd))
+                self.check_cmd_exception(cmd)
 
     def test_invalid_erase_range_cmd(self):
         commands = [
@@ -131,4 +128,4 @@ class TestCommandParser(TestCase):
         ]
         for test, cmd in commands:
             with self.subTest(test):
-                self.assertFalse(validate_command(cmd))
+                self.check_cmd_exception(cmd)
