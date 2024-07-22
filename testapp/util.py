@@ -88,16 +88,13 @@ def is_in_range_lba(lba: str) -> bool:
         return False
 
 
-def is_valid_hex(s: str) -> bool:
+def is_valid_hex(s: str):
     # 정규식으로 형식을 먼저 확인
     if re.fullmatch(r"0x[0-9A-Fa-f]{8}", s):
-        try:
-            # 16진수로 변환하여 범위를 확인
-            num = int(s, 16)
-            return SSD_MIN_VALUE <= num <= SSD_MAX_VALUE
-        except ValueError:
-            return False
-    return False
+        num = int(s, 16)
+        if not SSD_MIN_VALUE <= num <= SSD_MAX_VALUE:
+            raise ValueError("value는 0x00000000부터 0xFFFFFFFF 사이의 값이여야 합니다.")
+    return ValueError("value는 0x00000000 형식이여야 합니다.")
   
   
 def validate_size(size: str):
