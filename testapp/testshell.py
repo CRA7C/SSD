@@ -64,4 +64,5 @@ def main():
             if ts.execute(cmd) == EXECUTE_INVALID:
                 Logger().info(INVALID_COMMAND)
         except Exception as e:
-            Logger().error(str(e))
+            err_message = str(e) if str(e) else INVALID_COMMAND
+            Logger().error(err_message)
