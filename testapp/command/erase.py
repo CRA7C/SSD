@@ -2,7 +2,7 @@ from testapp.command.__interface import CommandInterface
 from testapp.command.erase_common import request_erase
 from testapp.constants import SSD_SIZE
 from testapp.ssd_driver import SsdDriver
-from testapp.util import is_valid_size, is_in_range_lba
+from testapp.util import validate_ssd_lba, validate_size
 
 
 class EraseCommand(CommandInterface):
@@ -44,8 +44,6 @@ class EraseCommand(CommandInterface):
         """
         n_lba = args[1]
         size = args[2]
-        if not is_in_range_lba(n_lba):
-            return False
-        if not is_valid_size(size):
-            return False
+        validate_ssd_lba(n_lba)
+        validate_size(size)
         return True

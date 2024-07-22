@@ -1,7 +1,7 @@
 from testapp.command.__interface import CommandInterface
-from testapp.ssd_driver import SsdDriver
 from testapp.constants import SSD_LBA_RANGE
-from testapp.util import is_valid_hex
+from testapp.ssd_driver import SsdDriver
+from testapp.util import validate_ssd_value
 
 
 class FullWriteCommand(CommandInterface):
@@ -36,4 +36,5 @@ class FullWriteCommand(CommandInterface):
             bool: 인자가 유효한 경우 True, 그렇지 않으면 False
         """
         value = args[1]
-        return True if is_valid_hex(value) else False
+        validate_ssd_value(value)
+        return True
