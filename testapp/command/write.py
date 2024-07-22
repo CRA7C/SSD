@@ -1,6 +1,6 @@
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
-from testapp.util import validate_ssd_lba, validate_ssd_value
+from testapp.util import validate_ssd_lba, is_valid_hex
 
 
 class WriteCommand(CommandInterface):
@@ -37,5 +37,5 @@ class WriteCommand(CommandInterface):
         n_lba = args[1]
         value = args[2]
         validate_ssd_lba(n_lba)
-        validate_ssd_value(value)
+        is_valid_hex(value)
         return True
