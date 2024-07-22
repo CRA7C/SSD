@@ -4,7 +4,7 @@ import sys
 import importlib
 import subprocess
 from typing import List, Tuple
-from testapp.constants import SCRIPTS_DIRECTORY
+from testapp.constants import SCRIPTS_DIRECTORY, MAX_BLOCK
 from my_logger import Logger
 
 
@@ -74,6 +74,13 @@ def get_classes() -> List[object]:
     return class_list
 
 
+def print_log(result, use_print, start_loc, end_loc):
+    if use_print:
+        Logger().info(result.stdout[start_loc:end_loc])
+    else:
+        Logger().debug(result.stdout[start_loc:end_loc])
+
+
 def run_script(script_name: str, use_print: bool = False) -> bool:
     """
     주어진 스크립트를 실행합니다.
@@ -89,10 +96,15 @@ def run_script(script_name: str, use_print: bool = False) -> bool:
         result = subprocess.run(['python', script_name], capture_output=True, text=True)
         # result.returncode가 0이면 성공, 그렇지 않으면 실패
         if result.stdout:
-            if use_print:
-                Logger().info(result.stdout)
-            else:
-                Logger().debug(result.stdout)
+            result_size = len(result.stdout)
+            curr_loc = 0
+            while curr_loc < result_size:
+                if curr_loc + MAX_BLOCK < result_size:
+                    print_log(result, use_print, curr_loc, curr_loc + MAX_BLOCK)
+                    curr_loc += MAX_BLOCK
+                else:
+                    print_log(result, use_print, curr_loc, result_size)
+                    break
         elif result.stderr:
             Logger().debug(result.stderr)
         return result.returncode == 0
