@@ -1,7 +1,7 @@
+from my_logger import Logger
 from testapp.command.__interface import CommandInterface
 from testapp.ssd_driver import SsdDriver
-from testapp.util import is_in_range_lba
-from my_logger import Logger
+from testapp.util import validate_ssd_lba
 
 
 class ReadCommand(CommandInterface):
@@ -38,4 +38,5 @@ class ReadCommand(CommandInterface):
             bool: 인자가 유효한 경우 True, 그렇지 않으면 False
         """
         n_lba = args[1]
-        return True if is_in_range_lba(n_lba) else False
+        validate_ssd_lba(n_lba)
+        return True
