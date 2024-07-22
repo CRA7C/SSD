@@ -7,3 +7,4 @@ pylint
 sphinx
 sphinx-autoapi
 sphinx-rtd-theme
+concurrent-log-handler
