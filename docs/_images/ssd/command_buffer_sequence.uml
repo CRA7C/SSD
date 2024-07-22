@@ -1,6 +1,7 @@
 @startuml
 actor User
 
+participant SSDRunner
 participant CommandBuffer
 participant CommandFactory
 participant Command
@@ -15,16 +16,23 @@ Deactivate Command
 CommandFactory --> User : command
 Deactivate CommandFactory
 
-User -> CommandBuffer: push_command(command)
-Activate CommandBuffer
+User -> SSDRunner : run(command)
+Activate SSDRunner
+
 alt Write or Erase
+    SSDRunner -> CommandBuffer: push_command(command)
+    Activate CommandBuffer
     CommandBuffer -> CommandBuffer: buffer에 명령어 추가
     group 명령어 최적화: Optimize()
         CommandBuffer -> CommandBuffer: 중복 Write 명령어 제거
         CommandBuffer -> CommandBuffer: Write후 Erase된 명령어 제거
         CommandBuffer -> CommandBuffer: 중복 Erase 명령어 제거
+        CommandBuffer -> CommandBuffer: Buffer가 가득차면 Flush
     end
+    CommandBuffer --> SSDRunner
+    Deactivate CommandBuffer
 else Read
+    SSDRunner -> CommandBuffer
     Activate CommandBuffer
     alt fast read
         CommandBuffer -> CommandBuffer: Buffer에 기록된 값 가져오기 : value
@@ -35,21 +43,25 @@ else Read
         Deactivate SolidStateDrive
     end
     CommandBuffer -> SolidStateDrive : Write to result.txt
+    CommandBuffer --> SSDRunner
+    Deactivate CommandBuffer
+else Flush
+    SSDRunner-> CommandBuffer: flush()
+    Activate CommandBuffer
+    loop 각 명령어 실행
+        CommandBuffer -> CommandBuffer: buffer 에서 명령어 pop
+        CommandBuffer -> Command: 명령어 실행 요청
+        Command -> SolidStateDrive: 명령어 실행
+        ref over SolidStateDrive: SSD 동작
+        SolidStateDrive -> Command: 명령어 실행 결과 반환
+        Command -> CommandBuffer: 명령어 실행 결과 반환
+    end
+    CommandBuffer --> SSDRunner
+    Deactivate CommandBuffer
 end
-CommandBuffer --> User :
-Deactivate CommandBuffer
 
 
-User -> CommandBuffer: flush()
-Activate CommandBuffer
-loop 각 명령어 실행
-    CommandBuffer -> CommandBuffer: buffer 에서 명령어 pop
-    CommandBuffer -> Command: 명령어 실행 요청
-    Command -> SolidStateDrive: 명령어 실행
-    ref over SolidStateDrive: SSD 동작
-    SolidStateDrive -> Command: 명령어 실행 결과 반환
-    Command -> CommandBuffer: 명령어 실행 결과 반환
-end
-CommandBuffer --> User
-Deactivate CommandBuffer
+SSDRunner --> User
+Deactivate SSDRunner
 @enduml
+
